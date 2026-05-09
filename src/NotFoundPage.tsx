@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Home, Zap, MessageSquare, Phone } from 'lucide-react';
-import { SeoHead } from './seo';
 
 export const NotFoundPage = () => {
   useEffect(() => {
@@ -9,12 +8,6 @@ export const NotFoundPage = () => {
 
   return (
     <div className="min-h-screen bg-main-dark text-main-light flex flex-col justify-center items-center relative overflow-hidden px-4">
-      <SeoHead
-        title="Page Not Found | DEZO"
-        description="The page you are looking for does not exist. Explore DEZO services or contact the team."
-        path={typeof window !== 'undefined' ? window.location.pathname : '/404'}
-        noIndex
-      />
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[var(--primary)]/20 blur-[120px] rounded-full mix-blend-screen"></div>
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[var(--accent)]/10 blur-[100px] rounded-full mix-blend-screen"></div>

@@ -1,390 +1,191 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Globe, TrendingUp, CheckCircle, Zap, Users, BarChart2 } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Globe, Target, TrendingUp } from 'lucide-react';
 
-/* ─── Rotating Headline ─── */
 export const RotatingText = () => {
   const phrases = [
     "If We Commit, We Deliver.",
     "Clean Website. Clear Communication.",
+    "If You Don't Like the First Design, We Improve It.",
+    "Your Website Should Look Professional.",
     "We Build Until It Feels Right.",
-    "No Hidden Costs. No Surprises.",
-    "We Focus on Quality, Speed & Trust.",
-    "We Don't Build Pages — We Build Brands.",
+    "No Confusing Process. No Hidden Drama.",
+    "We Focus on Quality, Speed, and Trust.",
+    "If Something Needs Fixing, We Help.",
+    "Your Business Deserves a Serious Digital Presence.",
+    "We Don't Just Build Pages — We Build Trust."
   ];
+
   const [index, setIndex] = useState(0);
-  const [visible, setVisible] = useState(true);
+  const [fade, setFade] = useState(true);
 
   useEffect(() => {
-    const id = setInterval(() => {
-      setVisible(false);
-      setTimeout(() => { setIndex(p => (p + 1) % phrases.length); setVisible(true); }, 420);
-    }, 3800);
-    return () => clearInterval(id);
+    const interval = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % phrases.length);
+        setFade(true);
+      }, 600);
+    }, 4000);
+    return () => clearInterval(interval);
   }, [phrases.length]);
 
   return (
-    <div className="min-h-[52px] flex items-center justify-center lg:justify-start">
-      <p style={{
-        color: 'var(--accent-light)', fontSize: 'clamp(1rem,2.5vw,1.35rem)',
-        fontWeight: 700, letterSpacing: '-0.01em',
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(10px)',
-        transition: 'opacity 0.38s ease, transform 0.38s cubic-bezier(0.22,1,0.36,1)',
-      }}>
-        {phrases[index]}
-      </p>
+    <div className="min-h-[60px] md:min-h-[80px] flex items-center justify-center lg:justify-start pt-2 mb-4">
+      <h3 
+        className="text-xl sm:text-2xl md:text-3xl font-black leading-tight tracking-tight text-main-light smooth-transition"
+        style={{
+          opacity: fade ? 1 : 0,
+          transform: fade ? 'translateY(0)' : 'translateY(10px)'
+        }}
+      >
+        <span className="text-brand-gold border-b-2 border-white/20 pb-1 inline-block">
+          {phrases[index]}
+        </span>
+      </h3>
     </div>
   );
 };
 
-/* ─── Fallback Image ─── */
 export const FallbackImage = ({ src, alt, className, fallbackInitials }: any) => {
-  const [err, setErr] = useState(false);
-  if (err) return (
-    <div className={`${className} bg-main-dark border border-main-light flex items-center justify-center text-main-light font-black tracking-widest`}>
-      {fallbackInitials}
-    </div>
-  );
-  return <img loading="lazy" decoding="async" src={src} alt={alt} className={className} onError={() => setErr(true)} />;
-};
-
-/* ─── Spring hook ─── */
-function useSpring(target: { x: number; y: number }, stiffness = 0.08) {
-  const val = useRef({ x: 0, y: 0 });
-  const raf = useRef<number>(0);
-  const [out, setOut] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const tick = () => {
-      val.current.x += (target.x - val.current.x) * stiffness;
-      val.current.y += (target.y - val.current.y) * stiffness;
-      setOut({ x: +val.current.x.toFixed(3), y: +val.current.y.toFixed(3) });
-      raf.current = requestAnimationFrame(tick);
-    };
-    raf.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf.current);
-  }, [target.x, target.y, stiffness]);
-
-  return out;
-}
-
-/* ─── Particle Canvas ─── */
-const ParticleCanvas = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d')!;
-    let w = canvas.offsetWidth, h = canvas.offsetHeight;
-    canvas.width = w; canvas.height = h;
-
-    const resize = () => {
-      w = canvas.offsetWidth; h = canvas.offsetHeight;
-      canvas.width = w; canvas.height = h;
-    };
-    window.addEventListener('resize', resize);
-
-    const dots = Array.from({ length: 28 }, () => ({
-      x: Math.random() * w, y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 1.5 + 0.5,
-      a: Math.random() * 0.4 + 0.1,
-    }));
-
-    let frame: number;
-    const draw = () => {
-      ctx.clearRect(0, 0, w, h);
-      dots.forEach(d => {
-        d.x += d.vx; d.y += d.vy;
-        if (d.x < 0 || d.x > w) d.vx *= -1;
-        if (d.y < 0 || d.y > h) d.vy *= -1;
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(96,165,250,${d.a})`;
-        ctx.fill();
-      });
-      // Draw lines between close dots
-      for (let i = 0; i < dots.length; i++) {
-        for (let j = i + 1; j < dots.length; j++) {
-          const dx = dots[i].x - dots[j].x, dy = dots[i].y - dots[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 100) {
-            ctx.beginPath();
-            ctx.moveTo(dots[i].x, dots[i].y);
-            ctx.lineTo(dots[j].x, dots[j].y);
-            ctx.strokeStyle = `rgba(59,130,196,${0.12 * (1 - dist / 100)})`;
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-          }
-        }
-      }
-      frame = requestAnimationFrame(draw);
-    };
-    draw();
-    return () => { cancelAnimationFrame(frame); window.removeEventListener('resize', resize); };
-  }, []);
-
-  return <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} />;
-};
-
-/* ─── Live Ticker ─── */
-const LiveTicker = () => {
-  const items = ['Web Dev', 'SEO', 'Meta Ads', 'Google Ads', 'Ecommerce', 'Landing Pages', 'Branding', 'UI/UX'];
-  return (
-    <div style={{ overflow: 'hidden', whiteSpace: 'nowrap', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '8px' }}>
-      <div className="animate-ticker" style={{ display: 'inline-flex', gap: '32px' }}>
-        {[...items, ...items].map((t, i) => (
-          <span key={i} style={{ fontSize: '9px', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>
-            {t} <span style={{ color: 'var(--primary)', opacity: 0.5 }}>·</span>
-          </span>
-        ))}
+  const [error, setError] = useState(false);
+  if (error) {
+    return (
+      <div className={`${className} bg-main-dark border border-main-light flex flex-col items-center justify-center text-main-light font-black tracking-widest relative overflow-hidden`}>
+        <span className="relative z-10">{fallbackInitials}</span>
       </div>
-    </div>
-  );
+    );
+  }
+  return <img loading="lazy" decoding="async" src={src} alt={alt} className={className} onError={() => setError(true)} />;
 };
 
-/* ─── Animated Bar Chart ─── */
-const BarChart = () => {
-  const bars = [28, 44, 38, 62, 48, 76, 72, 100];
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { const t = setTimeout(() => setMounted(true), 300); return () => clearTimeout(t); }, []);
-
-  return (
-    <div style={{ display: 'flex', alignItems: 'flex-end', gap: '4px', height: '52px' }}>
-      {bars.map((h, i) => (
-        <div key={i} style={{ flex: 1, height: '100%', display: 'flex', alignItems: 'flex-end' }}>
-          <div style={{
-            width: '100%', borderRadius: '3px 3px 0 0',
-            background: 'linear-gradient(to top, var(--primary), var(--primary-light))',
-            height: mounted ? `${h}%` : '0%',
-            opacity: 0.65 + i * 0.04,
-            transition: `height 1.2s cubic-bezier(0.22,1,0.36,1) ${i * 80}ms`,
-          }} />
-        </div>
-      ))}
-    </div>
-  );
-};
-
-/* ─── Main HeroVisual ─── */
-export const HeroVisual = ({ nightMode }: { nightMode?: boolean }) => {
+export const HeroVisual = ({ nightMode }: any) => {
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
-  const [rawMouse, setRawMouse] = useState({ x: 0, y: 0 });
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 1024);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-
-  const handlePointer = useCallback((clientX: number, clientY: number) => {
-    if (!containerRef.current) return;
+  const handleMouseMove = (e: any) => {
+    if (nightMode || !containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
-    const nx = (clientX - rect.left) / rect.width - 0.5;
-    const ny = (clientY - rect.top) / rect.height - 0.5;
-    setRawMouse({ x: nx * 18, y: -ny * 14 });
-  }, []);
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20; 
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -20;
+    setMouse({ x, y });
+  };
 
-  const handleMouse = useCallback((e: React.MouseEvent) => handlePointer(e.clientX, e.clientY), [handlePointer]);
-  const handleTouch = useCallback((e: React.TouchEvent) => {
-    const t = e.touches[0];
-    if (t) handlePointer(t.clientX, t.clientY);
-  }, [handlePointer]);
-  const handleLeave = useCallback(() => setRawMouse({ x: 0, y: 0 }), []);
-
-  const spring = useSpring(rawMouse, 0.07);
-  const skip3d = nightMode || isMobile;
-
-  const cardStyle = (z: number, extraX = 0, extraY = 0): React.CSSProperties => ({
-    transform: skip3d
-      ? 'none'
-      : `translateZ(${z}px) translateX(${-spring.x * z * 0.003 + extraX}px) translateY(${-spring.y * z * 0.003 + extraY}px)`,
-    transition: 'transform 60ms linear',
-  });
+  const handleMouseLeave = () => setMouse({ x: 0, y: 0 });
 
   return (
-    <div
+    <div 
       ref={containerRef}
-      onMouseMove={handleMouse}
-      onMouseLeave={handleLeave}
-      onTouchMove={handleTouch}
-      onTouchEnd={handleLeave}
-      style={{ width: '100%', height: '100%', position: 'relative', perspective: '1400px', perspectiveOrigin: '50% 50%' }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="w-full h-full relative" 
+      style={{ perspective: '2000px' }}
     >
-      {/* Particle layer */}
-      <div style={{ position: 'absolute', inset: 0, borderRadius: '2rem', overflow: 'hidden', pointerEvents: 'none' }}>
-        <ParticleCanvas />
-      </div>
-
-      {/* 3D scene wrapper */}
-      <div style={{
-        width: '100%', height: '100%', position: 'relative',
-        transformStyle: 'preserve-3d',
-        transform: skip3d ? 'none' : `rotateY(${spring.x}deg) rotateX(${spring.y}deg)`,
-        transition: 'transform 60ms linear',
-      }}>
-
-        {/* ── Main Browser Window ── */}
-        <div className="glass-card animate-float" style={{
-          position: 'absolute', right: 0, top: '2%',
-          width: '96%', height: '68%',
-          borderRadius: '1.6rem', overflow: 'hidden',
-          ...cardStyle(10),
-        }}>
-          {/* Browser bar */}
-          <div style={{ height: '38px', background: 'var(--bg-darker)', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', padding: '0 14px', gap: '8px' }}>
-            <div style={{ display: 'flex', gap: '5px' }}>
-              <div style={{ width: 10, height: 10, borderRadius: '50%', background: 'rgba(255,95,87,0.8)' }} />
-              <div style={{ width: 10, height: 10, borderRadius: '50%', background: 'rgba(255,189,46,0.8)' }} />
-              <div style={{ width: 10, height: 10, borderRadius: '50%', background: 'rgba(39,201,63,0.8)' }} />
-            </div>
-            <div style={{ margin: '0 auto', width: '44%', height: '22px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
-              <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'rgba(74,222,128,0.8)' }} />
-              <span style={{ fontSize: '9px', color: 'var(--text-muted)', letterSpacing: '0.06em', fontWeight: 600 }}>dezo.agency</span>
+      <div 
+        className="w-full h-full transition-transform duration-[600ms] ease-out"
+        style={{ 
+          transformStyle: 'preserve-3d', 
+          transform: nightMode ? 'none' : `rotateY(${mouse.x}deg) rotateX(${mouse.y}deg)` 
+        }}
+      >
+        {/* Main Glass 3D Browser Window */}
+        <div 
+          className="glass-card absolute right-[-5%] top-[5%] w-[100%] h-[80%] rounded-[2rem] overflow-hidden animate-float"
+          style={{ transform: 'translateZ(20px)' }}
+        >
+          <div className="h-10 bg-[#0F172A]/80 border-b border-white/10 flex items-center px-5 gap-2.5 backdrop-blur-md">
+            <div className="w-3 h-3 rounded-full bg-slate-600"></div>
+            <div className="w-3 h-3 rounded-full bg-slate-600"></div>
+            <div className="w-3 h-3 rounded-full bg-slate-600"></div>
+            <div className="mx-auto w-1/2 h-5 bg-[#020617] border border-white/5 rounded flex items-center justify-center">
+              <span className="text-[9px] font-bold text-slate-500 tracking-widest uppercase">dezo.agency</span>
             </div>
           </div>
-
-          {/* Page skeleton */}
-          <div style={{ padding: '18px', height: 'calc(100% - 38px)', background: 'var(--bg-darker)', position: 'relative', overflow: 'hidden' }}>
-            <div style={{ position: 'absolute', top: 0, right: 0, width: '200px', height: '200px', background: 'var(--primary)', opacity: 0.1, filter: 'blur(60px)', borderRadius: '50%', pointerEvents: 'none' }} />
-            <div style={{ position: 'absolute', bottom: 0, left: 0, width: '150px', height: '150px', background: 'var(--accent)', opacity: 0.08, filter: 'blur(50px)', borderRadius: '50%', pointerEvents: 'none' }} />
-
-            {/* Nav skeleton */}
-            <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', alignItems: 'center' }}>
-              <div style={{ height: 16, width: 64, background: 'rgba(255,255,255,0.12)', borderRadius: 99 }} />
-              {[40, 36, 48].map((w, i) => <div key={i} style={{ height: 14, width: w, background: 'rgba(255,255,255,0.05)', borderRadius: 99 }} />)}
-              <div style={{ marginLeft: 'auto', height: 16, width: 52, background: 'var(--primary)', opacity: 0.45, borderRadius: 99 }} />
+          <div className="p-8 h-full bg-[#030712] relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--primary)] opacity-[0.15] blur-[80px] rounded-full"></div>
+            <div className="w-32 h-6 bg-white/10 rounded-full mb-8 backdrop-blur-sm border border-white/5"></div>
+            <div className="w-[90%] h-14 bg-gradient-to-r from-[var(--primary)]/20 to-[var(--accent)]/20 border border-[var(--accent)]/30 rounded-xl mb-6 flex items-center px-4 relative overflow-hidden">
+               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer"></div>
+               <div className="w-1/2 h-3 bg-white/40 rounded-full"></div>
             </div>
-
-            {/* Hero skeleton */}
-            <div style={{ marginBottom: '14px' }}>
-              <div style={{ height: 8, width: 80, background: 'rgba(245,158,107,0.3)', borderRadius: 99, marginBottom: 10 }} />
-              <div style={{ height: 18, width: '72%', background: 'rgba(255,255,255,0.14)', borderRadius: 8, marginBottom: 7 }} />
-              <div style={{ height: 16, width: '54%', background: 'rgba(255,255,255,0.08)', borderRadius: 8, marginBottom: 14 }} />
-              <div style={{ display: 'flex', gap: '8px' }}>
-                <div style={{ height: 26, width: 80, background: 'rgba(59,130,196,0.5)', borderRadius: 99 }} />
-                <div style={{ height: 26, width: 66, background: 'rgba(255,255,255,0.08)', borderRadius: 99, border: '1px solid rgba(255,255,255,0.1)' }} />
+            <div className="grid grid-cols-2 gap-4 mb-6 relative z-10">
+              <div className="h-20 bg-white/5 rounded-xl border border-white/10 p-4 relative overflow-hidden backdrop-blur-md">
+                <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--primary)] opacity-20 blur-xl"></div>
+                <div className="w-8 h-8 rounded-full border border-[var(--primary)]/50 mb-2 shadow-[0_0_10px_var(--primary)]"></div>
+                <div className="w-full h-2 bg-white/10 rounded-full"></div>
+              </div>
+              <div className="h-20 bg-white/5 rounded-xl border border-white/10 p-4 relative overflow-hidden backdrop-blur-md">
+                <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--accent)] opacity-20 blur-xl"></div>
+                <div className="w-8 h-8 rounded-full border border-[var(--accent)]/50 mb-2 shadow-[0_0_10px_var(--accent)]"></div>
+                <div className="w-full h-2 bg-white/10 rounded-full"></div>
               </div>
             </div>
-
-            {/* Metrics */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '8px' }}>
-              {[
-                { c: 'var(--primary)', l: 'Leads', v: '+247%' },
-                { c: 'var(--accent)', l: 'Sales', v: '4.8x ROI' },
-                { c: 'var(--gold)', l: 'Traffic', v: '+180%' },
-              ].map((m, i) => (
-                <div key={i} style={{ borderRadius: 10, padding: '8px', border: '1px solid rgba(255,255,255,0.06)', background: `${m.c}12` }}>
-                  <div style={{ fontSize: 8, color: 'rgba(255,255,255,0.35)', marginBottom: 3 }}>{m.l}</div>
-                  <div style={{ fontSize: 11, fontWeight: 900, color: m.c }}>{m.v}</div>
-                </div>
-              ))}
-            </div>
-
-            <div style={{ marginTop: '12px' }}><LiveTicker /></div>
           </div>
         </div>
 
-        {/* ── Analytics Card ── */}
-        <div className="glass-card animate-float-delayed" style={{
-          position: 'absolute', right: '-2%', bottom: '10%',
-          width: '50%', borderRadius: '1.2rem', padding: '16px',
-          ...cardStyle(90),
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '10px', fontWeight: 700, color: '#fff' }}>
-              <Globe size={11} style={{ color: 'var(--accent)' }} />
-              Organic Traffic
+        {/* Live Code Editor Panel */}
+        <div 
+          className="absolute left-[-15%] top-[25%] w-[55%] bg-[#020617]/95 backdrop-blur-xl rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.8)] border border-[#1E293B] p-5 animate-float-delayed"
+          style={{ transform: 'translateZ(70px)' }}
+        >
+          <div className="flex justify-between items-center mb-4 border-b border-white/5 pb-2">
+            <div className="flex gap-2">
+              <div className="w-3 h-3 rounded-full bg-red-500/80 shadow-[0_0_10px_rgba(239,68,68,0.5)]"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500/80 shadow-[0_0_10px_rgba(234,179,8,0.5)]"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500/80 shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.2)', padding: '2px 7px', borderRadius: 99 }}>
-              <div className="animate-pulse" style={{ width: 5, height: 5, borderRadius: '50%', background: '#4ade80' }} />
-              <span style={{ fontSize: 7, color: '#4ade80', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Live</span>
-            </div>
+            <div className="text-[9px] font-mono text-slate-500">LandingPage.jsx</div>
           </div>
-          <BarChart />
-          <div style={{ fontSize: 8, color: 'var(--text-muted)', textAlign: 'center', marginTop: 4 }}>Last 8 months</div>
+          <div className="space-y-2 text-[12px] font-mono leading-relaxed">
+            <div className="text-[var(--primary)]">import <span className="text-white">React</span> from <span className="text-[var(--accent)]">'react'</span>;</div>
+            <div className="text-purple-400">export default function <span className="text-[var(--gold)]">Hero</span>() {'{'}</div>
+            <div className="pl-4 text-[#64748B]">// Award-winning Indian Agency</div>
+            <div className="pl-4 text-[var(--accent)]">return (</div>
+            <div className="pl-8 text-[var(--primary)]">&lt;div className="<span className="text-green-300">premium-growth</span>"&gt;</div>
+            <div className="pl-12 text-white font-bold animate-[text-pop_2s_infinite]">10x Your Digital Presence</div>
+            <div className="pl-8 text-[var(--primary)]">&lt;/div&gt;</div>
+            <div className="pl-4 text-[var(--accent)]">);</div>
+            <div className="text-purple-400">{'}'}</div>
+          </div>
         </div>
 
-        {/* ── Strategy Card ── */}
-        <div className="glass-card animate-float" style={{
-          position: 'absolute', left: '-6%', top: '26%',
-          width: '50%', borderRadius: '1.2rem', padding: '16px',
-          ...cardStyle(65),
-          animationDelay: '0.6s',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '7px', marginBottom: '10px' }}>
-            <div style={{ width: 22, height: 22, borderRadius: '50%', background: 'rgba(59,130,196,0.15)', border: '1px solid rgba(59,130,196,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <CheckCircle size={11} style={{ color: 'var(--primary)' }} />
+        {/* Advanced SEO Dashboard */}
+        <div 
+          className="absolute right-[-5%] bottom-[15%] w-[45%] bg-[#0F172A]/95 backdrop-blur-xl rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.8)] border border-white/10 p-5 animate-float"
+          style={{ transform: 'translateZ(110px)' }}
+        >
+          <div className="flex justify-between items-center mb-4">
+            <div className="flex items-center gap-2 text-xs font-bold text-white"><Globe size={16} className="text-[#06B6D4]" /> Organic Traffic</div>
+            <div className="flex items-center gap-1.5 bg-green-500/10 border border-green-500/20 px-2 py-1 rounded-full">
+              <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
+              <span className="text-[9px] text-green-400 font-bold uppercase tracking-widest">Live</span>
             </div>
-            <span style={{ fontSize: 8, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>Performance</span>
           </div>
-          <p style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.88)', lineHeight: 1.5, fontStyle: 'italic', marginBottom: '10px' }}>
-            "Revenue-ready websites that actually convert."
-          </p>
-          <div style={{ display: 'flex', gap: '5px' }}>
-            {['SEO', 'Ads', 'Design'].map(t => (
-              <span key={t} style={{ fontSize: 8, fontWeight: 700, padding: '3px 8px', borderRadius: 99, border: '1px solid rgba(59,130,196,0.25)', color: 'var(--primary-light)', background: 'rgba(59,130,196,0.1)' }}>{t}</span>
+          <div className="flex items-end gap-1.5 h-16 border-b border-white/10 pb-1">
+            {[30, 45, 40, 60, 50, 80, 75, 100].map((h, i) => (
+              <div key={i} className="relative w-full h-full flex items-end group">
+                 <div className="w-full bg-gradient-to-t from-[#2563EB] to-[#06B6D4] rounded-t-sm opacity-90 animate-bar-grow" style={{ height: `${h}%`, animationDelay: `${i * 100}ms` }}></div>
+                 <div className="absolute top-0 opacity-0 group-hover:opacity-100 bg-white text-black text-[8px] font-bold p-1 rounded -translate-y-full w-max left-1/2 -translate-x-1/2 transition-opacity z-10">{h}k</div>
+              </div>
             ))}
           </div>
         </div>
 
-        {/* ── ROI Badge ── */}
-        <div className="animate-float-delayed" style={{
-          position: 'absolute', left: '10%', bottom: '0%',
-          width: '34%', borderRadius: '1.2rem', padding: '14px',
-          background: 'linear-gradient(135deg, var(--primary) 0%, #1D4ED8 100%)',
-          overflow: 'hidden',
-          ...cardStyle(130),
-          animationDelay: '1s',
-        }}>
-          <div style={{ position: 'absolute', inset: 0, opacity: 0.08, backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '14px 14px' }} />
-          <div style={{ position: 'relative', zIndex: 1 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginBottom: '4px' }}>
-              <TrendingUp size={11} style={{ color: 'rgba(255,255,255,0.7)' }} />
-              <span style={{ fontSize: 8, color: 'rgba(255,255,255,0.65)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Avg ROI</span>
+        {/* Live Meta Ads Tracker */}
+        <div 
+          className="absolute left-[10%] bottom-[0%] w-[40%] bg-gradient-to-br from-[#2563EB] to-blue-900 rounded-2xl shadow-[0_30px_60px_rgba(37,99,235,0.3)] border border-white/20 p-5 animate-float-delayed relative overflow-hidden"
+          style={{ transform: 'translateZ(140px)' }}
+        >
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNykiLz48L3N2Zz4=')] opacity-50"></div>
+          <div className="relative z-10">
+            <div className="flex justify-between items-center mb-2">
+              <div className="flex items-center gap-2 text-xs font-bold text-white"><Target size={16} className="text-white" /> Meta Ads ROI</div>
+              <div className="bg-white/20 p-1 rounded backdrop-blur-md border border-white/10"><TrendingUp size={12} className="text-white"/></div>
             </div>
-            <div style={{ fontSize: 28, fontWeight: 900, color: '#fff', letterSpacing: '-0.04em', lineHeight: 1 }}>4.8x</div>
-            <div style={{ marginTop: '7px', height: 3, width: '100%', background: 'rgba(255,255,255,0.2)', borderRadius: 99, overflow: 'hidden' }}>
-              <div style={{ height: '100%', width: '82%', background: '#fff', borderRadius: 99, animation: 'scale-x 2.8s cubic-bezier(0.22,1,0.36,1) forwards' }} />
+            <div className="text-3xl font-black text-white tracking-tighter mb-1">4.8x</div>
+            <div className="text-[10px] text-blue-100 font-medium">Average Return on Ad Spend</div>
+            <div className="mt-3 h-1 w-full bg-white/20 rounded-full overflow-hidden">
+               <div className="h-full bg-white rounded-full animate-[scale-x_2s_ease-out_infinite_alternate] origin-left w-[80%]"></div>
             </div>
-          </div>
-        </div>
-
-        {/* ── Notification pop ── */}
-        <div className="animate-fade-up" style={{
-          position: 'absolute', right: '2%', top: '-4%',
-          background: 'rgba(16,22,34,0.92)', backdropFilter: 'blur(16px)',
-          border: '1px solid rgba(255,255,255,0.08)', borderRadius: '1rem', padding: '10px 14px',
-          display: 'flex', alignItems: 'center', gap: '10px',
-          animationDelay: '1.2s', animationFillMode: 'both',
-          ...cardStyle(50),
-        }}>
-          <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg,var(--primary),#1D4ED8)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Zap size={13} color="#fff" />
-          </div>
-          <div>
-            <div style={{ fontSize: 9, fontWeight: 700, color: '#fff', marginBottom: 1 }}>New Lead Captured</div>
-            <div style={{ fontSize: 8, color: 'var(--text-muted)' }}>+1 inquiry via WhatsApp</div>
-          </div>
-          <div className="animate-pulse" style={{ width: 7, height: 7, borderRadius: '50%', background: '#4ade80', marginLeft: 4 }} />
-        </div>
-
-        {/* ── Client count ── */}
-        <div className="glass-card" style={{
-          position: 'absolute', left: '-2%', bottom: '34%',
-          borderRadius: '1rem', padding: '10px 14px',
-          display: 'flex', alignItems: 'center', gap: '10px',
-          ...cardStyle(100),
-        }}>
-          <div style={{ width: 26, height: 26, borderRadius: '50%', background: 'rgba(245,158,107,0.15)', border: '1px solid rgba(245,158,107,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Users size={12} style={{ color: 'var(--accent)' }} />
-          </div>
-          <div>
-            <div style={{ fontSize: 14, fontWeight: 900, color: '#fff', lineHeight: 1 }}>50+</div>
-            <div style={{ fontSize: 8, color: 'var(--text-muted)', marginTop: 2, fontWeight: 600 }}>Happy Clients</div>
           </div>
         </div>
 

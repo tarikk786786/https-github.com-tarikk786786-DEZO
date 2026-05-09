@@ -96,7 +96,7 @@ export const AboutSection = () => {
               <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200" alt="Dezo Agency Team Collaboration" className="rounded-[2.5rem] shadow-2xl relative z-10 w-full object-cover aspect-[4/3] border border-main-light" />
               <div className="absolute -bottom-8 -right-8 bg-main-dark text-main-light p-8 rounded-[2rem] shadow-2xl z-20 hidden md:block border border-white/10">
                 <div className="text-5xl font-black mb-2 text-[var(--primary)]">100+</div>
-                <div className="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)]">Successful<br/>Projects</div>
+                <div className="text-sm font-bold uppercase tracking-widest text-[#94A3B8]">Successful<br/>Projects</div>
               </div>
             </div>
           </Reveal>
@@ -112,7 +112,7 @@ export const AboutSection = () => {
               <div className="space-y-6 mb-10">
                 {[
                   "Award-Winning Design Team",
-                  "Proven Marketing Strategies",
+                  "Data-Driven Marketing Strategies",
                   "Blazing Fast Web Technologies",
                   "Dedicated Support & Maintenance"
                 ].map((item, i) => (
@@ -155,7 +155,7 @@ export const MissionTargetSection = () => {
                </div>
                <h3 className="text-2xl font-black text-main-dark mb-4">Local Business Growth</h3>
                <p className="text-main-muted leading-relaxed">
-                 We aim to become the leading digital partner for forward-thinking enterprises, delivering web solutions that don't just look good but perform exceptionally. Our target is scaling businesses through proven digital architecture and establishing long-term partnerships.
+                 We aim to become the leading digital partner for forward-thinking enterprises, delivering web solutions that don't just look good but perform exceptionally. Our target is scaling businesses through data-driven digital architecture and establishing long-term partnerships.
                </p>
             </div>
           </Reveal>
@@ -167,7 +167,7 @@ export const MissionTargetSection = () => {
                </div>
                <h3 className="text-2xl font-black text-main-dark mb-4">Transparent Delivery and Support</h3>
                <p className="text-main-muted leading-relaxed">
-                 To lower the barriers to digital entry by providing top-tier, enterprise-grade development and design at accessible price points. We believe every business deserves a premium digital presence, and we are here to make that a reality through innovative engineering.
+                 To shatter the barriers of digital entry by providing top-tier, enterprise-grade development and design at accessible price points. We believe every business deserves a premium digital presence, and we are here to make that a reality through innovative engineering.
                </p>
             </div>
           </Reveal>
@@ -202,7 +202,7 @@ export const WhyChooseUsSection = () => {
             },
             {
               title: "Our Commitment",
-              desc: "Our commitment is simple: We deliver meticulously crafted, highly scalable web applications and performance-based marketing campaigns. We prioritize transparent communication and long-term partnerships over quick wins.",
+              desc: "Our commitment is simple: We deliver pixel-perfect, highly scalable web applications and data-driven marketing campaigns. We prioritize transparent communication and long-term partnerships over quick wins.",
               icon: <Target size={28} />
             }
           ].map((item, i) => (
@@ -269,7 +269,7 @@ export const IndustriesTestimonialsSections = () => {
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {[
               {
-                text: "DEZO completely transformed our digital presence. Our new ecommerce site is lightning fast and the Meta Ads campaign doubled our return on investment in just 3 months.",
+                text: "DEZO completely transformed our digital presence. Our new ecommerce site is lightning fast and the Meta Ads campaign doubled our ROAS in just 3 months.",
                 author: "Amit S.",
                 role: "Retail Founder"
               },
@@ -314,12 +314,12 @@ export const IndustriesTestimonialsSections = () => {
             <Reveal direction="left">
               <div>
                 <h2 className="clamp-h2 font-black text-main-light mb-6">Website Development & Digital Marketing Services in Bhubaneswar, Odisha</h2>
-                <p className="text-[var(--text-muted)] leading-relaxed mb-6 font-medium">As a premier digital marketing agency in Bhubaneswar, DEZO empowers local businesses across Odisha. We specialize in building high-performance websites, improving Google search rankings via SEO, and running targeted Meta Ads and Google Ads campaigns tailored for the Indian market.</p>
+                <p className="text-[#94A3B8] leading-relaxed mb-6 font-medium">As a premier digital marketing agency in Bhubaneswar, DEZO empowers local businesses across Odisha. We specialize in building high-performance websites, improving Google search rankings via SEO, and running targeted Meta Ads and Google Ads campaigns tailored for the Indian market.</p>
                 <div className="flex flex-wrap gap-3">
-                  <span className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-bold text-[var(--text-light)]">website development company in Bhubaneswar</span>
-                  <span className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-bold text-[var(--text-light)]">SEO services in Bhubaneswar</span>
-                  <span className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-bold text-[var(--text-light)]">website design company in Odisha</span>
-                  <span className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-bold text-[var(--text-light)]">Meta Ads agency in Odisha</span>
+                  <span className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-bold text-[#E2E8F0]">website development company in Bhubaneswar</span>
+                  <span className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-bold text-[#E2E8F0]">SEO services in Bhubaneswar</span>
+                  <span className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-bold text-[#E2E8F0]">website design company in Odisha</span>
+                  <span className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-bold text-[#E2E8F0]">Meta Ads agency in Odisha</span>
                 </div>
               </div>
             </Reveal>
@@ -395,7 +395,7 @@ export const BlogSection = () => {
                       {blog.category}
                    </div>
                 </div>
-                <div className="flex items-center gap-4 text-xs font-bold text-[var(--text-muted)] mb-3 uppercase tracking-widest">
+                <div className="flex items-center gap-4 text-xs font-bold text-[#94A3B8] mb-3 uppercase tracking-widest">
                   <span>{blog.date}</span>
                 </div>
                 <h3 className="text-xl font-black text-main-dark group-hover:text-[var(--primary)] smooth-transition leading-snug line-clamp-2">
@@ -414,7 +414,7 @@ export const ProcessSection = () => {
   const steps = [
     { num: "01", title: "Discovery", desc: "We deep dive into your business goals, target audience, and competitive landscape." },
     { num: "02", title: "Strategy & Design", desc: "Crafting wireframes and high-fidelity designs focused on user experience and conversion." },
-    { num: "03", title: "Development", desc: "Building the solution using robust, scalable, and secure technologies." },
+    { num: "03", title: "Development", desc: "Building the solution using cutting-edge, scalable, and secure technologies." },
     { num: "04", title: "Launch & Scale", desc: "Rigorous testing, successful deployment, and ongoing optimization for growth." }
   ];
 
@@ -452,7 +452,7 @@ export const FaqSection = ({ openIndex, setOpenIndex }: { openIndex: number | nu
     { q: "What does Dezo do?", a: "Dezo is a web development and digital marketing agency in India. We help businesses create fast, mobile-friendly websites, ecommerce stores, and high-converting landing pages. We also provide SEO, Meta Ads, and Google Ads management." },
     { q: "Does Dezo build ecommerce websites?", a: "Yes, we specialize in building fast and scalable ecommerce websites that convert visitors into buyers, featuring secure payment gateways and conversion-focused UI/UX." },
     { q: "Does Dezo provide SEO services?", a: "Yes, we implement technical SEO, on-page optimization, and content strategies to help businesses grow their organic search rankings consistently." },
-    { q: "Can Dezo run Meta Ads and Google Ads?", a: "Absolutely. Our performance marketing team builds targeted Meta Ads and Google Ads campaigns designed to generate quality leads and maximize your ROI." },
+    { q: "Can Dezo run Meta Ads and Google Ads?", a: "Absolutely. Our performance marketing team builds data-driven Meta Ads and Google Ads campaigns designed to generate quality leads and maximize your ROI." },
     { q: "Is Dezo suitable for small businesses in India?", a: "Yes, we provide affordable, high-quality digital growth solutions tailored to both local small businesses and large enterprises across India." }
   ];
 

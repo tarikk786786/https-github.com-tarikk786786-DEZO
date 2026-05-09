@@ -2,16 +2,10 @@ import React from 'react';
 import { ArrowLeft, Target, ShieldCheck, Zap, Users, Sparkles, CheckCircle2 } from 'lucide-react';
 import { Reveal } from './components1';
 import { ThemeStyles } from './ThemeStyles';
-import { SeoHead } from './seo';
 
 export const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
   return (
     <main className="bg-main-light min-h-screen pt-24 pb-32">
-      <SeoHead
-        title="About DEZO | Web Development & Marketing Team"
-        description="Meet DEZO, a web development and digital marketing team helping businesses build premium online experiences."
-        path="/about"
-      />
       <div className="max-w-[70rem] mx-auto px-4 lg:px-8">
         
         <Reveal direction="down">
@@ -29,7 +23,7 @@ export const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
         <Reveal direction="up">
           <div className="text-center mb-16">
             <h1 className="clamp-h1 font-black text-main-dark mb-4 drop-shadow-xl relative inline-block">
-              <span className="text-[var(--primary)] leading-tight pb-2 block">DEZO — Digital Excellence,</span>
+              <span className="logo-animated leading-tight pb-2 block">DEZO — Digital Excellence,</span>
               <span className="text-main-dark">Zero Ordinary</span>
             </h1>
           </div>
@@ -45,7 +39,7 @@ export const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
                 DEZO was created for business owners who are tired of looking <span className="text-[var(--accent)] font-black">average online</span> and losing customers because of weak websites, poor design, slow speed, and digital marketing that does not perform.
               </p>
               <p>
-                With <span className="text-[var(--primary)] font-black px-1">11 years of experience</span>, a strong team of skilled programmers, creative developers, designers, SEO experts, and digital marketing specialists, DEZO is built to deliver websites that do not just look good — <span className="text-[var(--primary)] font-black">they work, attract, convert, and grow businesses.</span>
+                With <span className="logo-animated font-black px-1">11 years of experience</span>, a strong team of skilled programmers, creative developers, designers, SEO experts, and digital marketing specialists, DEZO is built to deliver websites that do not just look good — <span className="text-[var(--primary)] font-black">they work, attract, convert, and grow businesses.</span>
               </p>
             </div>
           </Reveal>
@@ -95,7 +89,7 @@ export const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
             <div className="bg-panel-white p-10 md:p-14 rounded-[2.5rem] border border-main-light shadow-xl">
               <h3 className="text-3xl font-black text-main-dark mb-6">Why We Made DEZO</h3>
               <p className="mb-6">
-                We made DEZO because too many businesses are stuck with <span className="line-through decoration-[var(--accent)] opacity-70">copied-looking websites, slow pages, weak content, poor mobile design, and marketing that brings no serious results</span>. 
+                We made DEZO because too many businesses are stuck with <span className="line-through decoration-red-500 opacity-70">copied-looking websites, slow pages, weak content, poor mobile design, and marketing that brings no serious results</span>. 
               </p>
               <p className="mb-6 text-xl text-[var(--primary)] font-bold">
                 Your business deserves better than an average online presence. 
@@ -152,16 +146,16 @@ export const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
               <div className="bg-main-dark text-white p-8 md:p-12 rounded-[2rem] shadow-2xl relative overflow-hidden text-left border border-white/10">
                 <div className="absolute inset-0 bg-gradient-to-r from-[var(--primary)]/20 to-[var(--accent)]/20 blur-[50px]"></div>
                 <div className="relative z-10 flex flex-col items-center text-center">
-                  <h2 className="text-[var(--primary)] text-3xl md:text-4xl font-black mb-6 tracking-wide">DEZO — Digital Excellence, Zero Ordinary</h2>
+                  <h2 className="logo-animated text-3xl md:text-4xl font-black mb-6 tracking-wide">DEZO — Digital Excellence, Zero Ordinary</h2>
                   <div className="flex flex-wrap justify-center gap-3 mb-8">
                     {["11 Years Experience", "Hundreds of Websites/Mo", "Expert Programmers", "Creative Developers", "Powerful Marketing"].map((tag, i) => (
                       <span key={i} className="bg-white/10 backdrop-blur text-white px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wider">{tag}</span>
                     ))}
                   </div>
                   <div className="flex flex-wrap justify-center gap-4 text-white/50 text-sm font-black uppercase tracking-widest">
-                    <span className="line-through decoration-[var(--accent)]">No weak design</span> • 
-                    <span className="line-through decoration-[var(--accent)]">No slow experience</span> • 
-                    <span className="line-through decoration-[var(--accent)]">No average presence</span>
+                    <span className="line-through decoration-red-500">No weak design</span> • 
+                    <span className="line-through decoration-red-500">No slow experience</span> • 
+                    <span className="line-through decoration-red-500">No average presence</span>
                   </div>
                   <div className="mt-8 text-xl text-[var(--accent)] font-black">
                     Only premium websites and digital growth built to make your business look unstoppable.

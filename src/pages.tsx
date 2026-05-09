@@ -1,8 +1,7 @@
 import React from 'react';
-import { Phone, MessageSquare, Sparkles } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import { ThemeStyles } from './ThemeStyles';
 import { Link } from 'react-router-dom';
-import { SeoHead } from './seo';
 
 const PageLayout = ({ title, h1, meta, children, schemaData }: any) => {
   const orgSchema = {
@@ -23,25 +22,30 @@ const PageLayout = ({ title, h1, meta, children, schemaData }: any) => {
     "email": "contact@dezo.in",
     "priceRange": "$$"
   };
-  const pagePath = typeof window !== 'undefined' ? window.location.pathname : '/';
 
   return (
     <div className="min-h-screen bg-main-light text-main-dark font-sans scroll-smooth pt-20 lg:pt-28">
       <ThemeStyles />
-      <SeoHead
-        title={title}
-        description={meta}
-        path={pagePath}
-        schemaData={[orgSchema, ...(schemaData ? (Array.isArray(schemaData) ? schemaData : [schemaData]) : [])]}
-      />
+      <Helmet>
+        <title>{title}</title>
+        <meta name="title" content={title} />
+        <meta name="description" content={meta} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={meta} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={meta} />
+        <link rel="canonical" href={`https://dezo.in${window.location.pathname}`} />
+        <script type="application/ld+json">
+          {JSON.stringify(orgSchema)}
+        </script>
+        {schemaData && (
+          <script type="application/ld+json">
+            {JSON.stringify(schemaData)}
+          </script>
+        )}
+      </Helmet>
       <main className="max-w-[90rem] mx-auto px-4 lg:px-8 py-12 lg:py-20">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-[minmax(0,1fr)_280px] gap-10 lg:gap-14 items-start">
-          <div className="min-w-0 max-w-none lg:max-w-[46rem]">
-          <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-wider text-main-muted mb-4">
-            <Link to="/" className="hover:text-brand-primary smooth-transition">Home</Link>
-            <span className="mx-2">/</span>
-            <span className="text-main-dark">{h1}</span>
-          </nav>
+        <div className="max-w-4xl mx-auto">
           <h1 className="clamp-h2 font-black text-main-dark mb-6">{h1}</h1>
           <div className="prose prose-lg prose-slate max-w-none text-main-muted mb-12">
             {children}
@@ -64,43 +68,6 @@ const PageLayout = ({ title, h1, meta, children, schemaData }: any) => {
             <p className="mb-6 font-medium">Get a free website audit or consultation for your digital growth strategy.</p>
             <Link to="/" onClick={() => setTimeout(() => document.getElementById('contact')?.scrollIntoView({behavior:'smooth'}), 100)} className="inline-block px-8 py-4 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] text-white font-bold rounded-full hover:-translate-y-1 shadow-[0_10px_20px_rgba(124,58,237,0.4)] smooth-transition active:scale-95">Get Free Website Audit</Link>
           </div>
-          </div>
-
-          <aside
-            className="lg:sticky lg:top-28 space-y-4"
-            aria-label="Site updates and quick links"
-          >
-            <div className="rounded-2xl border border-[var(--primary)]/25 bg-gradient-to-br from-[var(--primary)]/12 to-[var(--accent)]/8 p-5">
-              <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--primary)] mb-2">
-                <Sparkles className="shrink-0" size={14} aria-hidden />
-                Updated site
-              </div>
-              <p className="text-sm font-bold text-main-dark leading-snug">
-                Latest version: faster loads on mobile, smoother motion, and refreshed service pages—aligned with how we build for clients.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-main-light bg-panel-white p-5 space-y-4">
-              <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-main-muted">Quick links</h2>
-              <nav className="flex flex-col gap-3 text-sm font-bold">
-                <Link to="/contact" className="text-main-dark hover:text-brand-primary smooth-transition">Contact</Link>
-                <Link to="/portfolio" className="text-main-dark hover:text-brand-primary smooth-transition">Portfolio</Link>
-                <Link to="/blog" className="text-main-dark hover:text-brand-primary smooth-transition">Blog</Link>
-                <a
-                  href="https://wa.me/917787063088"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-main-dark hover:text-[#25D366] smooth-transition"
-                >
-                  <MessageSquare size={16} aria-hidden />
-                  WhatsApp
-                </a>
-                <a href="tel:+917787063088" className="inline-flex items-center gap-2 text-main-dark hover:text-brand-primary smooth-transition">
-                  <Phone size={16} aria-hidden />
-                  +91 77870 63088
-                </a>
-              </nav>
-            </div>
-          </aside>
         </div>
       </main>
     </div>

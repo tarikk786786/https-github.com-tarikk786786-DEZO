@@ -1,65 +1,59 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  /* Premium Dark Theme — aligned with ThemeStyles.tsx */
-  --bg-nav: rgba(10, 14, 20, 0.92);
-  --bg-dark: #0A0E14;
-  --bg-darker: #060A0F;
-  --bg-light: #111827;
-  --bg-white: #1A2232;
-  --text-dark: #E8EDF5;
-  --text-light: #FFFFFF;
-  --text-muted: #6B7A99;
-  --text-light-muted: #94A3B8;
-  --primary: #3B82C4;
-  --primary-light: #60A5FA;
-  --accent: #F59E6B;
-  --accent-light: #FBD38D;
-  --gold: #C4A55A;
-  --border-light: rgba(255,255,255,0.08);
-  --border-dark: rgba(255,255,255,0.04);
-  --glow-opacity: 1;
-  --anim-speed: 0.9s;
-  --anim-dist: 36px;
-  --shadow-soft: 0 25px 60px -15px rgba(59,130,196,0.25);
-  --glass-blur: blur(24px);
-  --line-height-body: 1.65;
-  --tracking-body: 0.01em;
-  --hero-bg: linear-gradient(160deg, #0A0E14 0%, #0F1929 50%, #0A0E14 100%);
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --color-brand-primary: var(--primary);
+  --color-brand-accent: var(--accent);
 }
 
+:root {
+  /* Premium Dark Mode Colors (Vibrant) */
+  --bg-nav: rgba(10, 10, 22, 0.85);
+  --bg-dark: #0A0A16;
+  --bg-darker: #030308;
+  --bg-light: #12101F;
+  --bg-white: #1B182E;
+  --text-dark: #F8FAFC;
+  --text-light: #FFFFFF;
+  --text-muted: #A1A1AA;
+  --text-light-muted: #D4D4D8;
+  --primary: #8B5CF6; /* Lighter Violet */
+  --accent: #F472B6; /* Pink 400 */
+  --gold: #FBBF24;
+  --border-light: #27273F;
+  --border-dark: #373752;
+  --glow-opacity: 1;
+  --anim-speed: 0.8s;
+  --anim-dist: 40px;
+  --shadow-soft: 0 20px 40px -15px rgba(139, 92, 246, 0.4);
+  --glass-blur: blur(20px);
+  
+  /* Typography defaults */
+  --line-height-body: 1.6;
+  --tracking-body: 0.01em;
+  --hero-bg: radial-gradient(circle at top center, #1E1242 0%, #0A0A16 100%);
+}
 
 @media (max-width: 768px) {
   :root {
-    --anim-speed: 0.35s;   /* Much faster on mobile */
-    --anim-dist: 15px;     /* Less movement on mobile */
+    --anim-speed: 0.35s;
+    --anim-dist: 15px;
+  }
+  
+  .animate-float,
+  .animate-float-delayed,
+  .animate-pulse-soft,
+  .animate-shimmer,
+  .animate-gradient-text,
+  .animate-bar-grow,
+  .animate-typing-code {
+    animation: none !important;
+    transform: none !important;
   }
 
-  .smooth-transition {
-    transition-duration: 0.22s !important;
-  }
-
-  .glass-card,
-  .backdrop-blur-md,
-  .backdrop-blur-xl {
-    backdrop-filter: none !important;
-  }
-
-  [class*="blur-"] {
-    filter: none !important;
-  }
-
-  section {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 900px;
-  }
-
-  .shadow-2xl,
-  .shadow-xl,
-  .shadow-lg {
-    box-shadow: none !important;
+  .glass-card::before {
+    display: none !important;
   }
 }
 
@@ -69,33 +63,6 @@ body {
   background-color: var(--bg-light);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-.skip-link {
-  position: fixed;
-  top: 12px;
-  left: 12px;
-  z-index: 200;
-  padding: 10px 14px;
-  border-radius: 9999px;
-  background: var(--primary);
-  color: #fff;
-  font-weight: 700;
-  transform: translateY(-200%);
-  transition: transform 0.2s ease;
-}
-
-.skip-link:focus {
-  transform: translateY(0);
 }
 
 /* Ultra-smooth transitions */
@@ -127,15 +94,6 @@ body.night-mode .animate-typing-code {
   transform: none !important;
 }
 
-@media (max-width: 768px) {
-  .animate-float,
-  .animate-float-delayed,
-  .animate-shimmer,
-  .animate-bar-grow {
-    animation: none !important;
-  }
-}
-
 .bg-main-dark { background-color: var(--bg-dark); }
 .bg-main-light { background-color: var(--bg-light); }
 .bg-panel-white { background-color: var(--bg-white); }
@@ -147,27 +105,14 @@ body.night-mode .animate-typing-code {
 
 .smooth-transition { transition: all var(--anim-speed) cubic-bezier(0.22, 1, 0.36, 1); }
 
-.btn-primary {
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  color: #fff;
-  font-weight: 700;
-  border-radius: 9999px;
-}
-
-.btn-secondary {
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #fff;
-  border-radius: 9999px;
-}
-
 @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-12px) rotate(0.5deg); } }
 @keyframes float-delayed { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-18px) rotate(-0.5deg); } }
-@keyframes pulse-soft { 0%, 100% { box-shadow: 0 0 0 0 rgba(67, 140, 150, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(67, 140, 150, 0); } }
+@keyframes pulse-soft { 0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } }
 @keyframes shimmer { 0% { background-position: 200% center; } 100% { background-position: -200% center; } }
 @keyframes bar-grow { 0% { transform: scaleY(0.1); opacity: 0; } 100% { transform: scaleY(1); opacity: 1; } }
 @keyframes typing { from { width: 0 } to { width: 100% } }
 @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: white } }
-
+@keyframes background-pan { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
 .animate-float { animation: float 7s ease-in-out infinite; }
 .animate-float-delayed { animation: float-delayed 9s ease-in-out infinite 1s; }
@@ -175,7 +120,7 @@ body.night-mode .animate-typing-code {
 .animate-shimmer { background-size: 200% auto; animation: shimmer 4s linear infinite; }
 .animate-bar-grow { transform-origin: bottom; animation: bar-grow 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 .animate-typing-code { overflow: hidden; white-space: nowrap; border-right: 2px solid white; animation: typing 3s steps(30, end) infinite alternate, blink-caret .75s step-end infinite; }
-
+.animate-gradient-text { background-size: 200% auto; animation: background-pan 6s linear infinite; }
 
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

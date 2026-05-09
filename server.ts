@@ -20,40 +20,13 @@ async function startServer() {
 
   app.post("/api/contact", (req, res) => {
     try {
-      const { name, email, phone, businessName, service, budget, city, message } = req.body ?? {};
-      const emailValid = typeof email === "string" && /\S+@\S+\.\S+/.test(email);
-      const hasRequired =
-        typeof name === "string" &&
-        typeof phone === "string" &&
-        typeof service === "string" &&
-        typeof message === "string" &&
-        name.trim() &&
-        phone.trim() &&
-        service.trim() &&
-        message.trim();
-
-      if (!hasRequired || !emailValid) {
-        return res.status(400).json({
-          success: false,
-          message: "Please provide valid required fields.",
-        });
-      }
-
-      console.log(
-        "New contact submission",
-        JSON.stringify({
-          name,
-          email,
-          phone,
-          businessName: businessName ?? null,
-          city: city ?? null,
-          service,
-          budget: budget ?? null,
-          message,
-          createdAt: new Date().toISOString(),
-        }),
-      );
-
+      const { name, email, phone, businessName, service, budget, message } = req.body;
+      
+      // In a real application, you would send an email, save to database, etc.
+      // Here we log the request and return success.
+      console.log(`New contact submission from ${name} (${phone}) for ${service}`);
+      
+      // Simulate real-world delay for premium feel
       setTimeout(() => {
         res.status(200).json({ 
           success: true, 

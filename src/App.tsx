@@ -1,14 +1,13 @@
-import React, { lazy, Suspense, useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { 
   Menu, X, Search, 
-  ArrowUpRight, ArrowUp, Phone, MessageSquare, MapPin, Sparkles,
-  Facebook, Instagram, Linkedin
+  ArrowUpRight, ArrowUp, Phone, MessageSquare, MapPin
 } from 'lucide-react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { ThemeStyles } from './ThemeStyles';
 import { portfolioData, categories } from './data';
 import { 
-  Reveal, AnimatedCounter
+  useIntersectionObserver, Reveal, AnimatedCounter, DynamicHeadline 
 } from './components1';
 import { 
   RotatingText, FallbackImage, HeroVisual 
@@ -18,93 +17,21 @@ import {
   MissionTargetSection, WhyChooseUsSection, BlogSection, IndustriesTestimonialsSections
 } from './components3';
 import { AnimatedFavicon } from './AnimatedFavicon';
-import { SeoHead } from './seo';
 
-const AboutUsPage = lazy(async () => {
-  const module = await import('./AboutUsPage');
-  return { default: module.AboutUsPage };
-});
+import { AboutUsPage } from './AboutUsPage';
+import { NotFoundPage } from './NotFoundPage';
 
-const NotFoundPage = lazy(async () => {
-  const module = await import('./NotFoundPage');
-  return { default: module.NotFoundPage };
-});
-
-const WebDevPage = lazy(async () => {
-  const module = await import('./pages');
-  return { default: module.WebDevPage };
-});
-const BbsrWebDevPage = lazy(async () => {
-  const module = await import('./pages');
-  return { default: module.BbsrWebDevPage };
-});
-const DigitalMarketingPage = lazy(async () => {
-  const module = await import('./pages');
-  return { default: module.DigitalMarketingPage };
-});
-const SeoServicesPage = lazy(async () => {
-  const module = await import('./pages');
-  return { default: module.SeoServicesPage };
-});
-const MetaAdsPage = lazy(async () => {
-  const module = await import('./pages');
-  return { default: module.MetaAdsPage };
-});
-const GoogleAdsPage = lazy(async () => {
-  const module = await import('./pages');
-  return { default: module.GoogleAdsPage };
-});
-const EcommercePage = lazy(async () => {
-  const module = await import('./pages');
-  return { default: module.EcommercePage };
-});
-const LandingPagePage = lazy(async () => {
-  const module = await import('./pages');
-  return { default: module.LandingPagePage };
-});
-const BlogPage = lazy(async () => {
-  const module = await import('./pages');
-  return { default: module.BlogPage };
-});
-const ContactPage = lazy(async () => {
-  const module = await import('./pages');
-  return { default: module.ContactPage };
-});
-const PortfolioPage = lazy(async () => {
-  const module = await import('./pages');
-  return { default: module.PortfolioPage };
-});
-
-type ContactFormData = {
-  name: string;
-  email: string;
-  phone: string;
-  businessName: string;
-  city: string;
-  service: string;
-  budget: string;
-  message: string;
-};
-
-type FormErrors = Partial<Record<keyof ContactFormData | 'general', string>>;
-type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
-
-const initialFormData: ContactFormData = {
-  name: '',
-  email: '',
-  phone: '',
-  businessName: '',
-  city: '',
-  service: '',
-  budget: '',
-  message: ''
-};
-
-const RouteFallback = () => (
-  <div className="min-h-[40vh] flex items-center justify-center">
-    <div className="w-14 h-14 rounded-full border-4 border-main-light border-t-[var(--primary)] animate-spin" aria-label="Loading page" />
-  </div>
-);
+const WebDevPage = lazy(() => import('./pages').then(m => ({ default: m.WebDevPage })));
+const BbsrWebDevPage = lazy(() => import('./pages').then(m => ({ default: m.BbsrWebDevPage })));
+const DigitalMarketingPage = lazy(() => import('./pages').then(m => ({ default: m.DigitalMarketingPage })));
+const SeoServicesPage = lazy(() => import('./pages').then(m => ({ default: m.SeoServicesPage })));
+const MetaAdsPage = lazy(() => import('./pages').then(m => ({ default: m.MetaAdsPage })));
+const GoogleAdsPage = lazy(() => import('./pages').then(m => ({ default: m.GoogleAdsPage })));
+const EcommercePage = lazy(() => import('./pages').then(m => ({ default: m.EcommercePage })));
+const LandingPagePage = lazy(() => import('./pages').then(m => ({ default: m.LandingPagePage })));
+const BlogPage = lazy(() => import('./pages').then(m => ({ default: m.BlogPage })));
+const ContactPage = lazy(() => import('./pages').then(m => ({ default: m.ContactPage })));
+const PortfolioPage = lazy(() => import('./pages').then(m => ({ default: m.PortfolioPage })));
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -115,23 +42,38 @@ const ScrollToTop = () => {
 };
 
 export default function App() {
+  const [currentPage, setCurrentPage] = useState('home');
   const [isLoading, setIsLoading] = useState(true);
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [is404, setIs404] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(true);
   
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   
-  const [formData, setFormData] = useState<ContactFormData>(initialFormData);
-  const [formErrors, setFormErrors] = useState<FormErrors>({});
-  const [formStatus, setFormStatus] = useState<FormStatus>('idle');
-  const [submitMessage, setSubmitMessage] = useState('');
+  const [formData, setFormData] = useState({
+    name: '', email: '', phone: '', businessName: '', city: '', service: '', budget: '', message: ''
+  });
+  const [formErrors, setFormErrors] = useState<any>({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    const timer1 = setTimeout(() => setIsFadingOut(true), 240);
-    const timer2 = setTimeout(() => setIsLoading(false), 440);
+    setIsDesktop(window.innerWidth >= 1024);
+    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+    window.addEventListener('resize', handleResize);
+    
+    document.title = "Dezo | Web Development & Digital Marketing Agency India";
+    
+    if (window.location.pathname !== '/' && window.location.pathname !== '') {
+      setIs404(true);
+    }
+
+    const timer1 = setTimeout(() => setIsFadingOut(true), 400);
+    const timer2 = setTimeout(() => setIsLoading(false), 800);
     
     const handleScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener('scroll', handleScroll);
@@ -140,6 +82,7 @@ export default function App() {
       clearTimeout(timer1);
       clearTimeout(timer2);
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -151,21 +94,18 @@ export default function App() {
     }
   }, [mobileMenuOpen]);
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    if (formErrors[name as keyof FormErrors]) {
-      setFormErrors((prev) => ({ ...prev, [name]: '' }));
-    }
+  const handleFormChange = (e: any) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (formErrors[e.target.name]) setFormErrors({ ...formErrors, [e.target.name]: '' });
   };
 
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: any) => {
     e.preventDefault();
-    const errors: FormErrors = {};
+    const errors: any = {};
     if (!formData.name) errors.name = "Please fill in your name.";
     if (!formData.phone) errors.phone = "Please fill in your phone number.";
     if (!formData.email) errors.email = "Please fill in your email address.";
-    else if (!/\S+@\S+\.\S+/.test(formData.email.trim())) errors.email = "Invalid email format.";
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) errors.email = "Invalid email format.";
     if (!formData.service) errors.service = "Please select a service.";
     if (!formData.message) errors.message = "Please write a short message.";
     
@@ -174,45 +114,65 @@ export default function App() {
       return;
     }
     
-    setFormErrors({});
-    setFormStatus('submitting');
-    setSubmitMessage('');
+    setIsSubmitting(true);
     
-    // Build a rich WhatsApp message from all form fields
-    const textMessage =
-      `Hello DEZO Team! 👋\n\nI just filled in your contact form. Here are my details:\n\n` +
-      `🧑 *Name:* ${formData.name}\n` +
-      `📧 *Email:* ${formData.email}\n` +
-      `📞 *Phone:* ${formData.phone}\n` +
-      `🏢 *Business Name:* ${formData.businessName || 'N/A'}\n` +
-      `📍 *City:* ${formData.city || 'N/A'}\n` +
-      `🛠️ *Service Required:* ${formData.service}\n` +
-      `💰 *Budget:* ${formData.budget || 'Not specified'}\n\n` +
-      `💬 *Message:*\n${formData.message}\n\n` +
-      `Please get back to me. Thank you!`;
+    // Fire the email request in the background
+    fetch("https://formsubmit.co/ajax/princetarikislam@gmail.com", {
+      method: "POST",
+      headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+          _subject: "New Lead from DEZO Website",
+          _template: "table",
+          Name: formData.name,
+          Email: formData.email,
+          Phone: formData.phone,
+          "Business Name": formData.businessName || 'N/A',
+          City: formData.city || 'N/A',
+          Budget: formData.budget || 'N/A',
+          Service: formData.service,
+          Message: formData.message,
+      })
+    }).catch(err => console.error("Form submission error:", err));
 
-    const whatsappUrl = `https://wa.me/917787063088?text=${encodeURIComponent(textMessage)}`;
+    setIsSubmitting(false);
+    setIsSubmitted(true);
     
-    // Open WhatsApp in a new tab automatically — 100% client-side, no server needed
+    const whatsappMessage = `Hello Tarik, I am ${formData.name}. 
+Email: ${formData.email}
+Phone: ${formData.phone}
+Business: ${formData.businessName || 'N/A'}
+City: ${formData.city || 'N/A'}
+Budget: ${formData.budget || 'N/A'}
+Interested in: ${formData.service}
+Message: ${formData.message}`;
+
+    const whatsappUrl = `https://wa.me/917787063088?text=${encodeURIComponent(whatsappMessage)}`;
+    
     window.open(whatsappUrl, '_blank');
-
-    // Show success immediately
-    setFormStatus('success');
-    setSubmitMessage('✅ Opening WhatsApp with your details! Just hit Send in WhatsApp to complete your request.');
-    setFormData(initialFormData);
+    
+    setTimeout(() => setIsSubmitted(false), 8000);
+    setFormData({ name: '', email: '', phone: '', businessName: '', city: '', service: '', budget: '', message: '' });
   };
 
-  const filteredPortfolio = useMemo(() => portfolioData.filter(item => {
-    const normalizedSearch = searchQuery.trim().toLowerCase();
+  const filteredPortfolio = portfolioData.filter(item => {
     const matchesCategory = activeCategory === "All" || item.category === activeCategory;
-    const matchesSearch = item.title.toLowerCase().includes(normalizedSearch) || item.category.toLowerCase().includes(normalizedSearch);
+    const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || item.category.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
-  }), [activeCategory, searchQuery]);
+  });
+
+  const highlightedProjects = [
+    "Great India Public School", "Yasana Beauty Rituals", "Shree Ayurved", 
+    "Nilkanth Paints", "BB Signs New Zealand", "Jai Bhavani Travels", 
+    "The Paan Luxe", "Lax-Mi"
+  ].map(title => portfolioData.find(p => p.title === title)).filter(Boolean);
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: string) => {
+  const handleNavClick = (e: any, item: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
     if (item === 'About') {
@@ -231,7 +191,7 @@ export default function App() {
     }
   };
 
-  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleLogoClick = (e: any) => {
     e.preventDefault();
     if (location.pathname !== '/') {
       navigate('/');
@@ -246,10 +206,10 @@ export default function App() {
       <div className={`fixed inset-0 z-[200] bg-main-dark flex flex-col items-center justify-center smooth-transition ${isFadingOut ? 'opacity-0 scale-105' : 'opacity-100 scale-100'}`}>
         <ThemeStyles />
         <div className="relative flex flex-col items-center">
-          <div className="w-32 h-[3px] bg-[var(--border-dark)] mb-8 overflow-hidden rounded-full shadow-[0_0_20px_rgba(200,121,90,0.5)]">
+          <div className="w-32 h-[3px] bg-slate-800 mb-8 overflow-hidden rounded-full shadow-[0_0_20px_rgba(124,58,237,0.5)]">
              <div className="w-full h-full bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] origin-left animate-[scale-x_0.6s_ease-in-out_forwards]"></div>
           </div>
-          <span className="text-main-light font-black tracking-[0.4em] text-5xl mb-3">DEZO</span>
+          <span className="logo-animated text-main-light font-black tracking-[0.4em] text-5xl mb-3">DEZO</span>
           <span className="text-[var(--accent)] font-bold tracking-[0.2em] text-[10px] uppercase">Digital Excellence</span>
         </div>
         <style dangerouslySetInnerHTML={{__html: `@keyframes scale-x { 0% { transform: scaleX(0); } 100% { transform: scaleX(1); } }`}} />
@@ -257,225 +217,149 @@ export default function App() {
     );
   }
 
+  if (is404) {
+    return <NotFoundPage />;
+  }
+
   return (
     <div className="min-h-screen bg-main-light text-main-dark font-sans scroll-smooth">
-      <a className="skip-link" href="#main-content">Skip to content</a>
       <ThemeStyles />
-      <SeoHead
-        title="Dezo | Web Development & Digital Marketing Agency India"
-        description="DEZO is a web development and digital marketing agency in India helping businesses with websites, ecommerce, SEO, Meta Ads, and Google Ads."
-        keywords="web development company india, digital marketing agency bhubaneswar, seo services india, ecommerce website development, meta ads agency, google ads expert india"
-        path={location.pathname}
-        schemaData={{
-          "@context": "https://schema.org",
-          "@type": "DigitalMarketingAgency",
-          "name": "DEZO",
-          "url": "https://dezo.in/",
-          "telephone": "+917787063088",
-          "email": "contact@dezo.in",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Bhubaneswar",
-            "addressRegion": "Odisha",
-            "postalCode": "751024",
-            "addressCountry": "IN"
-          }
-        }}
-      />
       <AnimatedFavicon />
 
-      {/* Scroll To Top */}
-      <div className="fixed bottom-6 right-6 z-[70]">
-        <button
-          aria-label="Scroll to Top"
-          onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
-          className={`w-12 h-12 rounded-full flex items-center justify-center text-white shadow-xl smooth-transition hover:-translate-y-1 active:scale-90 ${scrolled ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
-          style={{ background: 'linear-gradient(135deg, var(--primary), #2563EB)' }}
-        >
-          <ArrowUp size={18} />
+      <div className="fixed bottom-6 right-6 z-[70] flex flex-col gap-3">
+        <button aria-label="Scroll to Top" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className={`w-12 h-12 bg-panel-white border border-main-light rounded-full flex items-center justify-center text-main-muted shadow-lg smooth-transition hover:bg-main-light active:scale-95 ${scrolled ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
+          <ArrowUp size={20} />
         </button>
       </div>
 
-      <header className={`fixed top-0 left-0 right-0 z-[60] smooth-transition ${scrolled ? 'bg-[var(--bg-nav)] backdrop-blur-[var(--glass-blur)] py-3.5 border-b border-[rgba(255,255,255,0.06)]' : 'bg-transparent py-5 lg:py-7'}`}>
-        <div className="max-w-[90rem] mx-auto px-5 lg:px-10 flex justify-between items-center">
-
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-3 z-[70] group" aria-label="Dezo Home" onClick={handleLogoClick}>
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-black text-sm" style={{ background: 'linear-gradient(135deg, var(--primary), #2563EB)' }}>D</div>
-            <span className={`font-black text-2xl tracking-[0.15em] smooth-transition text-white`}>DEZO</span>
+      <header className={`fixed top-0 left-0 right-0 z-[60] smooth-transition ${scrolled ? 'bg-[var(--bg-nav)] backdrop-blur-[var(--glass-blur)] py-3 shadow-sm border-b border-main-light' : 'bg-transparent py-4 lg:py-6'}`}>
+        <div className="max-w-[90rem] mx-auto px-4 lg:px-8 flex justify-between items-center">
+          <a href="#" className="flex items-center gap-2 z-[70] group" aria-label="Dezo Home" onClick={handleLogoClick}>
+            <span className={`font-black text-3xl tracking-[0.2em] smooth-transition logo-animated ${scrolled || mobileMenuOpen ? '' : 'drop-shadow-lg'}`}>DEZO</span>
           </a>
 
-          {/* Desktop Nav */}
-          <nav aria-label="Primary" className={`hidden lg:flex items-center gap-8 ${!scrolled ? 'bg-white/[0.06] border border-white/[0.1] backdrop-blur-xl px-9 py-3.5 rounded-full' : ''} smooth-transition`}>
+          <nav className={`hidden lg:flex items-center space-x-7 ${scrolled ? '' : 'bg-white/5 border border-white/10 backdrop-blur-md px-8 py-3.5 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.2)]'} smooth-transition`}>
             {['Services', 'Latest Work', 'About', 'Process', 'FAQ'].map((item) => (
-              <a
-                key={item}
-                href={item === 'About' ? '#' : `#${item.toLowerCase().replace(' ', '-')}`}
+              <a 
+                key={item} 
+                href={item === 'About' ? '#' : `#${item.toLowerCase().replace(' ', '-')}`} 
                 onClick={(e) => handleNavClick(e, item)}
-                className="text-[11px] font-bold uppercase tracking-[0.14em] smooth-transition text-white/70 hover:text-white relative group/nav"
+                className={`text-xs font-bold uppercase tracking-[0.15em] smooth-transition ${scrolled || currentPage !== 'home' ? 'text-main-muted hover:text-[var(--primary)]' : 'text-[#F8FAFC] hover:text-[#06B6D4]'}`}
               >
                 {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-[2px] rounded-full bg-[var(--accent)] group-hover/nav:w-full smooth-transition" />
               </a>
             ))}
           </nav>
 
-          {/* CTA */}
-          <div className="hidden lg:block">
-            <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, 'contact')}
-              className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-white rounded-full smooth-transition hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(59,130,196,0.4)] active:scale-95"
-              style={{ background: 'linear-gradient(135deg, var(--primary) 0%, #2563EB 100%)' }}
-            >
+          <div className="hidden lg:flex items-center gap-4">
+            <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className={`px-7 py-3 text-sm font-bold text-white rounded-full smooth-transition shadow-lg ${scrolled ? 'bg-[var(--primary)]' : 'bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] shadow-[0_10px_20px_var(--primary)]'} hover:-translate-y-0.5 active:scale-95`}>
               Start a Project
             </a>
           </div>
 
-          {/* Hamburger */}
-          <button aria-label="Toggle Mobile Menu" aria-expanded={mobileMenuOpen} className="lg:hidden p-2 z-[70] smooth-transition active:scale-90" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X size={26} className="text-white" /> : <Menu size={26} className="text-white" />}
+          <button aria-label="Toggle Mobile Menu" aria-expanded={mobileMenuOpen} className="lg:hidden p-2 z-[70] active:scale-90 smooth-transition" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <X size={28} className="text-main-dark" /> : <Menu size={28} className={scrolled ? 'text-main-dark' : 'text-white'} />}
           </button>
         </div>
 
-        {/* Mobile Drawer */}
-        <div className={`fixed inset-0 bg-[var(--bg-dark)] z-[65] lg:hidden flex flex-col justify-center px-8 smooth-transition ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-          <div className="flex flex-col gap-7 text-center">
+        {/* Mobile Navigation Drawer */}
+        <div className={`fixed inset-0 bg-panel-white z-[65] lg:hidden flex flex-col justify-center px-6 smooth-transition transform ${mobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'}`}>
+          <div className="flex flex-col space-y-6 text-center mt-16">
             {['Services', 'Latest Work', 'About', 'Process', 'FAQ'].map((item, i) => (
-              <a
-                key={item}
-                href={item === 'About' ? '#' : `#${item.toLowerCase().replace(' ', '-')}`}
-                onClick={(e) => handleNavClick(e, item)}
-                className="text-2xl font-black text-white/80 hover:text-white smooth-transition"
-                style={{ transitionDelay: `${i * 40}ms`, transform: mobileMenuOpen ? 'none' : 'translateY(20px)', opacity: mobileMenuOpen ? 1 : 0 }}
-              >
+               <a 
+                 key={item} 
+                 href={item === 'About' ? '#' : `#${item.toLowerCase().replace(' ', '-')}`} 
+                 onClick={(e) => handleNavClick(e, item)} 
+                 className="text-2xl font-black tracking-tight text-main-dark hover:text-[var(--primary)] smooth-transition" 
+                 style={{ transitionDelay: `${i * 50}ms` }}
+               >
                 {item}
               </a>
             ))}
-            <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, 'contact')}
-              className="mt-4 px-10 py-4 text-white text-base font-bold rounded-full mx-auto inline-block active:scale-95 smooth-transition"
-              style={{ background: 'linear-gradient(135deg, var(--primary), #2563EB)' }}
-            >
-              Start a Project →
+            <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="mt-8 px-8 py-4 bg-[var(--primary)] text-white text-lg font-bold rounded-full mx-auto inline-block active:scale-95 smooth-transition">
+              Start a Project
             </a>
           </div>
         </div>
       </header>
 
       <ScrollToTop />
-      <Suspense fallback={<RouteFallback />}>
+      <Suspense fallback={<div className="min-h-screen bg-main-dark flex items-center justify-center"><div className="w-12 h-12 border-4 border-[var(--primary)] border-t-transparent rounded-full animate-spin"></div></div>}>
       <Routes>
         <Route path="/" element={
-          <main id="main-content">
-            {/* ── HERO ── */}
-          <section id="home" className="relative pt-36 pb-20 lg:pt-52 lg:pb-36 overflow-hidden" style={{ background: 'var(--hero-bg)' }}>
-            {/* Background Orbs */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div className="hero-grid" />
-              <div className="absolute top-[-15%] right-[-8%] w-[700px] h-[700px] rounded-full opacity-[0.18] animate-float" style={{ background: 'radial-gradient(circle, var(--primary) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-              <div className="absolute bottom-[-15%] left-[-8%] w-[550px] h-[550px] rounded-full opacity-[0.12] animate-float-delayed" style={{ background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-              <div className="absolute top-[40%] left-[40%] w-[300px] h-[300px] rounded-full opacity-[0.06]" style={{ background: 'var(--gold)', filter: 'blur(60px)' }} />
+          <main>
+          {/* HERO SECTION */}
+          <section id="home" className="relative pt-40 pb-24 lg:pt-56 lg:pb-40 overflow-hidden smooth-transition bg-main-dark" style={{ background: 'var(--hero-bg)' }}>
+            {/* Abstract Background Effects */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none smooth-transition" style={{ opacity: 'var(--glow-opacity)' }}>
+              <div className="hero-grid opacity-30"></div>
+              <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-[var(--primary)] opacity-20 rounded-full blur-[120px] animate-float"></div>
+              <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-[var(--accent)] opacity-[0.15] rounded-full blur-[120px] animate-float-delayed"></div>
             </div>
-
-            <div className="max-w-[90rem] mx-auto px-5 lg:px-10 relative z-10 text-center lg:text-left">
-              <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-
-                {/* Left: Copy */}
+            <div className="max-w-[90rem] mx-auto px-4 lg:px-8 relative z-10 text-center lg:text-left">
+              <div className="grid lg:grid-cols-12 gap-12 items-center">
                 <div className="lg:col-span-6">
-                  <Reveal direction="up" delay={0}>
-                    <div className="inline-flex items-center gap-2.5 mb-6 px-4 py-2 rounded-full border border-white/12 bg-white/[0.05] backdrop-blur-sm">
-                      <Sparkles size={13} className="text-[var(--accent)]" aria-hidden />
-                      <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/70">Web · SEO · Ads · Ecommerce</span>
-                    </div>
-                  </Reveal>
-
-                  <Reveal direction="up" delay={80}>
-                    <h1 className="clamp-h1 text-white mb-5" style={{ letterSpacing: '-0.03em' }}>
-                      We Build Websites
-                      <br />
-                      <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg, var(--primary-light) 0%, var(--accent-light) 100%)' }}>
-                        That Actually Earn
-                      </span>
+                  <Reveal direction="up" delay={100}>
+                    <h1 className="clamp-h1 font-black text-main-light mb-6">
+                      Web Development <br/>
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary)] to-[var(--accent)]">&amp; Digital Marketing</span>
+                      <span className="block text-3xl md:text-5xl mt-2 text-white">Agency in India.</span>
                     </h1>
                   </Reveal>
-
-                  <Reveal direction="up" delay={180}>
-                    <RotatingText />
+                  <Reveal direction="up" delay={200}>
+                    <div className="mb-6">
+                      <RotatingText />
+                    </div>
                   </Reveal>
-
-                  <Reveal direction="up" delay={280}>
-                    <p className="text-base md:text-lg text-white/60 mb-9 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
-                      DEZO helps Indian founders launch fast websites, high-converting funnels, and performance campaigns — turning traffic into paying customers.
+                  <Reveal direction="up" delay={300}>
+                    <p className="text-sm sm:text-base md:text-lg text-[#E2E8F0] opacity-90 mb-8 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                      DEZO is a web development and digital marketing agency in India helping businesses build fast, modern, and conversion-focused websites. We create premium websites, ecommerce stores, landing pages, SEO systems, Meta Ads, and Google Ads strategies that turn visitors into customers.
                     </p>
                   </Reveal>
-
-                  <Reveal direction="up" delay={380}>
-                    <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-10">
-                      <a
-                        href="#contact"
-                        onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-                        className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold text-white rounded-full smooth-transition hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(59,130,196,0.4)] active:scale-95"
-                        style={{ background: 'linear-gradient(135deg, var(--primary) 0%, #1D4ED8 100%)' }}
-                      >
-                        Book Free Growth Call
-                        <ArrowUpRight size={16} />
+                  <Reveal direction="up" delay={500}>
+                    <div className="flex justify-center lg:justify-start gap-4 mb-12 flex-wrap">
+                      <a href="#contact" className="px-9 py-4 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] text-white font-bold rounded-full hover:-translate-y-1 shadow-[0_10px_20px_rgba(124,58,237,0.4)] hover:shadow-[0_15px_30px_rgba(236,72,153,0.6)] smooth-transition active:scale-95 relative overflow-hidden group">
+                        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 smooth-transition rounded-full"></div>
+                        <span className="relative z-10">Get Free Website Audit</span>
                       </a>
-                      <a
-                        href="#latest-work"
-                        onClick={(e) => { e.preventDefault(); document.getElementById('latest-work')?.scrollIntoView({ behavior: 'smooth' }); }}
-                        className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold text-white/80 rounded-full border border-white/15 hover:bg-white/8 hover:text-white smooth-transition active:scale-95 backdrop-blur-sm"
-                      >
-                        See Our Work
+                      <a href="#latest-work" className="px-9 py-4 text-white font-bold rounded-full hover:bg-white/10 border border-white/20 smooth-transition active:scale-95 group">
+                        <span>Start Your Project</span>
                       </a>
                     </div>
-
-                    {/* Social proof strip */}
-                    <div className="flex items-center justify-center lg:justify-start gap-5">
-                      <div className="flex -space-x-2">
-                        {['#3B82C4','#F59E6B','#C4A55A','#60A5FA','#FBD38D'].map((c, i) => (
-                          <div key={i} className="w-7 h-7 rounded-full border-2 border-[var(--bg-dark)] flex items-center justify-center text-[8px] font-black text-white" style={{ background: c, zIndex: 5 - i }}>★</div>
-                        ))}
-                      </div>
-                      <p className="text-xs text-white/50 font-medium">Trusted by <strong className="text-white/80">50+ businesses</strong> across India</p>
-                    </div>
+                    <p className="text-xs text-white/50 font-bold uppercase tracking-widest mt-4">Web Development, SEO, Meta Ads, Google Ads & Ecommerce</p>
                   </Reveal>
                 </div>
-
-                {/* Right: Visual */}
-                <div className="lg:col-span-6 hidden lg:block h-[580px]">
-                  <Reveal direction="left" delay={300} className="w-full h-full">
-                    <HeroVisual nightMode={false} />
-                  </Reveal>
+                <div className="lg:col-span-6 hidden lg:block h-[600px]">
+                  {isDesktop && (
+                    <Reveal direction="left" delay={400} className="w-full h-full">
+                      <HeroVisual nightMode={false} />
+                    </Reveal>
+                  )}
                 </div>
               </div>
             </div>
           </section>
 
-          {/* ── STATS BAR ── */}
-          <section className="py-12 lg:py-16" style={{ background: 'var(--bg-white)', borderTop: '1px solid var(--border-light)', borderBottom: '1px solid var(--border-light)' }}>
-            <div className="max-w-[90rem] mx-auto px-5">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                {[
-                  { num: 50, suffix: '+', label: 'Websites Delivered', icon: '🌐' },
-                  { num: 11, suffix: '+', label: 'Years Experience', icon: '⚡' },
-                  { num: 10, suffix: '+', label: 'Industries Served', icon: '🏆' },
-                  { num: 4, suffix: '.8x', label: 'Average ROI', icon: '📈' },
-                ].map((stat, i) => (
-                  <Reveal key={i} delay={i * 80} direction="up">
-                    <div className="group cursor-default">
-                      <div className="text-2xl mb-2">{stat.icon}</div>
-                      <div className="text-3xl lg:text-4xl font-black mb-1" style={{ color: 'var(--text-light)' }}>
-                        <AnimatedCounter end={stat.num} suffix={stat.suffix} nightMode={false} />
-                      </div>
-                      <div className="text-[11px] font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>{stat.label}</div>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
-          </section>
+      {/* STATS */}
+      <section className="py-16 lg:py-20 bg-panel-white border-b border-main-light overflow-hidden">
+        <div className="max-w-[90rem] mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4 md:gap-6 text-center divide-x divide-main-light">
+            {[
+              { num: 50, suffix: "+", label: "Websites Delivered" },
+              { num: 10, suffix: "+", label: "Industries Served" },
+              { num: 100, suffix: "%", label: "Pan-India Experience" },
+              { num: 24, suffix: "/7", label: "Fast & Secure Sites" }
+            ].map((stat, i) => (
+              <Reveal key={i} delay={i * 100} direction="up">
+                <div>
+                  <div className="text-3xl lg:text-4xl font-black text-main-dark mb-1"><AnimatedCounter end={stat.num} suffix={stat.suffix} nightMode={false} /></div>
+                  <div className="text-[10px] md:text-[11px] font-bold text-brand-primary uppercase tracking-widest leading-snug lg:leading-normal">{stat.label}</div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <ServicesSection nightMode={false} />
       <AboutSection />
@@ -546,63 +430,6 @@ export default function App() {
       <FaqSection openIndex={openFaqIndex} setOpenIndex={setOpenFaqIndex} />
       <BlogSection />
 
-      {/* TESTIMONIALS */}
-      <section className="py-24 lg:py-32 bg-main-dark overflow-hidden relative">
-        <div className="absolute inset-0 bg-[var(--primary)] opacity-5 pointer-events-none mix-blend-overlay"></div>
-        <div className="max-w-[90rem] mx-auto px-4 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-24">
-            <Reveal direction="up">
-              <div className="text-xs font-bold text-[var(--primary)] tracking-[0.2em] uppercase mb-4">Client Success</div>
-              <h2 className="clamp-h2 font-black text-main-light mb-6">Loved by Real Human Businesses</h2>
-              <p className="text-lg text-[var(--text-muted)] font-medium leading-relaxed">
-                We don't just build websites; we build partnerships. Here's what some of our amazing clients have to say about working with DEZO.
-              </p>
-            </Reveal>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                quote: "DEZO completely transformed our digital presence. The new website is not only stunning, but it actually converts visitors into leads. They truly care about the businesses they work with.",
-                name: "Anjali M.",
-                role: "Founder, local Boutique"
-              },
-              {
-                quote: "Working with the DEZO team felt incredibly natural. They listened to our needs and delivered an ecommerce platform that exceeded our expectations in both speed and design.",
-                name: "Vikram S.",
-                role: "CEO, Tech Retail"
-              },
-              {
-                quote: "The organic, premium feel of our new website has elevated our brand identity overnight. Their attention to detail and human-centric approach is unparalleled in the industry.",
-                name: "Priya R.",
-                role: "Marketing Director"
-              }
-            ].map((testimonial, i) => (
-              <Reveal direction="up" delay={i * 100} key={i}>
-                <div className="bg-white/5 backdrop-blur-md p-8 lg:p-10 rounded-3xl border border-white/10 hover:border-[var(--primary)]/30 smooth-transition h-full flex flex-col group relative overflow-hidden">
-                  <div className="absolute top-0 right-0 p-6 text-[var(--primary)] opacity-20 group-hover:opacity-40 smooth-transition group-hover:scale-110">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
-                  </div>
-                  <div className="flex mb-6 gap-1 text-[var(--gold)]">
-                    {[1,2,3,4,5].map(star => <svg key={star} className="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}
-                  </div>
-                  <p className="text-[var(--text-dark)] text-lg mb-8 leading-relaxed font-medium flex-grow relative z-10">"{testimonial.quote}"</p>
-                  <div className="mt-auto flex items-center gap-4 relative z-10">
-                    <div className="w-12 h-12 rounded-full bg-[var(--primary)]/20 flex items-center justify-center text-[var(--text-dark)] font-bold text-xl border border-[var(--primary)]/30">
-                      {testimonial.name.charAt(0)}
-                    </div>
-                    <div>
-                      <div className="text-[var(--text-dark)] font-bold">{testimonial.name}</div>
-                      <div className="text-sm text-[var(--text-muted)]">{testimonial.role}</div>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CONTACT */}
       <section id="contact" className="py-24 lg:py-32 bg-main-light overflow-hidden">
         <div className="max-w-[90rem] mx-auto px-4 lg:px-8">
@@ -653,18 +480,18 @@ export default function App() {
               
               <div className="lg:w-2/3 relative z-10">
                 <form className="space-y-5" onSubmit={handleFormSubmit}>
-                {formStatus === 'success' && <div className="bg-green-50 text-green-700 p-4 rounded-xl text-sm font-bold border border-green-200" role="status">{submitMessage || "Form submitted successfully! We'll get back to you shortly."}</div>}
+                {isSubmitted && <div className="bg-green-50 text-green-700 p-4 rounded-xl text-sm font-bold border border-green-200">Form submitted successfully! We'll get back to you shortly.</div>}
                 {formErrors.general && <div className="bg-red-50 text-red-700 p-4 rounded-xl text-sm font-bold border border-red-200">{formErrors.general}</div>}
                 
                 <div className="grid md:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="nameInput" className="text-[10px] font-bold uppercase tracking-widest mb-2 block text-main-dark relative">Name <span className="text-red-500">*</span></label>
-                    <input id="nameInput" name="name" type="text" value={formData.name} onChange={handleFormChange} required className="w-full bg-main-light border border-main-light rounded-xl px-5 min-h-[56px] text-sm text-main-dark focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 smooth-transition" placeholder="Enter your full name" />
+                    <input id="nameInput" name="name" type="text" value={formData.name} onChange={handleFormChange} className="w-full bg-main-light border border-main-light rounded-xl px-5 min-h-[56px] text-sm text-main-dark focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 smooth-transition" placeholder="Enter your full name" />
                     {formErrors.name && <p className="text-red-500 text-xs font-bold mt-1.5">{formErrors.name}</p>}
                   </div>
                   <div>
                     <label htmlFor="emailInput" className="text-[10px] font-bold uppercase tracking-widest mb-2 block text-main-dark">Email <span className="text-red-500">*</span></label>
-                    <input id="emailInput" name="email" type="email" value={formData.email} onChange={handleFormChange} required className="w-full bg-main-light border border-main-light rounded-xl px-5 min-h-[56px] text-sm text-main-dark focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 smooth-transition" placeholder="Your email address" />
+                    <input id="emailInput" name="email" type="email" value={formData.email} onChange={handleFormChange} className="w-full bg-main-light border border-main-light rounded-xl px-5 min-h-[56px] text-sm text-main-dark focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 smooth-transition" placeholder="Your email address" />
                     {formErrors.email && <p className="text-red-500 text-xs font-bold mt-1.5">{formErrors.email}</p>}
                   </div>
                 </div>
@@ -672,7 +499,7 @@ export default function App() {
                 <div className="grid md:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="phoneInput" className="text-[10px] font-bold uppercase tracking-widest mb-2 block text-main-dark">Phone <span className="text-red-500">*</span></label>
-                    <input id="phoneInput" name="phone" type="tel" inputMode="tel" value={formData.phone} onChange={handleFormChange} required className="w-full bg-main-light border border-main-light rounded-xl px-5 min-h-[56px] text-sm text-main-dark focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 smooth-transition" placeholder="Your phone number" />
+                    <input id="phoneInput" name="phone" type="tel" value={formData.phone} onChange={handleFormChange} className="w-full bg-main-light border border-main-light rounded-xl px-5 min-h-[56px] text-sm text-main-dark focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 smooth-transition" placeholder="Your phone number" />
                     {formErrors.phone && <p className="text-red-500 text-xs font-bold mt-1.5">{formErrors.phone}</p>}
                   </div>
                   <div>
@@ -691,7 +518,7 @@ export default function App() {
                     <select id="budgetInput" name="budget" value={formData.budget} onChange={handleFormChange} className="w-full bg-main-light border border-main-light rounded-xl px-5 min-h-[56px] text-sm text-main-dark appearance-none focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 smooth-transition" style={{ backgroundImage: 'url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6 9 12 15 18 9\'%3e%3c/polyline%3e%3c/svg%3e")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1em' }}>
                       <option value="">Select Budget (Optional)</option>
                       <option value="Under ₹50,000">Under ₹50,000</option>
-                      <option value="₹50,000 - ₹1,00,000">₹50,000 - ₹1,00,000</option>
+                      <option value="₹50,000 - ₹1,000,000">₹50,000 - ₹1,00,000</option>
                       <option value="₹1,00,000 - ₹2,00,000">₹1,00,000 - ₹2,00,000</option>
                       <option value="₹2,00,000+">₹2,00,000+</option>
                     </select>
@@ -700,7 +527,7 @@ export default function App() {
 
                 <div>
                   <label htmlFor="serviceInput" className="text-[10px] font-bold uppercase tracking-widest mb-2 block text-main-dark">Service Needed <span className="text-red-500">*</span></label>
-                  <select id="serviceInput" name="service" value={formData.service} onChange={handleFormChange} required className="w-full bg-main-light border border-main-light rounded-xl px-5 min-h-[56px] text-sm text-main-dark appearance-none focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 smooth-transition" style={{ backgroundImage: 'url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6 9 12 15 18 9\'%3e%3c/polyline%3e%3c/svg%3e")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1em' }}>
+                  <select id="serviceInput" name="service" value={formData.service} onChange={handleFormChange} className="w-full bg-main-light border border-main-light rounded-xl px-5 min-h-[56px] text-sm text-main-dark appearance-none focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 smooth-transition" style={{ backgroundImage: 'url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6 9 12 15 18 9\'%3e%3c/polyline%3e%3c/svg%3e")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1em' }}>
                     <option value="">Select Service</option>
                     <option value="Website Development">Website Development</option>
                     <option value="Ecommerce">Ecommerce</option>
@@ -711,18 +538,23 @@ export default function App() {
 
                 <div>
                   <label htmlFor="messageInput" className="text-[10px] font-bold uppercase tracking-widest mb-2 block text-main-dark">Message <span className="text-red-500">*</span></label>
-                  <textarea id="messageInput" name="message" value={formData.message} onChange={handleFormChange} rows={4} required className="w-full bg-main-light border border-main-light rounded-xl px-5 py-4 text-sm text-main-dark focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 smooth-transition resize-vertical" placeholder="Tell us about your project..."></textarea>
+                  <textarea id="messageInput" name="message" value={formData.message} onChange={handleFormChange} rows={4} className="w-full bg-main-light border border-main-light rounded-xl px-5 py-4 text-sm text-main-dark focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 smooth-transition resize-vertical" placeholder="Tell us about your project..."></textarea>
                   {formErrors.message && <p className="text-red-500 text-xs font-bold mt-1.5">{formErrors.message}</p>}
                 </div>
                 
-                <div className="pt-2">
-                  <button type="submit" disabled={formStatus === 'submitting'} className="w-full min-h-[60px] rounded-xl bg-gradient-to-r from-brand-primary to-[var(--accent)] text-white font-black text-lg tracking-wide hover:shadow-[0_15px_30px_rgba(37,99,235,0.3)] hover:-translate-y-1 active:translate-y-0 active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed smooth-transition">{formStatus === 'submitting' ? 'Submitting...' : 'Submit Request'}</button>
+                <div className="pt-2 flex flex-col sm:flex-row gap-4">
+                  <button type="submit" disabled={isSubmitting} className="flex-1 w-full min-h-[60px] rounded-xl bg-gradient-to-r from-brand-primary to-[var(--accent)] text-white font-black text-lg tracking-wide hover:shadow-[0_15px_30px_rgba(37,99,235,0.3)] hover:-translate-y-1 active:translate-y-0 active:scale-95 smooth-transition flex items-center justify-center gap-2 disabled:opacity-70 disabled:pointer-events-none">
+                    {isSubmitting ? (
+                      <><div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> Sending...</>
+                    ) : (
+                      "Submit Request"
+                    )}
+                  </button>
+                  <button type="button" onClick={() => window.open('https://wa.me/917787063088', '_blank')} className="flex-1 w-full min-h-[60px] rounded-xl bg-[#25D366] text-white font-black text-lg tracking-wide hover:shadow-[0_15px_30px_rgba(37,211,102,0.3)] hover:-translate-y-1 active:translate-y-0 active:scale-95 smooth-transition flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 1.833 6.368L.141 24l5.803-1.492A12 12 0 1 0 11.944 0zm0 22C6.918 22 2.802 18.237 2.451 13.315l1.637 1.636a8.878 8.878 0 0 1 10.9-10.9l1.636-1.636C12.186 2.012 11.968 2 11.944 2c-5.522 0-10 4.477-10 10 0 1.76.452 3.411 1.233 4.887L1.93 21.365l4.63-1.196A9.957 9.957 0 0 0 11.944 22c5.522 0 10-4.478 10-10s-4.478-10-10-10zm5.176-6.425c-.282-.141-1.669-.824-1.927-.919-.258-.094-.447-.141-.635.141-.188.282-.729.919-.894 1.107-.165.188-.33.211-.612.07-.282-.141-1.19-.439-2.268-1.4-8.37-1.135 7.42-1.925 7.185-1.442-.236.483-3.692.671-5.127.812-.141.141-.33.353-.33.353s-.188.165-.188.447c0 .282.188.635.423.824.236.188.236.47.236.753.047.893-1.011 2.585-2.067 2.679-1.011.094-1.364.094-1.904-.094s-.541-.47-.541-.894.236-1.011.682-1.364c.541-.423.705-.682.894-1.152.188-.47.094-.894-.047-1.176-.141-.282-.635-1.528-.87-2.092-.235-.564-.47-.487-.635-.494-.165-.008-.353-.008-.541-.008s-.494.07-.753.353c-.258.282-1.011.988-1.011 2.4 0 1.411 1.035 2.775 1.176 2.963.141.188 2.022 3.081 4.891 4.316.682.294 1.223.47 1.646.6.682.216 1.305.185 1.796.113.551-.082 1.669-.682 1.904-1.34s.235-1.223.165-1.341c-.07-.118-.258-.188-.541-.33z"/></svg>
+                    Chat on WhatsApp
+                  </button>
                 </div>
-                {formStatus !== 'submitting' && (
-                  <p className="text-xs text-main-muted text-center pt-1">
-                    Need urgent help? <a className="underline hover:text-[var(--primary)]" href={`https://wa.me/917787063088?text=${encodeURIComponent(`Hello Tarik, I am ${formData.name || 'a business owner'} and need help with ${formData.service || 'website/digital marketing'}.`)}`} target="_blank" rel="noopener noreferrer">Message us on WhatsApp</a>.
-                  </p>
-                )}
               </form>
             </div>
           </div>
@@ -755,9 +587,9 @@ export default function App() {
                     <span className="font-black text-3xl tracking-[0.2em] text-main-light mb-4 block">DEZO</span>
                     <p className="text-main-muted text-sm font-medium mb-6">Premium web development and digital marketing agency delivering scalable solutions for brands in India.</p>
                     <div className="flex gap-4 text-main-light/70 text-sm font-bold">
-                        <a href="#" aria-label="Facebook" className="hover:text-[var(--primary)] smooth-transition cursor-pointer"><Facebook size={20} /></a>
-                        <a href="#" aria-label="Instagram" className="hover:text-[var(--primary)] smooth-transition cursor-pointer"><Instagram size={20} /></a>
-                        <a href="#" aria-label="LinkedIn" className="hover:text-[var(--primary)] smooth-transition cursor-pointer"><Linkedin size={20} /></a>
+                        <a href="#" aria-label="Facebook"><span className="hover:text-[var(--primary)] smooth-transition cursor-pointer">FB</span></a>
+                        <a href="#" aria-label="Instagram"><span className="hover:text-[var(--primary)] smooth-transition cursor-pointer">IG</span></a>
+                        <a href="#" aria-label="LinkedIn"><span className="hover:text-[var(--primary)] smooth-transition cursor-pointer">IN</span></a>
                     </div>
                   </div>
                   <div>

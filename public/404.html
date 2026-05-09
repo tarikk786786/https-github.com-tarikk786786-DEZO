@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>DEZO Agency</title>
+  <script>
+    // GitHub Pages SPA redirect trick
+    // Redirect all 404s back to index.html preserving the path
+    var l = window.location;
+    var base = '/https-github.com-tarikk786786-DEZO';
+    var path = l.pathname.replace(base, '');
+    var search = l.search.slice(1) ? '?q=' + l.search.slice(1).split('&').join('~and~') : '';
+    var hash = l.hash ? '&h=' + l.hash.slice(1) : '';
+    l.replace(
+      l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+      base + '/?p=' + encodeURIComponent(path) + search + hash
+    );
+  </script>
+</head>
+<body></body>
+</html>

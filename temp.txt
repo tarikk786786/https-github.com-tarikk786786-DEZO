@@ -1,0 +1,34 @@
+src/ThemeStyles.tsx:39:      --bg-white: var(--bg-surface);
+src/ThemeStyles.tsx:127:    .bg-panel-white { background-color: var(--bg-white); }
+src/ThemeStyles.tsx:130:    .bg-white { background-color: var(--bg-surface) !important; }
+src/components2.tsx:306:               <div className="absolute top-2 left-3 w-[2px] h-[2px] bg-white rounded-full shadow-[0_0_2px_white] animate-pulse"></div>
+src/components2.tsx:307:               <div className="absolute bottom-4 right-4 w-[1px] h-[1px] bg-white rounded-full shadow-[0_0_2px_white] animate-pulse" style={{ animationDelay: '0.5s'}}></div>
+src/components2.tsx:308:               <div className="absolute top-6 right-2 w-[1.5px] h-[1.5px] bg-white rounded-full shadow-[0_0_2px_white] animate-pulse" style={{ animationDelay: '1s'}}></div>
+src/components2.tsx:324:         <div className={`glass-card ${isDay ? 'bg-white/20 border-white/40' : 'bg-[#030712]/70 border-white/10'} backdrop-blur-xl rounded-2xl p-4 shadow-2xl flex items-center gap-4 w-full relative overflow-hidden group transition-colors duration-1000`}>
+src/NotFoundPage.tsx:25:          <a href="/#services" className="flex items-center justify-center gap-2 px-6 py-4 bg-white/5 border border-white/10 hover:border-[var(--primary)]/50 hover:bg-white/10 text-white font-bold rounded-xl hover:-translate-y-1 smooth-transition">
+src/NotFoundPage.tsx:28:          <a href="/#contact" className="flex items-center justify-center gap-2 px-6 py-4 bg-white/5 border border-white/10 hover:border-[var(--primary)]/50 hover:bg-white/10 text-white font-bold rounded-xl hover:-translate-y-1 smooth-transition">
+src/components/PricingAndOffers.tsx:83:                className="w-full py-4 text-center text-white bg-white/10 hover:bg-[var(--primary)] border border-white/10 hover:border-transparent hover:shadow-[0_10px_20px_rgba(47,128,255,0.3)] smooth-transition font-bold rounded-xl mt-4"
+src/components/PricingAndOffers.tsx:152:                className="w-full py-4 text-center text-white bg-white/10 hover:bg-[var(--primary)] border border-white/10 hover:border-transparent hover:shadow-[0_10px_20px_rgba(47,128,255,0.3)] smooth-transition font-bold rounded-xl mt-4"
+src/components/PricingAndOffers.tsx:167:      <div className="absolute inset-0 bg-white/5 opacity-50 mix-blend-overlay"></div>
+src/components/PricingAndOffers.tsx:168:      <div className="absolute -top-40 -right-40 w-96 h-96 bg-white/20 blur-3xl rounded-full"></div>
+src/components/PricingAndOffers.tsx:242:            <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-3xl shadow-2xl z-20 border border-white/10 flex gap-4 items-center animate-float">
+src/components/PricingAndOffers.tsx:285:              <motion.div whileHover={{ y: -5 }} className="bg-white border border-white/10 p-6 rounded-2xl h-full flex flex-col hover:shadow-xl smooth-transition hover:border-[var(--primary)]/30 group">
+src/components/tools/GoogleRankingChecklist.tsx:84:            <div className="w-full bg-white/5 rounded-full h-2.5 mb-6 overflow-hidden">
+src/App.tsx:54:    <div className="flex items-center gap-1 bg-white/5 border border-white/10 px-6 py-2 rounded-full backdrop-blur-md overflow-hidden h-[40px] shadow-[0_4px_10px_rgba(0,0,0,0.2)]">
+src/App.tsx:399:          <nav className={`hidden lg:flex items-center space-x-7 ${scrolled ? '' : 'bg-white/5 border border-white/10 backdrop-blur-md px-8 py-3.5 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.2)]'} smooth-transition`}>
+src/App.tsx:415:              className={`p-2.5 rounded-full border smooth-transition ${scrolled ? 'bg-[var(--bg-surface)] border-white/10 text-main-muted hover:text-[var(--primary)]' : 'bg-white/10 border-white/20 text-white/70 hover:text-white'} hover:scale-105 active:scale-95`}
+src/App.tsx:479:                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full mb-6 backdrop-blur-sm">
+src/App.tsx:613:                      activeCategory === cat ? 'bg-white text-black border-white' : 'bg-white/5 text-main-muted border-white/10 hover:border-white/30'
+src/App.tsx:928:                className="absolute top-4 right-4 w-10 h-10 bg-white/5 hover:bg-white/10 rounded-full flex items-center justify-center smooth-transition z-10"
+src/App.tsx:1023:              <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+src/components3.tsx:75:                <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-[var(--primary)] mb-8 shadow-sm border border-white/5 group-hover:scale-110 group-hover:rotate-3 smooth-transition relative z-10">
+src/components3.tsx:227:              <div className="bg-[var(--bg-card)] backdrop-blur-md p-6 rounded-2xl border border-white/10 h-full flex flex-col items-center justify-center text-center hover:bg-white/5 hover:border-[var(--primary)]/50 hover:-translate-y-1 smooth-transition relative overflow-hidden group">
+src/components3.tsx:339:                  <span className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-bold text-[#E2E8F0]">website development company in Bhubaneswar</span>
+src/components3.tsx:340:                  <span className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-bold text-[#E2E8F0]">SEO services in Bhubaneswar</span>
+src/components3.tsx:341:                  <span className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-bold text-[#E2E8F0]">website design company in Odisha</span>
+src/components3.tsx:342:                  <span className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-bold text-[#E2E8F0]">Meta Ads agency in Odisha</span>
+src/components3.tsx:347:              <div className="bg-white/5 backdrop-blur-md p-10 rounded-[2.5rem] border border-white/10">
+src/AboutUsPage.tsx:77:              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 smooth-transition"></div>
+src/AboutUsPage.tsx:107:                <div className="w-14 h-14 bg-white/10 text-white rounded-full flex items-center justify-center mb-6">
+src/AboutUsPage.tsx:118:                <div className="w-14 h-14 bg-white/10 text-white rounded-full flex items-center justify-center mb-6">
+src/AboutUsPage.tsx:176:                      <span key={i} className="bg-white/10 backdrop-blur text-white px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wider">{tag}</span>

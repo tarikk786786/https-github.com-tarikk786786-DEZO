@@ -1,236 +1,68 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DEZO — Web Development, SEO & Digital Marketing Agency in Odisha</title>
+    <meta name="description" content="DEZO builds fast, premium websites, SEO strategies, Meta Ads campaigns, and digital growth systems for businesses in Odisha and across India." />
     
-    <!-- Primary Meta Tags -->
-    <title>DEZO - Web Development & Digital Marketing Agency in India</title>
-    
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://images.unsplash.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
-    <meta name="title" content="DEZO - Web Development & Digital Marketing Agency in India" />
-    <meta name="description" content="DEZO is a web development and digital marketing agency in India building fast websites, ecommerce stores, landing pages, SEO systems, Meta Ads and Google Ads campaigns for business growth." />
-    <meta name="keywords" content="DEZO, web development company in India, digital marketing agency in India, SEO services, Meta Ads, Google Ads, ecommerce website development, landing page design, business growth solutions" />
-    <meta name="author" content="DEZO Agency" />
-    <meta name="robots" content="index, follow" />
-    <meta name="language" content="English" />
-
     <link rel="canonical" href="https://dezo.in/" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    
+    <meta name="theme-color" content="#070707" />
+    <meta name="application-name" content="DEZO" />
+    <meta name="author" content="Tarik Islam" />
+    <meta name="apple-mobile-web-app-title" content="DEZO" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph -->
+    <meta property="og:title" content="DEZO — Web Development, SEO & Digital Marketing Agency in Odisha" />
+    <meta property="og:description" content="DEZO builds fast, premium websites, SEO strategies, Meta Ads campaigns, and digital growth systems for businesses in Odisha and across India." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://dezo.in/" />
-    <meta property="og:title" content="DEZO - Web Development & Digital Marketing Agency in India" />
-    <meta property="og:description" content="DEZO is a web development and digital marketing agency in India building fast websites, ecommerce stores, landing pages, SEO systems, Meta Ads and Google Ads campaigns for business growth." />
+    <meta property="og:site_name" content="DEZO" />
     <meta property="og:image" content="https://dezo.in/og-image.jpg" />
+    <meta property="og:locale" content="en_IN" />
 
-    <!-- Twitter -->
+    <!-- Twitter/X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://dezo.in/" />
-    <meta name="twitter:title" content="DEZO - Web Development & Digital Marketing Agency in India" />
-    <meta name="twitter:description" content="DEZO is a web development and digital marketing agency in India building fast websites, ecommerce stores, landing pages, SEO systems, Meta Ads and Google Ads campaigns for business growth." />
+    <meta name="twitter:title" content="DEZO — Web Development, SEO & Digital Marketing Agency in Odisha" />
+    <meta name="twitter:description" content="DEZO builds fast, premium websites, SEO strategies, Meta Ads campaigns, and digital growth systems for businesses in Odisha and across India." />
     <meta name="twitter:image" content="https://dezo.in/og-image.jpg" />
 
-    <!-- Google Analytics Placeholder -->
-    <!-- Replace G-XXXXXXXXXX with real Google Analytics Measurement ID -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
-    
-    <!-- Meta Pixel Code Placeholder -->
-    <!-- Replace YOUR_PIXEL_ID with real Meta Pixel ID before using -->
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', 'YOUR_PIXEL_ID');
-      fbq('track', 'PageView');
-    </script>
+    <!-- Favicon placeholders -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- TODO: Add proper DEZO logo at /public/logo.png -->
+    <!-- TODO: Add proper DEZO Open Graph image at /public/og-image.jpg -->
+    <!-- TODO: Add favicon at /public/favicon.ico -->
 
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#030914" />
-
-    <!-- Structured Data (JSON-LD) -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "DigitalMarketingAgency",
-      "name": "DEZO",
-      "url": "https://dezo.in/",
-      "description": "DEZO is a web development and digital marketing agency in India offering website development, ecommerce websites, SEO, Meta Ads and Google Ads services.",
-      "areaServed": {
-        "@type": "Country",
-        "name": "India"
-      },
-      "serviceType": [
-        "Web Development",
-        "Digital Marketing",
-        "SEO Services",
-        "Meta Ads Management",
-        "Google Ads Management",
-        "Ecommerce Website Development",
-        "Landing Page Design"
-      ],
-      "sameAs": [
-        "https://dezo.in/"
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What does DEZO do?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "DEZO is a web development and digital marketing agency in India helping businesses build fast websites, improve SEO, run Meta Ads and Google Ads, and grow online."
-          }
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "DEZO",
+        "url": "https://dezo.in/",
+        "description": "Web development, SEO, digital marketing, Meta Ads, and business growth agency.",
+        "founder": {
+          "@type": "Person",
+          "name": "Tarik Islam"
         },
-        {
-          "@type": "Question",
-          "name": "Is DEZO a web development company in India?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, we are a professional web development company in India building custom business websites, ecommerce stores, and landing pages that convert."
-          }
+        "areaServed": ["Odisha", "India"],
+        "telephone": "+91 9114411026",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bhubaneswar",
+          "addressRegion": "Odisha",
+          "addressCountry": "IN"
         },
-        {
-          "@type": "Question",
-          "name": "Do you provide website development in Bhubaneswar?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, we offer website development and digital marketing services in Bhubaneswar, Odisha, and serve clients across India."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you offer SEO services?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, we provide complete SEO services in India including technical SEO, on-page optimization, and local SEO to improve your Google ranking."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can you run Meta Ads and Google Ads?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, as a performance-driven Meta Ads and Google Ads agency in India, we create and manage ROI-focused campaigns to generate quality leads."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you build ecommerce websites?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, we specialize in high-converting ecommerce website development with secure payment gateways, fast loading speeds, and SEO-ready structures."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How long does it take to build a website?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A standard business website typically takes 2-4 weeks, while complex ecommerce stores or custom web apps may take 4-8 weeks depending on requirements."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How can I contact DEZO?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "You can contact DEZO by filling out the form on our Contact page, sending an email, or messaging us directly via WhatsApp."
-          }
-        }
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "DEZO",
-      "url": "https://dezo.in/"
-    }
-    </script>
-    <style>
-      .seo-fallback {
-        background: #030914;
-        color: #E2E8F0;
-        padding: 5%;
-        font-family: system-ui, sans-serif;
-        min-height: 100vh;
+        "image": "https://dezo.in/logo.png"
       }
-    </style>
+    </script>
   </head>
   <body>
-    <div id="root">
-      <div class="seo-fallback">
-        <header>
-          <h1>Web Development & Digital Marketing Agency in India</h1>
-          <p>DEZO is a web development and digital marketing agency in India helping businesses build fast, modern and conversion-focused websites. We create premium business websites, ecommerce stores, landing pages, SEO systems, Meta Ads campaigns and Google Ads strategies that turn visitors into leads, sales and long-term customers.</p>
-        </header>
-        <main>
-          <section>
-            <h2>Premium Website Development That Converts</h2>
-            <p>Fast Mobile-Friendly Websites. Custom-coded, lightning-fast, and highly converting websites tailored to your brand's unique needs.</p>
-          </section>
-          <section>
-            <h2>SEO, Meta Ads & Google Ads for Business Growth</h2>
-            <p>Data-driven SEO strategies, Meta Ads management, and Google Ads network implementation.</p>
-          </section>
-          <section>
-            <h2>Ecommerce Websites, Landing Pages & Custom Web Solutions</h2>
-            <p>At DEZO, we focus on clean design, fast performance, mobile responsiveness, strong SEO structure and measurable digital growth. Whether a business needs a new website, a high-converting landing page, ecommerce development or paid advertising support, our team builds digital systems that look premium and perform in real business conditions.</p>
-          </section>
-          <section>
-            <h2>Why Businesses Choose DEZO</h2>
-            <p>Uncompromising quality, blazing fast performance, and an ironclad guarantee.</p>
-          </section>
-          <section>
-            <h2>Our Web Development & Marketing Process</h2>
-            <p>Strategy, Design, Development, and Marketing execution.</p>
-          </section>
-          <section>
-            <h2>Frequently Asked Questions About DEZO</h2>
-            <ul>
-              <li><strong>What does DEZO do?</strong> DEZO is a web development and digital marketing agency in India helping businesses build fast websites, improve SEO, run Meta Ads and Google Ads, and grow online.</li>
-              <li><strong>Is DEZO a web development company in India?</strong> Yes, we are a professional web development company in India building custom business websites, ecommerce stores, and landing pages that convert.</li>
-              <li><strong>Do you provide website development in Bhubaneswar?</strong> Yes, we offer website development and digital marketing services in Bhubaneswar, Odisha, and serve clients across India.</li>
-              <li><strong>Do you offer SEO services?</strong> Yes, we provide complete SEO services in India including technical SEO, on-page optimization, and local SEO to improve your Google ranking.</li>
-              <li><strong>Can you run Meta Ads and Google Ads?</strong> Yes, as a performance-driven Meta Ads and Google Ads agency in India, we create and manage ROI-focused campaigns to generate quality leads.</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Contact Details</h2>
-            <address>
-              Official website: https://dezo.in/<br/>
-              Locations Served: India
-            </address>
-          </section>
-        </main>
-      </div>
-    </div>
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

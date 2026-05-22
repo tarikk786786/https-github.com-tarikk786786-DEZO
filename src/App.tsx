@@ -15,7 +15,7 @@ import {
 // Cache-buster: 2026-05-22
 console.log('DEZO Agency Website Loaded - V2');
 import { 
-  RotatingText, FallbackImage, HeroVisual 
+  RotatingText, FallbackImage, HeroVisual, ReactLiveBackground 
 } from './components2';
 import {
   ServicesSection, AboutSection, ProcessSection, FaqSection,
@@ -376,9 +376,9 @@ export default function App() {
           <main id="main-content">
             {/* ── HERO ── */}
           <section id="home" className="relative pt-36 pb-20 lg:pt-52 lg:pb-36 overflow-hidden" style={{ background: 'var(--hero-bg)' }}>
-            {/* AWWWARDS-style 3D Animated Background */}
+            {/* ReactLive Web Dev Background */}
             <Suspense fallback={null}>
-              <AwwwardsBackground />
+              <ReactLiveBackground />
             </Suspense>
 
             <div className="max-w-[90rem] mx-auto px-5 lg:px-10 relative z-10 text-center lg:text-left">
@@ -522,7 +522,7 @@ export default function App() {
                   <article className="bg-main-light rounded-3xl p-6 border border-main-light h-full flex flex-col justify-between hover:border-brand-primary smooth-transition shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(37,99,235,0.15)] relative overflow-hidden group-hover:-translate-y-1 active:translate-y-0 active:scale-[0.98]">
                     <div>
                       <div className="relative w-full h-44 mb-6 rounded-2xl overflow-hidden bg-[var(--background-color)] group-hover:shadow-md smooth-transition">
-                        <img src={`https://picsum.photos/seed/${project.title.replace(/\s/g,'')}/600/400`} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 smooth-transition duration-700" loading="lazy" />
+                        <img src={`https://image.thum.io/get/width/800/crop/600/${project.url}`} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 smooth-transition duration-700" loading="lazy" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 smooth-transition duration-500"></div>
                       </div>
                       <div className="text-[10px] font-bold text-brand-primary uppercase bg-panel-white px-3 py-1 rounded-full border border-main-light inline-block mb-4 shadow-sm">{project.category}</div>

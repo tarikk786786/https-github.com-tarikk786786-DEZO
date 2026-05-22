@@ -89,47 +89,140 @@ export const AboutSection = () => {
   return (
     <section id="about" className="py-24 lg:py-32 bg-panel-white overflow-hidden">
       <div className="max-w-[90rem] mx-auto px-4 lg:px-8 border-t border-main-light pt-24 lg:pt-32">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <Reveal direction="left">
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] opacity-20 blur-3xl rounded-[3rem]"></div>
-              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200" alt="Dezo Agency Team Collaboration" className="rounded-[2.5rem] shadow-2xl relative z-10 w-full object-cover aspect-[4/3] border border-main-light" />
-              <div className="absolute -bottom-8 -right-8 bg-main-dark text-main-light p-8 rounded-[2rem] shadow-2xl z-20 hidden md:block border border-white/10">
-                <div className="text-5xl font-black mb-2 text-[var(--primary)]">100+</div>
-                <div className="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)]">Successful<br/>Projects</div>
-              </div>
-            </div>
+        
+        <div className="text-center max-w-4xl mx-auto mb-20">
+          <Reveal direction="up">
+            <h2 className="clamp-h2 font-black text-main-dark mb-6 leading-tight">DEZO Vision</h2>
+            <p className="text-xl md:text-2xl text-main-muted font-medium leading-relaxed">
+              DEZO is built with one clear vision: to make powerful websites and digital marketing affordable for every business in India.
+            </p>
           </Reveal>
+        </div>
+
+        <div className="grid lg:grid-cols-12 gap-16 items-start relative">
           
-          <Reveal direction="right" delay={200}>
-            <div>
-              <div className="text-xs font-bold text-[var(--primary)] tracking-[0.2em] uppercase mb-4">About Dezo</div>
-              <h2 className="clamp-h2 font-black text-main-dark mb-6 leading-tight">Ecommerce Websites, Landing Pages & Custom Web Solutions</h2>
-              <p className="text-lg text-main-muted mb-8 leading-relaxed">
-                At Dezo, we focus on clean design, fast performance, mobile responsiveness, strong SEO structure and measurable digital growth. Whether a business needs a new website, a high-converting landing page, ecommerce development or paid advertising support, our team builds digital systems that look premium and perform in real business conditions.
-              </p>
-              
-              <div className="space-y-6 mb-10">
-                {[
-                  "Award-Winning Design Team",
-                  "Proven Marketing Strategies",
-                  "Blazing Fast Web Technologies",
-                  "Dedicated Support & Maintenance"
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-4">
-                    <div className="w-8 h-8 rounded-full bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] shrink-0">
-                      <CheckCircle2 size={18} />
-                    </div>
-                    <span className="font-bold text-main-dark text-lg">{item}</span>
-                  </div>
-                ))}
+          {/* Left Sticky Image - Tarik Islam */}
+          <div className="lg:col-span-5 lg:sticky lg:top-32">
+            <Reveal direction="left">
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] opacity-20 blur-3xl rounded-[3rem]"></div>
+                <img loading="lazy" decoding="async" src="https://i.ibb.co/KpVx2Yy5/Whats-App-Image-2026-04-21-at-9-46-54-PM.jpg" alt="Tarik Islam - Director & CEO" className="rounded-[2.5rem] shadow-2xl relative z-10 w-full object-cover aspect-[4/5] border border-main-light" />
+                
+                <div className="absolute -bottom-8 -right-8 bg-main-dark text-main-light p-8 rounded-[2rem] shadow-2xl z-20 hidden md:block border border-white/10 max-w-[280px]">
+                  <div className="text-2xl font-black mb-1 text-[var(--primary)]">Tarik Islam</div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Director & CEO</div>
+                  <p className="text-sm font-medium opacity-80 leading-relaxed">11+ years of experience in web development, branding, and online business growth.</p>
+                </div>
               </div>
-              
-              <a href="#contact" className="inline-flex items-center gap-3 font-bold text-[var(--primary)] hover:gap-5 smooth-transition border-b-2 border-[var(--primary)] pb-1">
-                Meet The Team <ArrowRight size={20} />
-              </a>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
+
+          {/* Right Scrolling Content */}
+          <div className="lg:col-span-7 space-y-16">
+            
+            <Reveal direction="up">
+              <div>
+                <p className="text-lg text-main-muted leading-relaxed mb-6">
+                  We believe every business deserves a website that looks premium, loads fast, works perfectly on mobile, ranks better on Google, and brings real customers — not just visitors. DEZO is not only a web development company; it is a complete digital growth partner for brands that want to look professional, build trust, and grow online.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal direction="up">
+              <div>
+                <h3 className="text-3xl font-black text-main-dark mb-6">Why DEZO Is Different</h3>
+                <p className="text-lg text-main-muted leading-relaxed mb-6">
+                  At DEZO, we focus on quality, speed, trust, and affordability. Many agencies make websites that only look good, but DEZO creates websites that are designed to perform. Every section, animation, color, button, and page is planned to connect with customers and convert them into leads.
+                </p>
+                
+                <h4 className="text-lg font-bold text-main-dark mb-4">We combine:</h4>
+                <div className="grid sm:grid-cols-2 gap-4 mb-8">
+                  {[
+                    "Professional website design",
+                    "Fast and responsive development",
+                    "SEO-friendly structure",
+                    "Digital marketing strategy",
+                    "Meta Ads and lead generation",
+                    "Brand trust & premium presentation",
+                    "Affordable pricing for India"
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="w-6 h-6 rounded-full bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] shrink-0">
+                        <CheckCircle2 size={14} />
+                      </div>
+                      <span className="font-bold text-main-dark">{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-lg text-main-muted font-bold">
+                  Our goal is simple: premium digital work at a price that small businesses, startups, schools, local shops, service providers, and growing brands can actually afford.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal direction="up">
+              <div className="bg-white p-8 rounded-[2rem] shadow-xl border border-main-light">
+                <h3 className="text-2xl font-black text-main-dark mb-6">Why DEZO Is Best</h3>
+                <p className="text-lg text-main-muted leading-relaxed mb-6">
+                  DEZO understands what Indian customers need. A website should not only be beautiful — it should be clear, trustworthy, mobile-friendly, and easy to contact. That is why every DEZO website is built with a business-first mindset.
+                </p>
+                <div className="space-y-4">
+                  {[
+                    "Build trust from the first impression",
+                    "Show services clearly",
+                    "Look premium and professional",
+                    "Get more inquiries through WhatsApp, forms, and calls",
+                    "Rank better with SEO-ready pages",
+                    "Run better ad campaigns",
+                    "Convert traffic into customers"
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <Star className="text-[var(--primary)] shrink-0 mt-1" size={18} fill="currentColor" />
+                      <span className="font-bold text-main-dark text-lg">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal direction="up">
+              <div>
+                <h3 className="text-3xl font-black text-main-dark mb-6">Our Promise</h3>
+                <p className="text-2xl font-bold text-[var(--primary)] mb-6">
+                  We do not just build websites. We build digital confidence.
+                </p>
+                <p className="text-lg text-main-muted leading-relaxed mb-8">
+                  When a customer visits your website, they should immediately feel that your business is real, professional, and reliable. That is the power DEZO wants to give every client.
+                </p>
+
+                <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+                  {[
+                    "Premium work",
+                    "Affordable pricing",
+                    "Human-made design feel",
+                    "Fast delivery",
+                    "Strong support",
+                    "SEO and marketing-ready",
+                    "Complete digital growth"
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <ShieldCheck className="text-[var(--primary)] shrink-0" size={20} />
+                      <span className="font-bold text-main-dark">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+            
+            <Reveal direction="up">
+              <div className="mt-12 p-8 bg-[var(--primary)] rounded-[2rem] text-white shadow-2xl">
+                <p className="text-2xl md:text-3xl font-black leading-tight">
+                  DEZO helps businesses grow online with premium websites, smart digital marketing, and affordable solutions led by 11 years of experience.
+                </p>
+              </div>
+            </Reveal>
+
+          </div>
         </div>
       </div>
     </section>

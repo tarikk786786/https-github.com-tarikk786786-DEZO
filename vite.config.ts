@@ -21,28 +21,7 @@ export default defineConfig({
         if (warning.code === 'CIRCULAR_DEPENDENCY') return;
         warn(warning);
       },
-      output: {
-        manualChunks(id) {
-          // Three.js + GSAP → lazy-loaded with AwwwardsBackground
-          if (
-            id.includes('node_modules/three/') ||
-            id.includes('node_modules/@react-three/') ||
-            id.includes('node_modules/gsap/') ||
-            id.includes('node_modules/@gsap/')
-          ) {
-            return 'three-vendor';
-          }
-          // Core vendor chunk (React, Router, Framer Motion, etc.)
-          if (id.includes('node_modules/')) {
-            return 'vendor';
-          }
-          // Service pages → lazy-loaded
-          if (id.includes('/src/pages')) {
-            return 'route-pages';
-          }
-          return undefined;
-        },
-      },
+      output: {},
     },
   },
   server: {

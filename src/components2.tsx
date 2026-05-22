@@ -150,11 +150,19 @@ export const ReactLiveBackground = () => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
     };
+    const handleTouchMove = (e: TouchEvent) => {
+      if(e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
+    };
     const handleMouseLeave = () => {
       mouse = { x: -1000, y: -1000 };
     };
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('touchend', handleMouseLeave);
 
     // Highly responsive Web Dev network atoms
     const atoms = Array.from({ length: window.innerWidth < 768 ? 20 : 40 }, () => ({
@@ -239,7 +247,9 @@ export const ReactLiveBackground = () => {
     return () => {
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('touchend', handleMouseLeave);
       cancelAnimationFrame(frame);
     };
   }, []);

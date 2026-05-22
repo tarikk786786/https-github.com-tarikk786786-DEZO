@@ -1,27 +1,72 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# DEZO — Web Development & Digital Marketing Agency
 
-# DEZO — Web & Marketing Site
+Premium agency website with AWWWARDS-style 3D animated background built with React, Three.js, GSAP, and Framer Motion.
 
-Premium marketing site for **DEZO** (web development and digital marketing in India).
+## 🚀 Live Deployment on Render
 
-- **Live site:** [https://dezo.in](https://dezo.in/)
-- **Source:** [https://github.com/tarikk786786/https-github.com-tarikk786786-DEZO](https://github.com/tarikk786786/https-github.com-tarikk786786-DEZO)
+### One-Click Deploy
+1. Go to [Render Dashboard](https://dashboard.render.com)
+2. Click **New → Web Service**
+3. Connect this GitHub repository
+4. Render auto-detects `render.yaml` — just confirm:
+   - **Build Command:** `npm install && npm run build`
+   - **Start Command:** `npm start`
+   - **Environment Variable:** `NODE_ENV = production`
+5. Click **Deploy**
 
-## Run locally
+### Manual Settings (if needed)
+| Setting | Value |
+|---------|-------|
+| Runtime | Node |
+| Build Command | `npm install && npm run build` |
+| Start Command | `npm start` |
+| Health Check | `/api/health` |
+| Node Version | `>=18` |
 
-**Prerequisites:** Node.js
+## 🛠 Tech Stack
 
-1. Install dependencies: `npm install`
-2. Copy env: use `.env.example` as reference; create `.env` or `.env.local` as needed.
-3. Dev server: `npm run dev` (runs `tsx server.ts`, typically [http://localhost:3000](http://localhost:3000)).
+- **Frontend:** React 19, TypeScript, Tailwind CSS 3
+- **3D Background:** Three.js, React Three Fiber, drei, GSAP
+- **Animations:** Framer Motion, GSAP with ScrollTrigger
+- **Server:** Express (SPA with API routes)
+- **Build:** Vite 6 with code-splitting
 
-## Production build
+## 📦 Bundle Architecture
+
+| Chunk | Size (gzip) | Loading |
+|-------|------------|---------|
+| `vendor` (React, Router) | ~103 KB | Immediate |
+| `three-vendor` (Three.js, R3F, GSAP) | ~270 KB | Lazy |
+| `index` (App code) | ~24 KB | Immediate |
+| `AwwwardsBackground` | ~2 KB | Lazy |
+| `route-pages` | ~10 KB | Lazy |
+
+## 🖥 Local Development
 
 ```bash
-npm run build
+npm install
+npm run dev      # → http://localhost:3000
 ```
 
-Static output is written to `dist/`. Deploy that folder on Netlify/Vercel or any static host (`netlify.toml` is included for Netlify SPA routing).
+## 🏗 Production Build
 
+```bash
+npm run build    # Outputs to dist/
+npm start        # Serves at PORT (default 3000)
+```
+
+## 📁 Project Structure
+
+```
+├── src/
+│   ├── App.tsx                 # Main app with routing
+│   ├── AwwwardsBackground.tsx  # 3D animated hero background
+│   ├── components1-3.tsx       # UI components
+│   ├── pages.tsx               # Service pages
+│   ├── data.ts                 # Portfolio & content data
+│   └── index.css               # Tailwind + custom styles
+├── server.ts                   # Express production server
+├── render.yaml                 # Render deployment blueprint
+├── vite.config.ts              # Vite build configuration
+└── index.html                  # Entry point with SEO
+```

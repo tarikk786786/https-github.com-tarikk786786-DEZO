@@ -17,8 +17,8 @@ export const RotatingText = () => {
   useEffect(() => {
     const id = setInterval(() => {
       setVisible(false);
-      setTimeout(() => { setIndex(p => (p + 1) % phrases.length); setVisible(true); }, 420);
-    }, 3800);
+      setTimeout(() => { setIndex(p => (p + 1) % phrases.length); setVisible(true); }, 600);
+    }, 5500);
     return () => clearInterval(id);
   }, [phrases.length]);
 
@@ -28,8 +28,8 @@ export const RotatingText = () => {
         color: 'var(--accent-light)', fontSize: 'clamp(1rem,2.5vw,1.35rem)',
         fontWeight: 700, letterSpacing: '-0.01em',
         opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(10px)',
-        transition: 'opacity 0.38s ease, transform 0.38s cubic-bezier(0.22,1,0.36,1)',
+        transform: visible ? 'translateY(0)' : 'translateY(8px)',
+        transition: 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.22,1,0.36,1)',
       }}>
         {phrases[index]}
       </p>

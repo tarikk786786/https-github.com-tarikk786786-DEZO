@@ -307,7 +307,7 @@ export default function App() {
           {/* Logo */}
           <Magnetic>
             <a href="#" className="flex items-center z-[70] group" aria-label="Dezo Home" onClick={handleLogoClick}>
-              <img src="https://i.ibb.co/F40Zt4tf/Chat-GPT-Image-May-22-2026-10-18-52-PM.png" alt="DEZO Logo" className="h-14 md:h-16 w-auto object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.3)] hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.6)] group-hover:scale-110 animate-float smooth-transition duration-500" />
+              <img src="/dezo-logo-transparent.png" alt="DEZO Logo" className="h-14 md:h-16 w-auto object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.3)] hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.6)] group-hover:scale-110 animate-float smooth-transition duration-500" />
             </a>
           </Magnetic>
 
@@ -327,11 +327,17 @@ export default function App() {
           </nav>
 
           {/* CTA */}
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center gap-6">
+            <a href="tel:+919114411026" className="flex items-center gap-2 text-white/90 hover:text-white font-bold text-sm smooth-transition group">
+              <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-[var(--primary)] smooth-transition">
+                <Phone size={14} className="animate-pulse-soft" />
+              </div>
+              <span className="tracking-wide">+91 9114411026</span>
+            </a>
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, 'contact')}
-              className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-white rounded-full smooth-transition hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(59,130,196,0.4)] active:scale-95"
+              className="btn-premium inline-flex items-center gap-2 px-7 py-3 text-sm font-bold text-white rounded-full smooth-transition hover:-translate-y-1 hover:shadow-[0_15px_35px_rgba(59,130,196,0.5)] active:scale-95 border border-white/10"
               style={{ background: 'linear-gradient(135deg, var(--primary) 0%, #2563EB 100%)' }}
             >
               Start a Project
@@ -361,10 +367,14 @@ export default function App() {
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, 'contact')}
-              className="mt-4 px-10 py-4 text-white text-base font-bold rounded-full mx-auto inline-block active:scale-95 smooth-transition"
+              className="btn-premium mt-4 px-10 py-4 text-white text-base font-bold rounded-full mx-auto inline-flex items-center gap-2 active:scale-95 smooth-transition shadow-[0_10px_25px_rgba(59,130,196,0.3)] border border-white/10"
               style={{ background: 'linear-gradient(135deg, var(--primary), #2563EB)' }}
             >
-              Start a Project →
+              Start a Project
+            </a>
+            <a href="tel:+919114411026" className="flex items-center justify-center gap-2 text-white/80 font-bold text-sm mt-2">
+              <Phone size={16} className="text-[var(--primary)] animate-pulse-soft" />
+              +91 9114411026
             </a>
           </div>
         </div>
@@ -767,7 +777,7 @@ export default function App() {
           <div className="max-w-[90rem] mx-auto px-4 lg:px-8">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
                   <div className="col-span-2 md:col-span-1">
-                    <img src="https://i.ibb.co/F40Zt4tf/Chat-GPT-Image-May-22-2026-10-18-52-PM.png" alt="DEZO Logo" className="h-16 md:h-20 w-auto object-contain mb-6 invert opacity-90 hover:opacity-100 hover:scale-105 hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.8)] animate-pulse-soft smooth-transition duration-500 drop-shadow-xl" />
+                    <img src="/dezo-logo-transparent.png" alt="DEZO Logo" className="h-16 md:h-20 w-auto object-contain mb-6 opacity-90 hover:opacity-100 hover:scale-105 hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.8)] animate-pulse-soft smooth-transition duration-500 drop-shadow-xl" />
                     <p className="text-main-muted text-sm font-medium mb-6">Premium web development and digital marketing agency delivering scalable solutions for brands in India.</p>
                     <div className="flex gap-4 text-main-light/70 text-sm font-bold">
                         <a href="#" aria-label="Facebook" className="hover:text-[var(--primary)] smooth-transition cursor-pointer"><Facebook size={20} /></a>

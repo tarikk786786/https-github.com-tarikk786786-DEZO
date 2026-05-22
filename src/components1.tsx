@@ -72,10 +72,8 @@ export const Reveal = ({
 
 export const AnimatedCounter = ({ end, duration = 2200, suffix = '', nightMode }: any) => {
   const [count, setCount] = useState(0);
-  const [ref, isVisible] = useIntersectionObserver({ triggerOnce: true });
 
   useEffect(() => {
-    if (!isVisible) return;
     let startTime: number | null = null;
     let frameId: number;
     const d = nightMode ? 400 : duration;
@@ -94,10 +92,10 @@ export const AnimatedCounter = ({ end, duration = 2200, suffix = '', nightMode }
 
     frameId = requestAnimationFrame(step);
     return () => cancelAnimationFrame(frameId);
-  }, [isVisible, end, duration, nightMode]);
+  }, [end, duration, nightMode]);
 
   return (
-    <span ref={ref as any} className="tabular-nums">
+    <span className="tabular-nums">
       {count}{suffix}
     </span>
   );

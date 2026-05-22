@@ -34,10 +34,10 @@ export const useIntersectionObserver = (options: Record<string, unknown> = {}) =
 };
 
 const directionMap: Record<string, string> = {
-  up:    'translateY(36px)',
-  down:  'translateY(-36px)',
-  left:  'translateX(36px)',
-  right: 'translateX(-36px)',
+  up:    'translateY(40px) scale(0.96)',
+  down:  'translateY(-40px) scale(0.96)',
+  left:  'translateX(40px) scale(0.96)',
+  right: 'translateX(-40px) scale(0.96)',
   scale: 'scale(0.92)',
   none:  'none',
 };
@@ -222,5 +222,30 @@ export const CustomCursor = () => {
         }}
       />
     </>
+  );
+};
+
+export const InfiniteMarquee = () => {
+  return (
+    <div className="overflow-hidden whitespace-nowrap py-4 border-y border-white/5 bg-[var(--bg-dark)] relative flex">
+      <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[var(--bg-dark)] to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[var(--bg-dark)] to-transparent z-10 pointer-events-none" />
+      <div className="animate-marquee inline-block flex items-center">
+        {Array(10).fill(['WEB DEVELOPMENT', 'SEO OPTIMIZATION', 'DIGITAL MARKETING', 'UI/UX DESIGN', 'E-COMMERCE']).flat().map((text, i) => (
+          <div key={i} className="flex items-center mx-6">
+            <span className="text-[10px] sm:text-xs font-black tracking-[0.2em] text-white/40">{text}</span>
+            <span className="mx-6 w-1.5 h-1.5 rounded-full bg-[var(--primary)] animate-pulse-soft" />
+          </div>
+        ))}
+      </div>
+      <div className="animate-marquee inline-block flex items-center absolute top-0" style={{ animationDelay: '-15s' }}>
+        {Array(10).fill(['WEB DEVELOPMENT', 'SEO OPTIMIZATION', 'DIGITAL MARKETING', 'UI/UX DESIGN', 'E-COMMERCE']).flat().map((text, i) => (
+          <div key={i} className="flex items-center mx-6 mt-4">
+            <span className="text-[10px] sm:text-xs font-black tracking-[0.2em] text-white/40">{text}</span>
+            <span className="mx-6 w-1.5 h-1.5 rounded-full bg-[var(--primary)] animate-pulse-soft" />
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };

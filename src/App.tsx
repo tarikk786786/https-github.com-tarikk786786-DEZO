@@ -9,7 +9,7 @@ import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom'
 import { ThemeStyles } from './ThemeStyles';
 import { portfolioData, categories } from './data';
 import { 
-  Reveal, AnimatedCounter, CustomCursor, Magnetic
+  Reveal, AnimatedCounter, CustomCursor, Magnetic, InfiniteMarquee
 } from './components1';
 
 // Cache-buster: 2026-05-22
@@ -492,6 +492,7 @@ export default function App() {
             </div>
           </section>
 
+      <InfiniteMarquee />
       <ServicesSection nightMode={false} />
       <AboutSection />
       <MissionTargetSection />
@@ -532,7 +533,8 @@ export default function App() {
             {(showAllProjects ? filteredPortfolio : filteredPortfolio.slice(0, 6)).map((project: any, i: number) => (
               <Reveal direction="up" delay={(i % 15) * 50} key={i}>
                 <a href={project.url !== "#" ? project.url : '#'} target={project.url !== "#" ? "_blank" : "_self"} rel={project.url !== "#" ? "noopener noreferrer" : ""} className="block group h-full">
-                  <article className="bg-main-light rounded-3xl p-6 border border-main-light h-full flex flex-col justify-between hover:border-brand-primary smooth-transition shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(37,99,235,0.15)] relative overflow-hidden group-hover:-translate-y-1 active:translate-y-0 active:scale-[0.98]">
+                  <article className="bg-main-light rounded-3xl p-6 border border-main-light h-full flex flex-col justify-between hover:border-brand-primary smooth-transition shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(37,99,235,0.4)] relative overflow-hidden group-hover:-translate-y-2 group-hover:scale-[1.03] active:translate-y-0 active:scale-[0.98] z-10 hover:z-20">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/5 to-transparent opacity-0 group-hover:opacity-100 smooth-transition duration-500 pointer-events-none" />
                     <div>
                       <div className="relative w-full h-44 mb-6 rounded-2xl overflow-hidden bg-[var(--background-color)] group-hover:shadow-md smooth-transition">
                         <img src={`https://image.thum.io/get/width/800/crop/600/${project.url}`} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 smooth-transition duration-700" loading="lazy" />
@@ -775,8 +777,9 @@ export default function App() {
       </Suspense>
       
       {/* FOOTER */}
-      <footer className="bg-main-dark pt-20 lg:pt-28 pb-10 border-t border-main-dark">
-          <div className="max-w-[90rem] mx-auto px-4 lg:px-8">
+      <footer className="bg-main-dark pt-20 lg:pt-28 pb-10 border-t border-main-dark relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--primary)] opacity-10 blur-[120px] rounded-full pointer-events-none" />
+          <div className="max-w-[90rem] mx-auto px-4 lg:px-8 relative z-10">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
                   <div className="col-span-2 md:col-span-1">
                     <img src="/dezo-logo-transparent.png" alt="DEZO Logo" className="h-16 md:h-20 w-auto object-contain mb-6 opacity-90 hover:opacity-100 hover:scale-105 hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.8)] animate-pulse-soft smooth-transition duration-500 drop-shadow-xl" />

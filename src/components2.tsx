@@ -17,8 +17,8 @@ export const RotatingText = () => {
   useEffect(() => {
     const id = setInterval(() => {
       setVisible(false);
-      setTimeout(() => { setIndex(p => (p + 1) % phrases.length); setVisible(true); }, 600);
-    }, 5500);
+      setTimeout(() => { setIndex(p => (p + 1) % phrases.length); setVisible(true); }, 750);
+    }, 6500);
     return () => clearInterval(id);
   }, [phrases.length]);
 

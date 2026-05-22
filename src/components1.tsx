@@ -72,30 +72,37 @@ export const Reveal = ({
 
 export const AnimatedCounter = ({ end, duration = 2200, suffix = '', nightMode }: any) => {
   const [count, setCount] = useState(0);
+  const [ref, isIntersecting] = useIntersectionObserver({ triggerOnce: true });
 
   useEffect(() => {
-    let startTime: number | null = null;
-    let frameId: number;
-    const d = nightMode ? 400 : duration;
+    if (!isIntersecting) return;
+    
+    let start = 0;
+    const endNum = parseInt(end, 10) || parseFloat(end) || 0;
+    if (endNum === 0) return;
 
-    const step = (ts: number) => {
-      if (!startTime) startTime = ts;
-      const progress = Math.min((ts - startTime) / d, 1);
+    const totalFrames = Math.round((duration / 1000) * 60);
+    let frame = 0;
+
+    const counter = setInterval(() => {
+      frame++;
+      const progress = frame / totalFrames;
       const ease = 1 - Math.pow(1 - progress, 4);
-      setCount(Math.floor(ease * end));
-      if (progress < 1) {
-        frameId = requestAnimationFrame(step);
+      const current = Math.floor(ease * endNum);
+      
+      if (frame >= totalFrames) {
+        clearInterval(counter);
+        setCount(endNum);
       } else {
-        setCount(end);
+        setCount(current);
       }
-    };
+    }, 1000 / 60);
 
-    frameId = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(frameId);
-  }, [end, duration, nightMode]);
+    return () => clearInterval(counter);
+  }, [end, duration, isIntersecting]);
 
   return (
-    <span className="tabular-nums">
+    <span ref={ref as any} className="tabular-nums">
       {count}{suffix}
     </span>
   );

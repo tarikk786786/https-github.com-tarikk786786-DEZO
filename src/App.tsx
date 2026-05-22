@@ -9,7 +9,7 @@ import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom'
 import { ThemeStyles } from './ThemeStyles';
 import { portfolioData, categories } from './data';
 import { 
-  Reveal, AnimatedCounter
+  Reveal, AnimatedCounter, CustomCursor, Magnetic
 } from './components1';
 
 // Cache-buster: 2026-05-22
@@ -195,7 +195,7 @@ export default function App() {
       `💬 *Message:*\n${formData.message}\n\n` +
       `Please get back to me. Thank you!`;
 
-    const whatsappUrl = `https://wa.me/917787063088?text=${encodeURIComponent(textMessage)}`;
+    const whatsappUrl = `https://wa.me/919114411026?text=${encodeURIComponent(textMessage)}`;
     
     // Open WhatsApp in a new tab automatically — 100% client-side, no server needed
     window.open(whatsappUrl, '_blank');
@@ -262,8 +262,8 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-main-light text-main-dark font-sans scroll-smooth">
-      <a className="skip-link" href="#main-content">Skip to content</a>
+    <div className="min-h-screen bg-main-light text-main-dark font-sans scroll-smooth relative selection:bg-[var(--accent)] selection:text-white">
+      <CustomCursor />
       <ThemeStyles />
       <SeoHead
         title="Dezo | Web Development & Digital Marketing Agency India"
@@ -275,7 +275,7 @@ export default function App() {
           "@type": "DigitalMarketingAgency",
           "name": "DEZO",
           "url": "https://dezo.in/",
-          "telephone": "+917787063088",
+          "telephone": "+919114411026",
           "email": "contact@dezo.in",
           "address": {
             "@type": "PostalAddress",
@@ -304,10 +304,11 @@ export default function App() {
         <div className="max-w-[90rem] mx-auto px-5 lg:px-10 flex justify-between items-center">
 
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 z-[70] group" aria-label="Dezo Home" onClick={handleLogoClick}>
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-black text-sm" style={{ background: 'linear-gradient(135deg, var(--primary), #2563EB)' }}>D</div>
-            <span className={`font-black text-2xl tracking-[0.15em] smooth-transition text-white`}>DEZO</span>
-          </a>
+          <Magnetic>
+            <a href="#" className="flex items-center z-[70] group" aria-label="Dezo Home" onClick={handleLogoClick}>
+              <img src="https://i.ibb.co/F40Zt4tf/Chat-GPT-Image-May-22-2026-10-18-52-PM.png" alt="DEZO Logo" className="h-12 w-auto object-contain drop-shadow-lg group-hover:scale-105 smooth-transition" />
+            </a>
+          </Magnetic>
 
           {/* Desktop Nav */}
           <nav aria-label="Primary" className={`hidden lg:flex items-center gap-8 ${!scrolled ? 'bg-white/[0.06] border border-white/[0.1] backdrop-blur-xl px-9 py-3.5 rounded-full' : ''} smooth-transition`}>
@@ -626,7 +627,7 @@ export default function App() {
                     <div>
                       <h4 className="text-xs font-bold text-main-dark uppercase tracking-[0.2em] mb-2 opacity-50">Contact Info</h4>
                       <div className="flex flex-col gap-2">
-                        <a href="tel:+917787063088" className="text-main-dark font-bold hover:text-[var(--accent)] smooth-transition flex items-center gap-2">
+                        <a href="tel:+919114411026" className="text-main-dark font-bold hover:text-[var(--accent)] smooth-transition flex items-center gap-2">
                           <Phone size={16} /> +91 77870 63088
                         </a>
                         <a href="mailto:princetarikislam@gmail.com" className="text-main-dark font-bold hover:text-[var(--accent)] smooth-transition flex items-center gap-2">
@@ -720,7 +721,7 @@ export default function App() {
                 </div>
                 {formStatus !== 'submitting' && (
                   <p className="text-xs text-main-muted text-center pt-1">
-                    Need urgent help? <a className="underline hover:text-[var(--primary)]" href={`https://wa.me/917787063088?text=${encodeURIComponent(`Hello Tarik, I am ${formData.name || 'a business owner'} and need help with ${formData.service || 'website/digital marketing'}.`)}`} target="_blank" rel="noopener noreferrer">Message us on WhatsApp</a>.
+                    Need urgent help? <a className="underline hover:text-[var(--primary)]" href={`https://wa.me/919114411026?text=${encodeURIComponent(`Hello Tarik, I am ${formData.name || 'a business owner'} and need help with ${formData.service || 'website/digital marketing'}.`)}`} target="_blank" rel="noopener noreferrer">Message us on WhatsApp</a>.
                   </p>
                 )}
               </form>
@@ -752,7 +753,7 @@ export default function App() {
           <div className="max-w-[90rem] mx-auto px-4 lg:px-8">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
                   <div className="col-span-2 md:col-span-1">
-                    <span className="font-black text-3xl tracking-[0.2em] text-main-light mb-4 block">DEZO</span>
+                    <img src="https://i.ibb.co/F40Zt4tf/Chat-GPT-Image-May-22-2026-10-18-52-PM.png" alt="DEZO Logo" className="h-16 w-auto object-contain mb-6 invert opacity-90 hover:opacity-100 smooth-transition drop-shadow-xl" />
                     <p className="text-main-muted text-sm font-medium mb-6">Premium web development and digital marketing agency delivering scalable solutions for brands in India.</p>
                     <div className="flex gap-4 text-main-light/70 text-sm font-bold">
                         <a href="#" aria-label="Facebook" className="hover:text-[var(--primary)] smooth-transition cursor-pointer"><Facebook size={20} /></a>

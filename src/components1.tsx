@@ -136,3 +136,93 @@ export const DynamicHeadline = ({ words, prefix = '', suffix = '', gradient = fa
     </span>
   );
 };
+
+export const Magnetic = ({ children }: any) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouse = (e: MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { height, width, left, top } = ref.current!.getBoundingClientRect();
+    const middleX = clientX - (left + width / 2);
+    const middleY = clientY - (top + height / 2);
+    setPosition({ x: middleX * 0.2, y: middleY * 0.2 });
+  };
+
+  const reset = () => {
+    setPosition({ x: 0, y: 0 });
+  };
+
+  return (
+    <div
+      ref={ref}
+      onMouseMove={handleMouse as any}
+      onMouseLeave={reset}
+      style={{
+        transform: `translate(${position.x}px, ${position.y}px)`,
+        transition: 'transform 0.15s ease-out',
+        display: 'inline-block'
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
+export const CustomCursor = () => {
+  const [pos, setPos] = useState({ x: -100, y: -100 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    const move = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
+    const hoverOn = () => setIsHovered(true);
+    const hoverOff = () => setIsHovered(false);
+
+    window.addEventListener('mousemove', move);
+    
+    const attachListeners = () => {
+      const interactables = document.querySelectorAll('a, button');
+      interactables.forEach(el => {
+        el.addEventListener('mouseenter', hoverOn);
+        el.addEventListener('mouseleave', hoverOff);
+      });
+    };
+    
+    attachListeners();
+    const observer = new MutationObserver(attachListeners);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      window.removeEventListener('mousemove', move);
+      observer.disconnect();
+      const interactables = document.querySelectorAll('a, button');
+      interactables.forEach(el => {
+        el.removeEventListener('mouseenter', hoverOn);
+        el.removeEventListener('mouseleave', hoverOff);
+      });
+    };
+  }, []);
+
+  if (typeof window === 'undefined' || window.innerWidth < 768) return null;
+
+  return (
+    <>
+      <div 
+        className="fixed top-0 left-0 w-3 h-3 bg-[var(--primary)] rounded-full pointer-events-none z-[9999] mix-blend-difference"
+        style={{
+          transform: `translate3d(${pos.x - 6}px, ${pos.y - 6}px, 0) scale(${isHovered ? 0 : 1})`,
+          transition: 'transform 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
+        }}
+      />
+      <div 
+        className="fixed top-0 left-0 w-12 h-12 border border-[var(--primary)] rounded-full pointer-events-none z-[9998] mix-blend-difference flex items-center justify-center backdrop-blur-[1px]"
+        style={{
+          transform: `translate3d(${pos.x - 24}px, ${pos.y - 24}px, 0) scale(${isHovered ? 1.5 : 1})`,
+          transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+          background: isHovered ? 'var(--primary)' : 'transparent',
+          opacity: isHovered ? 0.2 : 0.5
+        }}
+      />
+    </>
+  );
+};

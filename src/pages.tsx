@@ -20,7 +20,7 @@ const PageLayout = ({ title, h1, meta, children, schemaData, bgAnimation }: any)
       "postalCode": "751024",
       "addressCountry": "IN"
     },
-    "telephone": "+917787063088",
+    "telephone": "+919114411026",
     "email": "contact@dezo.in",
     "priceRange": "$$"
   };
@@ -89,7 +89,7 @@ const PageLayout = ({ title, h1, meta, children, schemaData, bgAnimation }: any)
                 <Link to="/portfolio" className="text-main-dark hover:text-brand-primary smooth-transition">Portfolio</Link>
                 <Link to="/blog" className="text-main-dark hover:text-brand-primary smooth-transition">Blog</Link>
                 <a
-                  href="https://wa.me/917787063088"
+                  href="https://wa.me/919114411026"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-main-dark hover:text-[#25D366] smooth-transition"
@@ -97,7 +97,7 @@ const PageLayout = ({ title, h1, meta, children, schemaData, bgAnimation }: any)
                   <MessageSquare size={16} aria-hidden />
                   WhatsApp
                 </a>
-                <a href="tel:+917787063088" className="inline-flex items-center gap-2 text-main-dark hover:text-brand-primary smooth-transition">
+                <a href="tel:+919114411026" className="inline-flex items-center gap-2 text-main-dark hover:text-brand-primary smooth-transition">
                   <Phone size={16} aria-hidden />
                   +91 77870 63088
                 </a>

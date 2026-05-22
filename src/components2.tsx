@@ -145,48 +145,92 @@ export const ReactLiveBackground = () => {
     };
     window.addEventListener('resize', resize);
 
-    // Floating React-like atoms
-    const atoms = Array.from({ length: 15 }, () => ({
+    let mouse = { x: -1000, y: -1000 };
+    const handleMouseMove = (e: MouseEvent) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    };
+    const handleMouseLeave = () => {
+      mouse = { x: -1000, y: -1000 };
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
+
+    // Highly responsive Web Dev network atoms
+    const atoms = Array.from({ length: window.innerWidth < 768 ? 20 : 40 }, () => ({
       x: Math.random() * w, 
       y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.5, 
-      vy: (Math.random() - 0.5) * 0.5,
-      scale: Math.random() * 0.5 + 0.3,
+      vx: (Math.random() - 0.5) * 0.8, 
+      vy: (Math.random() - 0.5) * 0.8,
+      baseX: 0, baseY: 0,
+      scale: Math.random() * 0.4 + 0.2,
       rot: Math.random() * Math.PI * 2,
-      vrot: (Math.random() - 0.5) * 0.02,
-      color: `hsla(210, 100%, 60%, ${Math.random() * 0.15 + 0.05})`
+      vrot: (Math.random() - 0.5) * 0.03,
+      color: `hsla(210, 100%, 60%, ${Math.random() * 0.2 + 0.1})`
     }));
 
     let frame: number;
     const draw = () => {
       ctx.clearRect(0, 0, w, h);
       
-      atoms.forEach(a => {
+      // Update and Draw Connections
+      for (let i = 0; i < atoms.length; i++) {
+        const a = atoms[i];
         a.x += a.vx; a.y += a.vy; a.rot += a.vrot;
+        
+        // Boundaries
         if (a.x < -100) a.x = w + 100;
         if (a.x > w + 100) a.x = -100;
         if (a.y < -100) a.y = h + 100;
         if (a.y > h + 100) a.y = -100;
-        
+
+        // Mouse attraction
+        const dx = mouse.x - a.x;
+        const dy = mouse.y - a.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 200) {
+          a.x += dx * 0.02;
+          a.y += dy * 0.02;
+        }
+
+        // Draw connections
+        for (let j = i + 1; j < atoms.length; j++) {
+          const b = atoms[j];
+          const ddx = a.x - b.x;
+          const ddy = a.y - b.y;
+          const distance = Math.sqrt(ddx * ddx + ddy * ddy);
+          if (distance < 150) {
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = `rgba(37, 99, 235, ${0.15 - distance / 1000})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+
+        // Draw React Node
         ctx.save();
         ctx.translate(a.x, a.y);
         ctx.rotate(a.rot);
         ctx.scale(a.scale, a.scale);
         
+        // Center Core
         ctx.beginPath();
         ctx.arc(0, 0, 8, 0, Math.PI * 2);
-        ctx.fillStyle = a.color.replace(/[^,]+(?=\))/, '0.8');
+        ctx.fillStyle = a.color.replace(/[^,]+(?=\))/, '0.9');
         ctx.fill();
 
+        // Orbit Rings
         ctx.lineWidth = 3;
         ctx.strokeStyle = a.color;
-        for(let i=0; i<3; i++) {
+        for(let r = 0; r < 3; r++) {
           ctx.beginPath();
-          ctx.ellipse(0, 0, 40, 15, (i * Math.PI) / 1.5, 0, Math.PI * 2);
+          ctx.ellipse(0, 0, 40, 15, (r * Math.PI) / 1.5, 0, Math.PI * 2);
           ctx.stroke();
         }
         ctx.restore();
-      });
+      }
       
       frame = requestAnimationFrame(draw);
     };
@@ -194,11 +238,18 @@ export const ReactLiveBackground = () => {
 
     return () => {
       window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
       cancelAnimationFrame(frame);
     };
   }, []);
 
-  return <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 0 }} />;
+  return (
+    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }}>
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-dark)] via-transparent to-[var(--bg-dark)] z-10" />
+      <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />
+    </div>
+  );
 };
 
 /* ─── Live Ticker ─── */

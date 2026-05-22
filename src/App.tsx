@@ -126,6 +126,7 @@ export default function App() {
   
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [showAllProjects, setShowAllProjects] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   
   const [formData, setFormData] = useState<ContactFormData>(initialFormData);
@@ -306,7 +307,7 @@ export default function App() {
           {/* Logo */}
           <Magnetic>
             <a href="#" className="flex items-center z-[70] group" aria-label="Dezo Home" onClick={handleLogoClick}>
-              <img src="https://i.ibb.co/F40Zt4tf/Chat-GPT-Image-May-22-2026-10-18-52-PM.png" alt="DEZO Logo" className="h-12 w-auto object-contain drop-shadow-lg group-hover:scale-105 smooth-transition" />
+              <img src="https://i.ibb.co/F40Zt4tf/Chat-GPT-Image-May-22-2026-10-18-52-PM.png" alt="DEZO Logo" className="h-14 md:h-16 w-auto object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.3)] hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.6)] group-hover:scale-110 animate-float smooth-transition duration-500" />
             </a>
           </Magnetic>
 
@@ -460,9 +461,9 @@ export default function App() {
             <div className="max-w-[90rem] mx-auto px-5">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                 {[
-                  { num: 50, suffix: '+', label: 'Websites Delivered', icon: '🌐' },
-                  { num: 11, suffix: '+', label: 'Years Experience', icon: '⚡' },
-                  { num: 10, suffix: '+', label: 'Industries Served', icon: '🏆' },
+                  { num: 5000, suffix: '+', label: 'Successful Projects', icon: '🚀' },
+                  { num: 11, suffix: '+', label: 'Years Experience', icon: '💎' },
+                  { num: 10, suffix: '+', label: 'Industries Served', icon: '🎯' },
                   { num: 4, suffix: '.8x', label: 'Average ROI', icon: '📈' },
                 ].map((stat, i) => (
                   <Reveal key={i} delay={i * 80} direction="up">
@@ -516,7 +517,7 @@ export default function App() {
           </Reveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-            {filteredPortfolio.map((project: any, i: number) => (
+            {(showAllProjects ? filteredPortfolio : filteredPortfolio.slice(0, 6)).map((project: any, i: number) => (
               <Reveal direction="up" delay={(i % 15) * 50} key={i}>
                 <a href={project.url !== "#" ? project.url : '#'} target={project.url !== "#" ? "_blank" : "_self"} rel={project.url !== "#" ? "noopener noreferrer" : ""} className="block group h-full">
                   <article className="bg-main-light rounded-3xl p-6 border border-main-light h-full flex flex-col justify-between hover:border-brand-primary smooth-transition shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(37,99,235,0.15)] relative overflow-hidden group-hover:-translate-y-1 active:translate-y-0 active:scale-[0.98]">
@@ -540,6 +541,19 @@ export default function App() {
               </Reveal>
             ))}
           </div>
+
+          {!showAllProjects && filteredPortfolio.length > 6 && (
+            <Reveal direction="up" delay={200}>
+              <div className="mt-14 flex justify-center">
+                <button 
+                  onClick={() => setShowAllProjects(true)}
+                  className="px-8 py-4 bg-transparent border-2 border-brand-primary text-brand-primary font-black rounded-full hover:bg-brand-primary hover:text-white smooth-transition active:scale-95 shadow-[0_0_15px_rgba(37,99,235,0.1)]"
+                >
+                  Load More Projects
+                </button>
+              </div>
+            </Reveal>
+          )}
 
         </div>
       </section>
@@ -753,7 +767,7 @@ export default function App() {
           <div className="max-w-[90rem] mx-auto px-4 lg:px-8">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
                   <div className="col-span-2 md:col-span-1">
-                    <img src="https://i.ibb.co/F40Zt4tf/Chat-GPT-Image-May-22-2026-10-18-52-PM.png" alt="DEZO Logo" className="h-16 w-auto object-contain mb-6 invert opacity-90 hover:opacity-100 smooth-transition drop-shadow-xl" />
+                    <img src="https://i.ibb.co/F40Zt4tf/Chat-GPT-Image-May-22-2026-10-18-52-PM.png" alt="DEZO Logo" className="h-16 md:h-20 w-auto object-contain mb-6 invert opacity-90 hover:opacity-100 hover:scale-105 hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.8)] animate-pulse-soft smooth-transition duration-500 drop-shadow-xl" />
                     <p className="text-main-muted text-sm font-medium mb-6">Premium web development and digital marketing agency delivering scalable solutions for brands in India.</p>
                     <div className="flex gap-4 text-main-light/70 text-sm font-bold">
                         <a href="#" aria-label="Facebook" className="hover:text-[var(--primary)] smooth-transition cursor-pointer"><Facebook size={20} /></a>

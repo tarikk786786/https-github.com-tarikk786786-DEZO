@@ -206,19 +206,19 @@ export const CustomCursor = () => {
   return (
     <>
       <div 
-        className="fixed top-0 left-0 w-3 h-3 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 w-2.5 h-2.5 bg-[var(--primary)] rounded-full pointer-events-none z-[9999]"
         style={{
-          transform: `translate3d(${pos.x - 6}px, ${pos.y - 6}px, 0) scale(${isHovered ? 0 : 1})`,
+          transform: `translate3d(${pos.x - 5}px, ${pos.y - 5}px, 0) scale(${isHovered ? 0 : 1})`,
           transition: 'transform 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       />
       <div 
-        className="fixed top-0 left-0 w-12 h-12 border border-white/50 rounded-full pointer-events-none z-[9998] mix-blend-difference flex items-center justify-center backdrop-blur-[1px]"
+        className="fixed top-0 left-0 w-10 h-10 border border-[var(--primary)] rounded-full pointer-events-none z-[9998] flex items-center justify-center"
         style={{
-          transform: `translate3d(${pos.x - 24}px, ${pos.y - 24}px, 0) scale(${isHovered ? 1.5 : 1})`,
+          transform: `translate3d(${pos.x - 20}px, ${pos.y - 20}px, 0) scale(${isHovered ? 1.5 : 1})`,
           transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-          background: isHovered ? 'rgba(255,255,255,1)' : 'transparent',
-          opacity: isHovered ? 0.8 : 1,
+          background: isHovered ? 'rgba(59,130,196,0.1)' : 'transparent',
+          opacity: isHovered ? 1 : 0.6,
         }}
       />
     </>
@@ -227,22 +227,22 @@ export const CustomCursor = () => {
 
 export const InfiniteMarquee = () => {
   return (
-    <div className="overflow-hidden whitespace-nowrap py-4 border-y border-white/5 bg-[var(--bg-dark)] relative flex">
-      <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[var(--bg-dark)] to-transparent z-10 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[var(--bg-dark)] to-transparent z-10 pointer-events-none" />
+    <div className="overflow-hidden whitespace-nowrap py-5 border-y border-white/5 bg-[#0a0f1a] relative flex items-center">
+      <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#0a0f1a] to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#0a0f1a] to-transparent z-10 pointer-events-none" />
       <div className="animate-marquee inline-block flex items-center">
         {Array(10).fill(['WEB DEVELOPMENT', 'SEO OPTIMIZATION', 'DIGITAL MARKETING', 'UI/UX DESIGN', 'E-COMMERCE']).flat().map((text, i) => (
           <div key={i} className="flex items-center mx-6">
-            <span className="text-[10px] sm:text-xs font-black tracking-[0.2em] text-white/40">{text}</span>
-            <span className="mx-6 w-1.5 h-1.5 rounded-full bg-[var(--primary)] animate-pulse-soft" />
+            <span className="text-[11px] sm:text-xs font-black tracking-[0.25em] text-white/80">{text}</span>
+            <span className="mx-6 w-1.5 h-1.5 rounded-full bg-[var(--primary)] opacity-70" />
           </div>
         ))}
       </div>
-      <div className="animate-marquee inline-block flex items-center absolute top-0" style={{ animationDelay: '-15s' }}>
+      <div className="animate-marquee inline-block flex items-center" aria-hidden="true">
         {Array(10).fill(['WEB DEVELOPMENT', 'SEO OPTIMIZATION', 'DIGITAL MARKETING', 'UI/UX DESIGN', 'E-COMMERCE']).flat().map((text, i) => (
-          <div key={i} className="flex items-center mx-6 mt-4">
-            <span className="text-[10px] sm:text-xs font-black tracking-[0.2em] text-white/40">{text}</span>
-            <span className="mx-6 w-1.5 h-1.5 rounded-full bg-[var(--primary)] animate-pulse-soft" />
+          <div key={i} className="flex items-center mx-6">
+            <span className="text-[11px] sm:text-xs font-black tracking-[0.25em] text-white/80">{text}</span>
+            <span className="mx-6 w-1.5 h-1.5 rounded-full bg-[var(--primary)] opacity-70" />
           </div>
         ))}
       </div>

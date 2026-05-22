@@ -410,7 +410,7 @@ export default function App() {
                     <h1 className="clamp-h1 text-white mb-5" style={{ letterSpacing: '-0.03em' }}>
                       We Build Websites
                       <br />
-                      <span className="text-transparent bg-clip-text animate-shimmer inline-block" style={{ backgroundImage: 'linear-gradient(135deg, var(--primary-light) 0%, var(--accent-light) 50%, var(--primary-light) 100%)', backgroundSize: '200% auto' }}>
+                      <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg, var(--primary-light) 0%, var(--accent-light) 100%)' }}>
                         That Actually Earn
                       </span>
                     </h1>

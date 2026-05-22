@@ -11,6 +11,9 @@ import { portfolioData, categories } from './data';
 import { 
   Reveal, AnimatedCounter
 } from './components1';
+
+// Cache-buster: 2026-05-22
+console.log('DEZO Agency Website Loaded - V2');
 import { 
   RotatingText, FallbackImage, HeroVisual 
 } from './components2';
@@ -512,11 +515,15 @@ export default function App() {
           </Reveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-            {filteredPortfolio.slice(0, 15).map((project: any, i: number) => (
-              <Reveal direction="up" delay={i * 50} key={i}>
+            {filteredPortfolio.map((project: any, i: number) => (
+              <Reveal direction="up" delay={(i % 15) * 50} key={i}>
                 <a href={project.url !== "#" ? project.url : '#'} target={project.url !== "#" ? "_blank" : "_self"} rel={project.url !== "#" ? "noopener noreferrer" : ""} className="block group h-full">
                   <article className="bg-main-light rounded-3xl p-6 border border-main-light h-full flex flex-col justify-between hover:border-brand-primary smooth-transition shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(37,99,235,0.15)] relative overflow-hidden group-hover:-translate-y-1 active:translate-y-0 active:scale-[0.98]">
                     <div>
+                      <div className="relative w-full h-44 mb-6 rounded-2xl overflow-hidden bg-[var(--background-color)] group-hover:shadow-md smooth-transition">
+                        <img src={`https://picsum.photos/seed/${project.title.replace(/\s/g,'')}/600/400`} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 smooth-transition duration-700" loading="lazy" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 smooth-transition duration-500"></div>
+                      </div>
                       <div className="text-[10px] font-bold text-brand-primary uppercase bg-panel-white px-3 py-1 rounded-full border border-main-light inline-block mb-4 shadow-sm">{project.category}</div>
                       <h4 className="text-xl md:text-2xl font-black text-main-dark group-hover:text-brand-primary mb-2 line-clamp-2">{project.title}</h4>
                       <div className="text-xs text-main-muted font-mono opacity-70 mb-4 truncate">{project.url.replace(/^https?:\/\/(www\.)?/, '')}</div>
@@ -532,12 +539,7 @@ export default function App() {
               </Reveal>
             ))}
           </div>
-          <Reveal direction="up" delay={200}>
-            <div className="text-center mt-12 bg-[var(--primary)]/5 p-8 rounded-3xl border border-[var(--primary)]/20 shadow-sm">
-              <p className="text-2xl font-black text-[var(--primary)] mb-2">+ 174 more projects in this category.</p>
-              <p className="text-main-muted font-bold text-sm tracking-widest uppercase">Here 5k website project we have</p>
-            </div>
-          </Reveal>
+
         </div>
       </section>
 

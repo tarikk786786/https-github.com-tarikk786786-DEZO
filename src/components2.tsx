@@ -125,7 +125,80 @@ const ParticleCanvas = () => {
     return () => { cancelAnimationFrame(frame); window.removeEventListener('resize', resize); };
   }, []);
 
-  return <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} />;
+  return <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 0, opacity: 0.6 }} />;
+};
+
+/* ─── React Live Background ─── */
+export const ReactLiveBackground = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d')!;
+    let w = canvas.offsetWidth, h = canvas.offsetHeight;
+    canvas.width = w; canvas.height = h;
+
+    const resize = () => {
+      w = canvas.offsetWidth; h = canvas.offsetHeight;
+      canvas.width = w; canvas.height = h;
+    };
+    window.addEventListener('resize', resize);
+
+    // Floating React-like atoms
+    const atoms = Array.from({ length: 15 }, () => ({
+      x: Math.random() * w, 
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.5, 
+      vy: (Math.random() - 0.5) * 0.5,
+      scale: Math.random() * 0.5 + 0.3,
+      rot: Math.random() * Math.PI * 2,
+      vrot: (Math.random() - 0.5) * 0.02,
+      color: `hsla(210, 100%, 60%, ${Math.random() * 0.15 + 0.05})`
+    }));
+
+    let frame: number;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      
+      atoms.forEach(a => {
+        a.x += a.vx; a.y += a.vy; a.rot += a.vrot;
+        if (a.x < -100) a.x = w + 100;
+        if (a.x > w + 100) a.x = -100;
+        if (a.y < -100) a.y = h + 100;
+        if (a.y > h + 100) a.y = -100;
+        
+        ctx.save();
+        ctx.translate(a.x, a.y);
+        ctx.rotate(a.rot);
+        ctx.scale(a.scale, a.scale);
+        
+        ctx.beginPath();
+        ctx.arc(0, 0, 8, 0, Math.PI * 2);
+        ctx.fillStyle = a.color.replace(/[^,]+(?=\))/, '0.8');
+        ctx.fill();
+
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = a.color;
+        for(let i=0; i<3; i++) {
+          ctx.beginPath();
+          ctx.ellipse(0, 0, 40, 15, (i * Math.PI) / 1.5, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        ctx.restore();
+      });
+      
+      frame = requestAnimationFrame(draw);
+    };
+    draw();
+
+    return () => {
+      window.removeEventListener('resize', resize);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 0 }} />;
 };
 
 /* ─── Live Ticker ─── */

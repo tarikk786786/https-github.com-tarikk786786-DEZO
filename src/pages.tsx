@@ -3,8 +3,9 @@ import { Phone, MessageSquare, Sparkles } from 'lucide-react';
 import { ThemeStyles } from './ThemeStyles';
 import { Link } from 'react-router-dom';
 import { SeoHead } from './seo';
+import { ReactLiveBackground } from './components2';
 
-const PageLayout = ({ title, h1, meta, children, schemaData }: any) => {
+const PageLayout = ({ title, h1, meta, children, schemaData, bgAnimation }: any) => {
   const orgSchema = {
     "@context": "https://schema.org",
     "@type": "DigitalMarketingAgency",
@@ -26,8 +27,10 @@ const PageLayout = ({ title, h1, meta, children, schemaData }: any) => {
   const pagePath = typeof window !== 'undefined' ? window.location.pathname : '/';
 
   return (
-    <div className="min-h-screen bg-main-light text-main-dark font-sans scroll-smooth pt-20 lg:pt-28">
+    <div className="min-h-screen bg-main-light text-main-dark font-sans scroll-smooth pt-20 lg:pt-28 relative">
+      {bgAnimation === 'react' && <div className="fixed inset-0 z-0 pointer-events-none opacity-40"><ReactLiveBackground /></div>}
       <ThemeStyles />
+      <div className="relative z-10">
       <SeoHead
         title={title}
         description={meta}
@@ -103,6 +106,7 @@ const PageLayout = ({ title, h1, meta, children, schemaData }: any) => {
           </aside>
         </div>
       </main>
+      </div>
     </div>
   );
 };
@@ -143,6 +147,7 @@ export const WebDevPage = () => {
     h1="Web Development Company in India" 
     meta="DEZO builds fast, modern and SEO-ready websites for businesses in India, including business websites, ecommerce stores, landing pages and custom web solutions."
     schemaData={schema}
+    bgAnimation="react"
   >
     <h2 className="text-2xl font-bold text-main-dark mb-4 mt-8">Custom Business Website Development</h2>
     <p>As a leading web development company in India, DEZO creates premium, fast-loading, and mobile-friendly websites designed for maximum conversions. We focus on clean code, seamless user experience, and strong technical SEO structures to ensure your brand stands out in the competitive digital landscape.</p>

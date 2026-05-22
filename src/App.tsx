@@ -334,14 +334,16 @@ export default function App() {
               </div>
               <span className="tracking-wide">+91 9114411026</span>
             </a>
-            <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, 'contact')}
-              className="btn-premium inline-flex items-center gap-2 px-7 py-3 text-sm font-bold text-white rounded-full smooth-transition hover:-translate-y-1 hover:shadow-[0_15px_35px_rgba(59,130,196,0.5)] active:scale-95 border border-white/10"
-              style={{ background: 'linear-gradient(135deg, var(--primary) 0%, #2563EB 100%)' }}
-            >
-              Start a Project
-            </a>
+            <Magnetic>
+              <a
+                href="#contact"
+                onClick={(e) => handleNavClick(e, 'contact')}
+                className="btn-premium inline-flex items-center gap-2 px-7 py-3 text-sm font-bold text-white rounded-full smooth-transition hover:-translate-y-1 hover:shadow-[0_15px_35px_rgba(59,130,196,0.5)] active:scale-95 border border-white/10"
+                style={{ background: 'linear-gradient(135deg, var(--primary) 0%, #2563EB 100%)' }}
+              >
+                Start a Project
+              </a>
+            </Magnetic>
           </div>
 
           {/* Hamburger */}
@@ -408,7 +410,7 @@ export default function App() {
                     <h1 className="clamp-h1 text-white mb-5" style={{ letterSpacing: '-0.03em' }}>
                       We Build Websites
                       <br />
-                      <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg, var(--primary-light) 0%, var(--accent-light) 100%)' }}>
+                      <span className="text-transparent bg-clip-text animate-shimmer inline-block" style={{ backgroundImage: 'linear-gradient(135deg, var(--primary-light) 0%, var(--accent-light) 50%, var(--primary-light) 100%)', backgroundSize: '200% auto' }}>
                         That Actually Earn
                       </span>
                     </h1>

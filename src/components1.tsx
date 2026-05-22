@@ -206,19 +206,19 @@ export const CustomCursor = () => {
   return (
     <>
       <div 
-        className="fixed top-0 left-0 w-3 h-3 bg-[var(--primary)] rounded-full pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 w-3 h-3 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
         style={{
           transform: `translate3d(${pos.x - 6}px, ${pos.y - 6}px, 0) scale(${isHovered ? 0 : 1})`,
           transition: 'transform 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       />
       <div 
-        className="fixed top-0 left-0 w-12 h-12 border border-[var(--primary)] rounded-full pointer-events-none z-[9998] mix-blend-difference flex items-center justify-center backdrop-blur-[1px]"
+        className="fixed top-0 left-0 w-12 h-12 border border-white/50 rounded-full pointer-events-none z-[9998] mix-blend-difference flex items-center justify-center backdrop-blur-[1px]"
         style={{
           transform: `translate3d(${pos.x - 24}px, ${pos.y - 24}px, 0) scale(${isHovered ? 1.5 : 1})`,
           transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-          background: isHovered ? 'var(--primary)' : 'transparent',
-          opacity: isHovered ? 0.2 : 0.5
+          background: isHovered ? 'rgba(255,255,255,1)' : 'transparent',
+          opacity: isHovered ? 0.8 : 1,
         }}
       />
     </>

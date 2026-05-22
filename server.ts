@@ -1,5 +1,4 @@
 import express from "express";
-import { createServer as createViteServer } from "vite";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -8,13 +7,13 @@ const __dirname = path.dirname(__filename);
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = parseInt(process.env.PORT || "3000", 10);
 
-  // Add middlewares to parse JSON bodies
+  // Parse JSON request bodies
   app.use(express.json());
 
-  // API Routes
-  app.get("/api/health", (req, res) => {
+  // ── API Routes ──────────────────────────────────────────────
+  app.get("/api/health", (_req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
   });
 
@@ -55,36 +54,60 @@ async function startServer() {
       );
 
       setTimeout(() => {
-        res.status(200).json({ 
-          success: true, 
-          message: "Form received. We will contact you soon." 
+        res.status(200).json({
+          success: true,
+          message: "Form received. We will contact you soon.",
         });
       }, 800);
-      
     } catch (err) {
       console.error(err);
       res.status(500).json({ success: false, message: "Internal server error" });
     }
   });
 
-  // Vite middleware for development
-  if (process.env.NODE_ENV !== "production") {
+  // ── Production: Serve static build ──────────────────────────
+  if (process.env.NODE_ENV === "production") {
+    const distPath = path.join(__dirname, "dist");
+
+    // Serve static assets with aggressive caching (hashed filenames)
+    app.use(
+      "/assets",
+      express.static(path.join(distPath, "assets"), {
+        maxAge: "1y",
+        immutable: true,
+      }),
+    );
+
+    // Serve other static files with moderate cache
+    app.use(
+      express.static(distPath, {
+        maxAge: "1h",
+        setHeaders(res, filePath) {
+          // HTML should not be cached
+          if (filePath.endsWith(".html")) {
+            res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+          }
+        },
+      }),
+    );
+
+    // SPA fallback — all unmatched routes get index.html
+    app.get("*", (_req, res) => {
+      res.sendFile(path.join(distPath, "index.html"));
+    });
+  } else {
+    // ── Development: Vite middleware ──────────────────────────
+    const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
     });
     app.use(vite.middlewares);
-  } else {
-    // Serve static files in production
-    const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
-    });
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`✅ DEZO server running on http://0.0.0.0:${PORT}`);
+    console.log(`   Mode: ${process.env.NODE_ENV || "development"}`);
   });
 }
 

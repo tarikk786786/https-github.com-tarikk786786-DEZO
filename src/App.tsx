@@ -1,4 +1,5 @@
 import React, { lazy, Suspense, useState, useEffect, useMemo } from 'react';
+const AwwwardsBackground = lazy(() => import('./AwwwardsBackground'));
 import { 
   Menu, X, Search, 
   ArrowUpRight, ArrowUp, Phone, MessageSquare, MapPin, Sparkles,
@@ -371,13 +372,10 @@ export default function App() {
           <main id="main-content">
             {/* ── HERO ── */}
           <section id="home" className="relative pt-36 pb-20 lg:pt-52 lg:pb-36 overflow-hidden" style={{ background: 'var(--hero-bg)' }}>
-            {/* Background Orbs */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div className="hero-grid" />
-              <div className="absolute top-[-15%] right-[-8%] w-[700px] h-[700px] rounded-full opacity-[0.18] animate-float" style={{ background: 'radial-gradient(circle, var(--primary) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-              <div className="absolute bottom-[-15%] left-[-8%] w-[550px] h-[550px] rounded-full opacity-[0.12] animate-float-delayed" style={{ background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-              <div className="absolute top-[40%] left-[40%] w-[300px] h-[300px] rounded-full opacity-[0.06]" style={{ background: 'var(--gold)', filter: 'blur(60px)' }} />
-            </div>
+            {/* AWWWARDS-style 3D Animated Background */}
+            <Suspense fallback={null}>
+              <AwwwardsBackground />
+            </Suspense>
 
             <div className="max-w-[90rem] mx-auto px-5 lg:px-10 relative z-10 text-center lg:text-left">
               <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">

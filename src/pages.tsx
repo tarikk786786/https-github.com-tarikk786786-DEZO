@@ -314,21 +314,73 @@ export const PortfolioPage = () => {
 };
 
 export const BlogPage = () => (
-  <PageLayout title="DEZO Blog" h1="DEZO Blog" meta="Read articles on web development, SEO, Meta Ads, Google Ads, and digital marketing strategies.">
+  <PageLayout title="DEZO Blog | Web Design & Marketing Insights" h1="DEZO Insights & Guides" meta="Read actionable articles on web development, SEO, Meta Ads, Google Ads, and digital marketing strategies tailored for Indian businesses.">
     <div className="grid gap-6">
+      <div className="glass-card rounded-xl p-6 border-l-4 border-[var(--primary)]">
+        <span className="text-xs font-bold text-[var(--primary)] uppercase tracking-wider">Featured Guide</span>
+        <h3 className="text-xl font-bold text-main-light mt-2">The Ultimate Guide to Digital Marketing for Businesses in Odisha</h3>
+        <p className="text-sm text-main-muted mt-2 mb-4">Discover the exact strategies local businesses in Bhubaneswar and Cuttack are using to scale online with local SEO, Meta Ads, and omnichannel marketing.</p>
+        <Link to="/blog/digital-marketing-guide-odisha" className="text-sm text-[var(--primary)] font-bold inline-block hover:underline">Read The Guide →</Link>
+      </div>
+
       {[
         "How to Choose the Best Web Development Company in India",
         "Why Every Business Needs an SEO-Friendly Website",
-        "Meta Ads vs Google Ads: Which Is Better for Your Business?",
-        "Ecommerce Website Development Checklist for Indian Businesses",
-        "How Local SEO Helps Businesses in Bhubaneswar Grow"
+        "Meta Ads vs Google Ads: Which Is Better for Your Business?"
       ].map((title, i) => (
-        <div key={i} className="glass-card rounded-xl p-6">
-          <span className="text-xs font-bold text-[var(--primary)] uppercase tracking-wider">Article</span>
+        <div key={i} className="glass-card rounded-xl p-6 opacity-70">
+          <span className="text-xs font-bold text-[var(--primary)] uppercase tracking-wider">Coming Soon</span>
           <h3 className="text-lg font-bold text-main-light mt-2">{title}</h3>
-          <a href="#" className="text-sm text-[var(--primary)] font-bold mt-3 inline-block hover:underline">Read More →</a>
         </div>
       ))}
     </div>
   </PageLayout>
 );
+
+export const DigitalMarketingOdishaGuide = () => {
+  return (
+    <PageLayout 
+      title="Ultimate Digital Marketing Guide for Businesses in Odisha | DEZO" 
+      h1="The Ultimate Guide to Digital Marketing for Businesses in Odisha" 
+      meta="Learn the exact digital marketing, SEO, and paid advertising strategies businesses in Bhubaneswar and Odisha need to scale in 2026." 
+      canonicalSlug="blog/digital-marketing-guide-odisha"
+    >
+      <div className="max-w-3xl mx-auto space-y-6">
+        <p className="text-lg text-main-muted font-medium">Odisha is experiencing a massive digital boom. With consumers in Bhubaneswar, Cuttack, and Rourkela increasingly turning to Google and social media to find local products and services, traditional marketing is no longer enough.</p>
+        
+        <p>In this comprehensive guide, we will break down the essential pillars of a successful digital marketing strategy specifically tailored for the Odisha market.</p>
+
+        <h2 className="text-2xl font-bold text-main-light mt-8">1. Dominate Local SEO (Search Engine Optimization)</h2>
+        <p>For service-based businesses (clinics, salons, agencies) or local retail shops, Local SEO is your most powerful weapon.</p>
+        <ul className="list-disc pl-6 space-y-2 text-main-muted">
+          <li><strong>Google Business Profile:</strong> Claim and verify your Google Business Profile. Ensure your Name, Address, and Phone number (NAP) are exactly the same across the web.</li>
+          <li><strong>Localized Keywords:</strong> Optimize your website for keywords like <em>"Best [Service] in Bhubaneswar"</em> instead of generic terms.</li>
+          <li><strong>Odisha Business Directories:</strong> Get listed on Justdial, VyaparGrow, and Odisha Biz. These citations build massive local trust.</li>
+        </ul>
+
+        <h2 className="text-2xl font-bold text-main-light mt-8">2. High-Converting Web Design</h2>
+        <p>Your website is your digital storefront. Over 75% of users in Odisha browse the internet via mobile phones. If your website is slow or hard to navigate on a smartphone, you will lose customers to competitors.</p>
+        <p>A modern website must include:</p>
+        <ul className="list-disc pl-6 space-y-2 text-main-muted">
+          <li>Blazing fast load speeds (under 3 seconds).</li>
+          <li>Mobile-first architecture (like React or Vite).</li>
+          <li>Direct WhatsApp integration for instant communication.</li>
+        </ul>
+
+        <h2 className="text-2xl font-bold text-main-light mt-8">3. Meta Ads (Facebook & Instagram)</h2>
+        <p>Organic social media reach is dead. To quickly generate leads, Meta Ads are incredibly cost-effective in tier-2 cities.</p>
+        <p><strong>The Strategy:</strong> Use video creatives in Odia or Hindi that address a specific pain point. Drive that traffic to a dedicated Landing Page, not just your homepage. Utilize Lead Forms or direct-to-WhatsApp campaigns to reduce friction.</p>
+
+        <h2 className="text-2xl font-bold text-main-light mt-8">4. Google Ads for High-Intent Buyers</h2>
+        <p>While Meta Ads are great for generating demand, Google Ads capture existing demand. When someone in Bhubaneswar searches for <em>"Buy laptop near me"</em>, they are ready to buy.</p>
+        <p>Start with a hyper-local radius targeting (e.g., a 10km radius around your store) using Google Search and Performance Max campaigns.</p>
+
+        <div className="glass-card rounded-xl p-8 mt-12 bg-brand-primary/10 border border-brand-primary/20 text-center">
+          <h3 className="text-xl font-bold text-main-light mb-2">Ready to Scale Your Business in Odisha?</h3>
+          <p className="mb-6 text-sm text-main-muted">DEZO is a premium digital marketing agency based in Bhubaneswar. We help businesses build the systems they need to generate consistent revenue online.</p>
+          <Link to="/contact" className="inline-block px-8 py-3 bg-[var(--primary)] text-white font-bold rounded-full hover:scale-105 smooth-transition">Get a Free Growth Strategy</Link>
+        </div>
+      </div>
+    </PageLayout>
+  );
+};

@@ -31,6 +31,7 @@ const GoogleAdsPage = lazy(() => import('./pages').then(m => ({ default: m.Googl
 const EcommercePage = lazy(() => import('./pages').then(m => ({ default: m.EcommercePage })));
 const LandingPagePage = lazy(() => import('./pages').then(m => ({ default: m.LandingPagePage })));
 const BlogPage = lazy(() => import('./pages').then(m => ({ default: m.BlogPage })));
+const DigitalMarketingOdishaGuide = lazy(() => import('./pages').then(m => ({ default: m.DigitalMarketingOdishaGuide })));
 const ContactPage = lazy(() => import('./pages').then(m => ({ default: m.ContactPage })));
 const PortfolioPage = lazy(() => import('./pages').then(m => ({ default: m.PortfolioPage })));
 
@@ -606,6 +607,7 @@ Message: ${formData.message}`;
         <Route path="/ecommerce-website-development" element={<EcommercePage />} />
         <Route path="/landing-page-design-services" element={<LandingPagePage />} />
         <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/digital-marketing-guide-odisha" element={<DigitalMarketingOdishaGuide />} />
         <Route path="/portfolio" element={<PortfolioPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about" element={<AboutUsPage onBack={() => { navigate('/'); window.scrollTo({top: 0}); }} />} />

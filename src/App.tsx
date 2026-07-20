@@ -478,10 +478,6 @@ Message: ${formData.message}`;
                   
                   <div className="space-y-8">
                     <div>
-                      <h4 className="text-xs font-bold text-main-dark uppercase tracking-[0.2em] mb-2 opacity-50">CEO</h4>
-                      <p className="text-xl font-black text-[var(--primary)]">Rohan Dinkar Sanap</p>
-                    </div>
-                    <div>
                       <h4 className="text-xs font-bold text-main-dark uppercase tracking-[0.2em] mb-2 opacity-50">Director</h4>
                       <p className="text-xl font-black text-[var(--primary)]">Tarik Islam</p>
                     </div>

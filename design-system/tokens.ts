@@ -1,30 +1,30 @@
 /**
- * DEZO Growth Platform — dark premium editorial + tech tokens
- * Source: /cursor/stores/self/docs/growth-platform-architecture.md
+ * DEZO Design Tokens — professional editorial business
+ * Warm paper, charcoal ink, single gold accent. No neon.
  */
 
 export const dezoTokens = {
   colors: {
-    bg: '#08090B',
-    bgWarm: '#0C0E12',
-    surface: '#111318',
-    surfaceHover: '#181B22',
-    surfaceElevated: '#1A1D26',
-    border: 'rgba(245, 245, 242, 0.08)',
-    borderStrong: 'rgba(245, 245, 242, 0.16)',
-    primary: '#B7FF3C',
-    primaryHover: '#A3E635',
-    accent: '#B7FF3C',
-    accentSoft: 'rgba(183, 255, 60, 0.12)',
-    secondary: '#6C63FF',
-    ink: '#F5F5F2',
-    success: '#B7FF3C',
-    highlight: '#B7FF3C',
+    bg: '#F5F3EE',
+    bgWarm: '#EFECE5',
+    surface: '#FFFFFF',
+    surfaceHover: '#FAF9F6',
+    surfaceElevated: '#FFFFFF',
+    border: 'rgba(11, 11, 10, 0.10)',
+    borderStrong: 'rgba(11, 11, 10, 0.18)',
+    primary: '#B08D57',
+    primaryHover: '#9A7A48',
+    accent: '#B08D57',
+    accentSoft: 'rgba(176, 141, 87, 0.12)',
+    secondary: '#161616',
+    ink: '#0B0B0A',
+    success: '#3D6B4F',
+    highlight: '#B08D57',
     text: {
-      primary: '#F5F5F2',
-      secondary: '#9095A1',
-      muted: '#6B7280',
-      inverse: '#08090B',
+      primary: '#0B0B0A',
+      secondary: '#4A4A46',
+      muted: '#7A7A74',
+      inverse: '#F5F3EE',
     },
   },
   typography: {
@@ -34,10 +34,10 @@ export const dezoTokens = {
   },
   motion: {
     duration: {
-      fast: 0.15,
-      normal: 0.25,
-      slow: 0.5,
-      cinematic: 0.9,
+      fast: 0.2,
+      normal: 0.3,
+      slow: 0.4,
+      cinematic: 0.5,
     },
     ease: {
       standard: [0.22, 1, 0.36, 1],

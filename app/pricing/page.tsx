@@ -5,26 +5,26 @@ import { constructMetadata } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = constructMetadata({
   title: 'Pricing — START / GROW / SCALE / CUSTOM',
-  description: 'DEZO growth packages and build-your-own stack estimates.',
+  description: 'DEZO engagement packages. Exact pricing after project diagnostic.',
   canonicalUrl: 'https://dezo.in/pricing',
 });
 
 const plans = [
   {
     name: 'START',
-    blurb: 'Foundation website or storefront + brand basics + launch checklist.',
+    blurb: 'Foundation website or storefront, brand basics, and launch checklist.',
   },
   {
     name: 'GROW',
-    blurb: 'Build + SEO/ads or marketplace focus — monthly operating cadence.',
+    blurb: 'Build plus SEO, ads, or marketplace focus — monthly operating cadence.',
   },
   {
     name: 'SCALE',
-    blurb: 'Full stack: brand, web, marketplaces, paid, social, reporting.',
+    blurb: 'Full stack: brand, web, marketplaces, paid media, social, reporting.',
   },
   {
     name: 'CUSTOM',
-    blurb: 'Build your own stack — strategy call + scoped estimate.',
+    blurb: 'Assemble your own stack — strategy call and scoped estimate.',
   },
 ];
 
@@ -32,18 +32,15 @@ export default function PricingPage() {
   return (
     <PlatformPageScaffold
       badge="Pricing"
-      title="Packages that match how growth actually works"
-      subtitle="START · GROW · SCALE · CUSTOM — or assemble your own stack. Exact pricing after diagnostic."
-      ctaHref="/book-strategy-call"
-      ctaLabel="Get a scoped estimate"
+      title="Engagement packages"
+      subtitle="START · GROW · SCALE · CUSTOM. Exact pricing after a short diagnostic — no published vanity rates."
+      ctaHref="/contact"
+      ctaLabel="Request an estimate"
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-dezo-border border border-dezo-border">
         {plans.map((p) => (
-          <div
-            key={p.name}
-            className="p-6 border border-dezo-border bg-dezo-surface rounded-dezo-lg"
-          >
-            <p className="font-display text-2xl font-bold text-dezo-primary mb-3">{p.name}</p>
+          <div key={p.name} className="p-6 sm:p-8 bg-dezo-surface">
+            <p className="font-display text-2xl text-dezo-text-primary mb-3">{p.name}</p>
             <p className="text-sm text-dezo-text-secondary leading-relaxed">{p.blurb}</p>
           </div>
         ))}

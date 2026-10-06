@@ -1,13 +1,13 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { PlatformPageScaffold, ScaffoldLinkList } from '@/components/platform/PlatformPageScaffold';
-import { servicePillars } from '@/content/site';
+import { serviceRows } from '@/content/site';
 import { constructMetadata } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Services — Full Growth Stack',
+  title: 'Services — Digital Growth Capabilities',
   description:
-    'DEZO services: Digital Build, Search, Amazon, Flipkart, Paid Growth, Social, Brand, and Growth Systems.',
+    'Web development, performance marketing, marketplace growth, SEO, and brand & creative.',
   canonicalUrl: 'https://dezo.in/services',
 });
 
@@ -15,14 +15,14 @@ export default function ServicesPage() {
   return (
     <PlatformPageScaffold
       badge="Services"
-      title="Eight pillars. One growth partner."
-      subtitle="Web, SEO, Amazon, Flipkart, Meta/Google ads, social, brand, and growth systems — operated together."
+      title="Capabilities across the full commercial stack"
+      subtitle="Web, performance marketing, marketplaces, SEO, and brand — delivered as one partner."
     >
       <ScaffoldLinkList
-        items={servicePillars.map((p) => ({
-          href: p.href,
-          name: p.name,
-          summary: p.summary,
+        items={serviceRows.map((s) => ({
+          href: s.href,
+          name: `${s.num}  ${s.name}`,
+          summary: s.summary,
         }))}
       />
     </PlatformPageScaffold>

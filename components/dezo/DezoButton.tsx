@@ -27,23 +27,23 @@ export function DezoButton({
   ...props
 }: DezoButtonProps) {
   const baseStyles =
-    'inline-flex items-center justify-center font-semibold transition-all duration-200 select-none cursor-pointer active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none';
+    'inline-flex items-center justify-center font-medium transition-colors duration-200 select-none cursor-pointer active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none';
 
   const sizeStyles = {
-    sm: 'text-xs px-4 py-2 gap-1.5 rounded-dezo-pill',
-    md: 'text-sm px-5 py-3 gap-2 rounded-dezo-pill',
-    lg: 'text-[15px] px-7 py-3.5 gap-2.5 tracking-tight rounded-dezo-pill',
+    sm: 'text-xs px-4 py-2 gap-1.5',
+    md: 'text-sm px-5 py-2.5 gap-2',
+    lg: 'text-[15px] px-6 py-3.5 gap-2 tracking-tight',
   };
 
   const variantStyles = {
     primary:
-      'bg-dezo-primary hover:bg-dezo-primary-hover text-dezo-text-inverse border border-dezo-primary hover:-translate-y-px shadow-dezo-glow',
+      'bg-dezo-ink hover:bg-dezo-secondary text-dezo-text-inverse border border-dezo-ink',
     secondary:
-      'bg-dezo-surface-elevated hover:bg-dezo-surface-hover text-dezo-text-primary border border-dezo-border-strong hover:-translate-y-px',
+      'bg-dezo-surface hover:bg-dezo-surface-hover text-dezo-text-primary border border-dezo-border-strong',
     outline:
-      'bg-transparent hover:bg-dezo-accent-soft text-dezo-text-primary border border-dezo-border-strong hover:border-dezo-primary/50 hover:-translate-y-px',
+      'bg-transparent hover:bg-dezo-bg-warm text-dezo-text-primary border border-dezo-border-strong',
     ghost:
-      'bg-transparent hover:bg-white/[0.04] text-dezo-text-secondary hover:text-dezo-text-primary rounded-dezo-md',
+      'bg-transparent hover:bg-black/[0.04] text-dezo-text-secondary hover:text-dezo-text-primary',
   };
 
   const content = (

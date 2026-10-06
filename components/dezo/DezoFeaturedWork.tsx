@@ -150,7 +150,7 @@ export function DezoCaseStudyStrip({
                   title={study.title}
                   className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
                 />
-                <span className="absolute top-3 left-3 z-10 text-[10px] font-semibold uppercase tracking-wider bg-dezo-bg/90 text-dezo-primary border border-dezo-border px-2 py-0.5 rounded-dezo-sm">
+                <span className="absolute top-3 left-3 z-10 text-[10px] font-semibold uppercase tracking-wider bg-dezo-surface/95 text-dezo-primary border border-dezo-border px-2 py-0.5">
                   Live case study
                 </span>
               </a>

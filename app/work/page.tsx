@@ -12,7 +12,7 @@ import { portfolioData } from '@/content/projects';
 export const metadata: Metadata = constructMetadata({
   title: 'Work — Live Client Deployments',
   description:
-    'Browse DEZO live client deployments — real URLs with live previews.',
+    'Browse DEZO live client deployments — real URLs with production previews.',
   canonicalUrl: 'https://dezo.in/work',
 });
 
@@ -35,7 +35,7 @@ export default function WorkPage() {
     });
 
   return (
-    <div className="pt-32 sm:pt-36 pb-24 min-h-screen">
+    <div className="pt-28 sm:pt-32 pb-24 min-h-screen">
       <DezoSection spacing="compact">
         <DezoContainer size="wide">
           <DezoReveal>
@@ -43,9 +43,9 @@ export default function WorkPage() {
               <DezoHeading
                 badge="Work"
                 as="h1"
-                subtitle={`${liveCount}+ live URLs. Featured sites are production websites with clickable previews.`}
+                subtitle={`${liveCount}+ live URLs in our public archive. Featured sites are production websites — not mockups.`}
               >
-                Proof you can click
+                Selected work
               </DezoHeading>
             </div>
           </DezoReveal>
@@ -54,7 +54,7 @@ export default function WorkPage() {
             <DezoFeaturedWork projects={featured} />
           </div>
           <DezoReveal>
-            <h2 className="font-display text-2xl sm:text-3xl font-bold mb-8">
+            <h2 className="font-display text-2xl sm:text-3xl text-dezo-text-primary mb-8">
               Full live archive
             </h2>
           </DezoReveal>

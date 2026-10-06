@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Syne, Manrope, JetBrains_Mono } from 'next/font/google';
+import { Instrument_Serif, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import '@/design-system/globals.css';
 import { constructMetadata } from '@/lib/seo/metadata';
 import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/seo/jsonld';
@@ -8,25 +8,26 @@ import { DezoNavigation } from '@/components/dezo/DezoNavigation';
 import { DezoFooter } from '@/components/dezo/DezoFooter';
 import { DezoPageShell } from '@/components/dezo/DezoPageShell';
 
-const syne = Syne({
+const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-syne',
-  weight: ['500', '600', '700', '800'],
+  variable: '--font-serif',
+  weight: ['400'],
+  style: ['normal', 'italic'],
 });
 
-const manrope = Manrope({
+const dmSans = DM_Sans({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-manrope',
-  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-body',
+  weight: ['400', '500', '600', '700'],
 });
 
 const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-jetbrains',
-  weight: ['400', '500', '600'],
+  variable: '--font-code',
+  weight: ['400', '500'],
 });
 
 export const metadata: Metadata = constructMetadata();
@@ -42,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${manrope.variable} ${jetbrains.variable}`}
+      className={`${instrumentSerif.variable} ${dmSans.variable} ${jetbrains.variable}`}
       suppressHydrationWarning
     >
       <head>

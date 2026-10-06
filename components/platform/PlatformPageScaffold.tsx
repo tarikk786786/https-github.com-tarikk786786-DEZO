@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Link from 'next/link';
 import { DezoContainer } from '@/components/dezo/DezoContainer';
 import { DezoHeading } from '@/components/dezo/DezoHeading';
@@ -10,8 +11,8 @@ export function PlatformPageScaffold({
   title,
   subtitle,
   children,
-  ctaHref = '/growth-lab',
-  ctaLabel = 'Get Free Growth Audit',
+  ctaHref = '/contact',
+  ctaLabel = "Let's Talk",
 }: {
   badge: string;
   title: string;
@@ -21,7 +22,7 @@ export function PlatformPageScaffold({
   ctaLabel?: string;
 }) {
   return (
-    <div className="pt-32 sm:pt-36 pb-24 min-h-screen">
+    <div className="pt-28 sm:pt-32 pb-24 min-h-screen">
       <DezoSection spacing="compact">
         <DezoContainer size="wide">
           <div className="max-w-3xl mb-10">
@@ -35,8 +36,8 @@ export function PlatformPageScaffold({
             <DezoButton href={ctaHref} size="lg">
               {ctaLabel}
             </DezoButton>
-            <DezoButton href="/book-strategy-call" variant="outline" size="lg">
-              Book Strategy Call
+            <DezoButton href="/start-a-project" variant="outline" size="lg">
+              Start a Project
             </DezoButton>
           </div>
         </DezoContainer>
@@ -58,7 +59,7 @@ export function ScaffoldLinkList({
             href={item.href}
             className="flex flex-col sm:flex-row sm:items-center gap-2 py-5 hover:text-dezo-primary transition-colors"
           >
-            <span className="font-display text-lg font-bold text-dezo-text-primary sm:w-48 shrink-0">
+            <span className="font-display text-lg text-dezo-text-primary sm:w-52 shrink-0">
               {item.name}
             </span>
             {item.summary && (

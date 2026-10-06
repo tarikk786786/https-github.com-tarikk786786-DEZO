@@ -1,13 +1,13 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { PlatformPageScaffold } from '@/components/platform/PlatformPageScaffold';
-import { StoryCaseStudies, CaseStudyCta } from '@/components/platform/StoryCaseStudies';
+import { featuredCaseStudies } from '@/content/site';
 import { constructMetadata } from '@/lib/seo/metadata';
 import { portfolioData } from '@/content/projects';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Results — Verifiable Outcomes',
-  description: 'Live deployments and structured case studies — no fake stats.',
+  title: 'Results — Verified Outcomes',
+  description: 'Live deployments and structured case studies — verified figures only.',
   canonicalUrl: 'https://dezo.in/results',
 });
 
@@ -17,13 +17,30 @@ export default function ResultsPage() {
   return (
     <PlatformPageScaffold
       badge="Results"
-      title="Proof you can click"
-      subtitle={`${liveCount}+ live URLs catalogued. Case studies use Problem → Strategy → Execution → Result — no invented metrics.`}
+      title="Verified outcomes only"
+      subtitle={`${liveCount}+ live URLs catalogued. Case studies use challenge and result framing — no invented metrics.`}
       ctaHref="/work"
-      ctaLabel="Browse work archive"
+      ctaLabel="Browse work"
     >
-      <StoryCaseStudies />
-      <CaseStudyCta />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        {featuredCaseStudies.map((c) => (
+          <a
+            key={c.url}
+            href={c.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block border-t border-dezo-border pt-5 group"
+          >
+            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-dezo-primary mb-2">
+              {c.industry}
+            </p>
+            <h3 className="font-display text-2xl text-dezo-text-primary group-hover:text-dezo-primary transition-colors mb-3">
+              {c.title}
+            </h3>
+            <p className="text-sm text-dezo-text-secondary leading-relaxed">{c.result}</p>
+          </a>
+        ))}
+      </div>
     </PlatformPageScaffold>
   );
 }

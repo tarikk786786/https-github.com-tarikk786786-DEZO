@@ -11,6 +11,14 @@ interface DezoToolScannerProps {
   className?: string;
 }
 
+/** Phase 1 public engines only — later phases stay on category routes as placeholders */
+const PHASE1_CATEGORIES: ToolCategory[] = [
+  'seo',
+  'page-speed',
+  'accessibility',
+  'shopify',
+];
+
 const CATEGORY_META: Record<
   ToolCategory,
   { name: string; placeholder: string; example: string; description: string }
@@ -19,19 +27,21 @@ const CATEGORY_META: Record<
     name: 'SEO Audit',
     placeholder: 'Enter website URL (e.g. brand.in)',
     example: 'https://example.com',
-    description: 'Diagnose indexing, canonical tags, mobile titles, and SERP CTR readiness.',
+    description:
+      'Diagnose indexing, canonicals, schema, sitemap/robots, and broken-link observations.',
   },
   shopify: {
-    name: 'Shopify Store',
+    name: 'Shopify Audit',
     placeholder: 'Enter Shopify URL (e.g. store.myshopify.com or brand.com)',
     example: 'https://store.myshopify.com',
     description: 'Detect app script bloat, theme payload, CDN optimization, and checkout blockers.',
   },
   'page-speed': {
-    name: 'Page Speed & CWV',
+    name: 'Page Speed',
     placeholder: 'Enter website or landing page URL',
     example: 'https://example.com/shop',
-    description: 'Evaluate Largest Contentful Paint (LCP), INP, Cumulative Layout Shift, and mobile load speed.',
+    description:
+      'Core Web Vitals-oriented performance diagnostics and public tech fingerprints.',
   },
   keywords: {
     name: 'Keyword Opportunity',
@@ -64,10 +74,10 @@ const CATEGORY_META: Record<
     description: 'Audit SSL/TLS handshake, HSTS, CSP headers, mixed content, and SSRF safety.',
   },
   accessibility: {
-    name: 'Accessibility / WCAG',
+    name: 'Accessibility',
     placeholder: 'Enter website URL',
     example: 'https://example.com',
-    description: 'Check WCAG 2.1 contrast ratios, screen-reader landmarks, and mobile touch targets.',
+    description: 'Check WCAG-oriented contrast, labels, landmarks, and mobile touch targets.',
   },
   'local-seo': {
     name: 'Local SEO (Odisha & India)',
@@ -149,7 +159,7 @@ export function DezoToolScanner({
     <div className={`w-full max-w-4xl mx-auto ${className}`}>
       {/* Category Tabs */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none mb-3">
-        {(Object.keys(CATEGORY_META) as ToolCategory[]).map((cat) => {
+        {PHASE1_CATEGORIES.map((cat) => {
           const isActive = selectedCategory === cat;
           return (
             <button
@@ -160,10 +170,10 @@ export function DezoToolScanner({
                 setErrorMessage(null);
                 if (status === 'error') setStatus('idle');
               }}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-dezo-md text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
                 isActive
-                  ? 'bg-dezo-primary text-white shadow-md shadow-dezo-primary/20'
-                  : 'bg-dezo-surface border border-dezo-border text-dezo-text-secondary hover:text-dezo-text-primary hover:border-dezo-border-subtle'
+                  ? 'bg-dezo-primary text-white'
+                  : 'bg-dezo-surface border border-dezo-border text-dezo-text-secondary hover:text-dezo-text-primary hover:border-dezo-border-strong'
               }`}
             >
               {CATEGORY_META[cat].name}
@@ -204,7 +214,7 @@ export function DezoToolScanner({
             <button
               type="submit"
               disabled={status === 'scanning' || !inputVal.trim()}
-              className="px-6 py-3 rounded-dezo-md bg-dezo-primary hover:bg-dezo-primary-hover active:scale-98 text-white font-bold text-sm tracking-wide transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-dezo-primary/20 shrink-0"
+              className="px-6 py-3 rounded-dezo-md bg-dezo-primary hover:bg-dezo-primary-hover active:scale-[0.98] text-white font-semibold text-sm tracking-wide transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
             >
               {status === 'scanning' ? (
                 <>
@@ -249,10 +259,10 @@ export function DezoToolScanner({
 
         {/* Error Notification */}
         {status === 'error' && (
-          <div className="mt-4 p-3 rounded-dezo-sm bg-rose-500/10 border border-rose-500/30 flex items-start gap-2.5 text-rose-300 text-xs">
-            <AlertCircle size={15} className="text-rose-400 shrink-0 mt-0.5" />
+          <div className="mt-4 p-3 rounded-dezo-sm bg-red-50 border border-red-200 flex items-start gap-2.5 text-red-800 text-xs">
+            <AlertCircle size={15} className="text-red-600 shrink-0 mt-0.5" />
             <div>
-              <strong className="font-semibold block text-rose-200">Scan Incomplete</strong>
+              <strong className="font-semibold block text-red-900">Scan Incomplete</strong>
               <span>{errorMessage}</span>
             </div>
           </div>

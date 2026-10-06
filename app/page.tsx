@@ -25,6 +25,7 @@ import { DezoWorkGallery } from '@/components/dezo/DezoWorkGallery';
 import { DezoMarketplaceDashboard } from '@/components/dezo/DezoMarketplaceDashboard';
 import { DezoContactForm } from '@/components/dezo/DezoContactForm';
 import { DezoToolScanner } from '@/components/dezo/tools/DezoToolScanner';
+import { DezoHeroStudioConsole } from '@/components/dezo/DezoHeroStudioConsole';
 import { DezoReveal } from '@/lib/motion/MotionAdapter';
 
 export default function HomePage() {
@@ -107,6 +108,11 @@ export default function HomePage() {
                   Trusted by <strong className="text-dezo-text-primary">50+ businesses</strong> nationwide
                 </span>
               </div>
+            </DezoReveal>
+
+            {/* Interactive Growth Engine Architecture Console */}
+            <DezoReveal delay={0.6} direction="up" className="w-full">
+              <DezoHeroStudioConsole />
             </DezoReveal>
           </div>
         </DezoContainer>

@@ -24,6 +24,7 @@ import { DezoMarquee } from '@/components/dezo/DezoMarquee';
 import { DezoWorkGallery } from '@/components/dezo/DezoWorkGallery';
 import { DezoMarketplaceDashboard } from '@/components/dezo/DezoMarketplaceDashboard';
 import { DezoContactForm } from '@/components/dezo/DezoContactForm';
+import { DezoToolScanner } from '@/components/dezo/tools/DezoToolScanner';
 import { DezoReveal } from '@/lib/motion/MotionAdapter';
 
 export default function HomePage() {
@@ -308,6 +309,26 @@ export default function HomePage() {
               </Link>
             </DezoCard>
           </div>
+        </DezoContainer>
+      </DezoSection>
+
+      {/* ── 4B. DEZO TOOLS LAB INTERACTIVE SCANNER (PRD S7) ── */}
+      <DezoSection spacing="normal" borderTop className="bg-dezo-bg">
+        <DezoContainer size="wide">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <DezoHeading
+              badge="DEZO Tools Lab"
+              as="h2"
+              subtitle="Run an instant, multi-engine audit on your website, Shopify store, Amazon ASIN, or keywords. 100% free with prioritized P0-P3 fixes."
+            >
+              Analyze. Discover. Grow.
+            </DezoHeading>
+            <DezoButton href="/tools" variant="outline" size="sm">
+              Explore All 10 Intelligence Suites →
+            </DezoButton>
+          </div>
+
+          <DezoToolScanner />
         </DezoContainer>
       </DezoSection>
 

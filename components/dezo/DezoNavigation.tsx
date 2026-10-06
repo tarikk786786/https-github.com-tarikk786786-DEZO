@@ -40,6 +40,7 @@ export function DezoNavigation() {
     { label: 'Industries', href: '/industries' },
     { label: 'Work', href: '/work' },
     { label: 'Marketplace', href: '/marketplace' },
+    { label: 'Tools', href: '/tools', badge: 'Free' },
     { label: 'Odisha', href: '/locations/odisha', badge: 'Regional' },
     { label: 'Lab', href: '/lab' },
     { label: 'About', href: '/about' },
@@ -214,6 +215,13 @@ export function DezoNavigation() {
             className="text-xl font-bold text-dezo-text-primary hover:text-dezo-accent transition-colors"
           >
             Marketplace Intelligence
+          </Link>
+          <Link
+            href="/tools"
+            onClick={() => setMobileMenuOpen(false)}
+            className="text-xl font-bold text-dezo-accent transition-colors"
+          >
+            DEZO Tools Lab (Free Audits)
           </Link>
           <Link
             href="/locations/odisha"

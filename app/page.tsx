@@ -3,14 +3,16 @@ import Link from 'next/link';
 import {
   ArrowUpRight,
   Sparkles,
-  Zap,
+  ShoppingBag,
   TrendingUp,
   ShieldCheck,
   CheckCircle2,
   Code2,
   Layers,
   BarChart3,
-  Globe2,
+  MapPin,
+  Cpu,
+  ArrowRight,
 } from 'lucide-react';
 import { DezoContainer } from '@/components/dezo/DezoContainer';
 import { DezoHeading } from '@/components/dezo/DezoHeading';
@@ -20,93 +22,88 @@ import { DezoMetric } from '@/components/dezo/DezoMetric';
 import { DezoCard } from '@/components/dezo/DezoCard';
 import { DezoMarquee } from '@/components/dezo/DezoMarquee';
 import { DezoWorkGallery } from '@/components/dezo/DezoWorkGallery';
+import { DezoMarketplaceDashboard } from '@/components/dezo/DezoMarketplaceDashboard';
 import { DezoContactForm } from '@/components/dezo/DezoContactForm';
 import { DezoReveal } from '@/lib/motion/MotionAdapter';
 
 export default function HomePage() {
   const marqueeItems = [
-    'Next.js App Router',
-    'Bespoke Ecommerce',
-    'Technical SEO Architecture',
-    'High-Conversion Funnels',
-    'Sub-Second Performance',
-    'Meta & Google Ads',
-    'Design System Engineering',
-    'B2B Growth Engines',
+    'We Build Brands That Sell',
+    'Amazon & Flipkart Marketplace Scaling',
+    'High-Speed Next.js Storefronts',
+    'Bespoke Shopify Architecture',
+    'Meta & Google Ads Management',
+    'DEZO Growth OS Telemetry',
+    'Built in Odisha · Built for India',
+    'Technical SEO & Core Web Vitals',
   ];
 
   return (
     <>
-      {/* ── 1. HERO SECTION ── */}
+      {/* ── 1. PREMIUM HERO (PRD Section 7) ── */}
       <section className="relative pt-36 pb-20 sm:pt-44 sm:pb-28 lg:pt-52 lg:pb-36 overflow-hidden">
-        {/* Subtle ambient gradient mesh */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-dezo-primary/10 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute top-1/3 right-10 w-[400px] h-[400px] bg-dezo-accent/5 rounded-full blur-[120px] pointer-events-none" />
+        {/* Subtle ambient lighting */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-dezo-primary/10 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-1/3 right-10 w-[450px] h-[450px] bg-dezo-accent/5 rounded-full blur-[120px] pointer-events-none" />
 
         <DezoContainer size="wide" className="relative z-10">
           <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
-            {/* Studio Badge */}
+            {/* Positioning Badge */}
             <DezoReveal delay={0.1} direction="up">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-dezo-surface border border-dezo-border text-dezo-text-primary text-xs font-semibold mb-8">
                 <Sparkles size={14} className="text-dezo-accent" />
-                <span>Web Development · Ecommerce · SEO · Paid Growth</span>
+                <span>Digital Commerce · Brand · Marketplace · Growth Technology</span>
               </div>
             </DezoReveal>
 
-            {/* Main Editorial Headline */}
+            {/* Master Headline */}
             <DezoReveal delay={0.2} direction="up">
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] text-dezo-text-primary mb-6">
-                We Build Websites <br className="hidden sm:inline" />
+              <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] text-dezo-text-primary mb-6">
+                We Build Brands <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-dezo-accent via-blue-400 to-dezo-primary">
-                  That Actually Earn
+                  That Sell.
                 </span>
               </h1>
             </DezoReveal>
 
-            {/* Value Proposition Subtitle */}
+            {/* Supporting Statement */}
             <DezoReveal delay={0.3} direction="up">
               <p className="text-base sm:text-xl text-dezo-text-secondary leading-relaxed max-w-2xl mx-auto mb-10 font-normal">
-                DEZO helps ambitious founders and enterprises engineer ultra-fast websites, high-converting digital storefronts, and performance acquisition funnels that turn traffic into reliable revenue.
+                Digital engineering, ecommerce, Amazon & Flipkart marketplace growth, and performance marketing engineered together to help Indian businesses build, sell, and scale.
               </p>
             </DezoReveal>
 
-            {/* Hero CTAs */}
+            {/* Primary Actions */}
             <DezoReveal delay={0.4} direction="up">
               <div className="flex flex-wrap items-center justify-center gap-4 mb-14">
                 <DezoButton
-                  href="/contact"
+                  href="/start-a-project"
                   size="lg"
                   magnetic
                   icon={<ArrowUpRight size={18} />}
                 >
-                  Book Free Growth Call
+                  Start a Project
                 </DezoButton>
                 <DezoButton
                   href="/work"
                   variant="secondary"
                   size="lg"
                 >
-                  Explore 100+ Live Projects
+                  Explore Our Work
                 </DezoButton>
               </div>
             </DezoReveal>
 
-            {/* Social Proof Strip */}
+            {/* Geographic & Trust Anchor */}
             <DezoReveal delay={0.5} direction="up">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-xs text-dezo-text-muted">
-                <div className="flex -space-x-2">
-                  {['#2563EB', '#38BDF8', '#10B981', '#F59E0B', '#6366F1'].map((color, i) => (
-                    <div
-                      key={i}
-                      className="w-7 h-7 rounded-full border-2 border-dezo-bg flex items-center justify-center text-[9px] font-bold text-white shadow-sm"
-                      style={{ backgroundColor: color }}
-                    >
-                      ★
-                    </div>
-                  ))}
+                <div className="flex items-center gap-1.5 font-mono text-dezo-accent font-semibold">
+                  <MapPin size={13} />
+                  <span>Built in Odisha · Built for India · Built to Scale</span>
                 </div>
+                <span className="hidden sm:inline">·</span>
                 <span>
-                  Trusted by <strong className="text-dezo-text-primary">50+ businesses</strong> across India and international markets
+                  Trusted by <strong className="text-dezo-text-primary">50+ businesses</strong> nationwide
                 </span>
               </div>
             </DezoReveal>
@@ -114,15 +111,15 @@ export default function HomePage() {
         </DezoContainer>
       </section>
 
-      {/* ── 2. LIVE METRICS BAR ── */}
+      {/* ── 2. VERIFIED PROOF STRIP (PRD Section 8) ── */}
       <DezoSection spacing="compact" borderTop borderBottom className="bg-dezo-surface/50">
         <DezoContainer size="wide">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             <DezoMetric
               value={5000}
               suffix="+"
-              label="Completed Projects"
-              sublabel="Deployed & Live"
+              label="Projects Delivered"
+              sublabel="Verified Commercial Code"
             />
             <DezoMetric
               value={11}
@@ -133,14 +130,14 @@ export default function HomePage() {
             <DezoMetric
               value={10}
               suffix="+"
-              label="Industries Served"
-              sublabel="B2B, Retail & D2C"
+              label="Industries Scaled"
+              sublabel="D2C, B2B, Healthcare"
             />
             <DezoMetric
               value={4.8}
               decimals={1}
               suffix="x"
-              label="Average Client ROI"
+              label="Average Client ROAS"
               sublabel="Measured Performance"
             />
           </div>
@@ -150,294 +147,230 @@ export default function HomePage() {
       {/* ── 3. MARQUEE STRIP ── */}
       <DezoMarquee items={marqueeItems} speed="normal" className="border-b border-dezo-border" />
 
-      {/* ── 4. WHAT WE DO (CORE SERVICES) ── */}
-      <DezoSection id="services" spacing="normal">
+      {/* ── 4. THE FIVE PILLARS (PRD Section 3 & 9) ── */}
+      <DezoSection id="solutions" spacing="normal">
         <DezoContainer size="wide">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16">
             <DezoHeading
-              badge="Capabilities"
+              badge="Integrated Platform"
               as="h2"
-              subtitle="We combine clean software engineering with ruthless conversion optimization to deliver measurable commercial outcomes."
+              subtitle="From first line of code to national marketplace dominance. We handle the full digital commercial journey under one roof."
             >
-              Engineered For Market Dominance
+              Five Disciplines. Complete Commercial Scale.
             </DezoHeading>
-            <DezoButton href="/services" variant="outline" size="sm">
-              All Capabilities
+            <DezoButton href="/solutions" variant="outline" size="sm">
+              View All Solutions
             </DezoButton>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {/* Service 1 */}
-            <DezoCard glow>
-              <div className="w-12 h-12 rounded-dezo-md bg-dezo-primary/10 border border-dezo-primary/20 flex items-center justify-center text-dezo-accent mb-6">
-                <Code2 size={24} />
+            {/* PILLAR 1: BUILD */}
+            <DezoCard glow className="flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-dezo-md bg-dezo-primary/10 border border-dezo-primary/20 flex items-center justify-center text-dezo-accent">
+                    <Code2 size={20} />
+                  </div>
+                  <span className="font-mono text-xs font-bold text-dezo-accent">PILLAR 01</span>
+                </div>
+                <h3 className="text-xl font-bold text-dezo-text-primary mb-2">
+                  BUILD · Digital Engineering
+                </h3>
+                <div className="text-xs text-dezo-accent font-semibold mb-3">
+                  Websites · Ecommerce · Shopify · SaaS · Portals
+                </div>
+                <p className="text-xs sm:text-sm text-dezo-text-secondary leading-relaxed mb-6">
+                  High-assurance Next.js and custom storefronts engineered for sub-second speeds, zero bloat, and frictionless conversion.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-dezo-text-primary mb-3">
-                High-Speed Web Development
-              </h3>
-              <p className="text-sm text-dezo-text-secondary leading-relaxed mb-6">
-                Bespoke Next.js and React architectures built for lightning-quick load times, perfect accessibility, and frictionless user flows.
-              </p>
-              <ul className="flex flex-col gap-2 text-xs text-dezo-text-muted">
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 size={13} className="text-dezo-accent" />
-                  <span>Sub-second page speeds</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 size={13} className="text-dezo-accent" />
-                  <span>Modular design systems</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 size={13} className="text-dezo-accent" />
-                  <span>Clean, maintainable TypeScript</span>
-                </li>
-              </ul>
+              <Link href="/solutions/build" className="text-xs font-bold text-dezo-accent hover:underline inline-flex items-center gap-1">
+                Explore Build Solutions <ArrowRight size={12} />
+              </Link>
             </DezoCard>
 
-            {/* Service 2 */}
-            <DezoCard glow>
-              <div className="w-12 h-12 rounded-dezo-md bg-dezo-accent/10 border border-dezo-accent/20 flex items-center justify-center text-dezo-accent mb-6">
-                <Layers size={24} />
+            {/* PILLAR 2: BRAND */}
+            <DezoCard glow className="flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-dezo-md bg-dezo-primary/10 border border-dezo-primary/20 flex items-center justify-center text-dezo-accent">
+                    <Sparkles size={20} />
+                  </div>
+                  <span className="font-mono text-xs font-bold text-dezo-accent">PILLAR 02</span>
+                </div>
+                <h3 className="text-xl font-bold text-dezo-text-primary mb-2">
+                  BRAND · Strategic Identity
+                </h3>
+                <div className="text-xs text-dezo-accent font-semibold mb-3">
+                  Packaging · Positioning · Amazon Brand Stores · A+ Content
+                </div>
+                <p className="text-xs sm:text-sm text-dezo-text-secondary leading-relaxed mb-6">
+                  We turn commodities into defensible brands that command 30-50% pricing power over generic competitors.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-dezo-text-primary mb-3">
-                Ecommerce & D2C Stores
-              </h3>
-              <p className="text-sm text-dezo-text-secondary leading-relaxed mb-6">
-                Conversion-focused digital retail experiences tailored for high average order value (AOV), seamless checkout, and rapid mobile buying.
-              </p>
-              <ul className="flex flex-col gap-2 text-xs text-dezo-text-muted">
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 size={13} className="text-dezo-accent" />
-                  <span>Shopify & custom headless stores</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 size={13} className="text-dezo-accent" />
-                  <span>UPI & multi-gateway integrations</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 size={13} className="text-dezo-accent" />
-                  <span>Mobile-first purchase journeys</span>
-                </li>
-              </ul>
+              <Link href="/solutions/brand" className="text-xs font-bold text-dezo-accent hover:underline inline-flex items-center gap-1">
+                Explore Brand Studio <ArrowRight size={12} />
+              </Link>
             </DezoCard>
 
-            {/* Service 3 */}
-            <DezoCard glow>
-              <div className="w-12 h-12 rounded-dezo-md bg-dezo-success/10 border border-dezo-success/20 flex items-center justify-center text-dezo-success mb-6">
-                <BarChart3 size={24} />
+            {/* PILLAR 3: MARKETPLACE */}
+            <DezoCard glow className="flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-dezo-md bg-dezo-primary/10 border border-dezo-primary/20 flex items-center justify-center text-dezo-accent">
+                    <ShoppingBag size={20} />
+                  </div>
+                  <span className="font-mono text-xs font-bold text-dezo-accent">PILLAR 03</span>
+                </div>
+                <h3 className="text-xl font-bold text-dezo-text-primary mb-2">
+                  MARKETPLACE · Amazon & Flipkart
+                </h3>
+                <div className="text-xs text-dezo-accent font-semibold mb-3">
+                  Listing Indexing · PPC · Buy Box · Catalog Growth
+                </div>
+                <p className="text-xs sm:text-sm text-dezo-text-secondary leading-relaxed mb-6">
+                  Complete seller account operations, Search Query Performance mining, and disciplined TACoS ad management.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-dezo-text-primary mb-3">
-                SEO & Performance Ads
-              </h3>
-              <p className="text-sm text-dezo-text-secondary leading-relaxed mb-6">
-                Organic search dominance and data-backed Meta and Google advertising campaigns designed to maximize return on ad spend (ROAS).
-              </p>
-              <ul className="flex flex-col gap-2 text-xs text-dezo-text-muted">
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 size={13} className="text-dezo-accent" />
-                  <span>Technical & programmatic SEO</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 size={13} className="text-dezo-accent" />
-                  <span>Laser-targeted paid ad funnels</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 size={13} className="text-dezo-accent" />
-                  <span>Real-time conversion tracking</span>
-                </li>
-              </ul>
+              <Link href="/solutions/marketplace" className="text-xs font-bold text-dezo-accent hover:underline inline-flex items-center gap-1">
+                Explore Marketplace Growth <ArrowRight size={12} />
+              </Link>
+            </DezoCard>
+
+            {/* PILLAR 4: GROW */}
+            <DezoCard glow className="flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-dezo-md bg-dezo-primary/10 border border-dezo-primary/20 flex items-center justify-center text-dezo-accent">
+                    <TrendingUp size={20} />
+                  </div>
+                  <span className="font-mono text-xs font-bold text-dezo-accent">PILLAR 04</span>
+                </div>
+                <h3 className="text-xl font-bold text-dezo-text-primary mb-2">
+                  GROW · Performance Marketing
+                </h3>
+                <div className="text-xs text-dezo-accent font-semibold mb-3">
+                  Meta Ads · Google Shopping · Technical SEO · CRO
+                </div>
+                <p className="text-xs sm:text-sm text-dezo-text-secondary leading-relaxed mb-6">
+                  Precision ad spend management and organic Google dominance designed to maximize bottom-line profit.
+                </p>
+              </div>
+              <Link href="/solutions/growth" className="text-xs font-bold text-dezo-accent hover:underline inline-flex items-center gap-1">
+                Explore Growth Marketing <ArrowRight size={12} />
+              </Link>
+            </DezoCard>
+
+            {/* PILLAR 5: INTELLIGENCE */}
+            <DezoCard glow className="flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-dezo-md bg-dezo-primary/10 border border-dezo-primary/20 flex items-center justify-center text-dezo-accent">
+                    <Cpu size={20} />
+                  </div>
+                  <span className="font-mono text-xs font-bold text-dezo-accent">PILLAR 05</span>
+                </div>
+                <h3 className="text-xl font-bold text-dezo-text-primary mb-2">
+                  INTELLIGENCE · DEZO Growth OS
+                </h3>
+                <div className="text-xs text-dezo-accent font-semibold mb-3">
+                  AI Seller Engine · Cross-Channel Telemetry · Automation
+                </div>
+                <p className="text-xs sm:text-sm text-dezo-text-secondary leading-relaxed mb-6">
+                  Our internal technology differentiator: unified telemetry that detects margin bleed and rank drops automatically.
+                </p>
+              </div>
+              <Link href="/solutions/intelligence" className="text-xs font-bold text-dezo-accent hover:underline inline-flex items-center gap-1">
+                Explore Growth OS <ArrowRight size={12} />
+              </Link>
+            </DezoCard>
+
+            {/* REGIONAL ODYSSEY */}
+            <DezoCard glow className="flex flex-col justify-between bg-dezo-primary/5 border-dezo-primary/30">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-dezo-md bg-dezo-primary/20 border border-dezo-primary/40 flex items-center justify-center text-dezo-accent">
+                    <MapPin size={20} />
+                  </div>
+                  <span className="font-mono text-xs font-bold text-dezo-accent">ODISHA FOCUS</span>
+                </div>
+                <h3 className="text-xl font-bold text-dezo-text-primary mb-2">
+                  DEZO Odisha Specialization
+                </h3>
+                <div className="text-xs text-dezo-accent font-semibold mb-3">
+                  Bhubaneswar Studio · Cuttack · Regional Scale
+                </div>
+                <p className="text-xs sm:text-sm text-dezo-text-secondary leading-relaxed mb-6">
+                  Specialized growth programs for Odisha manufacturers, education institutes, healthcare clinics, and D2C brands.
+                </p>
+              </div>
+              <Link href="/locations/odisha" className="text-xs font-bold text-dezo-accent hover:underline inline-flex items-center gap-1">
+                Explore DEZO Odisha <ArrowRight size={12} />
+              </Link>
             </DezoCard>
           </div>
         </DezoContainer>
       </DezoSection>
 
-      {/* ── 5. PORTFOLIO SHOWCASE (REAL WORK) ── */}
-      <DezoSection id="work" spacing="normal" borderTop className="bg-dezo-surface/30">
+      {/* ── 5. MARKETPLACE INTELLIGENCE FLAGSHIP DEMO ── */}
+      <DezoSection spacing="normal" borderTop className="bg-dezo-surface/30">
         <DezoContainer size="wide">
-          <div className="max-w-3xl mb-16">
+          <div className="max-w-3xl mb-12">
+            <DezoHeading
+              badge="Live Telemetry Demo"
+              as="h2"
+              subtitle="See how DEZO synthesizes sales, ad spend, and inventory data across Amazon, Flipkart, your website, and Meta into one single pane of glass."
+            >
+              Unified Commerce & Seller Telemetry
+            </DezoHeading>
+          </div>
+
+          <DezoMarketplaceDashboard />
+        </DezoContainer>
+      </DezoSection>
+
+      {/* ── 6. VERIFIED CASE STUDIES & 100+ LIVE PROOFS ── */}
+      <DezoSection id="work" spacing="normal" borderTop>
+        <DezoContainer size="wide">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16">
             <DezoHeading
               badge="Evidence"
               as="h2"
-              subtitle="Browse our verified live portfolio across ecommerce, corporate portals, healthcare, real estate, and education."
+              subtitle="Browse our verified live portfolio across D2C ecommerce, corporate portals, healthcare, real estate, and education."
             >
-              100+ Live Client Proofs
+              100+ Live Client Deployments
             </DezoHeading>
+            <DezoButton href="/work" variant="outline" size="sm">
+              Explore All 100+ Proofs
+            </DezoButton>
           </div>
 
           <DezoWorkGallery initialLimit={6} />
         </DezoContainer>
       </DezoSection>
 
-      {/* ── 6. THE DEZO DIFFERENCE / HUMAN RULES ── */}
-      <DezoSection spacing="normal" borderTop>
+      {/* ── 7. START A PROJECT LEAD FUNNEL CTA ── */}
+      <DezoSection spacing="relaxed" borderTop className="bg-dezo-surface/40">
         <DezoContainer size="wide">
-          <div className="max-w-3xl mb-16">
-            <DezoHeading
-              badge="Engineering Philosophy"
-              as="h2"
-              subtitle="Why ambitious founders choose DEZO over cookie-cutter template agencies and bloated software houses."
-            >
-              Architected For Longevity
-            </DezoHeading>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="flex flex-col gap-4">
-              <div className="text-2xl font-black text-dezo-accent font-mono">01</div>
-              <h4 className="text-lg font-bold text-dezo-text-primary">
-                HTML First, JS When Essential
-              </h4>
-              <p className="text-sm text-dezo-text-secondary leading-relaxed">
-                We believe websites must be resilient. If JavaScript is slow or fails, our pages still deliver fast, legible content and work smoothly on any device.
+          <div className="p-8 sm:p-16 rounded-dezo-xl bg-dezo-surface border border-dezo-border shadow-dezo-card flex flex-col lg:flex-row items-center justify-between gap-10">
+            <div className="max-w-2xl">
+              <span className="text-xs font-mono uppercase tracking-widest text-dezo-accent mb-2 block">
+                Next-Step Action
+              </span>
+              <h2 className="text-3xl sm:text-5xl font-black text-dezo-text-primary mb-4 leading-tight">
+                Ready to Build a Brand That Sells?
+              </h2>
+              <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed">
+                Take our 2-minute project diagnostic. Our intake algorithm evaluates channel readiness, budget alignment, and assigns your brief directly to studio leadership.
               </p>
             </div>
 
-            <div className="flex flex-col gap-4">
-              <div className="text-2xl font-black text-dezo-accent font-mono">02</div>
-              <h4 className="text-lg font-bold text-dezo-text-primary">
-                Zero AI Neon Fluff
-              </h4>
-              <p className="text-sm text-dezo-text-secondary leading-relaxed">
-                No meaningless 3D spinning cubes or eye-straining cyberpunk neon. Every motion, typography choice, and whitespace margin is crafted with purpose.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-4">
-              <div className="text-2xl font-black text-dezo-accent font-mono">03</div>
-              <h4 className="text-lg font-bold text-dezo-text-primary">
-                Uncompromising Performance
-              </h4>
-              <p className="text-sm text-dezo-text-secondary leading-relaxed">
-                Engineered to pass Google Core Web Vitals with flying colors. Faster sites rank higher, retain users longer, and convert at significantly higher rates.
-              </p>
-            </div>
-          </div>
-        </DezoContainer>
-      </DezoSection>
-
-      {/* ── 7. CLIENT TESTIMONIALS ── */}
-      <DezoSection spacing="normal" borderTop className="bg-dezo-surface/40">
-        <DezoContainer size="wide">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <DezoHeading
-              badge="Endorsements"
-              as="h2"
-              align="center"
-              subtitle="Real feedback from founders and marketing executives who partner with DEZO."
-            >
-              Trusted by Real Human Businesses
-            </DezoHeading>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {[
-              {
-                quote:
-                  'DEZO completely transformed our digital presence. The new architecture is not only stunning, but it actually converts visitors into leads. They truly care about the businesses they work with.',
-                author: 'Anjali M.',
-                role: 'Founder, Retail Boutique',
-              },
-              {
-                quote:
-                  'Working with the DEZO team felt smooth and focused. They listened to our constraints and delivered an ecommerce platform that exceeded our expectations in both speed and checkout completion.',
-                author: 'Vikram S.',
-                role: 'CEO, Consumer Tech Brand',
-              },
-              {
-                quote:
-                  'The organic, high-assurance feel of our website elevated our brand identity immediately. Their attention to detail and human-centric approach is rare in this industry.',
-                author: 'Priya R.',
-                role: 'Director of Growth',
-              },
-            ].map((testimonial, i) => (
-              <DezoCard key={i} interactive={false} className="flex flex-col justify-between">
-                <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed italic mb-8">
-                  "{testimonial.quote}"
-                </p>
-                <div className="flex items-center gap-3 pt-4 border-t border-dezo-border">
-                  <div className="w-10 h-10 rounded-full bg-dezo-primary/20 border border-dezo-primary/30 flex items-center justify-center font-bold text-dezo-accent text-sm">
-                    {testimonial.author.charAt(0)}
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold text-dezo-text-primary">
-                      {testimonial.author}
-                    </div>
-                    <div className="text-xs text-dezo-text-muted">{testimonial.role}</div>
-                  </div>
-                </div>
-              </DezoCard>
-            ))}
-          </div>
-        </DezoContainer>
-      </DezoSection>
-
-      {/* ── 8. START A PROJECT (HIGH-ASSURANCE LEAD ENGINE) ── */}
-      <DezoSection id="contact" spacing="relaxed" borderTop>
-        <DezoContainer size="wide">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-            {/* Left Contact Context */}
-            <div className="lg:col-span-5 flex flex-col justify-between">
-              <div>
-                <DezoHeading
-                  badge="Initiate"
-                  as="h2"
-                  subtitle="Ready to take your digital presence to the next level? Share your project details and connect directly with our leadership team."
-                >
-                  Start Growing With DEZO
-                </DezoHeading>
-
-                <div className="mt-10 flex flex-col gap-6 text-sm">
-                  <div>
-                    <h5 className="text-xs font-bold uppercase tracking-widest text-dezo-text-muted mb-1">
-                      Direct Executive Lines
-                    </h5>
-                    <p className="text-dezo-text-primary font-semibold">
-                      Tarik Islam (Director) · Rohan Dinkar Sanap (CEO)
-                    </p>
-                  </div>
-
-                  <div>
-                    <h5 className="text-xs font-bold uppercase tracking-widest text-dezo-text-muted mb-1">
-                      Immediate Inquiries
-                    </h5>
-                    <a
-                      href="tel:+919114411026"
-                      className="text-dezo-accent hover:underline font-bold"
-                    >
-                      +91 9114411026
-                    </a>
-                    <span className="text-dezo-text-muted"> / </span>
-                    <a
-                      href="mailto:contact@dezo.in"
-                      className="text-dezo-accent hover:underline font-bold"
-                    >
-                      contact@dezo.in
-                    </a>
-                  </div>
-
-                  <div>
-                    <h5 className="text-xs font-bold uppercase tracking-widest text-dezo-text-muted mb-1">
-                      Studio Headquarters
-                    </h5>
-                    <p className="text-dezo-text-secondary leading-relaxed">
-                      Phase 2, Patia, Bhubaneswar, Odisha 751024, India
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-10 p-6 rounded-dezo-md bg-dezo-surface border border-dezo-border">
-                <p className="text-xs text-dezo-text-secondary leading-relaxed">
-                  🔒 <strong>Confidentiality Assured:</strong> All project inquiries and commercial requirements are handled under strict NDA protocols.
-                </p>
-              </div>
-            </div>
-
-            {/* Right Contact Form */}
-            <div className="lg:col-span-7">
-              <div className="p-6 sm:p-10 rounded-dezo-xl bg-dezo-surface border border-dezo-border shadow-dezo-card">
-                <DezoContactForm />
-              </div>
+            <div className="flex flex-col sm:flex-row gap-4 shrink-0">
+              <DezoButton href="/start-a-project" size="lg" magnetic icon={<ArrowUpRight size={18} />}>
+                Start Project Diagnostic
+              </DezoButton>
+              <DezoButton href="/contact" variant="secondary" size="lg">
+                Direct Contact Lines
+              </DezoButton>
             </div>
           </div>
         </DezoContainer>

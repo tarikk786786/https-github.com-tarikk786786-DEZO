@@ -7,12 +7,14 @@
   --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
-  --bg-dezo: #f3f5f7;
+  --bg-dezo: #f0f3f5;
+  --bg-warm-dezo: #e8ecef;
   --surface-dezo: #ffffff;
-  --border-dezo: rgba(16, 19, 26, 0.1);
-  --primary-dezo: #0b6b52;
-  --accent-dezo: #0b6b52;
-  --ink-dezo: #10131a;
+  --border-dezo: rgba(10, 14, 18, 0.09);
+  --primary-dezo: #0a5c47;
+  --accent-dezo: #0a5c47;
+  --ink-dezo: #0a0e12;
+  --highlight-dezo: #b8954a;
 }
 
 html {
@@ -29,12 +31,12 @@ body {
 }
 
 ::selection {
-  background-color: #0b6b52;
+  background-color: #0a5c47;
   color: #ffffff;
 }
 
 :focus-visible {
-  outline: 2px solid #0b6b52;
+  outline: 2px solid #0a5c47;
   outline-offset: 3px;
 }
 
@@ -42,31 +44,39 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #eef1f4;
+  background: #e4e8ec;
 }
 ::-webkit-scrollbar-thumb {
-  background: #c5ccd6;
+  background: #b8c0ca;
   border-radius: 4px;
-  border: 2px solid #eef1f4;
+  border: 2px solid #e4e8ec;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #0b6b52;
+  background: #0a5c47;
 }
 
-/* Atmospheric hero mesh — commerce routes, not purple glow */
+/* Soft paper grain — editorial atmosphere without flat fill */
+.dezo-paper {
+  background-color: var(--bg-dezo);
+  background-image:
+    radial-gradient(ellipse 90% 70% at 12% -10%, rgba(10, 92, 71, 0.07), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 100% 0%, rgba(184, 149, 74, 0.05), transparent 45%),
+    linear-gradient(180deg, #f4f6f8 0%, #eef1f4 100%);
+}
+
 .dezo-hero-atmosphere {
   background:
-    radial-gradient(ellipse 80% 60% at 70% 20%, rgba(11, 107, 82, 0.14), transparent 55%),
-    radial-gradient(ellipse 50% 40% at 15% 80%, rgba(196, 163, 90, 0.12), transparent 50%),
-    radial-gradient(ellipse 60% 50% at 90% 90%, rgba(26, 95, 122, 0.08), transparent 45%),
-    linear-gradient(165deg, #f7f8fa 0%, #eef2f5 45%, #e8eef1 100%);
+    radial-gradient(ellipse 80% 60% at 70% 20%, rgba(10, 92, 71, 0.12), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 15% 80%, rgba(184, 149, 74, 0.1), transparent 50%),
+    radial-gradient(ellipse 60% 50% at 90% 90%, rgba(26, 95, 122, 0.06), transparent 45%),
+    linear-gradient(165deg, #f5f7f9 0%, #eef2f5 45%, #e6ebef 100%);
 }
 
 .dezo-grid-fade {
   background-image:
-    linear-gradient(rgba(16, 19, 26, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16, 19, 26, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
+    linear-gradient(rgba(10, 14, 18, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 14, 18, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
   mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
 }
 
@@ -74,10 +84,28 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(11, 107, 82, 0.35) 10%,
-    rgba(11, 107, 82, 0.35) 90%,
+    rgba(10, 92, 71, 0.38) 12%,
+    rgba(10, 92, 71, 0.38) 88%,
     transparent
   );
+}
+
+.dezo-section-rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(10, 14, 18, 0.1) 20%,
+    rgba(10, 14, 18, 0.1) 80%,
+    transparent
+  );
+}
+
+.dezo-ink-field {
+  background:
+    radial-gradient(ellipse 70% 50% at 80% 20%, rgba(10, 92, 71, 0.22), transparent 55%),
+    radial-gradient(ellipse 40% 40% at 10% 90%, rgba(184, 149, 74, 0.1), transparent 50%),
+    #0a0e12;
 }
 
 html.lenis,
@@ -101,17 +129,6 @@ html.lenis body {
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
 @keyframes dezo-drift {
   0%,
   100% {
@@ -125,7 +142,7 @@ html.lenis body {
 @keyframes dezo-fade-up {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
@@ -133,15 +150,48 @@ html.lenis body {
   }
 }
 
+@keyframes dezo-kenburns {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.08) translate3d(-1.5%, -1%, 0);
+  }
+}
+
+@keyframes dezo-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dezo-line-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 .dezo-atmosphere-orb {
   animation: dezo-drift 18s ease-in-out infinite;
 }
 
+.dezo-hero-kenburns {
+  animation: dezo-kenburns 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
 .dezo-card-lift {
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s ease,
+    box-shadow 0.35s ease;
 }
 .dezo-card-lift:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(10, 14, 18, 0.08);
 }
 
 .dezo-nav-link {
@@ -170,14 +220,27 @@ html.lenis body {
   animation: dezo-draw 2.4s ease forwards 0.4s;
 }
 
-@keyframes dezo-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
+.dezo-accent-line {
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  background: #0a5c47;
+  transform-origin: left;
+  animation: dezo-line-grow 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dezo-atmosphere-orb {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .dezo-atmosphere-orb,
+  .dezo-hero-kenburns {
     animation: none;
   }
   .dezo-path-line {
@@ -185,6 +248,11 @@ html.lenis body {
     stroke-dashoffset: 0;
   }
   .dezo-card-lift:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .dezo-accent-line {
+    animation: none;
     transform: none;
   }
 }

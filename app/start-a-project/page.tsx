@@ -15,19 +15,21 @@ export const metadata: Metadata = constructMetadata({
 
 export default function StartAProjectPage() {
   return (
-    <div className="pt-28 sm:pt-36 pb-20">
+    <div className="pt-28 sm:pt-36 pb-24 dezo-paper min-h-screen">
       <DezoSection spacing="compact">
         <DezoContainer size="default">
-          <div className="text-center max-w-2xl mx-auto mb-10">
+          <div className="text-center max-w-2xl mx-auto mb-6">
             <DezoHeading
-              badge="Project Intake & Diagnostic"
+              badge="Project Intake"
               as="h1"
               align="center"
-              subtitle="Tell us about your brand, channels, and commercial targets. Our intake algorithm diagnoses channel readiness before your strategy call."
+              subtitle="Tell us about your brand, channels, and commercial targets. Our intake diagnoses channel readiness before your strategy call."
             >
-              Let's Build Something That Scales
+              Let&apos;s build something that sells
             </DezoHeading>
           </div>
+
+          <div className="dezo-section-rule my-10 sm:my-12 max-w-md mx-auto" />
 
           <DezoQualificationFunnel />
         </DezoContainer>

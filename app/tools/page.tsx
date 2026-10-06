@@ -45,15 +45,15 @@ export default function ToolsLabPage() {
   const demoTools = TOOL_CATALOG.filter((t) => t.availability === 'demo');
 
   return (
-    <div className="pt-24 pb-20">
+    <div className="pt-24 pb-24 dezo-paper min-h-screen">
       <DezoSection spacing="compact">
         <DezoContainer size="wide">
           <DezoReveal>
-            <div className="max-w-3xl mb-10">
+            <div className="max-w-3xl mb-12">
               <DezoHeading
                 badge="DEZO Tools Lab"
                 as="h1"
-                subtitle="Free public diagnostics for websites, Shopify, keywords, CRO, security, and local SEO — plus honest Amazon/Flipkart demo checklists (no seller APIs faked)."
+                subtitle="Free public diagnostics for websites, Shopify, keywords, CRO, security, and local SEO — plus honest Amazon/Flipkart demo checklists."
               >
                 Analyze. Discover. Grow.
               </DezoHeading>
@@ -78,77 +78,71 @@ export default function ToolsLabPage() {
         </DezoContainer>
       </DezoSection>
 
-      <DezoSection spacing="normal" borderTop className="bg-dezo-surface">
+      <DezoSection spacing="normal" className="bg-dezo-surface">
         <DezoContainer size="wide">
           <DezoReveal>
-            <div className="mb-10">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary mb-2">
-                Live engines
-              </p>
-              <h2 className="font-display text-2xl sm:text-3xl font-bold text-dezo-text-primary">
+            <div className="mb-12">
+              <DezoHeading
+                badge="Live engines"
+                as="h2"
+                subtitle="URL tools use a lightweight SSRF-guarded probe. Keyword and local engines run client-side heuristics — no marketplace credentials required."
+              >
                 Working public tools
-              </h2>
-              <p className="text-sm text-dezo-text-secondary mt-2 max-w-2xl">
-                URL tools use a lightweight SSRF-guarded probe. Keyword/local engines run
-                client-side heuristics. No Postgres, Redis, or marketplace credentials required.
-              </p>
+              </DezoHeading>
             </div>
           </DezoReveal>
 
-          <DezoStagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-14" stagger={0.06}>
+          <DezoStagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-dezo-border border border-dezo-border mb-16" stagger={0.05}>
             {liveTools.map((cat) => {
               const Icon = ICONS[cat.slug] || Sparkles;
               return (
                 <DezoStaggerItem key={cat.slug}>
-                  <DezoHoverLift>
-                    <Link
-                      href={`/tools/${cat.slug}`}
-                      className="block h-full p-6 rounded-dezo-lg border border-dezo-border bg-dezo-bg hover:border-dezo-primary/40 transition-colors group"
-                    >
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-10 h-10 rounded-dezo-md bg-dezo-accent-soft flex items-center justify-center text-dezo-primary">
-                          <Icon size={18} />
-                        </div>
-                        <div>
-                          <h3 className="font-display font-bold text-dezo-text-primary group-hover:text-dezo-primary transition-colors flex items-center gap-1.5">
-                            {cat.name}
-                            <ArrowRight
-                              size={14}
-                              className="opacity-0 group-hover:opacity-100 transition-opacity"
-                            />
-                          </h3>
-                          <p className="text-xs font-mono text-dezo-text-muted">{cat.tagline}</p>
-                        </div>
+                  <Link
+                    href={`/tools/${cat.slug}`}
+                    className="block h-full p-6 sm:p-7 bg-dezo-bg hover:bg-dezo-accent-soft/40 transition-colors group"
+                  >
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="w-10 h-10 rounded-dezo-md bg-dezo-accent-soft flex items-center justify-center text-dezo-primary shrink-0">
+                        <Icon size={18} />
                       </div>
-                      <p className="text-sm text-dezo-text-secondary leading-relaxed">
-                        {cat.description}
-                      </p>
-                      <span className="inline-block mt-4 text-[10px] font-bold uppercase tracking-wider text-dezo-primary bg-dezo-accent-soft px-2 py-0.5 rounded-dezo-sm">
-                        {cat.badge || 'Live'} · Phase {cat.phase}
-                      </span>
-                    </Link>
-                  </DezoHoverLift>
+                      <div className="min-w-0">
+                        <h3 className="font-display font-bold text-dezo-text-primary group-hover:text-dezo-primary transition-colors flex items-center gap-1.5">
+                          {cat.name}
+                          <ArrowRight
+                            size={14}
+                            className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
+                          />
+                        </h3>
+                        <p className="text-xs font-mono text-dezo-text-muted mt-0.5">
+                          {cat.tagline}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-sm text-dezo-text-secondary leading-relaxed">
+                      {cat.description}
+                    </p>
+                    <span className="inline-block mt-5 text-[10px] font-bold uppercase tracking-[0.12em] text-dezo-primary">
+                      {cat.badge || 'Live'} · Phase {cat.phase}
+                    </span>
+                  </Link>
                 </DezoStaggerItem>
               );
             })}
           </DezoStagger>
 
           <DezoReveal>
-            <div className="mb-6">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-highlight mb-2">
-                Marketplace · demo mode
-              </p>
-              <h2 className="font-display text-xl sm:text-2xl font-bold text-dezo-text-primary">
+            <div className="mb-8">
+              <DezoHeading
+                badge="Marketplace · demo"
+                as="h2"
+                subtitle="Public checklist scoring from URL/ASIN shape only. Seller APIs come later with authorized credentials."
+              >
                 Amazon & Flipkart without fake APIs
-              </h2>
-              <p className="text-sm text-dezo-text-secondary mt-2 max-w-2xl">
-                Public checklist scoring from URL/ASIN shape only. Seller APIs come later with
-                authorized credentials.
-              </p>
+              </DezoHeading>
             </div>
           </DezoReveal>
 
-          <DezoStagger className="grid grid-cols-1 md:grid-cols-2 gap-5" stagger={0.08}>
+          <DezoStagger className="grid grid-cols-1 md:grid-cols-2 gap-px bg-dezo-border border border-dashed border-dezo-border" stagger={0.08}>
             {demoTools.map((cat) => {
               const Icon = ICONS[cat.slug] || Package;
               return (
@@ -156,7 +150,7 @@ export default function ToolsLabPage() {
                   <DezoHoverLift>
                     <Link
                       href={`/tools/${cat.slug}`}
-                      className="block h-full p-6 rounded-dezo-lg border border-dashed border-dezo-border bg-dezo-bg-warm hover:border-dezo-primary/40 transition-colors group"
+                      className="block h-full p-6 sm:p-8 bg-dezo-bg-warm hover:bg-dezo-surface transition-colors group"
                     >
                       <div className="flex items-center gap-3 mb-3">
                         <div className="w-10 h-10 rounded-dezo-md bg-white border border-dezo-border flex items-center justify-center text-dezo-primary">
@@ -172,7 +166,7 @@ export default function ToolsLabPage() {
                       <p className="text-sm text-dezo-text-secondary leading-relaxed">
                         {cat.description}
                       </p>
-                      <span className="inline-block mt-4 text-[10px] font-bold uppercase tracking-wider text-dezo-highlight bg-white px-2 py-0.5 rounded-dezo-sm border border-dezo-border">
+                      <span className="inline-block mt-5 text-[10px] font-bold uppercase tracking-[0.12em] text-dezo-highlight">
                         Demo · Phase {cat.phase}
                       </span>
                     </Link>
@@ -184,13 +178,14 @@ export default function ToolsLabPage() {
         </DezoContainer>
       </DezoSection>
 
-      <DezoSection spacing="compact" borderTop>
+      <DezoSection spacing="compact" className="dezo-paper">
         <DezoContainer size="default">
-          <div className="text-center max-w-xl mx-auto">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary mb-2">
+          <div className="max-w-xl mx-auto text-center">
+            <span className="dezo-accent-line mx-auto mb-5" aria-hidden />
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-dezo-primary mb-3">
               Methodology
             </p>
-            <h3 className="font-display text-xl font-bold text-dezo-text-primary mb-3">
+            <h3 className="font-display text-xl sm:text-2xl font-bold text-dezo-text-primary mb-4 tracking-tight">
               Public observations. Disclosed modes. No fake seller APIs.
             </h3>
             <p className="text-sm text-dezo-text-secondary leading-relaxed">

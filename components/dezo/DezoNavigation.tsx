@@ -13,6 +13,8 @@ export function DezoNavigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const pathname = usePathname();
+  const isHome = pathname === '/';
+  const onDarkHero = isHome && !scrolled && !mobileMenuOpen;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +22,7 @@ export function DezoNavigation() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -45,11 +48,19 @@ export function DezoNavigation() {
     { label: 'About', href: '/about' },
   ];
 
+  const linkIdle = onDarkHero
+    ? 'text-white/75 hover:text-white'
+    : 'text-dezo-text-secondary hover:text-dezo-text-primary';
+  const linkActive = onDarkHero ? 'text-white' : 'text-dezo-primary';
+  const logoClass = onDarkHero
+    ? 'text-white group-hover:text-white/90'
+    : 'text-dezo-text-primary group-hover:text-dezo-primary';
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-dezo-bg/90 backdrop-blur-md border-b border-dezo-border py-3'
+        scrolled || mobileMenuOpen
+          ? 'bg-dezo-bg/92 backdrop-blur-md border-b border-dezo-border py-3'
           : 'bg-transparent py-5 lg:py-6'
       }`}
     >
@@ -60,15 +71,14 @@ export function DezoNavigation() {
             aria-label="DEZO homepage"
             className="flex items-center gap-2 group cursor-pointer"
           >
-            <span className="font-display text-2xl font-extrabold tracking-tight text-dezo-text-primary group-hover:text-dezo-primary transition-colors">
+            <span
+              className={`font-display text-2xl font-extrabold tracking-tightest transition-colors ${logoClass}`}
+            >
               DEZO
             </span>
           </Link>
 
-          <nav
-            aria-label="Primary Navigation"
-            className="hidden xl:flex items-center gap-7"
-          >
+          <nav aria-label="Primary Navigation" className="hidden xl:flex items-center gap-7">
             {navLinks.map((link) => {
               const isActive =
                 pathname === link.href ||
@@ -84,10 +94,8 @@ export function DezoNavigation() {
                   >
                     <Link
                       href={link.href}
-                  className={`dezo-nav-link inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors py-1 ${
-                        isActive
-                          ? 'text-dezo-primary'
-                          : 'text-dezo-text-secondary hover:text-dezo-text-primary'
+                      className={`dezo-nav-link inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors py-1 ${
+                        isActive ? linkActive : linkIdle
                       }`}
                       data-active={isActive}
                     >
@@ -130,10 +138,8 @@ export function DezoNavigation() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`dezo-nav-link text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors ${
-                    isActive
-                      ? 'text-dezo-primary'
-                      : 'text-dezo-text-secondary hover:text-dezo-text-primary'
+                  className={`dezo-nav-link text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors ${
+                    isActive ? linkActive : linkIdle
                   }`}
                   data-active={isActive}
                 >
@@ -146,13 +152,28 @@ export function DezoNavigation() {
           <div className="hidden lg:flex items-center gap-5">
             <a
               href="tel:+919114411026"
-              className="flex items-center gap-2 text-xs font-semibold text-dezo-text-secondary hover:text-dezo-text-primary transition-colors"
+              className={`flex items-center gap-2 text-xs font-semibold transition-colors ${
+                onDarkHero
+                  ? 'text-white/70 hover:text-white'
+                  : 'text-dezo-text-secondary hover:text-dezo-text-primary'
+              }`}
             >
-              <Phone size={14} className="text-dezo-primary" />
+              <Phone
+                size={14}
+                className={onDarkHero ? 'text-dezo-highlight' : 'text-dezo-primary'}
+              />
               <span>+91 9114411026</span>
             </a>
 
-            <DezoButton href="/start-a-project" size="sm">
+            <DezoButton
+              href="/start-a-project"
+              size="sm"
+              className={
+                onDarkHero
+                  ? '!bg-white !text-dezo-ink !border-white hover:!bg-white/90'
+                  : undefined
+              }
+            >
               Start a Project
             </DezoButton>
           </div>
@@ -162,7 +183,11 @@ export function DezoNavigation() {
             aria-label={mobileMenuOpen ? 'Close Navigation' : 'Open Navigation'}
             aria-expanded={mobileMenuOpen}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="xl:hidden p-2 rounded-dezo-md bg-dezo-surface border border-dezo-border text-dezo-text-primary cursor-pointer"
+            className={`xl:hidden p-2 rounded-dezo-md border cursor-pointer transition-colors ${
+              onDarkHero
+                ? 'bg-white/10 border-white/25 text-white'
+                : 'bg-dezo-surface border-dezo-border text-dezo-text-primary'
+            }`}
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>

@@ -51,10 +51,10 @@ const deliverables: Record<string, string[]> = {
 
 export default function SolutionsIndexPage() {
   return (
-    <div className="pt-28 sm:pt-36 pb-20">
+    <div className="pt-28 sm:pt-36 pb-24 dezo-paper min-h-screen">
       <DezoSection spacing="compact">
         <DezoContainer size="wide">
-          <div className="max-w-3xl mb-14">
+          <div className="max-w-3xl mb-8">
             <DezoHeading
               badge="Solutions"
               as="h1"
@@ -64,43 +64,45 @@ export default function SolutionsIndexPage() {
             </DezoHeading>
           </div>
 
-          <div className="flex flex-col gap-6">
+          <div className="dezo-section-rule my-12 sm:my-16" />
+
+          <div className="flex flex-col divide-y divide-dezo-border border-y border-dezo-border">
             {pillars.map((pillar, index) => (
               <article
                 key={pillar.slug}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-8 rounded-dezo-lg border border-dezo-border bg-dezo-surface"
+                className="grid grid-cols-1 lg:grid-cols-12 gap-6 py-10 sm:py-12 group"
               >
                 <div className="lg:col-span-4">
-                  <p className="font-mono text-xs text-dezo-text-muted mb-2">
+                  <p className="font-mono text-xs text-dezo-text-muted mb-3 tracking-wider">
                     0{index + 1}
                   </p>
-                  <h2 className="font-display text-2xl font-bold text-dezo-text-primary mb-1">
+                  <h2 className="font-display text-2xl sm:text-3xl font-bold text-dezo-text-primary mb-1 tracking-tight group-hover:text-dezo-primary transition-colors">
                     {pillar.name}
                   </h2>
-                  <p className="text-sm font-semibold text-dezo-primary mb-3">
+                  <p className="text-sm font-semibold text-dezo-primary mb-4">
                     {pillar.title}
                   </p>
                   <p className="text-sm text-dezo-text-secondary leading-relaxed">
                     {pillar.summary}
                   </p>
                 </div>
-                <div className="lg:col-span-6">
-                  <ul className="grid sm:grid-cols-2 gap-2">
+                <div className="lg:col-span-6 lg:pt-8">
+                  <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
                     {(deliverables[pillar.slug] || []).map((item) => (
                       <li
                         key={item}
-                        className="text-sm text-dezo-text-secondary flex gap-2"
+                        className="text-sm text-dezo-text-secondary flex gap-2.5"
                       >
-                        <span className="text-dezo-primary shrink-0">·</span>
+                        <span className="text-dezo-primary shrink-0 mt-1.5 w-1 h-1 rounded-full bg-dezo-primary" />
                         {item}
                       </li>
                     ))}
                   </ul>
                 </div>
-                <div className="lg:col-span-2 flex lg:justify-end lg:items-start">
+                <div className="lg:col-span-2 flex lg:justify-end lg:items-start lg:pt-8">
                   <Link
                     href={pillar.href}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-dezo-primary hover:underline"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-dezo-primary hover:gap-2.5 transition-all"
                   >
                     Explore <ArrowRight size={14} />
                   </Link>
@@ -109,7 +111,7 @@ export default function SolutionsIndexPage() {
             ))}
           </div>
 
-          <div className="mt-14 flex flex-wrap gap-3">
+          <div className="mt-16 flex flex-wrap gap-3">
             <DezoButton href="/start-a-project" size="lg">
               Start a Project
             </DezoButton>

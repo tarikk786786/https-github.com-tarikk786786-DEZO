@@ -18,7 +18,21 @@ export const metadata: Metadata = constructMetadata({
 
 export default function WorkPage() {
   const liveCount = portfolioData.filter((p) => p.isLive).length;
-  const featured = portfolioData.filter((p) => p.featured && p.isLive);
+  const featuredPriority = [
+    'yasanabeautyrituals.in',
+    'sonvicasarees.com',
+    'thepaanluxe.com',
+    'shreeayurved.com',
+    'nilkanthpaints.com',
+    'greatindiapublicschool.org',
+  ];
+  const featured = portfolioData
+    .filter((p) => p.featured && p.isLive)
+    .sort((a, b) => {
+      const ai = featuredPriority.findIndex((h) => a.url.includes(h));
+      const bi = featuredPriority.findIndex((h) => b.url.includes(h));
+      return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+    });
 
   return (
     <div className="pt-28 sm:pt-36 pb-20">

@@ -28,7 +28,21 @@ import { portfolioData } from '@/content/projects';
 
 export default function HomePage() {
   const liveCount = portfolioData.filter((p) => p.isLive).length;
-  const featuredProjects = portfolioData.filter((p) => p.featured && p.isLive);
+  const featuredPriority = [
+    'yasanabeautyrituals.in',
+    'sonvicasarees.com',
+    'thepaanluxe.com',
+    'shreeayurved.com',
+    'nilkanthpaints.com',
+    'greatindiapublicschool.org',
+  ];
+  const featuredProjects = portfolioData
+    .filter((p) => p.featured && p.isLive)
+    .sort((a, b) => {
+      const ai = featuredPriority.findIndex((h) => a.url.includes(h));
+      const bi = featuredPriority.findIndex((h) => b.url.includes(h));
+      return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+    });
   const phase1Unique = toolsLabPhase1.filter(
     (t, i, arr) => arr.findIndex((x) => x.name === t.name) === i
   );

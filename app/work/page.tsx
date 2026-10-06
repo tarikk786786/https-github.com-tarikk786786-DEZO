@@ -12,7 +12,7 @@ import { portfolioData } from '@/content/projects';
 export const metadata: Metadata = constructMetadata({
   title: 'Work — Live Client Deployments',
   description:
-    'Browse DEZO’s live client deployments across ecommerce, healthcare, education, corporate, and more — real URLs with live previews.',
+    'Browse DEZO live client deployments — real URLs with live previews.',
   canonicalUrl: 'https://dezo.in/work',
 });
 
@@ -35,36 +35,28 @@ export default function WorkPage() {
     });
 
   return (
-    <div className="pt-28 sm:pt-36 pb-24 dezo-paper min-h-screen">
+    <div className="pt-32 sm:pt-36 pb-24 min-h-screen">
       <DezoSection spacing="compact">
         <DezoContainer size="wide">
           <DezoReveal>
-            <div className="max-w-3xl mb-6">
+            <div className="max-w-3xl mb-10">
               <DezoHeading
                 badge="Work"
                 as="h1"
-                subtitle={`${liveCount}+ live URLs in our public archive. Featured sites below are production websites with clickable previews — not invented case studies.`}
+                subtitle={`${liveCount}+ live URLs. Featured sites are production websites with clickable previews.`}
               >
                 Proof you can click
               </DezoHeading>
             </div>
           </DezoReveal>
-
-          <div className="dezo-section-rule my-12 sm:my-16" />
-
-          <div className="mb-24">
+          <div className="dezo-section-rule mb-14" />
+          <div className="mb-20">
             <DezoFeaturedWork projects={featured} />
           </div>
-
           <DezoReveal>
-            <div className="mb-10">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-dezo-primary mb-3">
-                Full archive
-              </p>
-              <h2 className="font-display text-2xl sm:text-4xl font-bold text-dezo-text-primary tracking-tight">
-                Every live deployment
-              </h2>
-            </div>
+            <h2 className="font-display text-2xl sm:text-3xl font-bold mb-8">
+              Full live archive
+            </h2>
           </DezoReveal>
           <DezoWorkGallery initialLimit={18} featuredFirst />
         </DezoContainer>

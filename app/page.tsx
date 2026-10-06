@@ -1,227 +1,225 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, ArrowRight } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, ChevronDown } from 'lucide-react';
 import { DezoContainer } from '@/components/dezo/DezoContainer';
 import { DezoHeading } from '@/components/dezo/DezoHeading';
 import { DezoButton } from '@/components/dezo/DezoButton';
 import { DezoSection } from '@/components/dezo/DezoSection';
-import { DezoWorkGallery } from '@/components/dezo/DezoWorkGallery';
-import {
-  DezoFeaturedWork,
-  DezoCaseStudyStrip,
-} from '@/components/dezo/DezoFeaturedWork';
+import { GrowthCommandCenter } from '@/components/platform/GrowthCommandCenter';
+import { ChooseYourGoal } from '@/components/platform/ChooseYourGoal';
+import { StoryCaseStudies, CaseStudyCta } from '@/components/platform/StoryCaseStudies';
 import {
   DezoReveal,
   DezoHeroMotion,
   DezoStagger,
   DezoStaggerItem,
 } from '@/lib/motion/MotionAdapter';
-import { DezoHeroMedia } from '@/components/dezo/DezoHeroMedia';
 import {
   brand,
-  pillars,
+  servicePillars,
+  growthSystemSteps,
+  notAgencyPillars,
+  industries,
+  howWeWork,
+  faqItems,
   featuredCaseStudies,
 } from '@/content/site';
 import { portfolioData } from '@/content/projects';
 import { TOOL_CATALOG } from '@/lib/tools/catalog';
 
+const CAPABILITY_CHIPS = [
+  'Shopify / Next.js',
+  'Amazon Growth',
+  'Flipkart Growth',
+  'Meta Ads',
+  'Google Ads',
+  'SEO',
+  'Brand Systems',
+  'CRO',
+];
+
 export default function HomePage() {
   const liveCount = portfolioData.filter((p) => p.isLive).length;
-  const featuredPriority = [
-    'yasanabeautyrituals.in',
-    'sonvicasarees.com',
-    'thepaanluxe.com',
-    'shreeayurved.com',
-    'nilkanthpaints.com',
-    'greatindiapublicschool.org',
-  ];
-  const featuredProjects = portfolioData
-    .filter((p) => p.featured && p.isLive)
-    .sort((a, b) => {
-      const ai = featuredPriority.findIndex((h) => a.url.includes(h));
-      const bi = featuredPriority.findIndex((h) => b.url.includes(h));
-      return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
-    });
-  const liveToolsHome = TOOL_CATALOG.filter((t) => t.availability === 'live').slice(0, 6);
+  const liveTools = TOOL_CATALOG.filter((t) => t.availability === 'live').length;
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
     <>
-      {/* Hero — brand-first over full-bleed commerce media */}
-      <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
-        <DezoHeroMotion className="relative flex flex-col justify-end flex-1 w-full min-h-[100svh]">
-          <DezoHeroMedia />
+      {/* 03 HERO */}
+      <section className="relative min-h-[100svh] pt-28 sm:pt-32 pb-16 overflow-hidden">
+        <div className="absolute inset-0 dezo-hero-glow pointer-events-none" />
+        <div className="absolute inset-0 dezo-grid-fade pointer-events-none opacity-60" />
 
-          {/* Readability scrim only — no badges/chips on media */}
-          <div
-            className="absolute inset-0 pointer-events-none z-[1]"
-            aria-hidden
-            data-hero-atmosphere
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-[#060a09]/[0.9] via-[#060a09]/[0.52] to-[#060a09]/[0.12]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#060a09]/[0.78] via-transparent to-[#060a09]/[0.32]" />
-          </div>
-
-          <DezoContainer
-            size="wide"
-            className="relative z-10 pb-20 pt-36 sm:pb-28 sm:pt-44 lg:pb-36 lg:pt-52"
-          >
-            <div className="max-w-3xl">
-              <p
-                data-hero-item
-                className="font-display text-6xl sm:text-8xl lg:text-[9rem] font-extrabold tracking-tightest text-white mb-6 sm:mb-8 leading-none"
-              >
-                DEZO
-              </p>
-
-              <h1
-                data-hero-item
-                className="font-display text-2xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-white leading-[1.15] mb-5 max-w-xl"
-              >
-                {brand.tagline}
-              </h1>
-
-              <p
-                data-hero-item
-                className="text-base sm:text-lg text-white/72 leading-relaxed max-w-lg mb-10"
-              >
-                {brand.supporting}
-              </p>
-
-              <div data-hero-item className="flex flex-wrap items-center gap-3">
-                <DezoButton
-                  href="/start-a-project"
-                  size="lg"
-                  magnetic
-                  icon={<ArrowUpRight size={18} />}
-                  className="!bg-white !text-dezo-ink !border-white hover:!bg-white/90"
+        <DezoHeroMotion className="relative z-10">
+          <DezoContainer size="wide">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center min-h-[calc(100svh-10rem)]">
+              <div className="lg:col-span-6 max-w-xl">
+                <p
+                  data-hero-item
+                  className="text-[11px] font-semibold uppercase tracking-[0.2em] text-dezo-primary mb-5"
                 >
-                  Start a Project
-                </DezoButton>
-                <DezoButton
-                  href="/work"
-                  variant="outline"
-                  size="lg"
-                  className="border-white/35 text-white hover:bg-white/10 hover:border-white/60"
+                  {brand.tag}
+                </p>
+                <h1
+                  data-hero-item
+                  className="font-display text-4xl sm:text-5xl lg:text-[3.75rem] font-extrabold tracking-tightest leading-[1.05] text-dezo-text-primary mb-5"
                 >
-                  See Our Work
-                </DezoButton>
+                  {brand.heroLine}
+                </h1>
+                <p
+                  data-hero-item
+                  className="text-base sm:text-lg text-dezo-text-secondary leading-relaxed mb-4"
+                >
+                  {brand.tagline}
+                </p>
+                <p
+                  data-hero-item
+                  className="text-sm text-dezo-text-muted leading-relaxed mb-9 max-w-md"
+                >
+                  {brand.supporting}
+                </p>
+                <div data-hero-item className="flex flex-wrap gap-3">
+                  <DezoButton
+                    href="/start-a-project"
+                    size="lg"
+                    magnetic
+                    icon={<ArrowUpRight size={18} />}
+                  >
+                    Start Growing
+                  </DezoButton>
+                  <DezoButton href="/growth-lab" variant="outline" size="lg">
+                    Get Free Growth Audit
+                  </DezoButton>
+                </div>
+              </div>
+
+              <div data-hero-item className="lg:col-span-6 pb-10">
+                <GrowthCommandCenter />
               </div>
             </div>
           </DezoContainer>
         </DezoHeroMotion>
       </section>
 
-      {/* Journey */}
-      <DezoSection spacing="compact" borderBottom className="bg-dezo-surface">
+      {/* 04 Trust strip */}
+      <DezoSection spacing="compact" className="border-y border-dezo-border bg-dezo-surface/40">
         <DezoContainer size="wide">
           <DezoReveal>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-dezo-primary mb-8">
-              Commercial Journey
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-dezo-text-muted mb-5 text-center">
+              Capability across the full growth stack · {liveCount}+ live deployments catalogued
             </p>
           </DezoReveal>
-          <DezoStagger className="relative" stagger={0.05}>
-            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-px dezo-journey-track -translate-y-1/2" />
-            <ol className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-5 relative">
-              {brand.journey.map((step, i) => (
-                <DezoStaggerItem key={step}>
-                  <li className="flex flex-col gap-1.5">
-                    <span className="font-mono text-[10px] text-dezo-text-muted tracking-wider">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <span className="font-display text-sm sm:text-base font-bold text-dezo-text-primary">
-                      {step}
-                    </span>
-                  </li>
-                </DezoStaggerItem>
-              ))}
-            </ol>
+          <DezoStagger className="flex flex-wrap justify-center gap-2 sm:gap-3" stagger={0.04}>
+            {CAPABILITY_CHIPS.map((chip) => (
+              <DezoStaggerItem key={chip}>
+                <span className="inline-block px-3.5 py-1.5 rounded-dezo-pill border border-dezo-border text-xs font-medium text-dezo-text-secondary">
+                  {chip}
+                </span>
+              </DezoStaggerItem>
+            ))}
           </DezoStagger>
         </DezoContainer>
       </DezoSection>
 
-      {/* Proof */}
-      <DezoSection spacing="compact" className="dezo-paper">
+      {/* 05 Not Another Agency */}
+      <DezoSection spacing="normal">
         <DezoContainer size="wide">
-          <DezoStagger className="grid grid-cols-1 sm:grid-cols-3 gap-12 lg:gap-16" stagger={0.1}>
-            <DezoStaggerItem>
-              <p className="font-display text-5xl sm:text-6xl font-extrabold text-dezo-text-primary tracking-tightest tabular-nums">
-                {liveCount}+
-              </p>
-              <p className="text-sm font-semibold text-dezo-text-primary mt-3">
-                Live deployments catalogued
-              </p>
-              <p className="text-xs text-dezo-text-muted mt-2 leading-relaxed max-w-[16rem]">
-                Linked projects from our public work archive — not inflated totals.
-              </p>
-            </DezoStaggerItem>
-            <DezoStaggerItem>
-              <p className="font-display text-5xl sm:text-6xl font-extrabold text-dezo-text-primary tracking-tightest">
-                5
-              </p>
-              <p className="text-sm font-semibold text-dezo-text-primary mt-3">
-                Integrated commercial pillars
-              </p>
-              <p className="text-xs text-dezo-text-muted mt-2 leading-relaxed max-w-[16rem]">
-                Build · Brand · Marketplace · Grow · Intelligence
-              </p>
-            </DezoStaggerItem>
-            <DezoStaggerItem>
-              <p className="font-display text-5xl sm:text-6xl font-extrabold text-dezo-text-primary tracking-tightest">
-                IN
-              </p>
-              <p className="text-sm font-semibold text-dezo-text-primary mt-3">
-                Odisha roots, India scale
-              </p>
-              <p className="text-xs text-dezo-text-muted mt-2 leading-relaxed max-w-[16rem]">
-                Studio in Bhubaneswar · shipping for brands nationwide
-              </p>
-            </DezoStaggerItem>
+          <DezoReveal>
+            <DezoHeading
+              badge="Positioning"
+              as="h2"
+              subtitle="We don’t sell isolated services. We operate the entire digital growth ecosystem."
+            >
+              Not another marketing agency
+            </DezoHeading>
+          </DezoReveal>
+          <DezoStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-dezo-border border border-dezo-border mt-12" stagger={0.08}>
+            {notAgencyPillars.map((p) => (
+              <DezoStaggerItem key={p.title}>
+                <div className="h-full p-7 sm:p-8 bg-dezo-bg hover:bg-dezo-surface transition-colors">
+                  <h3 className="font-display text-xl font-bold text-dezo-primary mb-3 tracking-tight">
+                    {p.title}
+                  </h3>
+                  <p className="text-sm text-dezo-text-secondary leading-relaxed">{p.body}</p>
+                </div>
+              </DezoStaggerItem>
+            ))}
           </DezoStagger>
         </DezoContainer>
       </DezoSection>
 
-      {/* Pillars */}
-      <DezoSection id="solutions" spacing="normal" className="bg-dezo-surface">
+      {/* 06 Growth System viz */}
+      <DezoSection spacing="normal" className="bg-dezo-surface/30">
         <DezoContainer size="wide">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14 lg:mb-18">
+          <DezoReveal>
+            <DezoHeading
+              badge="Growth system"
+              as="h2"
+              subtitle="One journey from brand to scale — not a menu of disconnected vendors."
+            >
+              Brand → Build → Traffic → Marketplaces → Conversion → Scale
+            </DezoHeading>
+          </DezoReveal>
+          <DezoStagger
+            className="mt-12 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3"
+            stagger={0.05}
+          >
+            {growthSystemSteps.map((step, i) => (
+              <DezoStaggerItem key={step}>
+                <div className="relative flex flex-col items-center text-center p-4 rounded-dezo-md border border-dezo-border bg-dezo-bg">
+                  <span className="font-mono text-[10px] text-dezo-primary mb-2">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="font-display text-sm font-bold text-dezo-text-primary">
+                    {step}
+                  </span>
+                  {i < growthSystemSteps.length - 1 && (
+                    <ArrowRight
+                      size={12}
+                      className="hidden lg:block absolute -right-2.5 top-1/2 -translate-y-1/2 text-dezo-text-muted"
+                    />
+                  )}
+                </div>
+              </DezoStaggerItem>
+            ))}
+          </DezoStagger>
+        </DezoContainer>
+      </DezoSection>
+
+      {/* 07 Eight service pillars */}
+      <DezoSection spacing="normal" id="services">
+        <DezoContainer size="wide">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
             <DezoReveal>
               <DezoHeading
-                badge="Platform"
+                badge="Services"
                 as="h2"
-                subtitle="One studio across the full digital commercial stack — from first build to marketplace and paid growth."
+                subtitle="Eight pillars. Full coverage. One operating partner."
               >
-                Build. Brand. Marketplace. Grow. Intelligence.
+                Everything your brand needs to scale
               </DezoHeading>
             </DezoReveal>
-            <DezoReveal delay={0.1}>
-              <DezoButton href="/solutions" variant="outline" size="sm">
-                All solutions
-              </DezoButton>
-            </DezoReveal>
+            <DezoButton href="/services" variant="outline" size="sm">
+              All services
+            </DezoButton>
           </div>
-
-          <DezoStagger className="divide-y divide-dezo-border border-y border-dezo-border" stagger={0.06}>
-            {pillars.map((pillar, index) => (
-              <DezoStaggerItem key={pillar.slug}>
+          <DezoStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" stagger={0.06}>
+            {servicePillars.map((p, i) => (
+              <DezoStaggerItem key={p.slug}>
                 <Link
-                  href={pillar.href}
-                  className="group flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8 py-8 hover:bg-dezo-bg/60 transition-colors px-1 sm:px-4 -mx-1 sm:-mx-4"
+                  href={p.href}
+                  className="group block h-full p-6 border border-dezo-border bg-dezo-surface hover:border-dezo-primary/40 transition-colors dezo-card-lift"
                 >
-                  <span className="font-mono text-xs text-dezo-text-muted w-10 shrink-0 tracking-wider">
-                    0{index + 1}
+                  <span className="font-mono text-[10px] text-dezo-text-muted">
+                    {String(i + 1).padStart(2, '0')}
                   </span>
-                  <span className="font-display text-xl sm:text-2xl font-bold text-dezo-text-primary group-hover:text-dezo-primary transition-colors sm:w-48 shrink-0 tracking-tight">
-                    {pillar.name}
-                  </span>
-                  <span className="text-sm text-dezo-text-secondary flex-1 leading-relaxed">
-                    {pillar.summary}
-                  </span>
-                  <ArrowRight
-                    size={18}
-                    className="text-dezo-text-muted group-hover:text-dezo-primary group-hover:translate-x-1 transition-all shrink-0 hidden sm:block"
-                  />
+                  <h3 className="font-display text-xl font-bold text-dezo-text-primary mt-2 mb-1 group-hover:text-dezo-primary transition-colors">
+                    {p.name}
+                  </h3>
+                  <p className="text-xs font-semibold text-dezo-text-muted mb-3">{p.title}</p>
+                  <p className="text-sm text-dezo-text-secondary leading-relaxed">{p.summary}</p>
                 </Link>
               </DezoStaggerItem>
             ))}
@@ -229,80 +227,125 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* Featured live work */}
-      <DezoSection spacing="normal" className="dezo-paper" id="work">
+      {/* 08 Choose Your Goal */}
+      <DezoSection spacing="normal" className="bg-dezo-surface/30">
         <DezoContainer size="wide">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14">
-            <DezoReveal>
+          <DezoReveal>
+            <div className="mb-12">
               <DezoHeading
-                badge="Selected work"
+                badge="Interactive"
                 as="h2"
-                subtitle="Real live websites — click through to production sites. Previews from the public web, not mockups."
+                subtitle="Pick an outcome — we’ll recommend the service stack."
               >
-                Brands that sell online
+                Choose your goal
               </DezoHeading>
-            </DezoReveal>
-            <DezoReveal delay={0.08}>
-              <DezoButton href="/work" variant="outline" size="sm">
-                Full archive
-              </DezoButton>
-            </DezoReveal>
-          </div>
-          <DezoFeaturedWork projects={featuredProjects} />
+            </div>
+          </DezoReveal>
+          <ChooseYourGoal />
         </DezoContainer>
       </DezoSection>
 
-      {/* Case study framing */}
-      <DezoSection spacing="normal" className="bg-dezo-surface">
+      {/* 09 Story case studies */}
+      <DezoSection spacing="normal" id="work">
         <DezoContainer size="wide">
-          <div className="mb-14">
-            <DezoReveal>
+          <DezoReveal>
+            <div className="mb-12">
               <DezoHeading
                 badge="Case studies"
                 as="h2"
-                subtitle="Challenge → result framing on verified live deployments — no anonymous testimonials."
+                subtitle="Problem → Strategy → Execution → Result on verified live deployments — no invented metrics."
               >
-                How the work reads
+                Stories behind the work
               </DezoHeading>
-            </DezoReveal>
-          </div>
-          <DezoCaseStudyStrip studies={[...featuredCaseStudies]} />
+            </div>
+          </DezoReveal>
+          <StoryCaseStudies />
+          <CaseStudyCta />
         </DezoContainer>
       </DezoSection>
 
-      {/* Tools Lab */}
-      <DezoSection spacing="normal" className="dezo-paper">
+      {/* 10 Before → After */}
+      <DezoSection spacing="normal" className="bg-dezo-surface/30">
         <DezoContainer size="wide">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-            <DezoReveal>
-              <DezoHeading
-                badge="DEZO Tools Lab"
-                as="h2"
-                subtitle="SEO, speed, accessibility, Shopify, security, CRO — free diagnostics that prove the craft."
-              >
-                Free tools that prove the craft
-              </DezoHeading>
-            </DezoReveal>
-            <DezoReveal delay={0.08}>
-              <DezoButton href="/tools" variant="outline" size="sm">
-                Open Tools Lab
-              </DezoButton>
-            </DezoReveal>
+          <DezoReveal>
+            <DezoHeading
+              badge="Results"
+              as="h2"
+              subtitle="We show live proof, not vanity dashboards. Click through to production sites."
+            >
+              Before templates. After systems.
+            </DezoHeading>
+          </DezoReveal>
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-8 border border-dezo-border rounded-dezo-lg bg-dezo-bg">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-dezo-text-muted mb-4">
+                Before
+              </p>
+              <ul className="space-y-3 text-sm text-dezo-text-secondary">
+                <li>Disconnected vendors for web, ads, and marketplaces</li>
+                <li>Template sites that don’t convert paid traffic</li>
+                <li>No shared telemetry across channels</li>
+              </ul>
+            </div>
+            <div className="p-8 border border-dezo-primary/30 rounded-dezo-lg bg-dezo-accent-soft">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-dezo-primary mb-4">
+                After DEZO
+              </p>
+              <ul className="space-y-3 text-sm text-dezo-text-primary">
+                <li>One growth partner across brand → build → traffic → sell</li>
+                <li>{liveCount}+ live deployments in our public archive</li>
+                <li>Growth Lab diagnostics + Client Portal path</li>
+              </ul>
+            </div>
           </div>
+          <div className="mt-8">
+            <DezoButton href="/results" variant="outline" size="sm">
+              View results
+            </DezoButton>
+          </div>
+        </DezoContainer>
+      </DezoSection>
 
-          <DezoStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-dezo-border border border-dezo-border" stagger={0.07}>
-            {liveToolsHome.map((tool) => (
-              <DezoStaggerItem key={tool.slug}>
+      {/* 11 Platform expertise */}
+      <DezoSection spacing="normal">
+        <DezoContainer size="wide">
+          <DezoReveal>
+            <DezoHeading badge="Platforms" as="h2" subtitle="Deep operators on the channels that move Indian commerce.">
+              Amazon · Flipkart · Meta · Google
+            </DezoHeading>
+          </DezoReveal>
+          <DezoStagger className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" stagger={0.07}>
+            {[
+              {
+                name: 'Amazon',
+                body: 'Listings, A+, ads, catalog health, seller ops — SP-API connectors scaffolded for later.',
+                href: '/services/amazon',
+              },
+              {
+                name: 'Flipkart',
+                body: 'Catalog, pricing, promotions, inventory, and marketplace performance playbooks.',
+                href: '/services/flipkart',
+              },
+              {
+                name: 'Meta',
+                body: 'FB/IG ecommerce & lead gen, retargeting, creative testing, conversion tracking.',
+                href: '/services/paid-ads',
+              },
+              {
+                name: 'Google',
+                body: 'Search, Shopping, PMax, YouTube, remarketing — tied to measurable outcomes.',
+                href: '/services/paid-ads',
+              },
+            ].map((p) => (
+              <DezoStaggerItem key={p.name}>
                 <Link
-                  href={`/tools/${tool.slug}`}
-                  className="block h-full p-6 sm:p-7 bg-dezo-surface hover:bg-dezo-accent-soft/30 transition-colors group"
+                  href={p.href}
+                  className="block h-full p-6 border border-dezo-border bg-dezo-surface dezo-card-lift"
                 >
-                  <p className="font-display font-bold text-dezo-text-primary mb-2 group-hover:text-dezo-primary transition-colors">
-                    {tool.name}
-                  </p>
-                  <p className="text-xs text-dezo-text-secondary leading-relaxed">
-                    {tool.description}
-                  </p>
+                  <h3 className="font-display text-xl font-bold text-dezo-text-primary mb-2">
+                    {p.name}
+                  </h3>
+                  <p className="text-sm text-dezo-text-secondary leading-relaxed">{p.body}</p>
                 </Link>
               </DezoStaggerItem>
             ))}
@@ -310,57 +353,238 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* Archive gallery */}
-      <DezoSection spacing="normal" className="bg-dezo-surface">
+      {/* 12 Growth Lab teaser */}
+      <DezoSection spacing="normal" className="bg-dezo-surface/30">
         <DezoContainer size="wide">
-          <div className="mb-14">
-            <DezoReveal>
-              <DezoHeading
-                badge="Archive"
-                as="h2"
-                subtitle="Browse live client deployments across fashion, healthcare, education, corporate, and more."
-              >
-                More live deployments
-              </DezoHeading>
-            </DezoReveal>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-7">
+              <DezoReveal>
+                <DezoHeading
+                  badge="Growth Lab"
+                  as="h2"
+                  subtitle={`${liveTools} live public diagnostics — SEO, speed, Shopify, security, CRO, keywords, and more. Partial findings free; full Growth Report unlocks via CTA.`}
+                >
+                  Free tools that prove the craft
+                </DezoHeading>
+              </DezoReveal>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <DezoButton href="/growth-lab" size="lg" icon={<ArrowUpRight size={18} />}>
+                  Open Growth Lab
+                </DezoButton>
+                <DezoButton href="/tools" variant="outline" size="lg">
+                  Browse tools
+                </DezoButton>
+              </div>
+            </div>
+            <div className="lg:col-span-5 p-8 rounded-dezo-lg border border-dezo-border bg-dezo-bg">
+              <p className="font-mono text-xs text-dezo-primary mb-4">GROWTH SCORE FUNNEL</p>
+              <div className="space-y-3">
+                {['Probe public signals', 'Show partial findings', 'Lock full report → CTA'].map(
+                  (step, i) => (
+                    <div key={step} className="flex items-center gap-3 text-sm text-dezo-text-secondary">
+                      <span className="w-7 h-7 rounded-full border border-dezo-primary/40 text-dezo-primary flex items-center justify-center text-xs font-bold">
+                        {i + 1}
+                      </span>
+                      {step}
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
           </div>
-          <DezoWorkGallery initialLimit={6} featuredFirst />
         </DezoContainer>
       </DezoSection>
 
-      {/* CTA */}
-      <DezoSection spacing="relaxed" className="dezo-ink-field text-dezo-text-inverse">
+      {/* 13 Free Audit CTA */}
+      <DezoSection spacing="compact">
+        <DezoContainer size="wide">
+          <div className="p-8 sm:p-12 rounded-dezo-xl border border-dezo-primary/25 bg-dezo-accent-soft flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-dezo-primary mb-2">
+                Free Growth Audit
+              </p>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-dezo-text-primary tracking-tight">
+                See where your brand leaks growth
+              </h2>
+            </div>
+            <DezoButton href="/growth-lab" size="lg" magnetic>
+              Get Free Growth Audit
+            </DezoButton>
+          </div>
+        </DezoContainer>
+      </DezoSection>
+
+      {/* 14 How We Work */}
+      <DezoSection spacing="normal" className="bg-dezo-surface/30">
+        <DezoContainer size="wide">
+          <DezoReveal>
+            <DezoHeading badge="Process" as="h2">
+              How we work
+            </DezoHeading>
+          </DezoReveal>
+          <DezoStagger className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" stagger={0.08}>
+            {howWeWork.map((s) => (
+              <DezoStaggerItem key={s.step}>
+                <div>
+                  <span className="font-mono text-dezo-primary text-sm">{s.step}</span>
+                  <h3 className="font-display text-xl font-bold text-dezo-text-primary mt-2 mb-2">
+                    {s.title}
+                  </h3>
+                  <p className="text-sm text-dezo-text-secondary leading-relaxed">{s.body}</p>
+                </div>
+              </DezoStaggerItem>
+            ))}
+          </DezoStagger>
+        </DezoContainer>
+      </DezoSection>
+
+      {/* 15 Industries */}
+      <DezoSection spacing="normal">
+        <DezoContainer size="wide">
+          <DezoReveal>
+            <DezoHeading badge="Industries" as="h2" subtitle="Built for brands that need to sell — not just look premium.">
+              Who we grow
+            </DezoHeading>
+          </DezoReveal>
+          <div className="mt-10 flex flex-wrap gap-3">
+            {industries.map((ind) => (
+              <Link
+                key={ind.href}
+                href={ind.href}
+                className="px-5 py-3 rounded-dezo-pill border border-dezo-border text-sm font-semibold text-dezo-text-secondary hover:border-dezo-primary hover:text-dezo-primary transition-colors"
+              >
+                {ind.name}
+              </Link>
+            ))}
+          </div>
+        </DezoContainer>
+      </DezoSection>
+
+      {/* 16 Technology / Integrations */}
+      <DezoSection spacing="normal" className="bg-dezo-surface/30">
+        <DezoContainer size="wide">
+          <DezoReveal>
+            <DezoHeading
+              badge="Technology"
+              as="h2"
+              subtitle="Adapters and connectors scaffolded now — full SP-API / Ads APIs / CMS backends ship in later phases."
+            >
+              Integrations that compound
+            </DezoHeading>
+          </DezoReveal>
+          <div className="mt-10 flex flex-wrap gap-2">
+            {[
+              'Next.js',
+              'Shopify',
+              'Amazon SP-API*',
+              'Flipkart*',
+              'Meta Ads*',
+              'Google Ads*',
+              'Growth Lab',
+              'Client Portal',
+            ].map((t) => (
+              <span
+                key={t}
+                className="px-3.5 py-2 rounded-dezo-md border border-dezo-border text-xs font-mono text-dezo-text-secondary"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+          <p className="mt-4 text-xs text-dezo-text-muted">* Connector shells — live auth later</p>
+        </DezoContainer>
+      </DezoSection>
+
+      {/* 17 Testimonials — verifiable only */}
+      <DezoSection spacing="normal">
+        <DezoContainer size="wide">
+          <DezoReveal>
+            <DezoHeading
+              badge="Proof"
+              as="h2"
+              subtitle="No anonymous quotes. Proof is live URLs and structured case studies."
+            >
+              Verifiable outcomes only
+            </DezoHeading>
+          </DezoReveal>
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {featuredCaseStudies.map((c) => (
+              <a
+                key={c.url}
+                href={c.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-5 border border-dezo-border bg-dezo-surface hover:border-dezo-primary/40 transition-colors"
+              >
+                <p className="font-display font-bold text-dezo-text-primary">{c.title}</p>
+                <p className="text-xs text-dezo-text-muted mt-1">{c.industry}</p>
+                <p className="text-sm text-dezo-text-secondary mt-3 line-clamp-2">{c.result}</p>
+              </a>
+            ))}
+          </div>
+        </DezoContainer>
+      </DezoSection>
+
+      {/* 18 FAQ */}
+      <DezoSection spacing="normal" className="bg-dezo-surface/30">
+        <DezoContainer size="default">
+          <DezoReveal>
+            <DezoHeading badge="FAQ" as="h2" align="center" className="mb-10">
+              Questions, answered
+            </DezoHeading>
+          </DezoReveal>
+          <div className="divide-y divide-dezo-border border-y border-dezo-border">
+            {faqItems.map((item, i) => (
+              <div key={item.q}>
+                <button
+                  type="button"
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between gap-4 py-5 text-left"
+                >
+                  <span className="font-display font-bold text-dezo-text-primary">{item.q}</span>
+                  <ChevronDown
+                    size={18}
+                    className={`text-dezo-text-muted shrink-0 transition-transform ${
+                      openFaq === i ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                {openFaq === i && (
+                  <p className="pb-5 text-sm text-dezo-text-secondary leading-relaxed pr-8">
+                    {item.a}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </DezoContainer>
+      </DezoSection>
+
+      {/* 19 Final CTA */}
+      <DezoSection spacing="relaxed">
         <DezoContainer size="wide">
           <DezoReveal>
             <div className="max-w-2xl">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-dezo-highlight mb-5">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-dezo-primary mb-4">
                 Next step
               </p>
-              <span className="dezo-accent-line !bg-dezo-highlight mb-6" aria-hidden />
-              <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.05] mb-6 tracking-tightest">
-                Ready to build a brand that sells?
+              <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tightest leading-[1.05] text-dezo-text-primary mb-5">
+                Ready to operate your entire growth system?
               </h2>
-              <p className="text-white/60 text-base leading-relaxed mb-10 max-w-xl">
-                A short project diagnostic routes your brief to studio leadership — channels,
-                marketplace needs, timeline, and goals.
+              <p className="text-dezo-text-secondary text-base leading-relaxed mb-9 max-w-xl">
+                Start with a free Growth Audit, or book a strategy call with studio leadership.
               </p>
               <div className="flex flex-wrap gap-3">
                 <DezoButton
-                  href="/start-a-project"
+                  href="/growth-lab"
                   size="lg"
                   magnetic
-                  className="!bg-white !text-dezo-ink hover:!bg-white/90 !border-white"
                   icon={<ArrowUpRight size={18} />}
                 >
-                  Start Project Diagnostic
+                  Get Free Growth Audit
                 </DezoButton>
-                <DezoButton
-                  href="/contact"
-                  variant="outline"
-                  size="lg"
-                  className="!border-white/25 !text-white hover:!bg-white/10"
-                >
-                  Contact
+                <DezoButton href="/book-strategy-call" variant="outline" size="lg">
+                  Book Strategy Call
                 </DezoButton>
               </div>
             </div>

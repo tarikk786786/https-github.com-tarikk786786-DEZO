@@ -1,30 +1,30 @@
 /**
- * DEZO Design System Tokens
- * Emerald editorial commerce: cool paper, deep ink, forest emerald.
- * Avoids dark-mode defaults, purple gradients, and cream/terracotta templates.
+ * DEZO Growth Platform — dark premium editorial + tech tokens
+ * Source: /cursor/stores/self/docs/growth-platform-architecture.md
  */
 
 export const dezoTokens = {
   colors: {
-    bg: '#F0F3F5',
-    bgWarm: '#E8ECEF',
-    surface: '#FFFFFF',
-    surfaceHover: '#F7F9FA',
-    surfaceElevated: '#FFFFFF',
-    border: 'rgba(10, 14, 18, 0.09)',
-    borderStrong: 'rgba(10, 14, 18, 0.16)',
-    primary: '#0A5C47',
-    primaryHover: '#084A39',
-    accent: '#0A5C47',
-    accentSoft: '#D4EDE4',
-    ink: '#0A0E12',
-    success: '#0A5C47',
-    highlight: '#B8954A',
+    bg: '#08090B',
+    bgWarm: '#0C0E12',
+    surface: '#111318',
+    surfaceHover: '#181B22',
+    surfaceElevated: '#1A1D26',
+    border: 'rgba(245, 245, 242, 0.08)',
+    borderStrong: 'rgba(245, 245, 242, 0.16)',
+    primary: '#B7FF3C',
+    primaryHover: '#A3E635',
+    accent: '#B7FF3C',
+    accentSoft: 'rgba(183, 255, 60, 0.12)',
+    secondary: '#6C63FF',
+    ink: '#F5F5F2',
+    success: '#B7FF3C',
+    highlight: '#B7FF3C',
     text: {
-      primary: '#0A0E12',
-      secondary: '#3D4756',
-      muted: '#6B7585',
-      inverse: '#F5F7F9',
+      primary: '#F5F5F2',
+      secondary: '#9095A1',
+      muted: '#6B7280',
+      inverse: '#08090B',
     },
   },
   typography: {

@@ -25,8 +25,8 @@ export function DezoHeading({
   };
 
   const sizes = {
-    h1: 'font-display text-4xl sm:text-5xl lg:text-[4.5rem] font-extrabold tracking-tightest leading-[1.02]',
-    h2: 'font-display text-3xl sm:text-[2.6rem] lg:text-[3.35rem] font-bold tracking-tight leading-[1.08]',
+    h1: 'font-display text-4xl sm:text-5xl lg:text-[4.75rem] font-extrabold tracking-tightest leading-[1.02]',
+    h2: 'font-display text-3xl sm:text-[2.75rem] lg:text-[3.5rem] font-bold tracking-tight leading-[1.06]',
     h3: 'font-display text-2xl sm:text-3xl font-bold tracking-tight leading-snug',
     h4: 'font-display text-xl sm:text-2xl font-semibold tracking-normal',
     p: 'text-lg sm:text-xl font-medium',
@@ -40,7 +40,7 @@ export function DezoHeading({
             align === 'center' ? 'items-center' : align === 'right' ? 'items-end' : 'items-start'
           }`}
         >
-          <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-dezo-primary">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-dezo-primary">
             {badge}
           </span>
           <span className="dezo-accent-line" aria-hidden />

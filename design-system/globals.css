@@ -7,14 +7,13 @@
   --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
-  --bg-dezo: #f0f3f5;
-  --bg-warm-dezo: #e8ecef;
-  --surface-dezo: #ffffff;
-  --border-dezo: rgba(10, 14, 18, 0.09);
-  --primary-dezo: #0a5c47;
-  --accent-dezo: #0a5c47;
-  --ink-dezo: #0a0e12;
-  --highlight-dezo: #b8954a;
+  --bg-dezo: #08090b;
+  --surface-dezo: #111318;
+  --border-dezo: rgba(245, 245, 242, 0.08);
+  --primary-dezo: #b7ff3c;
+  --accent-dezo: #b7ff3c;
+  --ink-dezo: #f5f5f2;
+  --secondary-dezo: #6c63ff;
 }
 
 html {
@@ -31,12 +30,12 @@ body {
 }
 
 ::selection {
-  background-color: #0a5c47;
-  color: #ffffff;
+  background-color: #b7ff3c;
+  color: #08090b;
 }
 
 :focus-visible {
-  outline: 2px solid #0a5c47;
+  outline: 2px solid #b7ff3c;
   outline-offset: 3px;
 }
 
@@ -44,50 +43,44 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #e4e8ec;
+  background: #0c0e12;
 }
 ::-webkit-scrollbar-thumb {
-  background: #b8c0ca;
+  background: #2a2e38;
   border-radius: 4px;
-  border: 2px solid #e4e8ec;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #0a5c47;
-}
-
-/* Soft paper grain — editorial atmosphere without flat fill */
-.dezo-paper {
-  background-color: var(--bg-dezo);
-  background-image:
-    radial-gradient(ellipse 90% 70% at 12% -10%, rgba(10, 92, 71, 0.07), transparent 55%),
-    radial-gradient(ellipse 60% 50% at 100% 0%, rgba(184, 149, 74, 0.05), transparent 45%),
-    linear-gradient(180deg, #f4f6f8 0%, #eef1f4 100%);
-}
-
-.dezo-hero-atmosphere {
-  background:
-    radial-gradient(ellipse 80% 60% at 70% 20%, rgba(10, 92, 71, 0.12), transparent 55%),
-    radial-gradient(ellipse 50% 40% at 15% 80%, rgba(184, 149, 74, 0.1), transparent 50%),
-    radial-gradient(ellipse 60% 50% at 90% 90%, rgba(26, 95, 122, 0.06), transparent 45%),
-    linear-gradient(165deg, #f5f7f9 0%, #eef2f5 45%, #e6ebef 100%);
+  background: #b7ff3c;
 }
 
 .dezo-grid-fade {
   background-image:
-    linear-gradient(rgba(10, 14, 18, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(10, 14, 18, 0.035) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
+    linear-gradient(rgba(245, 245, 242, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 245, 242, 0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 15%, transparent 75%);
 }
 
-.dezo-journey-track {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(10, 92, 71, 0.38) 12%,
-    rgba(10, 92, 71, 0.38) 88%,
-    transparent
-  );
+.dezo-hero-glow {
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 40%, rgba(183, 255, 60, 0.08), transparent 55%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(108, 99, 255, 0.06), transparent 50%),
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245, 245, 242, 0.03), transparent 50%);
+}
+
+.dezo-glass {
+  background: rgba(17, 19, 24, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(245, 245, 242, 0.1);
+}
+
+.dezo-pill-nav {
+  background: rgba(17, 19, 24, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(245, 245, 242, 0.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
 .dezo-section-rule {
@@ -95,47 +88,92 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(10, 14, 18, 0.1) 20%,
-    rgba(10, 14, 18, 0.1) 80%,
+    rgba(245, 245, 242, 0.12) 20%,
+    rgba(245, 245, 242, 0.12) 80%,
     transparent
   );
 }
 
-.dezo-ink-field {
-  background:
-    radial-gradient(ellipse 70% 50% at 80% 20%, rgba(10, 92, 71, 0.22), transparent 55%),
-    radial-gradient(ellipse 40% 40% at 10% 90%, rgba(184, 149, 74, 0.1), transparent 50%),
-    #0a0e12;
+.dezo-accent-line {
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  background: #b7ff3c;
+  transform-origin: left;
 }
 
-html.lenis,
-html.lenis body {
-  height: auto;
+.dezo-node-pulse {
+  animation: dezo-pulse 3.2s ease-in-out infinite;
 }
 
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
+.dezo-orbit {
+  animation: dezo-orbit 24s linear infinite;
 }
 
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
+.dezo-float {
+  animation: dezo-float 6s ease-in-out infinite;
 }
 
-.lenis.lenis-stopped {
-  overflow: hidden;
+.dezo-card-lift {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s ease,
+    box-shadow 0.35s ease;
+}
+.dezo-card-lift:hover {
+  transform: translateY(-3px);
+  border-color: rgba(183, 255, 60, 0.35);
+  box-shadow: 0 0 32px rgba(183, 255, 60, 0.08);
 }
 
-.lenis.lenis-scrolling iframe {
-  pointer-events: none;
+.dezo-nav-link {
+  position: relative;
+}
+.dezo-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1.5px;
+  background: #b7ff3c;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dezo-nav-link:hover::after,
+.dezo-nav-link[data-active='true']::after {
+  transform: scaleX(1);
 }
 
-@keyframes dezo-drift {
+@keyframes dezo-pulse {
   0%,
   100% {
-    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.55;
+    transform: scale(1);
   }
   50% {
-    transform: translate3d(2%, -1.5%, 0) scale(1.03);
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes dezo-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dezo-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
   }
 }
 
@@ -150,83 +188,21 @@ html.lenis body {
   }
 }
 
-@keyframes dezo-kenburns {
-  0% {
-    transform: scale(1) translate3d(0, 0, 0);
-  }
-  100% {
-    transform: scale(1.08) translate3d(-1.5%, -1%, 0);
-  }
+html.lenis,
+html.lenis body {
+  height: auto;
 }
-
-@keyframes dezo-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
-
-@keyframes dezo-line-grow {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
-
-.dezo-atmosphere-orb {
-  animation: dezo-drift 18s ease-in-out infinite;
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
-
-.dezo-hero-kenburns {
-  animation: dezo-kenburns 28s ease-in-out infinite alternate;
-  will-change: transform;
-}
-
-.dezo-card-lift {
-  transition:
-    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.25s ease,
-    box-shadow 0.35s ease;
-}
-.dezo-card-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(10, 14, 18, 0.08);
-}
-
-.dezo-nav-link {
-  position: relative;
-}
-.dezo-nav-link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -4px;
-  height: 1.5px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.dezo-nav-link:hover::after,
-.dezo-nav-link[data-active='true']::after {
-  transform: scaleX(1);
-}
-
-.dezo-path-line {
-  stroke-dasharray: 900;
-  stroke-dashoffset: 900;
-  animation: dezo-draw 2.4s ease forwards 0.4s;
-}
-
-.dezo-accent-line {
-  display: block;
-  width: 2.5rem;
-  height: 2px;
-  background: #0a5c47;
-  transform-origin: left;
-  animation: dezo-line-grow 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -238,21 +214,12 @@ html.lenis body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-
-  .dezo-atmosphere-orb,
-  .dezo-hero-kenburns {
+  .dezo-node-pulse,
+  .dezo-orbit,
+  .dezo-float {
     animation: none;
-  }
-  .dezo-path-line {
-    animation: none;
-    stroke-dashoffset: 0;
   }
   .dezo-card-lift:hover {
-    transform: none;
-    box-shadow: none;
-  }
-  .dezo-accent-line {
-    animation: none;
     transform: none;
   }
 }

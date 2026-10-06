@@ -137,8 +137,54 @@ html.lenis body {
   animation: dezo-drift 18s ease-in-out infinite;
 }
 
+.dezo-card-lift {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease;
+}
+.dezo-card-lift:hover {
+  transform: translateY(-3px);
+}
+
+.dezo-nav-link {
+  position: relative;
+}
+.dezo-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dezo-nav-link:hover::after,
+.dezo-nav-link[data-active='true']::after {
+  transform: scaleX(1);
+}
+
+.dezo-path-line {
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: dezo-draw 2.4s ease forwards 0.4s;
+}
+
+@keyframes dezo-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .dezo-atmosphere-orb {
     animation: none;
+  }
+  .dezo-path-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .dezo-card-lift:hover {
+    transform: none;
   }
 }

@@ -98,7 +98,10 @@ export function DezoToolScanner({
   onAuditComplete,
   className = '',
 }: DezoToolScannerProps) {
-  const [selectedCategory, setSelectedCategory] = useState<ToolCategory>(initialCategory);
+  const safeInitial = PHASE1_CATEGORIES.includes(initialCategory)
+    ? initialCategory
+    : 'seo';
+  const [selectedCategory, setSelectedCategory] = useState<ToolCategory>(safeInitial);
   const [inputVal, setInputVal] = useState('');
   const [status, setStatus] = useState<'idle' | 'scanning' | 'error' | 'success'>('idle');
   const [progressStep, setProgressStep] = useState<string>('');

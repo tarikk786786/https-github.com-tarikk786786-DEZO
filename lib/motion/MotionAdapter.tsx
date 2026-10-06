@@ -1,8 +1,11 @@
 'use client';
 
-import React from 'react';
-import { motion, HTMLMotionProps } from 'motion/react';
+import React, { useRef, useLayoutEffect } from 'react';
+import { motion, HTMLMotionProps, AnimatePresence } from 'motion/react';
+import gsap from 'gsap';
 import { useReducedMotion } from './useReducedMotion';
+
+export const dezoEase = [0.22, 1, 0.36, 1] as const;
 
 export interface DezoRevealProps extends HTMLMotionProps<'div'> {
   children: React.ReactNode;
@@ -13,13 +16,12 @@ export interface DezoRevealProps extends HTMLMotionProps<'div'> {
 }
 
 /**
- * DezoReveal: High-performance entrance animation adapter.
- * Automatically falls back to zero-motion when prefers-reduced-motion is enabled.
+ * DezoReveal: Scroll-triggered entrance. Respects prefers-reduced-motion.
  */
 export function DezoReveal({
   children,
   delay = 0,
-  duration = 0.5,
+  duration = 0.55,
   direction = 'up',
   className = '',
   ...props
@@ -30,7 +32,7 @@ export function DezoReveal({
     return <div className={className}>{children}</div>;
   }
 
-  const offset = 24;
+  const offset = 28;
   const initialOffset = {
     up: { y: offset, opacity: 0 },
     down: { y: -offset, opacity: 0 },
@@ -43,11 +45,11 @@ export function DezoReveal({
     <motion.div
       initial={initialOffset}
       whileInView={{ x: 0, y: 0, opacity: 1 }}
-      viewport={{ once: true, margin: '-40px' }}
+      viewport={{ once: true, margin: '-60px' }}
       transition={{
         duration,
         delay,
-        ease: [0.22, 1, 0.36, 1], // DEZO bespoke bezier
+        ease: dezoEase,
       }}
       className={className}
       {...props}
@@ -57,12 +59,77 @@ export function DezoReveal({
   );
 }
 
+export function DezoStagger({
+  children,
+  className = '',
+  stagger = 0.08,
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  stagger?: number;
+  delay?: number;
+}) {
+  const isReducedMotion = useReducedMotion();
+
+  if (isReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      className={className}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: '-50px' }}
+      variants={{
+        hidden: {},
+        show: {
+          transition: { staggerChildren: stagger, delayChildren: delay },
+        },
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export function DezoStaggerItem({
+  children,
+  className = '',
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const isReducedMotion = useReducedMotion();
+
+  if (isReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      className={className}
+      variants={{
+        hidden: { opacity: 0, y: 22 },
+        show: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.5, ease: dezoEase },
+        },
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 /**
- * DezoMagnetic: Subtle cursor magnetic pull interaction for CTAs.
+ * DezoMagnetic: Subtle cursor magnetic pull for CTAs.
  */
 export function DezoMagnetic({
   children,
-  strength = 0.25,
+  strength = 0.22,
   className = '',
 }: {
   children: React.ReactNode;
@@ -93,10 +160,120 @@ export function DezoMagnetic({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       animate={{ x: position.x, y: position.y }}
-      transition={{ type: 'spring', stiffness: 200, damping: 20, mass: 0.1 }}
+      transition={{ type: 'spring', stiffness: 220, damping: 18, mass: 0.12 }}
       className={className}
     >
       {children}
     </motion.div>
+  );
+}
+
+/**
+ * DezoHoverLift: Card hover lift + subtle scale.
+ */
+export function DezoHoverLift({
+  children,
+  className = '',
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const isReducedMotion = useReducedMotion();
+
+  if (isReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      className={className}
+      whileHover={{ y: -4 }}
+      transition={{ type: 'spring', stiffness: 320, damping: 24 }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/**
+ * GSAP hero entrance — brand mark, headline, CTAs, geo line.
+ */
+export function DezoHeroMotion({
+  children,
+  className = '',
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const isReducedMotion = useReducedMotion();
+
+  useLayoutEffect(() => {
+    if (isReducedMotion || !rootRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const targets = rootRef.current?.querySelectorAll('[data-hero-item]');
+      if (targets?.length) {
+        gsap.set(targets, { opacity: 0, y: 36 });
+        gsap.to(targets, {
+          opacity: 1,
+          y: 0,
+          duration: 0.85,
+          stagger: 0.11,
+          ease: 'power3.out',
+          clearProps: 'transform',
+        });
+      }
+
+      const atmosphere = rootRef.current?.querySelectorAll('[data-hero-atmosphere]');
+      if (atmosphere?.length) {
+        gsap.set(atmosphere, { opacity: 0, scale: 0.96 });
+        gsap.to(atmosphere, {
+          opacity: 1,
+          scale: 1,
+          duration: 1.35,
+          ease: 'power2.out',
+        });
+      }
+    }, rootRef);
+
+    return () => ctx.revert();
+  }, [isReducedMotion]);
+
+  return (
+    <div ref={rootRef} className={className}>
+      {children}
+    </div>
+  );
+}
+
+/**
+ * Lightweight route transition wrapper for main content.
+ */
+export function DezoPageTransition({
+  children,
+  routeKey,
+}: {
+  children: React.ReactNode;
+  routeKey: string;
+}) {
+  const isReducedMotion = useReducedMotion();
+
+  if (isReducedMotion) {
+    return <>{children}</>;
+  }
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={routeKey}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -6 }}
+        transition={{ duration: 0.35, ease: dezoEase }}
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
   );
 }

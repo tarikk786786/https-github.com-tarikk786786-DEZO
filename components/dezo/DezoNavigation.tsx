@@ -84,11 +84,12 @@ export function DezoNavigation() {
                   >
                     <Link
                       href={link.href}
-                      className={`inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors py-1 ${
+                  className={`dezo-nav-link inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors py-1 ${
                         isActive
                           ? 'text-dezo-primary'
                           : 'text-dezo-text-secondary hover:text-dezo-text-primary'
                       }`}
+                      data-active={isActive}
                     >
                       <span>{link.label}</span>
                       <ChevronDown
@@ -129,11 +130,12 @@ export function DezoNavigation() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors ${
+                  className={`dezo-nav-link text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors ${
                     isActive
                       ? 'text-dezo-primary'
                       : 'text-dezo-text-secondary hover:text-dezo-text-primary'
                   }`}
+                  data-active={isActive}
                 >
                   {link.label}
                 </Link>

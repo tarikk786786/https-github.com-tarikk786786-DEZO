@@ -25,8 +25,8 @@ export function DezoHeading({
   };
 
   const sizes = {
-    h1: 'font-display text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.05]',
-    h2: 'font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.12]',
+    h1: 'font-display text-4xl sm:text-5xl lg:text-[4.25rem] font-extrabold tracking-tight leading-[1.04]',
+    h2: 'font-display text-3xl sm:text-[2.5rem] lg:text-[3.25rem] font-bold tracking-tight leading-[1.1]',
     h3: 'font-display text-2xl sm:text-3xl font-bold tracking-tight leading-snug',
     h4: 'font-display text-xl sm:text-2xl font-semibold tracking-normal',
     p: 'text-lg sm:text-xl font-medium',

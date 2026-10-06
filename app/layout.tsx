@@ -6,6 +6,7 @@ import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/seo/jso
 import { SmoothScrollProvider } from '@/lib/motion/SmoothScrollProvider';
 import { DezoNavigation } from '@/components/dezo/DezoNavigation';
 import { DezoFooter } from '@/components/dezo/DezoFooter';
+import { DezoPageShell } from '@/components/dezo/DezoPageShell';
 
 const syne = Syne({
   subsets: ['latin'],
@@ -57,7 +58,9 @@ export default function RootLayout({
       <body className="min-h-screen bg-dezo-bg text-dezo-text-primary antialiased selection:bg-dezo-primary selection:text-white flex flex-col justify-between font-sans">
         <SmoothScrollProvider>
           <DezoNavigation />
-          <main className="flex-1 w-full">{children}</main>
+          <main className="flex-1 w-full">
+            <DezoPageShell>{children}</DezoPageShell>
+          </main>
           <DezoFooter />
         </SmoothScrollProvider>
       </body>

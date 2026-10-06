@@ -3,56 +3,85 @@
 @tailwind utilities;
 
 :root {
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
-  --bg-dezo: #0a0b0e;
-  --surface-dezo: #111318;
-  --border-dezo: rgba(255, 255, 255, 0.08);
-  --primary-dezo: #2563eb;
-  --accent-dezo: #38bdf8;
+  --bg-dezo: #f3f5f7;
+  --surface-dezo: #ffffff;
+  --border-dezo: rgba(16, 19, 26, 0.1);
+  --primary-dezo: #0b6b52;
+  --accent-dezo: #0b6b52;
+  --ink-dezo: #10131a;
 }
 
 html {
-  background-color: #0a0b0e;
-  color: #f8fafc;
+  background-color: var(--bg-dezo);
+  color: var(--ink-dezo);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Selection */
+body {
+  background-color: var(--bg-dezo);
+}
+
 ::selection {
-  background-color: #2563eb;
+  background-color: #0b6b52;
   color: #ffffff;
 }
 
-/* Focus Rings for Accessibility (WCAG 2.1 AA) */
 :focus-visible {
-  outline: 2px solid #38bdf8;
+  outline: 2px solid #0b6b52;
   outline-offset: 3px;
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0b0e;
+  background: #eef1f4;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1c2029;
-  border-radius: 9999px;
-  border: 2px solid #0a0b0e;
+  background: #c5ccd6;
+  border-radius: 4px;
+  border: 2px solid #eef1f4;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2563eb;
+  background: #0b6b52;
 }
 
-/* Lenis Recommended CSS */
-html.lenis, html.lenis body {
+/* Atmospheric hero mesh — commerce routes, not purple glow */
+.dezo-hero-atmosphere {
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 20%, rgba(11, 107, 82, 0.14), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 15% 80%, rgba(196, 163, 90, 0.12), transparent 50%),
+    radial-gradient(ellipse 60% 50% at 90% 90%, rgba(26, 95, 122, 0.08), transparent 45%),
+    linear-gradient(165deg, #f7f8fa 0%, #eef2f5 45%, #e8eef1 100%);
+}
+
+.dezo-grid-fade {
+  background-image:
+    linear-gradient(rgba(16, 19, 26, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 19, 26, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
+}
+
+.dezo-journey-track {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(11, 107, 82, 0.35) 10%,
+    rgba(11, 107, 82, 0.35) 90%,
+    transparent
+  );
+}
+
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -72,12 +101,44 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
-/* Strict prefers-reduced-motion rule: Rule #6 */
 @media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
+  *,
+  ::before,
+  ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@keyframes dezo-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2%, -1.5%, 0) scale(1.03);
+  }
+}
+
+@keyframes dezo-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dezo-atmosphere-orb {
+  animation: dezo-drift 18s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dezo-atmosphere-orb {
+    animation: none;
   }
 }

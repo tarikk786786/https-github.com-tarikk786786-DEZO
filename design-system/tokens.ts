@@ -1,24 +1,30 @@
 /**
  * DEZO Design System Tokens
- * Human-crafted design standards: editorial clarity, high contrast, restrained palettes.
+ * Editorial commerce aesthetic: cool paper, deep ink, emerald accent.
+ * Avoids dark-mode defaults, purple gradients, and cream/terracotta templates.
  */
 
 export const dezoTokens = {
   colors: {
-    bg: '#0A0B0E',
-    surface: '#111318',
-    surfaceHover: '#161920',
-    surfaceElevated: '#1C2029',
-    border: 'rgba(255, 255, 255, 0.08)',
-    borderStrong: 'rgba(255, 255, 255, 0.16)',
-    primary: '#2563EB',
-    primaryHover: '#1D4ED8',
-    accent: '#38BDF8',
-    success: '#10B981',
+    bg: '#F3F5F7',
+    bgWarm: '#EEF1F4',
+    surface: '#FFFFFF',
+    surfaceHover: '#F8FAFB',
+    surfaceElevated: '#FFFFFF',
+    border: 'rgba(16, 19, 26, 0.10)',
+    borderStrong: 'rgba(16, 19, 26, 0.18)',
+    primary: '#0B6B52',
+    primaryHover: '#095C46',
+    accent: '#0B6B52',
+    accentSoft: '#D8F0E8',
+    ink: '#10131A',
+    success: '#0B6B52',
+    highlight: '#C4A35A',
     text: {
-      primary: '#F8FAFC',
-      secondary: '#94A3B8',
-      muted: '#64748B',
+      primary: '#10131A',
+      secondary: '#4A5568',
+      muted: '#6B7280',
+      inverse: '#F8FAFC',
     },
   },
   typography: {
@@ -34,7 +40,7 @@ export const dezoTokens = {
       cinematic: 0.8,
     },
     ease: {
-      standard: [0.22, 1, 0.36, 1], // Custom DEZO cubic bezier
+      standard: [0.22, 1, 0.36, 1],
       smooth: [0.16, 1, 0.3, 1],
       bounce: [0.34, 1.56, 0.64, 1],
     },

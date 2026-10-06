@@ -45,7 +45,7 @@ export function DezoWorkGallery({ initialLimit = 9 }: { initialLimit?: number })
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by client or keyword..."
             aria-label="Search projects"
-            className="w-full bg-dezo-surface border border-dezo-border focus:border-dezo-primary rounded-full pl-11 pr-5 py-3 text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none transition-colors"
+            className="w-full bg-dezo-surface border border-dezo-border focus:border-dezo-primary rounded-dezo-md pl-11 pr-5 py-3 text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none transition-colors"
           />
         </div>
 
@@ -60,9 +60,9 @@ export function DezoWorkGallery({ initialLimit = 9 }: { initialLimit?: number })
                   setActiveCategory(category);
                   setDisplayCount(initialLimit);
                 }}
-                className={`shrink-0 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                className={`shrink-0 px-3.5 py-2 rounded-dezo-md text-xs font-semibold uppercase tracking-wider transition-colors duration-200 cursor-pointer ${
                   isSelected
-                    ? 'bg-dezo-primary text-white shadow-md'
+                    ? 'bg-dezo-primary text-white'
                     : 'bg-dezo-surface hover:bg-dezo-surface-hover text-dezo-text-secondary hover:text-dezo-text-primary border border-dezo-border'
                 }`}
               >

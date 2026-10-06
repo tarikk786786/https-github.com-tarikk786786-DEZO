@@ -32,16 +32,18 @@ export default function MarketplacePage() {
         <DezoContainer size="wide">
           <div className="max-w-3xl mb-12">
             <DezoHeading
-              badge="Marketplace Telemetry"
+              badge="Marketplace"
               as="h1"
-              subtitle="Stop managing Amazon, Flipkart, and your website in disconnected silos. DEZO synthesizes your advertising, inventory, and ranking data into unified commercial intelligence."
+              subtitle="Amazon and Flipkart operations, listing systems, and PPC — with a Growth OS telemetry vision shipping in phases. Demo numbers below are illustrative, not client claims."
             >
-              Unified Marketplace & Seller Intelligence
+              Marketplace intelligence for brands that sell
             </DezoHeading>
           </div>
 
-          {/* Interactive Intelligence Dashboard */}
           <div className="mb-20">
+            <p className="text-xs font-semibold uppercase tracking-wider text-dezo-text-muted mb-3">
+              Illustrative product demo — sample data only
+            </p>
             <DezoMarketplaceDashboard />
           </div>
 

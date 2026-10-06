@@ -5,26 +5,29 @@ import { DezoHeading } from '@/components/dezo/DezoHeading';
 import { DezoSection } from '@/components/dezo/DezoSection';
 import { DezoWorkGallery } from '@/components/dezo/DezoWorkGallery';
 import { constructMetadata } from '@/lib/seo/metadata';
+import { portfolioData } from '@/content/projects';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Client Work & Portfolio',
+  title: 'Work — Live Client Deployments',
   description:
-    'Explore 100+ verified live websites, ecommerce architectures, and digital portals engineered by DEZO.',
+    'Browse DEZO’s live client deployments across ecommerce, healthcare, education, corporate, and more — real URLs, not invented testimonials.',
   canonicalUrl: 'https://dezo.in/work',
 });
 
 export default function WorkPage() {
+  const liveCount = portfolioData.filter((p) => p.isLive).length;
+
   return (
     <div className="pt-28 sm:pt-36 pb-20">
       <DezoSection spacing="compact">
         <DezoContainer size="wide">
           <div className="max-w-3xl mb-12">
             <DezoHeading
-              badge="Portfolio"
+              badge="Work"
               as="h1"
-              subtitle="Browse through over 100 live client deployments across retail, healthcare, corporate, real estate, and education."
+              subtitle={`${liveCount}+ live URLs in our public archive. Prefer case-study framing over anonymous testimonials. Metrics only when methodology is clear.`}
             >
-              Proven Results Across Real Industries
+              Proof you can click
             </DezoHeading>
           </div>
 

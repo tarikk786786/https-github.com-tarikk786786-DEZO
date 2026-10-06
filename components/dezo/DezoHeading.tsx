@@ -25,17 +25,17 @@ export function DezoHeading({
   };
 
   const sizes = {
-    h1: 'text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.08]',
-    h2: 'text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.15]',
-    h3: 'text-2xl sm:text-3xl font-bold tracking-tight leading-snug',
-    h4: 'text-xl sm:text-2xl font-bold tracking-normal',
+    h1: 'font-display text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.05]',
+    h2: 'font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.12]',
+    h3: 'font-display text-2xl sm:text-3xl font-bold tracking-tight leading-snug',
+    h4: 'font-display text-xl sm:text-2xl font-semibold tracking-normal',
     p: 'text-lg sm:text-xl font-medium',
   };
 
   return (
     <div className={`flex flex-col gap-3 max-w-3xl ${alignments[align]} ${className}`}>
       {badge && (
-        <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest bg-dezo-surface border border-dezo-border text-dezo-accent">
+        <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary">
           {badge}
         </span>
       )}
@@ -43,7 +43,7 @@ export function DezoHeading({
         {children}
       </Component>
       {subtitle && (
-        <p className="text-base sm:text-lg text-dezo-text-secondary leading-relaxed font-normal">
+        <p className="text-base sm:text-lg text-dezo-text-secondary leading-relaxed font-normal max-w-2xl">
           {subtitle}
         </p>
       )}

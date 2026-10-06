@@ -1,25 +1,19 @@
 import { Metadata } from 'next';
+import { brand, contact, leadership } from '@/content/site';
 
 export const siteConfig = {
-  name: 'DEZO — Digital Engineering & Growth Studio',
-  shortName: 'DEZO',
-  description:
-    'DEZO builds high-converting websites, bespoke ecommerce architectures, and performance growth funnels for ambitious brands and enterprises in India and worldwide.',
+  name: `${brand.name} — ${brand.positioning}`,
+  shortName: brand.name,
+  description: brand.supporting,
   url: 'https://dezo.in',
   ogImage: 'https://dezo.in/dezo-logo-transparent.png',
-  phone: '+919114411026',
-  phoneFormatted: '+91 9114411026',
-  email: 'contact@dezo.in',
-  address: {
-    street: 'Phase 2, Patia',
-    city: 'Bhubaneswar',
-    region: 'Odisha',
-    postalCode: '751024',
-    country: 'IN',
-  },
+  phone: contact.phone,
+  phoneFormatted: contact.phoneFormatted,
+  email: contact.email,
+  address: contact.address,
   founders: [
-    { name: 'Tarik Islam', role: 'Director & Founder' },
-    { name: 'Rohan Dinkar Sanap', role: 'Chief Executive Officer' },
+    { name: leadership.primary.name, role: leadership.primary.role },
+    { name: leadership.partner.name, role: leadership.partner.role },
   ],
 };
 
@@ -37,23 +31,23 @@ export function constructMetadata({
   noIndex?: boolean;
 } = {}): Metadata {
   const metaTitle = title
-    ? `${title} | DEZO Digital Engineering`
-    : 'DEZO | Web Development, Ecommerce & Growth Agency India';
+    ? `${title} | DEZO`
+    : 'DEZO | We Build Brands That Sell — Digital Commerce India';
 
   return {
     title: metaTitle,
     description,
     keywords: [
-      'web development company india',
-      'digital marketing agency bhubaneswar',
-      'seo services india',
-      'ecommerce website development',
-      'next.js development agency',
-      'performance marketing studio',
-      'b2b growth engine',
-      'dezo agency',
+      'digital commerce india',
+      'amazon flipkart marketplace agency',
+      'brand building odisha',
+      'ecommerce development bhubaneswar',
+      'meta google ads india',
+      'shopify agency india',
+      'dezo',
+      'growth technology',
     ],
-    authors: [{ name: 'DEZO Team', url: siteConfig.url }],
+    authors: [{ name: 'DEZO', url: siteConfig.url }],
     creator: 'DEZO',
     metadataBase: new URL(siteConfig.url),
     alternates: {
@@ -63,7 +57,7 @@ export function constructMetadata({
       title: metaTitle,
       description,
       url: canonicalUrl || siteConfig.url,
-      siteName: siteConfig.name,
+      siteName: 'DEZO',
       images: [
         {
           url: image,

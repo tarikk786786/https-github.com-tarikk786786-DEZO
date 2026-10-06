@@ -13,47 +13,39 @@ export function DezoCaseStudy({ project, className = '' }: DezoCaseStudyProps) {
 
   return (
     <article
-      className={`group relative flex flex-col justify-between rounded-dezo-lg bg-dezo-surface border border-dezo-border p-6 transition-all duration-300 hover:border-dezo-primary/40 hover:bg-dezo-surface-hover hover:-translate-y-1 ${className}`}
+      className={`group relative flex flex-col justify-between rounded-dezo-lg bg-dezo-surface border border-dezo-border p-5 sm:p-6 transition-colors duration-200 hover:border-dezo-primary/35 ${className}`}
     >
       <div>
-        {/* Preview Thumbnail Container */}
-        <div className="relative w-full h-44 sm:h-48 mb-6 rounded-dezo-md overflow-hidden bg-dezo-surface-elevated border border-dezo-border/60">
+        <div className="relative w-full h-44 sm:h-48 mb-5 rounded-dezo-md overflow-hidden bg-dezo-bg-warm border border-dezo-border/60">
           <img
             src={`https://image.thum.io/get/width/800/crop/600/${project.url}`}
             alt={`${project.title} live website preview`}
             loading="lazy"
-            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-dezo-bg/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
 
-        {/* Metadata Badge */}
         <div className="flex items-center justify-between gap-2 mb-3">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-dezo-accent bg-dezo-surface-elevated px-2.5 py-1 rounded-full border border-dezo-border">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-dezo-primary bg-dezo-accent-soft px-2 py-1 rounded-dezo-sm">
             {project.category}
           </span>
           {project.metric && (
-            <span className="text-[10px] font-bold text-dezo-success bg-dezo-success/10 px-2 py-0.5 rounded-full">
+            <span className="text-[10px] font-semibold text-dezo-text-muted">
               {project.metric}
             </span>
           )}
         </div>
 
-        {/* Title */}
-        <h3 className="text-xl font-bold tracking-tight text-dezo-text-primary group-hover:text-dezo-accent transition-colors line-clamp-1">
+        <h3 className="font-display text-lg font-bold tracking-tight text-dezo-text-primary group-hover:text-dezo-primary transition-colors line-clamp-1">
           {project.title}
         </h3>
 
-        {/* Clean Domain */}
-        <p className="text-xs font-mono text-dezo-text-muted mt-1 truncate">
-          {cleanUrl}
-        </p>
+        <p className="text-xs font-mono text-dezo-text-muted mt-1 truncate">{cleanUrl}</p>
       </div>
 
-      {/* Action Footer */}
-      <div className="mt-6 pt-4 border-t border-dezo-border/60 flex items-center justify-between">
-        <span className="text-xs font-bold uppercase tracking-widest text-dezo-text-secondary group-hover:text-dezo-text-primary transition-colors">
-          View Live Website
+      <div className="mt-5 pt-4 border-t border-dezo-border flex items-center justify-between">
+        <span className="text-xs font-semibold uppercase tracking-wider text-dezo-text-secondary group-hover:text-dezo-text-primary transition-colors">
+          View live
         </span>
         {isClickable ? (
           <a
@@ -61,7 +53,7 @@ export function DezoCaseStudy({ project, className = '' }: DezoCaseStudyProps) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Visit live site of ${project.title}`}
-            className="w-8 h-8 rounded-full bg-dezo-surface-elevated border border-dezo-border flex items-center justify-center text-dezo-text-muted group-hover:text-white group-hover:bg-dezo-primary group-hover:border-dezo-primary transition-all duration-300"
+            className="w-8 h-8 rounded-dezo-md bg-dezo-bg border border-dezo-border flex items-center justify-center text-dezo-text-muted group-hover:text-white group-hover:bg-dezo-primary group-hover:border-dezo-primary transition-colors"
           >
             <ExternalLink size={14} />
           </a>

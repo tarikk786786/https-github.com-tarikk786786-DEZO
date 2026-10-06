@@ -1,146 +1,121 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import {
-  Code2,
-  Sparkles,
-  ShoppingBag,
-  TrendingUp,
-  Cpu,
-  ArrowRight,
-  CheckCircle2,
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { DezoContainer } from '@/components/dezo/DezoContainer';
 import { DezoHeading } from '@/components/dezo/DezoHeading';
 import { DezoSection } from '@/components/dezo/DezoSection';
-import { DezoCard } from '@/components/dezo/DezoCard';
 import { DezoButton } from '@/components/dezo/DezoButton';
 import { constructMetadata } from '@/lib/seo/metadata';
+import { pillars, brand } from '@/content/site';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Solutions & Core Pillars (Build, Brand, Marketplace, Growth, Intelligence)',
+  title: 'Solutions — Build, Brand, Marketplace, Grow, Intelligence',
   description:
-    'Explore DEZO’s five commercial pillars: Digital Engineering, Brand Strategy, Marketplace Mastery, Performance Growth, and Seller Intelligence.',
+    'DEZO’s five commercial pillars: digital engineering, brand systems, Amazon & Flipkart marketplace growth, performance marketing, and Growth OS intelligence.',
   canonicalUrl: 'https://dezo.in/solutions',
 });
 
-export default function SolutionsIndexPage() {
-  const pillars = [
-    {
-      slug: 'build',
-      pillarNumber: '01',
-      title: 'BUILD · Digital Engineering',
-      tagline: 'Websites · Ecommerce · Shopify · SaaS · Custom Portals',
-      description:
-        'We engineer sub-second web architectures, bespoke Shopify stores, and enterprise portals designed for extreme reliability, zero bloat, and frictionless conversion.',
-      deliverables: ['Custom Next.js App Router', 'High-Converting Shopify Storefronts', 'B2B Client Portals', 'Headless API Systems'],
-    },
-    {
-      slug: 'brand',
-      pillarNumber: '02',
-      title: 'BRAND · Strategic Identity',
-      tagline: 'Positioning · Packaging · Marketplace Creative · A+ Content',
-      description:
-        'We do not just advertise products; we turn commoditized items into premium brands. From packaging design to Amazon Brand Stores and editorial creative.',
-      deliverables: ['Brand Naming & Identity Systems', 'D2C Packaging & Unboxing Design', 'Amazon A+ Content & Brand Stores', 'Direct-Response Product Imagery'],
-    },
-    {
-      slug: 'marketplace',
-      pillarNumber: '03',
-      title: 'MARKETPLACE · Amazon & Flipkart Mastery',
-      tagline: 'Seller Onboarding · Listing Strategy · PPC · Buy Box Defense',
-      description:
-        'Complete channel management for Amazon India, Flipkart, and modern connectors. We optimize keyword indexing, control ad spend efficiency, and protect margins.',
-      deliverables: ['Full Account Setup & Brand Registry', 'Search Query Performance Harvesting', 'Sponsored Ads (SP, SB, SD) Management', 'Catalog Health & Buy Box Monitoring'],
-    },
-    {
-      slug: 'growth',
-      pillarNumber: '04',
-      title: 'GROWTH · Performance Acquisition',
-      tagline: 'Technical SEO · Meta Ads · Google Ads · CRO',
-      description:
-        'Data-backed customer acquisition. We manage precision ad spend across Meta Ads (Instagram/FB) and Google Ads (Search/PMax), paired with technical search engine dominance.',
-      deliverables: ['High-ROAS Meta & Google Ad Funnels', 'Technical & Local 3-Pack SEO', 'Conversion Rate Optimization (CRO)', 'Conversion API & Server Telemetry'],
-    },
-    {
-      slug: 'intelligence',
-      pillarNumber: '05',
-      title: 'INTELLIGENCE · DEZO Growth OS',
-      tagline: 'AI Engine · Automation · Seller Dashboards · Telemetry',
-      description:
-        'Our internal technology differentiator. Machine intelligence that analyzes cross-channel sales, detects margin bleed, and triggers automated alerts before revenue drops.',
-      deliverables: ['DEZO Seller OS Unified Telemetry', 'AI Listing Health Diagnostic', 'Automated Lead Qualification & CRM Routing', 'Real-Time Cross-Platform Dashboards'],
-    },
-  ];
+const deliverables: Record<string, string[]> = {
+  build: [
+    'Custom Next.js storefronts & marketing sites',
+    'Shopify architecture & theme systems',
+    'SaaS / portals / internal tools',
+    'Performance-first frontend engineering',
+  ],
+  brand: [
+    'Positioning & identity systems',
+    'Packaging & unboxing design',
+    'Marketplace creative & A+ content',
+    'Launch kits across web + ads',
+  ],
+  marketplace: [
+    'Amazon & Flipkart listing systems',
+    'Catalog health & indexing work',
+    'Sponsored ads / PPC operations',
+    'Seller account growth playbooks',
+  ],
+  growth: [
+    'Technical & content SEO',
+    'Meta & Google acquisition',
+    'CRO and analytics instrumentation',
+    'Unified performance reporting',
+  ],
+  intelligence: [
+    'DEZO Growth OS (phased)',
+    'Cross-channel telemetry concepts',
+    'Tools Lab public diagnostics',
+    'Automation adapters for later scale',
+  ],
+};
 
+export default function SolutionsIndexPage() {
   return (
     <div className="pt-28 sm:pt-36 pb-20">
       <DezoSection spacing="compact">
         <DezoContainer size="wide">
-          <div className="max-w-3xl mb-16">
+          <div className="max-w-3xl mb-14">
             <DezoHeading
-              badge="The DEZO Ecosystem"
+              badge="Solutions"
               as="h1"
-              subtitle="From the first concept line of code to national marketplace dominance. Explore the five integrated disciplines that drive DEZO client growth."
+              subtitle={`${brand.tagline} Five disciplines under one commercial roof — ${brand.geo}`}
             >
-              Five Pillars. One Unified Growth Machine.
+              Build · Brand · Marketplace · Grow · Intelligence
             </DezoHeading>
           </div>
 
-          <div className="flex flex-col gap-8">
-            {pillars.map((pillar) => (
-              <div
+          <div className="flex flex-col gap-6">
+            {pillars.map((pillar, index) => (
+              <article
                 key={pillar.slug}
-                className="p-8 sm:p-12 rounded-dezo-xl bg-dezo-surface border border-dezo-border hover:border-dezo-border-strong transition-all duration-300"
+                className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-8 rounded-dezo-lg border border-dezo-border bg-dezo-surface"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                  <div className="lg:col-span-7 flex flex-col gap-3">
-                    <div className="flex items-center gap-3">
-                      <span className="font-mono text-sm font-bold text-dezo-accent">
-                        PILLAR {pillar.pillarNumber}
-                      </span>
-                      <span className="text-xs text-dezo-text-muted">·</span>
-                      <span className="text-xs font-semibold text-dezo-text-muted uppercase">
-                        {pillar.tagline}
-                      </span>
-                    </div>
-
-                    <h2 className="text-2xl sm:text-3xl font-black text-dezo-text-primary">
-                      {pillar.title}
-                    </h2>
-
-                    <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed mt-1">
-                      {pillar.description}
-                    </p>
-
-                    <div className="pt-4">
-                      <DezoButton
-                        href={`/solutions/${pillar.slug}`}
-                        size="sm"
-                        variant="secondary"
-                        icon={<ArrowRight size={14} />}
-                      >
-                        Explore Pillar Details
-                      </DezoButton>
-                    </div>
-                  </div>
-
-                  <div className="lg:col-span-5 p-6 rounded-dezo-md bg-dezo-surface-elevated border border-dezo-border">
-                    <h4 className="text-xs font-bold uppercase tracking-widest text-dezo-text-muted mb-3">
-                      Key Deliverables
-                    </h4>
-                    <ul className="flex flex-col gap-2.5 text-xs text-dezo-text-primary">
-                      {pillar.deliverables.map((d, i) => (
-                        <li key={i} className="flex items-center gap-2">
-                          <CheckCircle2 size={13} className="text-dezo-accent shrink-0" />
-                          <span>{d}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                <div className="lg:col-span-4">
+                  <p className="font-mono text-xs text-dezo-text-muted mb-2">
+                    0{index + 1}
+                  </p>
+                  <h2 className="font-display text-2xl font-bold text-dezo-text-primary mb-1">
+                    {pillar.name}
+                  </h2>
+                  <p className="text-sm font-semibold text-dezo-primary mb-3">
+                    {pillar.title}
+                  </p>
+                  <p className="text-sm text-dezo-text-secondary leading-relaxed">
+                    {pillar.summary}
+                  </p>
                 </div>
-              </div>
+                <div className="lg:col-span-6">
+                  <ul className="grid sm:grid-cols-2 gap-2">
+                    {(deliverables[pillar.slug] || []).map((item) => (
+                      <li
+                        key={item}
+                        className="text-sm text-dezo-text-secondary flex gap-2"
+                      >
+                        <span className="text-dezo-primary shrink-0">·</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="lg:col-span-2 flex lg:justify-end lg:items-start">
+                  <Link
+                    href={pillar.href}
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-dezo-primary hover:underline"
+                  >
+                    Explore <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </article>
             ))}
+          </div>
+
+          <div className="mt-14 flex flex-wrap gap-3">
+            <DezoButton href="/start-a-project" size="lg">
+              Start a Project
+            </DezoButton>
+            <DezoButton href="/tools" variant="outline" size="lg">
+              Try Tools Lab
+            </DezoButton>
           </div>
         </DezoContainer>
       </DezoSection>

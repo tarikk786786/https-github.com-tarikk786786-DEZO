@@ -22,9 +22,9 @@ import {
   brand,
   pillars,
   featuredCaseStudies,
-  toolsLabPhase1,
 } from '@/content/site';
 import { portfolioData } from '@/content/projects';
+import { TOOL_CATALOG } from '@/lib/tools/catalog';
 
 export default function HomePage() {
   const liveCount = portfolioData.filter((p) => p.isLive).length;
@@ -43,9 +43,7 @@ export default function HomePage() {
       const bi = featuredPriority.findIndex((h) => b.url.includes(h));
       return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
     });
-  const phase1Unique = toolsLabPhase1.filter(
-    (t, i, arr) => arr.findIndex((x) => x.name === t.name) === i
-  );
+  const liveToolsHome = TOOL_CATALOG.filter((t) => t.availability === 'live').slice(0, 8);
 
   return (
     <>
@@ -309,13 +307,13 @@ export default function HomePage() {
         <DezoContainer size="wide">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <DezoReveal>
-              <DezoHeading
-                badge="DEZO Tools Lab"
-                as="h2"
-                subtitle="Phase 1 public diagnostics — SEO, speed, accessibility, schema, sitemap/robots, links, tech detection, and Shopify health."
-              >
-                Free tools that prove the craft
-              </DezoHeading>
+            <DezoHeading
+              badge="DEZO Tools Lab"
+              as="h2"
+              subtitle="SEO, speed, accessibility, Shopify, security, CRO, keywords, local SEO, brand health — plus honest Amazon/Flipkart demos."
+            >
+              Free tools that prove the craft
+            </DezoHeading>
             </DezoReveal>
             <DezoReveal delay={0.08}>
               <DezoButton href="/tools" variant="outline" size="sm">

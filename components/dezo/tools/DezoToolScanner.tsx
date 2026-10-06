@@ -2,22 +2,18 @@
 
 import React, { useState } from 'react';
 import { Search, Loader2, Sparkles, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { ToolCategory, UniversalAuditReport } from '@/lib/tools/types';
 import { runUniversalAudit } from '@/lib/tools/engine';
+import { LIVE_SCANNER_CATEGORIES, getToolMeta } from '@/lib/tools/catalog';
+import { useReducedMotion } from '@/lib/motion/useReducedMotion';
 
 interface DezoToolScannerProps {
   initialCategory?: ToolCategory;
   onAuditComplete?: (report: UniversalAuditReport) => void;
   className?: string;
+  categories?: ToolCategory[];
 }
-
-/** Phase 1 public engines only — later phases stay on category routes as placeholders */
-const PHASE1_CATEGORIES: ToolCategory[] = [
-  'seo',
-  'page-speed',
-  'accessibility',
-  'shopify',
-];
 
 const CATEGORY_META: Record<
   ToolCategory,
@@ -26,70 +22,68 @@ const CATEGORY_META: Record<
   seo: {
     name: 'SEO Audit',
     placeholder: 'Enter website URL (e.g. brand.in)',
-    example: 'https://example.com',
-    description:
-      'Diagnose indexing, canonicals, schema, sitemap/robots, and broken-link observations.',
+    example: 'https://dezo.in',
+    description: 'Index, canonicals, schema, and crawl hygiene via public probe.',
   },
   shopify: {
     name: 'Shopify Audit',
-    placeholder: 'Enter Shopify URL (e.g. store.myshopify.com or brand.com)',
-    example: 'https://store.myshopify.com',
-    description: 'Detect app script bloat, theme payload, CDN optimization, and checkout blockers.',
+    placeholder: 'Enter Shopify or custom-domain store URL',
+    example: 'https://www.shopify.com',
+    description: 'Storefront health, HTTPS trust, and app-bloat remediation cues.',
   },
   'page-speed': {
     name: 'Page Speed',
     placeholder: 'Enter website or landing page URL',
-    example: 'https://example.com/shop',
-    description:
-      'Core Web Vitals-oriented performance diagnostics and public tech fingerprints.',
+    example: 'https://dezo.in',
+    description: 'Probe TTFB, viewport, and document-weight performance heuristics.',
   },
   keywords: {
     name: 'Keyword Opportunity',
-    placeholder: 'Enter seed keyword or product phrase (e.g. sambalpuri saree)',
-    example: 'ayurvedic skin oil',
-    description: 'Surface commercial intent volume, Indian search competition, and ranking opportunities.',
+    placeholder: 'Enter seed keyword (e.g. sambalpuri saree online)',
+    example: 'sambalpuri saree online',
+    description: 'Client-side India intent clustering — not Keyword Planner volumes.',
   },
   amazon: {
     name: 'Amazon Listing',
-    placeholder: 'Enter Amazon Product URL or ASIN (e.g. amazon.in/dp/B08...)',
-    example: 'https://amazon.in/dp/B08N5WRWNW',
-    description: 'Analyze title keyword harvesting, bullet points, image ratios, and Buy Box readiness.',
+    placeholder: 'Amazon product URL or ASIN',
+    example: 'https://www.amazon.in/dp/B0EXAMPLE01',
+    description: 'Public demo checklist — not connected to Amazon SP-API.',
   },
   flipkart: {
-    name: 'Flipkart Listing',
-    placeholder: 'Enter Flipkart Product URL or FSN',
-    example: 'https://flipkart.com/p/itm123...',
-    description: 'Check F-Assured tier qualification, regional pin code speed, and catalog scoring.',
+    name: 'Flipkart Catalog',
+    placeholder: 'Flipkart product URL',
+    example: 'https://www.flipkart.com',
+    description: 'Public demo checklist — not connected to Flipkart seller APIs.',
   },
   cro: {
-    name: 'CRO / Conversion',
-    placeholder: 'Enter storefront or cart URL',
-    example: 'https://example.com/checkout',
-    description: 'Audit mobile trust badges, checkout friction, COD assurances, and abandonment leaks.',
+    name: 'CRO Checklist',
+    placeholder: 'Enter storefront, PDP, or checkout URL',
+    example: 'https://example.com/cart',
+    description: 'COD trust, shipping clarity, and mobile CTA conversion heuristics.',
   },
   security: {
-    name: 'Security & SSL',
-    placeholder: 'Enter domain name or URL',
-    example: 'https://example.com',
-    description: 'Audit SSL/TLS handshake, HSTS, CSP headers, mixed content, and SSRF safety.',
+    name: 'Security & Headers',
+    placeholder: 'Enter domain or URL',
+    example: 'https://dezo.in',
+    description: 'HTTPS + public security header observations from a safe probe.',
   },
   accessibility: {
     name: 'Accessibility',
     placeholder: 'Enter website URL',
-    example: 'https://example.com',
-    description: 'Check WCAG-oriented contrast, labels, landmarks, and mobile touch targets.',
+    example: 'https://dezo.in',
+    description: 'WCAG-oriented title/viewport heuristics with manual follow-ups.',
   },
   'local-seo': {
-    name: 'Local SEO (Odisha & India)',
-    placeholder: 'Enter business name, city, or website URL',
+    name: 'Local SEO',
+    placeholder: 'Business + city (e.g. dental clinic bhubaneswar)',
     example: 'dental clinic bhubaneswar',
-    description: 'Audit Google Business Profile readiness, NAP consistency, and local geographic intent.',
+    description: 'Geo keyword + NAP/LocalBusiness readiness for Odisha/India.',
   },
   brand: {
     name: 'Brand Health',
-    placeholder: 'Enter brand name or domain',
+    placeholder: 'Brand name or domain',
     example: 'dezo.in',
-    description: 'Cross-channel brand footprint review across web, search, marketplaces, and social channels.',
+    description: 'Naming consistency and channel parity heuristics.',
   },
 };
 
@@ -97,10 +91,10 @@ export function DezoToolScanner({
   initialCategory = 'seo',
   onAuditComplete,
   className = '',
+  categories = LIVE_SCANNER_CATEGORIES,
 }: DezoToolScannerProps) {
-  const safeInitial = PHASE1_CATEGORIES.includes(initialCategory)
-    ? initialCategory
-    : 'seo';
+  const reduced = useReducedMotion();
+  const safeInitial = categories.includes(initialCategory) ? initialCategory : categories[0];
   const [selectedCategory, setSelectedCategory] = useState<ToolCategory>(safeInitial);
   const [inputVal, setInputVal] = useState('');
   const [status, setStatus] = useState<'idle' | 'scanning' | 'error' | 'success'>('idle');
@@ -108,6 +102,7 @@ export function DezoToolScanner({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const currentMeta = CATEGORY_META[selectedCategory] || CATEGORY_META.seo;
+  const availability = getToolMeta(selectedCategory).availability;
 
   const handleScan = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -116,13 +111,13 @@ export function DezoToolScanner({
     setStatus('scanning');
     setErrorMessage(null);
 
-    // Multi-step diagnostic simulation while executing deterministic logic
     const steps = [
-      'Validating security & SSRF boundary...',
-      'Executing HTTP headers & SSL handshake inspection...',
-      'Crawling DOM structure & semantic hierarchy...',
-      'Computing weighted category benchmark scores...',
-      'Synthesizing DEZO Growth recommendation matrix...',
+      'Validating SSRF boundary...',
+      availability === 'demo'
+        ? 'Running public marketplace demo heuristics...'
+        : 'Probing public headers & HTML sample...',
+      'Scoring deterministic engine checks...',
+      'Prioritizing P0–P3 remediation...',
     ];
 
     try {
@@ -130,40 +125,30 @@ export function DezoToolScanner({
       setProgressStep(steps[stepIndex]);
       const interval = setInterval(() => {
         stepIndex++;
-        if (stepIndex < steps.length) {
-          setProgressStep(steps[stepIndex]);
-        }
-      }, 350);
+        if (stepIndex < steps.length) setProgressStep(steps[stepIndex]);
+      }, 420);
 
       const report = await runUniversalAudit(inputVal, selectedCategory);
-
       clearInterval(interval);
       setStatus('success');
-      setProgressStep('Complete!');
-
-      if (onAuditComplete) {
-        onAuditComplete(report);
-      }
+      setProgressStep('Complete');
+      onAuditComplete?.(report);
     } catch (err: unknown) {
       setStatus('error');
       setErrorMessage(
         err instanceof Error
           ? err.message
-          : 'Unable to scan this target. Please verify URL and try again.'
+          : 'Unable to scan this target. Please verify input and try again.'
       );
     }
   };
 
-  const handlePrefill = (example: string) => {
-    setInputVal(example);
-  };
-
   return (
-    <div className={`w-full max-w-4xl mx-auto ${className}`}>
-      {/* Category Tabs */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none mb-3">
-        {PHASE1_CATEGORIES.map((cat) => {
+    <div className={`w-full max-w-5xl mx-auto ${className}`}>
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-3 scrollbar-none mb-3">
+        {categories.map((cat) => {
           const isActive = selectedCategory === cat;
+          const meta = getToolMeta(cat);
           return (
             <button
               key={cat}
@@ -173,28 +158,47 @@ export function DezoToolScanner({
                 setErrorMessage(null);
                 if (status === 'error') setStatus('idle');
               }}
-              className={`px-3 py-1.5 rounded-dezo-md text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
+              className={`relative px-3 py-1.5 rounded-dezo-md text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
                 isActive
                   ? 'bg-dezo-primary text-white'
                   : 'bg-dezo-surface border border-dezo-border text-dezo-text-secondary hover:text-dezo-text-primary hover:border-dezo-border-strong'
               }`}
             >
               {CATEGORY_META[cat].name}
+              {meta.availability === 'demo' && (
+                <span
+                  className={`ml-1.5 text-[9px] uppercase tracking-wider ${
+                    isActive ? 'text-white/80' : 'text-dezo-highlight'
+                  }`}
+                >
+                  Demo
+                </span>
+              )}
             </button>
           );
         })}
       </div>
 
-      {/* Main Scanner Box */}
-      <div className="p-4 sm:p-6 rounded-dezo-xl bg-dezo-surface border border-dezo-border shadow-dezo-card relative overflow-hidden backdrop-blur-xl">
+      <motion.div
+        layout={!reduced}
+        className="p-4 sm:p-6 rounded-dezo-xl bg-dezo-surface border border-dezo-border shadow-dezo-card relative overflow-hidden"
+      >
+        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-dezo-primary via-dezo-highlight to-dezo-primary opacity-80" />
+
         <div className="flex flex-col gap-3">
-          <div className="flex items-center justify-between text-xs text-dezo-text-muted">
+          <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-dezo-text-muted">
             <span className="font-semibold text-dezo-text-secondary">
-              Engine: <strong className="text-dezo-accent">{currentMeta.name}</strong>
+              Engine:{' '}
+              <strong className="text-dezo-primary">{currentMeta.name}</strong>
+              {availability === 'demo' && (
+                <span className="ml-2 text-[10px] uppercase tracking-wider text-dezo-highlight font-bold">
+                  Public demo
+                </span>
+              )}
             </span>
-            <div className="flex items-center gap-1.5 text-dezo-text-muted">
-              <ShieldCheck size={13} className="text-emerald-400" />
-              <span>SSRF Protected & Anonymous</span>
+            <div className="flex items-center gap-1.5">
+              <ShieldCheck size={13} className="text-dezo-primary" />
+              <span>SSRF guarded · anonymous</span>
             </div>
           </div>
 
@@ -210,19 +214,20 @@ export function DezoToolScanner({
                 onChange={(e) => setInputVal(e.target.value)}
                 placeholder={currentMeta.placeholder}
                 disabled={status === 'scanning'}
-                className="w-full pl-10 pr-4 py-3 text-sm rounded-dezo-md bg-dezo-bg border border-dezo-border text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none focus:border-dezo-primary focus:ring-1 focus:ring-dezo-primary transition-all disabled:opacity-60"
+                className="w-full pl-10 pr-4 py-3.5 text-sm rounded-dezo-md bg-dezo-bg border border-dezo-border text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none focus:border-dezo-primary focus:ring-1 focus:ring-dezo-primary transition-all disabled:opacity-60"
               />
             </div>
 
-            <button
+            <motion.button
               type="submit"
               disabled={status === 'scanning' || !inputVal.trim()}
-              className="px-6 py-3 rounded-dezo-md bg-dezo-primary hover:bg-dezo-primary-hover active:scale-[0.98] text-white font-semibold text-sm tracking-wide transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
+              whileTap={reduced ? undefined : { scale: 0.98 }}
+              className="px-6 py-3.5 rounded-dezo-md bg-dezo-primary hover:bg-dezo-primary-hover text-white font-semibold text-sm tracking-wide transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
             >
               {status === 'scanning' ? (
                 <>
                   <Loader2 size={16} className="animate-spin text-white" />
-                  <span>Scanning...</span>
+                  <span>Analyzing…</span>
                 </>
               ) : (
                 <>
@@ -230,47 +235,51 @@ export function DezoToolScanner({
                   <ArrowRight size={15} />
                 </>
               )}
-            </button>
+            </motion.button>
           </form>
 
-          {/* Quick Prefill & Description */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs text-dezo-text-muted gap-2 pt-1 border-t border-dezo-border/40">
-            <span className="text-[11px] leading-relaxed line-clamp-1">{currentMeta.description}</span>
+            <span className="text-[11px] leading-relaxed">{currentMeta.description}</span>
             <button
               type="button"
-              onClick={() => handlePrefill(currentMeta.example)}
-              className="text-[11px] font-medium text-dezo-accent hover:underline flex items-center gap-1 shrink-0 cursor-pointer text-left"
+              onClick={() => setInputVal(currentMeta.example)}
+              className="text-[11px] font-medium text-dezo-primary hover:underline flex items-center gap-1 shrink-0 cursor-pointer text-left"
             >
               <Sparkles size={11} />
-              <span>Try example: {currentMeta.example}</span>
+              <span>Try example</span>
             </button>
           </div>
         </div>
 
-        {/* Scan Progress Bar & Message */}
-        {status === 'scanning' && (
-          <div className="mt-4 p-3 rounded-dezo-sm bg-dezo-bg/70 border border-dezo-border flex items-center gap-3 animate-pulse">
-            <Loader2 size={16} className="animate-spin text-dezo-accent shrink-0" />
-            <div className="flex flex-col gap-0.5 flex-1">
-              <span className="text-xs font-semibold text-dezo-text-primary">
-                Running 42 Multi-Engine Diagnostics
-              </span>
-              <span className="text-[11px] text-dezo-text-muted font-mono">{progressStep}</span>
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {status === 'scanning' && (
+            <motion.div
+              initial={reduced ? false : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="mt-4 p-3 rounded-dezo-sm bg-dezo-accent-soft/50 border border-dezo-border flex items-center gap-3"
+            >
+              <Loader2 size={16} className="animate-spin text-dezo-primary shrink-0" />
+              <div className="flex flex-col gap-0.5 flex-1">
+                <span className="text-xs font-semibold text-dezo-text-primary">
+                  Running {currentMeta.name}
+                </span>
+                <span className="text-[11px] text-dezo-text-muted font-mono">{progressStep}</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        {/* Error Notification */}
         {status === 'error' && (
           <div className="mt-4 p-3 rounded-dezo-sm bg-red-50 border border-red-200 flex items-start gap-2.5 text-red-800 text-xs">
             <AlertCircle size={15} className="text-red-600 shrink-0 mt-0.5" />
             <div>
-              <strong className="font-semibold block text-red-900">Scan Incomplete</strong>
+              <strong className="font-semibold block text-red-900">Scan incomplete</strong>
               <span>{errorMessage}</span>
             </div>
           </div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 }

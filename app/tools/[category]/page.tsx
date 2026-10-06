@@ -196,6 +196,10 @@ export default function CategoryToolPage() {
           {!activeReport ? (
             <DezoToolScanner
               initialCategory={categorySlug}
+              categories={
+                // Allow any catalog tool on its dedicated route
+                [categorySlug]
+              }
               onAuditComplete={(rep) => {
                 setActiveReport(rep);
                 window.scrollTo({ top: 300, behavior: 'smooth' });

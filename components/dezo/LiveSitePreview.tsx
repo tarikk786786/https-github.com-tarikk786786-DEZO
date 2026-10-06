@@ -1,12 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-
-/** Free public screenshot proxy used by many portfolios (WordPress mShots). */
-export function livePreviewSrc(url: string, width = 1200) {
-  const encoded = encodeURIComponent(url);
-  return `https://s0.wp.com/mshots/v1/${encoded}?w=${width}`;
-}
+import { previewPathForUrl } from '@/content/work-previews';
 
 export function cleanHost(url: string) {
   return url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
@@ -16,7 +11,6 @@ export function LiveSitePreview({
   url,
   title,
   className = '',
-  width = 1200,
   eager = false,
 }: {
   url: string;
@@ -25,26 +19,28 @@ export function LiveSitePreview({
   width?: number;
   eager?: boolean;
 }) {
-  const [failed, setFailed] = useState(false);
+  const local = previewPathForUrl(url);
+  const [failed, setFailed] = useState(!local);
   const host = cleanHost(url);
 
-  if (failed) {
+  if (failed || !local) {
     return (
       <div
-        className={`flex flex-col items-center justify-center bg-gradient-to-br from-dezo-bg-warm via-white to-dezo-accent-soft/40 ${className}`}
+        className={`flex flex-col items-center justify-center bg-gradient-to-br from-dezo-bg-warm via-white to-dezo-accent-soft/50 px-6 text-center ${className}`}
+        style={{ minHeight: '100%' }}
       >
         <p className="font-display text-lg sm:text-xl font-bold text-dezo-text-primary mb-1">
           {title}
         </p>
         <p className="font-mono text-xs text-dezo-primary">{host}</p>
-        <p className="text-[11px] text-dezo-text-muted mt-3">Live site · open to view</p>
+        <p className="text-[11px] text-dezo-text-muted mt-3">Live production site</p>
       </div>
     );
   }
 
   return (
     <img
-      src={livePreviewSrc(url, width)}
+      src={local}
       alt={`${title} live website preview`}
       loading={eager ? 'eager' : 'lazy'}
       onError={() => setFailed(true)}

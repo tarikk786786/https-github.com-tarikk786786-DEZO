@@ -10,7 +10,7 @@ export interface ProjectItem {
 
 export const portfolioData: ProjectItem[] = [
   // Education
-  { title: "Great India Public School", url: "https://greatindiapublicschool.org/", category: "Education", isLive: true, metric: "Live education site" },
+  { title: "Great India Public School", url: "https://greatindiapublicschool.org/", category: "Education", isLive: true, featured: true, metric: "Live education site", description: "Admissions-focused school website with clear programs and inquiry pathways." },
   { title: "Sorobana Abacus Academy", url: "https://www.sorobanabacusacademy.com/", category: "Education", isLive: true },
   { title: "Babusirs Group Tuitions", url: "https://babusirsgrouptuitions.com", category: "Education", isLive: true },
   { title: "Smart Bankers Institute", url: "https://smartbankersinstitute.com/", category: "Education", isLive: true },

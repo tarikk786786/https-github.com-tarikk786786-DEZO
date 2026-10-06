@@ -359,7 +359,7 @@ export function DezoQualificationFunnel() {
                   Where should we send your strategic audit?
                 </h3>
                 <p className="text-xs text-dezo-text-secondary">
-                  Direct connection with Director Tarik Islam & CEO Rohan Sanap.
+                  Direct connection with Founder & CEO Tarik Islam.
                 </p>
               </div>
 

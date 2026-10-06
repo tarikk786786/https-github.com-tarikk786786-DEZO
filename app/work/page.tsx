@@ -4,31 +4,62 @@ import { DezoContainer } from '@/components/dezo/DezoContainer';
 import { DezoHeading } from '@/components/dezo/DezoHeading';
 import { DezoSection } from '@/components/dezo/DezoSection';
 import { DezoWorkGallery } from '@/components/dezo/DezoWorkGallery';
+import { DezoFeaturedWork } from '@/components/dezo/DezoFeaturedWork';
+import { DezoReveal } from '@/lib/motion/MotionAdapter';
 import { constructMetadata } from '@/lib/seo/metadata';
+import { portfolioData } from '@/content/projects';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Client Work & Portfolio',
+  title: 'Work — Live Client Deployments',
   description:
-    'Explore 100+ verified live websites, ecommerce architectures, and digital portals engineered by DEZO.',
+    'Browse DEZO’s live client deployments across ecommerce, healthcare, education, corporate, and more — real URLs with live previews.',
   canonicalUrl: 'https://dezo.in/work',
 });
 
 export default function WorkPage() {
+  const liveCount = portfolioData.filter((p) => p.isLive).length;
+  const featuredPriority = [
+    'yasanabeautyrituals.in',
+    'sonvicasarees.com',
+    'thepaanluxe.com',
+    'shreeayurved.com',
+    'nilkanthpaints.com',
+    'greatindiapublicschool.org',
+  ];
+  const featured = portfolioData
+    .filter((p) => p.featured && p.isLive)
+    .sort((a, b) => {
+      const ai = featuredPriority.findIndex((h) => a.url.includes(h));
+      const bi = featuredPriority.findIndex((h) => b.url.includes(h));
+      return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+    });
+
   return (
     <div className="pt-28 sm:pt-36 pb-20">
       <DezoSection spacing="compact">
         <DezoContainer size="wide">
-          <div className="max-w-3xl mb-12">
-            <DezoHeading
-              badge="Portfolio"
-              as="h1"
-              subtitle="Browse through over 100 live client deployments across retail, healthcare, corporate, real estate, and education."
-            >
-              Proven Results Across Real Industries
-            </DezoHeading>
+          <DezoReveal>
+            <div className="max-w-3xl mb-14">
+              <DezoHeading
+                badge="Work"
+                as="h1"
+                subtitle={`${liveCount}+ live URLs in our public archive. Featured sites below are production websites with clickable previews — not invented case studies.`}
+              >
+                Proof you can click
+              </DezoHeading>
+            </div>
+          </DezoReveal>
+
+          <div className="mb-20">
+            <DezoFeaturedWork projects={featured} />
           </div>
 
-          <DezoWorkGallery initialLimit={18} />
+          <DezoReveal>
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-dezo-text-primary mb-8 tracking-tight">
+              Full live archive
+            </h2>
+          </DezoReveal>
+          <DezoWorkGallery initialLimit={18} featuredFirst />
         </DezoContainer>
       </DezoSection>
     </div>

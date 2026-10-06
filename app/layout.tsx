@@ -1,16 +1,32 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Syne, Manrope, JetBrains_Mono } from 'next/font/google';
 import '@/design-system/globals.css';
 import { constructMetadata } from '@/lib/seo/metadata';
 import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/seo/jsonld';
 import { SmoothScrollProvider } from '@/lib/motion/SmoothScrollProvider';
 import { DezoNavigation } from '@/components/dezo/DezoNavigation';
 import { DezoFooter } from '@/components/dezo/DezoFooter';
+import { DezoPageShell } from '@/components/dezo/DezoPageShell';
 
-const inter = Inter({
+const syne = Syne({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-sans',
+  variable: '--font-syne',
+  weight: ['500', '600', '700', '800'],
+});
+
+const manrope = Manrope({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-manrope',
+  weight: ['400', '500', '600', '700', '800'],
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-jetbrains',
+  weight: ['400', '500', '600'],
 });
 
 export const metadata: Metadata = constructMetadata();
@@ -24,9 +40,12 @@ export default function RootLayout({
   const webSiteSchema = generateWebSiteSchema();
 
   return (
-    <html lang="en" className={`${inter.variable} dark`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${syne.variable} ${manrope.variable} ${jetbrains.variable}`}
+      suppressHydrationWarning
+    >
       <head>
-        {/* Organization & WebSite JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
@@ -36,10 +55,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
         />
       </head>
-      <body className="min-h-screen bg-dezo-bg text-dezo-text-primary antialiased selection:bg-dezo-primary selection:text-white flex flex-col justify-between">
+      <body className="min-h-screen bg-dezo-bg text-dezo-text-primary antialiased selection:bg-dezo-primary selection:text-white flex flex-col justify-between font-sans">
         <SmoothScrollProvider>
           <DezoNavigation />
-          <main className="flex-1 w-full">{children}</main>
+          <main className="flex-1 w-full">
+            <DezoPageShell>{children}</DezoPageShell>
+          </main>
           <DezoFooter />
         </SmoothScrollProvider>
       </body>

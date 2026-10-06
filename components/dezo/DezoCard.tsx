@@ -20,7 +20,7 @@ export function DezoCard({
         interactive
           ? 'hover:border-dezo-border-strong hover:bg-dezo-surface-hover hover:-translate-y-1'
           : ''
-      } ${glow ? 'shadow-dezo-card hover:shadow-dezo-glow' : ''} ${className}`}
+      } ${glow ? 'shadow-dezo-card' : ''} ${className}`}
       {...props}
     >
       {children}

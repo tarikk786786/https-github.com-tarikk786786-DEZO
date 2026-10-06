@@ -10,16 +10,16 @@ export interface ProjectItem {
 
 export const portfolioData: ProjectItem[] = [
   // Education
-  { title: "Great India Public School", url: "https://greatindiapublicschool.org/", category: "Education", isLive: true, metric: "240% Admissions Inquiries" },
+  { title: "Great India Public School", url: "https://greatindiapublicschool.org/", category: "Education", isLive: true, featured: true, metric: "Live education site", description: "Admissions-focused school website with clear programs and inquiry pathways." },
   { title: "Sorobana Abacus Academy", url: "https://www.sorobanabacusacademy.com/", category: "Education", isLive: true },
   { title: "Babusirs Group Tuitions", url: "https://babusirsgrouptuitions.com", category: "Education", isLive: true },
   { title: "Smart Bankers Institute", url: "https://smartbankersinstitute.com/", category: "Education", isLive: true },
   
   // Beauty & Fashion
-  { title: "Yasana Beauty Rituals", url: "https://yasanabeautyrituals.in/", category: "Beauty & Fashion", isLive: true, featured: true, metric: "4.2x ROAS on Meta Ads" },
+  { title: "Yasana Beauty Rituals", url: "https://yasanabeautyrituals.in/", category: "Beauty & Fashion", isLive: true, featured: true, metric: "Live D2C storefront", description: "Brand-led ecommerce storefront with product storytelling and Meta-ready creative surfaces." },
   { title: "Aura Mantra", url: "https://auramantra.co/", category: "Beauty & Fashion", isLive: true },
   { title: "Zavique", url: "https://zavique.in/", category: "Beauty & Fashion", isLive: true },
-  { title: "Sonvica Sarees", url: "https://sonvicasarees.com/", category: "Beauty & Fashion", isLive: true, featured: true, metric: "+180% Direct Orders" },
+  { title: "Sonvica Sarees", url: "https://sonvicasarees.com/", category: "Beauty & Fashion", isLive: true, featured: true, metric: "Live ethnic wear store", description: "Direct-order commerce experience for ethnic wear with craft-forward product hierarchy." },
   { title: "Bloom Blush Beauty", url: "https://bloomblushbeauty.com/", category: "Beauty & Fashion", isLive: true },
   { title: "Vientro", url: "https://vientro.co/", category: "Beauty & Fashion", isLive: true },
   { title: "Glamifyra", url: "https://glamifyra.co/", category: "Beauty & Fashion", isLive: true },
@@ -65,7 +65,7 @@ export const portfolioData: ProjectItem[] = [
   { title: "Beautenza", url: "https://beautenza.in", category: "Beauty & Fashion", isLive: true },
   
   // Healthcare
-  { title: "Shree Ayurved", url: "https://www.shreeayurved.com/", category: "Healthcare", isLive: true, featured: true, metric: "Top 3 Google Rank in 60 Days" },
+  { title: "Shree Ayurved", url: "https://www.shreeayurved.com/", category: "Healthcare", isLive: true, featured: true, metric: "Live healthcare brand site", description: "SEO-forward Ayurveda brand site built for trust and organic discovery." },
   { title: "Shree Ayurveda", url: "https://shreeayurveda.co.in", category: "Healthcare", isLive: true },
   { title: "Neuro Ayurgenix", url: "https://neuroayurgenix.com", category: "Healthcare", isLive: true },
   { title: "BioBonz", url: "https://biobonz.com/", category: "Healthcare", isLive: true },
@@ -83,7 +83,7 @@ export const portfolioData: ProjectItem[] = [
   { title: "Deep Calm", url: "https://deepcalm.in", category: "Healthcare", isLive: true },
 
   // Corporate
-  { title: "Nilkanth Paints", url: "https://nilkanthpaints.com/", category: "Corporate", isLive: true, featured: true, metric: "Enterprise Portal Revamp" },
+  { title: "Nilkanth Paints", url: "https://nilkanthpaints.com/", category: "Corporate", isLive: true, featured: true, metric: "Live enterprise portal", description: "Corporate web system for product and dealer communication with clearer commercial navigation." },
   { title: "AFK Advisors", url: "https://afkadvisors.in/", category: "Corporate", isLive: true },
   { title: "Agrowusha Global", url: "https://agrowushaglobal.com/", category: "Corporate", isLive: true },
   { title: "EVTeker Europe", url: "https://evtekereurope.com", category: "Corporate", isLive: true },
@@ -128,7 +128,7 @@ export const portfolioData: ProjectItem[] = [
   { title: "Shri Sairam Homes", url: "https://shrisairamhomes.com", category: "Real Estate", isLive: true },
 
   // Ecommerce
-  { title: "The Paan Luxe", url: "https://thepaanluxe.com", category: "Ecommerce", isLive: true, featured: true, metric: "D2C Architecture & Scale" },
+  { title: "The Paan Luxe", url: "https://thepaanluxe.com", category: "Ecommerce", isLive: true, featured: true, metric: "Live D2C ecommerce", description: "D2C commerce architecture for a specialty lifestyle brand with conversion-focused storefront UX." },
   { title: "Pradiyas", url: "https://pradiyas.com", category: "Ecommerce", isLive: true },
   { title: "Kadence", url: "https://kadence.in/", category: "Ecommerce", isLive: true },
   { title: "Official Watches", url: "https://www.officialwatches.com/", category: "Ecommerce", isLive: true },

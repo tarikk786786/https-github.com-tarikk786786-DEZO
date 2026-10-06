@@ -96,7 +96,7 @@ export function qualifyLead(input: LeadQualificationInput): QualifiedLeadResult 
     },
     recommendedNextAction:
       priority === 'Immediate Executive'
-        ? 'Direct consultation with Director Tarik Islam / CEO Rohan Sanap within 4 hours.'
+        ? 'Direct consultation with Founder & CEO Tarik Islam within 4 hours.'
         : 'Strategic audit roadmap shared within 24 business hours.',
   };
 }

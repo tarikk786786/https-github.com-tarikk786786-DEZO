@@ -2,18 +2,25 @@
 
 import React, { useState, useMemo } from 'react';
 import { Search } from 'lucide-react';
-import { portfolioData, projectCategories, ProjectItem } from '@/content/projects';
+import { portfolioData, projectCategories } from '@/content/projects';
 import { DezoCaseStudy } from './DezoCaseStudy';
 import { DezoButton } from './DezoButton';
+import { DezoStagger, DezoStaggerItem } from '@/lib/motion/MotionAdapter';
 
-export function DezoWorkGallery({ initialLimit = 9 }: { initialLimit?: number }) {
+export function DezoWorkGallery({
+  initialLimit = 9,
+  featuredFirst = false,
+}: {
+  initialLimit?: number;
+  featuredFirst?: boolean;
+}) {
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [displayCount, setDisplayCount] = useState<number>(initialLimit);
 
   const filteredProjects = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
-    return portfolioData.filter((item) => {
+    let list = portfolioData.filter((item) => {
       const matchCategory =
         activeCategory === 'All' || item.category === activeCategory;
       const matchSearch =
@@ -22,18 +29,22 @@ export function DezoWorkGallery({ initialLimit = 9 }: { initialLimit?: number })
         item.category.toLowerCase().includes(query) ||
         item.url.toLowerCase().includes(query);
 
-      return matchCategory && matchSearch;
+      return matchCategory && matchSearch && item.isLive;
     });
-  }, [activeCategory, searchQuery]);
+
+    if (featuredFirst) {
+      list = [...list].sort((a, b) => Number(!!b.featured) - Number(!!a.featured));
+    }
+
+    return list;
+  }, [activeCategory, searchQuery, featuredFirst]);
 
   const visibleProjects = filteredProjects.slice(0, displayCount);
   const hasMore = displayCount < filteredProjects.length;
 
   return (
     <div className="w-full flex flex-col gap-8">
-      {/* Search & Category Filter Controls */}
       <div className="flex flex-col gap-6">
-        {/* Search Bar */}
         <div className="relative max-w-md w-full mx-auto sm:mx-0">
           <Search
             size={16}
@@ -45,24 +56,24 @@ export function DezoWorkGallery({ initialLimit = 9 }: { initialLimit?: number })
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by client or keyword..."
             aria-label="Search projects"
-            className="w-full bg-dezo-surface border border-dezo-border focus:border-dezo-primary rounded-full pl-11 pr-5 py-3 text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none transition-colors"
+            className="w-full bg-dezo-surface border border-dezo-border focus:border-dezo-primary rounded-dezo-md pl-11 pr-5 py-3 text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none transition-colors"
           />
         </div>
 
-        {/* Category Pill Filters */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
           {projectCategories.map((category) => {
             const isSelected = activeCategory === category;
             return (
               <button
                 key={category}
+                type="button"
                 onClick={() => {
                   setActiveCategory(category);
                   setDisplayCount(initialLimit);
                 }}
-                className={`shrink-0 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                className={`shrink-0 px-3.5 py-2 rounded-dezo-md text-xs font-semibold uppercase tracking-wider transition-colors duration-200 cursor-pointer ${
                   isSelected
-                    ? 'bg-dezo-primary text-white shadow-md'
+                    ? 'bg-dezo-primary text-white'
                     : 'bg-dezo-surface hover:bg-dezo-surface-hover text-dezo-text-secondary hover:text-dezo-text-primary border border-dezo-border'
                 }`}
               >
@@ -73,13 +84,17 @@ export function DezoWorkGallery({ initialLimit = 9 }: { initialLimit?: number })
         </div>
       </div>
 
-      {/* Grid of Case Studies */}
       {visibleProjects.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <DezoStagger
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          stagger={0.06}
+        >
           {visibleProjects.map((project, index) => (
-            <DezoCaseStudy key={`${project.title}-${index}`} project={project} />
+            <DezoStaggerItem key={`${project.title}-${index}`}>
+              <DezoCaseStudy project={project} />
+            </DezoStaggerItem>
           ))}
-        </div>
+        </DezoStagger>
       ) : (
         <div className="py-20 text-center flex flex-col items-center justify-center gap-3 bg-dezo-surface rounded-dezo-lg border border-dezo-border">
           <p className="text-base font-semibold text-dezo-text-primary">
@@ -101,7 +116,6 @@ export function DezoWorkGallery({ initialLimit = 9 }: { initialLimit?: number })
         </div>
       )}
 
-      {/* Load More Button */}
       {hasMore && (
         <div className="flex justify-center pt-8">
           <DezoButton

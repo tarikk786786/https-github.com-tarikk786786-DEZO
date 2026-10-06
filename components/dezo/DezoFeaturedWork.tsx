@@ -6,14 +6,7 @@ import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import { ProjectItem } from '@/content/projects';
 import { DezoStagger, DezoStaggerItem, DezoHoverLift } from '@/lib/motion/MotionAdapter';
 import { DezoButton } from './DezoButton';
-
-function previewUrl(url: string, width = 1200, crop = 750) {
-  return `https://image.thum.io/get/width/${width}/crop/${crop}/noanimate/${url}`;
-}
-
-function cleanHost(url: string) {
-  return url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
-}
+import { LiveSitePreview, cleanHost } from './LiveSitePreview';
 
 export function DezoFeaturedWork({
   projects,
@@ -26,7 +19,6 @@ export function DezoFeaturedWork({
 
   return (
     <div className="w-full flex flex-col gap-8 lg:gap-10">
-      {/* Lead featured — large live preview */}
       <DezoHoverLift>
         <a
           href={lead.url}
@@ -36,14 +28,15 @@ export function DezoFeaturedWork({
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[280px] lg:min-h-[380px]">
             <div className="lg:col-span-7 relative bg-dezo-bg-warm overflow-hidden min-h-[220px]">
-              <img
-                src={previewUrl(lead.url, 1400, 900)}
-                alt={`${lead.title} live website`}
-                loading="eager"
+              <LiveSitePreview
+                url={lead.url}
+                title={lead.title}
+                width={1400}
+                eager
                 className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-dezo-ink/25 via-transparent to-transparent opacity-60" />
-              <span className="absolute top-4 left-4 text-[10px] font-semibold uppercase tracking-wider bg-white/95 text-dezo-primary px-2.5 py-1 rounded-dezo-sm">
+              <div className="absolute inset-0 bg-gradient-to-t from-dezo-ink/20 via-transparent to-transparent opacity-50 pointer-events-none" />
+              <span className="absolute top-4 left-4 z-10 text-[10px] font-semibold uppercase tracking-wider bg-white/95 text-dezo-primary px-2.5 py-1 rounded-dezo-sm">
                 Live site
               </span>
             </div>
@@ -64,14 +57,17 @@ export function DezoFeaturedWork({
                 <p className="text-sm font-medium text-dezo-text-primary">{lead.metric}</p>
               )}
               <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-dezo-primary mt-2">
-                Visit live website <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                Visit live website{' '}
+                <ArrowUpRight
+                  size={16}
+                  className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
               </span>
             </div>
           </div>
         </a>
       </DezoHoverLift>
 
-      {/* Secondary featured grid */}
       {rest.length > 0 && (
         <DezoStagger className="grid grid-cols-1 md:grid-cols-2 gap-6" stagger={0.1}>
           {rest.map((project) => (
@@ -84,13 +80,12 @@ export function DezoFeaturedWork({
                   className="group flex flex-col h-full rounded-dezo-lg overflow-hidden border border-dezo-border bg-dezo-surface"
                 >
                   <div className="relative h-52 sm:h-56 overflow-hidden bg-dezo-bg-warm">
-                    <img
-                      src={previewUrl(project.url)}
-                      alt={`${project.title} live preview`}
-                      loading="lazy"
+                    <LiveSitePreview
+                      url={project.url}
+                      title={project.title}
                       className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
                     />
-                    <span className="absolute top-3 left-3 text-[10px] font-semibold uppercase tracking-wider bg-white/95 text-dezo-primary px-2 py-0.5 rounded-dezo-sm">
+                    <span className="absolute top-3 left-3 z-10 text-[10px] font-semibold uppercase tracking-wider bg-white/95 text-dezo-primary px-2 py-0.5 rounded-dezo-sm">
                       Live
                     </span>
                   </div>
@@ -156,13 +151,12 @@ export function DezoCaseStudyStrip({
                 rel="noopener noreferrer"
                 className="relative block h-44 sm:h-52 overflow-hidden bg-dezo-bg-warm group"
               >
-                <img
-                  src={previewUrl(study.url)}
-                  alt={`${study.title} live website`}
-                  loading="lazy"
+                <LiveSitePreview
+                  url={study.url}
+                  title={study.title}
                   className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
                 />
-                <span className="absolute top-3 left-3 text-[10px] font-semibold uppercase tracking-wider bg-white/95 text-dezo-primary px-2 py-0.5 rounded-dezo-sm">
+                <span className="absolute top-3 left-3 z-10 text-[10px] font-semibold uppercase tracking-wider bg-white/95 text-dezo-primary px-2 py-0.5 rounded-dezo-sm">
                   Live case study
                 </span>
               </a>

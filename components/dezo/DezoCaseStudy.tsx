@@ -1,7 +1,10 @@
+'use client';
+
 import React from 'react';
 import { ExternalLink } from 'lucide-react';
 import { ProjectItem } from '@/content/projects';
 import { DezoHoverLift } from '@/lib/motion/MotionAdapter';
+import { LiveSitePreview, cleanHost } from './LiveSitePreview';
 
 interface DezoCaseStudyProps {
   project: ProjectItem;
@@ -9,7 +12,6 @@ interface DezoCaseStudyProps {
 }
 
 export function DezoCaseStudy({ project, className = '' }: DezoCaseStudyProps) {
-  const cleanUrl = project.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
   const isClickable = project.url && project.url !== '#';
 
   return (
@@ -17,14 +19,14 @@ export function DezoCaseStudy({ project, className = '' }: DezoCaseStudyProps) {
       <article className="group relative flex flex-col justify-between h-full rounded-dezo-lg bg-dezo-surface border border-dezo-border p-5 sm:p-6 transition-colors duration-200 hover:border-dezo-primary/35">
         <div>
           <div className="relative w-full h-44 sm:h-52 mb-5 rounded-dezo-md overflow-hidden bg-dezo-bg-warm border border-dezo-border/60">
-            <img
-              src={`https://image.thum.io/get/width/900/crop/650/noanimate/${project.url}`}
-              alt={`${project.title} live website preview`}
-              loading="lazy"
+            <LiveSitePreview
+              url={project.url}
+              title={project.title}
+              width={900}
               className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             />
             {project.isLive && (
-              <span className="absolute top-2.5 left-2.5 text-[10px] font-semibold uppercase tracking-wider bg-white/95 text-dezo-primary px-2 py-0.5 rounded-dezo-sm">
+              <span className="absolute top-2.5 left-2.5 z-10 text-[10px] font-semibold uppercase tracking-wider bg-white/95 text-dezo-primary px-2 py-0.5 rounded-dezo-sm">
                 Live
               </span>
             )}
@@ -45,7 +47,9 @@ export function DezoCaseStudy({ project, className = '' }: DezoCaseStudyProps) {
             {project.title}
           </h3>
 
-          <p className="text-xs font-mono text-dezo-text-muted mt-1 truncate">{cleanUrl}</p>
+          <p className="text-xs font-mono text-dezo-text-muted mt-1 truncate">
+            {cleanHost(project.url)}
+          </p>
         </div>
 
         <div className="mt-5 pt-4 border-t border-dezo-border flex items-center justify-between">

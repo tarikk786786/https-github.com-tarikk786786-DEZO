@@ -323,8 +323,8 @@ export default function HomePage() {
           </div>
 
           <DezoStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" stagger={0.07}>
-            {phase1Unique.map((tool) => (
-              <DezoStaggerItem key={tool.name}>
+            {liveToolsHome.map((tool) => (
+              <DezoStaggerItem key={tool.slug}>
                 <Link
                   href={`/tools/${tool.slug}`}
                   className="block h-full p-5 border border-dezo-border rounded-dezo-md bg-dezo-surface hover:border-dezo-primary/40 transition-colors dezo-card-lift"

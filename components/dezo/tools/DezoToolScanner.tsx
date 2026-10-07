@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Search, Loader2, Sparkles, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Search, Loader2, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ToolCategory, UniversalAuditReport } from '@/lib/tools/types';
 import { runUniversalAudit } from '@/lib/tools/engine';
@@ -21,69 +21,69 @@ const CATEGORY_META: Record<
 > = {
   seo: {
     name: 'SEO Audit',
-    placeholder: 'Enter website URL (e.g. brand.in)',
+    placeholder: 'Enter your website URL',
     example: 'https://dezo.in',
-    description: 'Index, canonicals, schema, and crawl hygiene via public probe.',
+    description: 'Titles, indexing signals, and crawl basics from a public check.',
   },
   shopify: {
     name: 'Shopify Audit',
-    placeholder: 'Enter Shopify or custom-domain store URL',
+    placeholder: 'Enter your store URL',
     example: 'https://www.shopify.com',
-    description: 'Storefront health, HTTPS trust, and app-bloat remediation cues.',
+    description: 'Storefront health, HTTPS, and common storefront issues.',
   },
   'page-speed': {
     name: 'Page Speed',
-    placeholder: 'Enter website or landing page URL',
+    placeholder: 'Enter a page URL',
     example: 'https://dezo.in',
-    description: 'Probe TTFB, viewport, and document-weight performance heuristics.',
+    description: 'Load signals: response time, page weight, and mobile basics.',
   },
   keywords: {
     name: 'Keyword Opportunity',
-    placeholder: 'Enter seed keyword (e.g. sambalpuri saree online)',
+    placeholder: 'Enter a seed keyword (e.g. sambalpuri saree online)',
     example: 'sambalpuri saree online',
-    description: 'Client-side India intent clustering — not Keyword Planner volumes.',
+    description: 'India-intent clusters from your keyword — not Google Planner volumes.',
   },
   amazon: {
     name: 'Amazon Listing',
     placeholder: 'Amazon product URL or ASIN',
     example: 'https://www.amazon.in/dp/B0EXAMPLE01',
-    description: 'Public demo checklist — not connected to Amazon SP-API.',
+    description: 'Demo checklist from the listing URL — not connected to Amazon APIs.',
   },
   flipkart: {
     name: 'Flipkart Catalog',
     placeholder: 'Flipkart product URL',
     example: 'https://www.flipkart.com',
-    description: 'Public demo checklist — not connected to Flipkart seller APIs.',
+    description: 'Demo checklist from the product URL — not connected to Flipkart APIs.',
   },
   cro: {
     name: 'CRO Checklist',
-    placeholder: 'Enter storefront, PDP, or checkout URL',
+    placeholder: 'Enter store, product, or checkout URL',
     example: 'https://example.com/cart',
-    description: 'COD trust, shipping clarity, and mobile CTA conversion heuristics.',
+    description: 'Conversion basics: trust, shipping clarity, and mobile CTAs.',
   },
   security: {
     name: 'Security & Headers',
     placeholder: 'Enter domain or URL',
     example: 'https://dezo.in',
-    description: 'HTTPS + public security header observations from a safe probe.',
+    description: 'HTTPS and public security header checks — safe and anonymous.',
   },
   accessibility: {
     name: 'Accessibility',
     placeholder: 'Enter website URL',
     example: 'https://dezo.in',
-    description: 'WCAG-oriented title/viewport heuristics with manual follow-ups.',
+    description: 'Title, viewport, and accessibility cues for a follow-up review.',
   },
   'local-seo': {
     name: 'Local SEO',
     placeholder: 'Business + city (e.g. dental clinic bhubaneswar)',
     example: 'dental clinic bhubaneswar',
-    description: 'Geo keyword + NAP/LocalBusiness readiness for Odisha/India.',
+    description: 'Local search readiness for Odisha and India businesses.',
   },
   brand: {
     name: 'Brand Health',
     placeholder: 'Brand name or domain',
     example: 'dezo.in',
-    description: 'Naming consistency and channel parity heuristics.',
+    description: 'Naming consistency and channel presence checks.',
   },
 };
 
@@ -112,12 +112,12 @@ export function DezoToolScanner({
     setErrorMessage(null);
 
     const steps = [
-      'Validating SSRF boundary...',
+      'Checking your input…',
       availability === 'demo'
-        ? 'Running public marketplace demo heuristics...'
-        : 'Probing public headers & HTML sample...',
-      'Scoring deterministic engine checks...',
-      'Prioritizing P0–P3 remediation...',
+        ? 'Running marketplace demo checklist…'
+        : 'Reading public page signals…',
+      'Scoring findings…',
+      'Ranking what to fix first…',
     ];
 
     try {
@@ -188,17 +188,16 @@ export function DezoToolScanner({
         <div className="flex flex-col gap-3">
           <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-dezo-text-muted">
             <span className="font-semibold text-dezo-text-secondary">
-              Engine:{' '}
               <strong className="text-dezo-primary">{currentMeta.name}</strong>
               {availability === 'demo' && (
                 <span className="ml-2 text-[10px] uppercase tracking-wider text-dezo-highlight font-bold">
-                  Public demo
+                  Demo
                 </span>
               )}
             </span>
             <div className="flex items-center gap-1.5">
               <ShieldCheck size={13} className="text-dezo-primary" />
-              <span>SSRF guarded · anonymous</span>
+              <span>Safe public scan · no login</span>
             </div>
           </div>
 
@@ -245,8 +244,7 @@ export function DezoToolScanner({
               onClick={() => setInputVal(currentMeta.example)}
               className="text-[11px] font-medium text-dezo-primary hover:underline flex items-center gap-1 shrink-0 cursor-pointer text-left"
             >
-              <Sparkles size={11} />
-              <span>Try example</span>
+              <span>Try example →</span>
             </button>
           </div>
         </div>

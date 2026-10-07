@@ -53,40 +53,26 @@ export default function DezoLabPage() {
       <DezoSection spacing="compact">
         <DezoContainer size="wide">
           <DezoReveal>
-            <div className="max-w-3xl mb-4">
+            <div className="max-w-3xl mb-10">
               <DezoHeading
                 badge="DEZO LAB"
                 as="h1"
-                subtitle="Paste a URL. Get a practical score and clear opportunities — then talk to us if you want them fixed."
+                subtitle="Free public checks for your website and storefront. Marketplace tools stay labeled Demo — we never invent seller metrics."
               >
-                Analyst toolkit
+                Check your site in minutes
               </DezoHeading>
             </div>
           </DezoReveal>
-          <p className="text-sm text-dezo-text-muted mb-10 max-w-2xl">
-            Free public diagnostics. Marketplace tools are labeled demo until authorized APIs are
-            available. We do not invent seller metrics.
-          </p>
 
           {!activeReport ? (
             <DezoReveal delay={0.06}>
-              <div className="border border-dezo-border bg-dezo-surface">
-                <div className="border-b border-dezo-border px-5 py-4 sm:px-6">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary">
-                    Run an audit
-                  </p>
-                  <p className="text-sm text-dezo-text-secondary mt-1">
-                    Website, Shopify, SEO, speed, CRO and more — pick a tool below or start here.
-                  </p>
-                </div>
-                <div className="p-4 sm:p-6">
-                  <DezoToolScanner
-                    onAuditComplete={(rep) => {
-                      setActiveReport(rep);
-                      window.scrollTo({ top: 180, behavior: 'smooth' });
-                    }}
-                  />
-                </div>
+              <div className="border border-dezo-border bg-dezo-surface p-4 sm:p-6">
+                <DezoToolScanner
+                  onAuditComplete={(rep) => {
+                    setActiveReport(rep);
+                    window.scrollTo({ top: 180, behavior: 'smooth' });
+                  }}
+                />
               </div>
             </DezoReveal>
           ) : (
@@ -95,14 +81,14 @@ export default function DezoLabPage() {
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border border-dezo-border bg-dezo-surface px-6 py-5">
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary mb-1">
-                      Audit summary
+                      Your results
                     </p>
                     <p className="font-display text-2xl sm:text-3xl text-dezo-text-primary">
                       Score {Math.round(activeReport.overallScore)}
                       <span className="text-dezo-text-muted text-lg"> / 100</span>
                     </p>
                     <p className="text-sm text-dezo-text-secondary mt-1">
-                      {opportunityHint} opportunities found
+                      About {opportunityHint} improvement areas to review below
                     </p>
                   </div>
                   <div className="flex flex-wrap gap-3">
@@ -110,7 +96,7 @@ export default function DezoLabPage() {
                       Fix this with DEZO
                     </DezoButton>
                     <DezoButton href="/contact" variant="outline" size="sm">
-                      Discuss findings
+                      Talk to us
                     </DezoButton>
                   </div>
                 </div>
@@ -130,11 +116,11 @@ export default function DezoLabPage() {
             <DezoReveal>
               <div className="mb-10">
                 <DezoHeading
-                  badge="Tool catalog"
+                  badge="All tools"
                   as="h2"
-                  subtitle="Open a specific diagnostic, or use the scanner above."
+                  subtitle="Prefer a dedicated page? Open any diagnostic below."
                 >
-                  Available diagnostics
+                  Browse the toolkit
                 </DezoHeading>
               </div>
             </DezoReveal>
@@ -178,10 +164,10 @@ export default function DezoLabPage() {
             {demoTools.length > 0 && (
               <div className="mt-14">
                 <h2 className="font-display text-xl text-dezo-text-primary mb-2">
-                  Marketplace · demo mode
+                  Marketplace · demo
                 </h2>
                 <p className="text-sm text-dezo-text-secondary mb-6 max-w-2xl">
-                  Checklist scoring from URL/ASIN shape only — no fabricated seller APIs.
+                  Listing checklists from the public URL only — not connected to seller accounts.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-dezo-border">
                   {demoTools.map((cat) => (

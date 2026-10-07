@@ -20,8 +20,8 @@ import {
 } from '@/lib/motion/MotionAdapter';
 import { PromiseHomeTeaser } from '@/components/promise/PromiseGuaranteeSystem';
 import { CTASection } from '@/components/dezo/visual';
+import { DezoHeroMedia } from '@/components/dezo/DezoHeroMedia';
 import { finalCtaBanner } from '@/content/banners';
-import { heroStillForUrl, heroStillMobileForUrl } from '@/content/work-previews';
 import {
   brand,
   serviceRows,
@@ -37,12 +37,6 @@ import {
 export default function HomePage() {
   /** Homepage shows only image-led featured stories — full archive lives on /work */
   const featured = featuredCaseStudies.slice(0, 3);
-  const heroProofUrl = featured[0]?.url || 'https://yasanabeautyrituals.in/';
-  const heroStill =
-    heroStillForUrl(heroProofUrl) || '/work-previews/yasana-beauty-rituals-hero.jpg';
-  const heroStillMobile =
-    heroStillMobileForUrl(heroProofUrl) ||
-    '/work-previews/yasana-beauty-rituals-hero-mobile.jpg';
   const [hoveredService, setHoveredService] = useState<string | null>(null);
   const [activeGoal, setActiveGoal] = useState(0);
 
@@ -104,38 +98,16 @@ export default function HomePage() {
     <>
       <DezoScrollProgress />
 
-      {/* Hero — text-dominant editorial + chrome-free work still */}
+      {/* Hero — cinematic BUILD→MARKET→GROW shoot + text-dominant UI */}
       <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden bg-dezo-bg-warm">
         <div className="absolute inset-0" aria-hidden>
-          {/* Desktop landscape still */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={heroStill}
-            alt=""
-            width={620}
-            height={480}
-            decoding="async"
-            fetchPriority="high"
-            className="absolute inset-0 hidden h-full w-full object-cover object-[68%_42%] dezo-hero-kenburns sm:block"
-          />
-          {/* Mobile portrait still — intentional crop */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={heroStillMobile}
-            alt=""
-            width={520}
-            height={680}
-            decoding="async"
-            fetchPriority="high"
-            className="absolute inset-0 h-full w-full object-cover object-[62%_38%] dezo-hero-kenburns sm:hidden"
-          />
-          {/* Paper field for type + soft blend into proof image */}
+          <DezoHeroMedia />
+          {/* Paper field keeps DEZO copy dominant over the shoot */}
           <div
             className="absolute inset-0 dezo-hero-atmosphere"
             data-hero-atmosphere
           />
-          {/* Fine editorial grain — atmosphere, not decoration noise */}
-          <div className="absolute inset-0 dezo-hero-grain pointer-events-none opacity-[0.035] mix-blend-multiply" />
+          <div className="absolute inset-0 dezo-hero-grain pointer-events-none opacity-[0.03] mix-blend-multiply" />
         </div>
 
         <DezoContainer size="wide" className="relative z-10 pt-32 pb-12 sm:pb-16 lg:pb-20">

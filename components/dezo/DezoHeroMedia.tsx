@@ -4,20 +4,28 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from '@/lib/motion/useReducedMotion';
 
 const POSTER = '/hero/dezo-hero-poster.jpg';
-const LOOP = '/hero/dezo-hero-loop.mp4';
+const LOOP_WEBM = '/hero/dezo-hero-loop.webm';
+const LOOP_MP4 = '/hero/dezo-hero-loop.mp4';
+const LOOP_MOBILE = '/hero/dezo-hero-loop-mobile.mp4';
 
 /**
- * Full-bleed cinematic hero plane — muted autoplay loop with still poster fallback.
- * No badges/overlays on the media itself; parent supplies brand copy + scrim.
- *
- * LICENSE HOLD: `/public/hero/dezo-hero-*` are unverified stock/generative — do not
- * mount this on production surfaces until `docs/media-license-ledger.md` marks APPROVED.
- * Homepage uses real LiveSitePreview proof instead.
+ * Full-bleed cinematic hero plane — muted autoplay loop from DEZO work assets.
+ * Sharp BUILD → MARKET → GROW plates interleaved with chrome-free project stills.
+ * Poster + reduced-motion fallback; mobile uses lighter 720p encode.
  */
 export function DezoHeroMedia() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const reduced = useReducedMotion();
   const [useVideo, setUseVideo] = useState(false);
+  const [isNarrow, setIsNarrow] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 639px)');
+    const apply = () => setIsNarrow(mq.matches);
+    apply();
+    mq.addEventListener('change', apply);
+    return () => mq.removeEventListener('change', apply);
+  }, []);
 
   useEffect(() => {
     if (reduced) return;
@@ -52,19 +60,20 @@ export function DezoHeroMedia() {
     return () => {
       cancelled = true;
     };
-  }, [reduced]);
+  }, [reduced, isNarrow]);
 
   return (
     <div className="absolute inset-0 overflow-hidden" aria-hidden>
-      {/* Still poster — always present as paint + fallback */}
+      {/* Poster — paint + reduced-motion / autoplay-block fallback */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={POSTER}
         alt=""
-        width={1280}
-        height={720}
+        width={1920}
+        height={1080}
         decoding="async"
         fetchPriority="high"
-        className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700 ${
+        className={`absolute inset-0 h-full w-full object-cover object-[68%_42%] transition-opacity duration-700 ${
           useVideo ? 'opacity-0' : 'opacity-100 dezo-hero-kenburns'
         }`}
       />
@@ -72,7 +81,8 @@ export function DezoHeroMedia() {
       {!reduced && (
         <video
           ref={videoRef}
-          className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700 ${
+          key={isNarrow ? 'mobile' : 'desktop'}
+          className={`absolute inset-0 h-full w-full object-cover object-[68%_42%] sm:object-center transition-opacity duration-700 ${
             useVideo ? 'opacity-100' : 'opacity-0'
           }`}
           poster={POSTER}
@@ -84,7 +94,8 @@ export function DezoHeroMedia() {
           aria-hidden
           tabIndex={-1}
         >
-          <source src={LOOP} type="video/mp4" />
+          {!isNarrow && <source src={LOOP_WEBM} type="video/webm" />}
+          <source src={isNarrow ? LOOP_MOBILE : LOOP_MP4} type="video/mp4" />
         </video>
       )}
     </div>

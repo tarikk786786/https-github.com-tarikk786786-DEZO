@@ -121,9 +121,13 @@ body {
 }
 .dezo-engine-node:hover,
 .dezo-engine-node[data-active='true'] {
-  transform: translateX(4px);
-  border-color: rgba(11, 11, 10, 0.55);
-  box-shadow: 0 10px 28px rgba(11, 11, 10, 0.06);
+  border-color: rgba(11, 11, 10, 0.35);
+}
+@media (max-width: 1023px) {
+  .dezo-engine-node:hover,
+  .dezo-engine-node[data-active='true'] {
+    transform: translateX(4px);
+  }
 }
 
 .dezo-trust-marquee {
@@ -155,6 +159,20 @@ body {
   to {
     transform: translate3d(-1.5%, 1%, 0) scale(1.03);
     opacity: 0.92;
+  }
+}
+
+/* Slow cinematic ken burns on real hero proof media */
+.dezo-hero-kenburns {
+  animation: dezo-kenburns 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes dezo-kenburns {
+  from {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.08) translate3d(-1.5%, -1%, 0);
   }
 }
 
@@ -200,7 +218,8 @@ html.lenis body {
     transform: none;
   }
   .dezo-trust-marquee,
-  .dezo-atmosphere {
+  .dezo-atmosphere,
+  .dezo-hero-kenburns {
     animation: none !important;
   }
 }

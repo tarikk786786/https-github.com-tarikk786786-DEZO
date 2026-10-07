@@ -125,7 +125,7 @@ export function DezoNavigation() {
               </div>
             </div>
 
-            <Link href="/industries" className={linkClass('/industries')}>
+            <Link href="/solutions" className={linkClass('/solutions')}>
               Solutions
             </Link>
             <Link href="/work" className={linkClass('/work')}>
@@ -174,7 +174,7 @@ export function DezoNavigation() {
         <div className="flex flex-col gap-5">
           {[
             ['Services', '/services'],
-            ['Solutions', '/industries'],
+            ['Solutions', '/solutions'],
             ['Work', '/work'],
             ['Lab', '/growth-lab'],
             ['Insights', '/resources'],

@@ -12,6 +12,7 @@ export const brand = {
   supporting:
     'Websites, ecommerce, marketplaces, advertising, SEO, social and brand systems—built to work together.',
   tag: 'BUILD. MARKET. GROW.',
+  companyLabel: 'Digital growth company',
   geo: 'Based in India. Built for businesses everywhere.',
   studioLine: 'Studio in Bhubaneswar, Odisha · Delivery across India',
   positioning:

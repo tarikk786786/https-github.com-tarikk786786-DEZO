@@ -31,10 +31,12 @@ import {
   performancePipeline,
   faqItems,
   leadership,
+  heroChannels,
 } from '@/content/site';
 export default function HomePage() {
   /** Homepage shows only image-led featured stories — full archive lives on /work */
-  const featured = featuredCaseStudies.slice(0, 6);
+  const featured = featuredCaseStudies.slice(0, 5);
+  const capabilityChips = heroChannels.split(' · ');
   const [hoveredService, setHoveredService] = useState<string | null>(null);
   const [activeGoal, setActiveGoal] = useState(0);
 
@@ -103,14 +105,14 @@ export default function HomePage() {
             url={featured[0]?.url || 'https://yasanabeautyrituals.in/'}
             title={featured[0]?.title || 'Featured work'}
             eager
-            className="absolute inset-0 w-full h-full object-cover object-top scale-[1.02] dezo-img-zoom"
+            className="absolute inset-0 w-full h-full object-cover object-top dezo-hero-kenburns"
           />
           <div
             className="absolute inset-0 dezo-atmosphere"
             data-hero-atmosphere
             style={{
               background:
-                'linear-gradient(105deg, rgba(245,243,238,0.96) 0%, rgba(245,243,238,0.88) 38%, rgba(245,243,238,0.45) 62%, rgba(11,11,10,0.28) 100%)',
+                'linear-gradient(105deg, rgba(245,243,238,0.97) 0%, rgba(245,243,238,0.9) 36%, rgba(245,243,238,0.5) 58%, rgba(11,11,10,0.32) 100%)',
             }}
           />
         </div>
@@ -120,9 +122,15 @@ export default function HomePage() {
             <div className="max-w-2xl">
               <p
                 data-hero-item
-                className="font-display text-5xl sm:text-6xl lg:text-7xl tracking-tight text-dezo-text-primary mb-5"
+                className="font-display text-5xl sm:text-6xl lg:text-7xl tracking-tight text-dezo-text-primary mb-3"
               >
                 {brand.name}
+              </p>
+              <p
+                data-hero-item
+                className="text-[11px] font-semibold uppercase tracking-[0.18em] text-dezo-primary mb-5"
+              >
+                {brand.companyLabel}
               </p>
               <h1
                 data-hero-item
@@ -132,9 +140,16 @@ export default function HomePage() {
               </h1>
               <p
                 data-hero-item
-                className="text-base sm:text-lg text-dezo-text-secondary leading-relaxed max-w-lg mb-9"
+                className="text-base sm:text-lg text-dezo-text-secondary leading-relaxed max-w-lg mb-6"
               >
                 {brand.supporting}
+              </p>
+              <p
+                data-hero-item
+                className="font-mono text-[11px] sm:text-xs text-dezo-text-muted tracking-wide mb-9"
+                aria-label="Capabilities"
+              >
+                {capabilityChips.join(' · ')}
               </p>
               <div data-hero-item className="flex flex-wrap gap-3">
                 <DezoMagnetic>
@@ -237,21 +252,21 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* 05 DEZO Engine */}
+      {/* 05 DEZO Engine — signature system (before capability rows) */}
       <DezoSection spacing="normal" className="bg-dezo-surface border-y border-dezo-border">
         <DezoContainer size="wide">
           <DezoEngine />
         </DezoContainer>
       </DezoSection>
 
-      {/* Capabilities rows */}
+      {/* 06 Capabilities — editorial rows */}
       <DezoSection spacing="normal" id="services">
         <DezoContainer size="wide">
           <DezoReveal>
             <DezoHeading
               badge="Capabilities"
               as="h2"
-              subtitle="Service rows—not ten generic cards saying the same thing."
+              subtitle="Editorial service rows—not ten generic cards saying the same thing."
             >
               What we deliver
             </DezoHeading>
@@ -310,61 +325,80 @@ export default function HomePage() {
               View all work
             </DezoButton>
           </div>
-          <div className="flex flex-col gap-20 lg:gap-28">
-            {featured.map((study, i) => (
-              <DezoReveal key={study.url} delay={i * 0.04}>
-                <a
-                  href={study.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block"
-                >
-                  <DezoImageReveal
-                    delay={i * 0.03}
-                    className="relative w-full bg-dezo-bg border border-dezo-border aspect-[16/9] sm:aspect-[21/10] mb-8 lg:mb-10"
+          <div className="flex flex-col gap-24 lg:gap-36">
+            {featured.map((study, i) => {
+              const reverse = i % 2 === 1;
+              return (
+                <DezoReveal key={study.url} delay={i * 0.04}>
+                  <a
+                    href={study.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block"
                   >
-                    <LiveSitePreview
-                      url={study.url}
-                      title={study.title}
-                      eager={i < 2}
-                      className="absolute inset-0 w-full h-full object-cover object-top dezo-img-zoom"
-                    />
-                  </DezoImageReveal>
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12">
-                    <div className="lg:col-span-5">
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary mb-3">
-                        {study.industry}
-                        {study.stack?.length ? ` · ${study.stack.slice(0, 3).join(' · ')}` : ''}
-                      </p>
-                      <h3 className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] tracking-tight text-dezo-text-primary group-hover:text-dezo-primary transition-colors duration-300">
-                        {study.title}
-                      </h3>
-                      <p className="font-mono text-xs text-dezo-text-muted mt-3">
-                        {cleanHost(study.url)}
-                      </p>
+                    <DezoImageReveal
+                      delay={i * 0.03}
+                      className={`relative w-full bg-dezo-bg border border-dezo-border mb-8 lg:mb-10 ${
+                        i === 0
+                          ? 'aspect-[16/10] sm:aspect-[21/9]'
+                          : 'aspect-[16/9] sm:aspect-[21/10]'
+                      }`}
+                    >
+                      <LiveSitePreview
+                        url={study.url}
+                        title={study.title}
+                        eager={i < 2}
+                        className="absolute inset-0 w-full h-full object-cover object-top dezo-img-zoom"
+                      />
+                    </DezoImageReveal>
+                    <div
+                      className={`grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 ${
+                        reverse ? 'lg:[direction:rtl]' : ''
+                      }`}
+                    >
+                      <div className={`lg:col-span-5 ${reverse ? 'lg:[direction:ltr]' : ''}`}>
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary mb-3">
+                          {study.industry}
+                          {study.stack?.length ? ` · ${study.stack.slice(0, 3).join(' · ')}` : ''}
+                        </p>
+                        <h3
+                          className={`font-display tracking-tight text-dezo-text-primary group-hover:text-dezo-primary transition-colors duration-300 ${
+                            i === 0
+                              ? 'text-3xl sm:text-5xl lg:text-[3.25rem]'
+                              : 'text-3xl sm:text-4xl lg:text-[2.75rem]'
+                          }`}
+                        >
+                          {study.title}
+                        </h3>
+                        <p className="font-mono text-xs text-dezo-text-muted mt-3">
+                          {cleanHost(study.url)}
+                        </p>
+                      </div>
+                      <div
+                        className={`lg:col-span-7 space-y-4 ${reverse ? 'lg:[direction:ltr]' : ''}`}
+                      >
+                        <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed">
+                          <span className="font-semibold text-dezo-text-primary">Challenge. </span>
+                          {study.challenge}
+                        </p>
+                        <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed">
+                          <span className="font-semibold text-dezo-text-primary">What we did. </span>
+                          {study.execution}
+                        </p>
+                        <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed">
+                          <span className="font-semibold text-dezo-text-primary">Result. </span>
+                          {study.result}
+                        </p>
+                        <span className="inline-flex items-center gap-1.5 text-sm font-medium text-dezo-text-primary border-b border-dezo-ink pb-0.5 mt-2 group-hover:border-dezo-primary group-hover:text-dezo-primary transition-colors">
+                          Visit live site{' '}
+                          <ArrowUpRight size={14} className="dezo-cta-arrow" />
+                        </span>
+                      </div>
                     </div>
-                    <div className="lg:col-span-7 space-y-4">
-                      <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed">
-                        <span className="font-semibold text-dezo-text-primary">Challenge. </span>
-                        {study.challenge}
-                      </p>
-                      <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed">
-                        <span className="font-semibold text-dezo-text-primary">What we did. </span>
-                        {study.execution}
-                      </p>
-                      <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed">
-                        <span className="font-semibold text-dezo-text-primary">Result. </span>
-                        {study.result}
-                      </p>
-                      <span className="inline-flex items-center gap-1.5 text-sm font-medium text-dezo-text-primary border-b border-dezo-ink pb-0.5 mt-2 group-hover:border-dezo-primary group-hover:text-dezo-primary transition-colors">
-                        Visit live site{' '}
-                        <ArrowUpRight size={14} className="dezo-cta-arrow" />
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              </DezoReveal>
-            ))}
+                  </a>
+                </DezoReveal>
+              );
+            })}
           </div>
         </DezoContainer>
       </DezoSection>
@@ -463,17 +497,13 @@ export default function HomePage() {
               </div>
             </div>
             <div className="lg:col-span-7">
-              <ol className="flex flex-wrap items-center gap-x-2 gap-y-3">
+              <ol className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-5 border-t border-dezo-border pt-6">
                 {performancePipeline.map((step, i) => (
-                  <li key={step} className="flex items-center gap-2">
-                    <span className="border border-dezo-border bg-dezo-bg px-3 py-2 text-xs font-semibold uppercase tracking-wider text-dezo-text-primary">
-                      {step}
+                  <li key={step} className="border-t border-dezo-border/60 pt-3">
+                    <span className="font-mono text-[10px] text-dezo-text-muted">
+                      {String(i + 1).padStart(2, '0')}
                     </span>
-                    {i < performancePipeline.length - 1 && (
-                      <span className="text-dezo-text-muted font-mono text-xs" aria-hidden>
-                        →
-                      </span>
-                    )}
+                    <p className="font-display text-lg text-dezo-text-primary mt-1">{step}</p>
                   </li>
                 ))}
               </ol>
@@ -617,15 +647,15 @@ export default function HomePage() {
                 </li>
               ))}
             </ul>
-            <div className="lg:col-span-7 border border-dezo-border bg-dezo-surface p-6 sm:p-8">
+            <div className="lg:col-span-7 border-t border-dezo-border pt-6 sm:pt-2 lg:border-t-0 lg:border-l lg:pl-10">
               <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary mb-3">
                 Recommended stack
               </p>
-              <h3 className="font-display text-2xl text-dezo-text-primary mb-5">
+              <h3 className="font-display text-2xl sm:text-3xl text-dezo-text-primary mb-5">
                 {goals[activeGoal].label}
               </h3>
               <p className="font-mono text-sm text-dezo-text-secondary leading-relaxed mb-8">
-                {goals[activeGoal].stack.join('  +  ')}
+                {goals[activeGoal].stack.join('  →  ')}
               </p>
               <DezoButton href={goals[activeGoal].href} size="sm" icon={<ArrowUpRight size={14} />}>
                 Build my growth plan
@@ -690,7 +720,34 @@ export default function HomePage() {
       {/* 15 DEZO Standard */}
       <PromiseHomeTeaser />
 
-      {/* 16 About / leadership */}
+      {/* 16 Evidence — verified only, no invented averages */}
+      <DezoSection spacing="normal" className="bg-dezo-bg-warm border-y border-dezo-border">
+        <DezoContainer size="wide">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+            <div className="lg:col-span-7">
+              <DezoReveal>
+                <DezoHeading
+                  badge="Evidence"
+                  as="h2"
+                  subtitle="Results are published per case study when substantiated—not as sitewide vanity averages."
+                >
+                  Proof lives in the work
+                </DezoHeading>
+              </DezoReveal>
+            </div>
+            <div className="lg:col-span-5 flex flex-wrap gap-3 lg:justify-end">
+              <DezoButton href="/work" variant="outline" size="sm">
+                Selected work
+              </DezoButton>
+              <DezoButton href="/results" size="sm">
+                Results
+              </DezoButton>
+            </div>
+          </div>
+        </DezoContainer>
+      </DezoSection>
+
+      {/* 17 About / leadership */}
       <DezoSection spacing="normal">
         <DezoContainer size="wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">

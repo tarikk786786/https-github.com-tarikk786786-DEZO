@@ -9,6 +9,10 @@ const LOOP = '/hero/dezo-hero-loop.mp4';
 /**
  * Full-bleed cinematic hero plane — muted autoplay loop with still poster fallback.
  * No badges/overlays on the media itself; parent supplies brand copy + scrim.
+ *
+ * LICENSE HOLD: `/public/hero/dezo-hero-*` are unverified stock/generative — do not
+ * mount this on production surfaces until `docs/media-license-ledger.md` marks APPROVED.
+ * Homepage uses real LiveSitePreview proof instead.
  */
 export function DezoHeroMedia() {
   const videoRef = useRef<HTMLVideoElement>(null);

@@ -8,7 +8,6 @@ import {
   Zap,
   Eye,
   ArrowRight,
-  Sparkles,
   ShieldCheck,
   MousePointerClick,
   Package,
@@ -122,7 +121,7 @@ export default function DezoLabPage() {
 
           <DezoStagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-dezo-border border border-dezo-border" stagger={0.04}>
             {liveTools.map((cat) => {
-              const Icon = ICONS[cat.slug] || Sparkles;
+              const Icon = ICONS[cat.slug] || Search;
               return (
                 <DezoStaggerItem key={cat.slug}>
                   <Link

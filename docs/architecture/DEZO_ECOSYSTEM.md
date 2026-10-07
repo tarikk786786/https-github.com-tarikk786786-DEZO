@@ -68,6 +68,6 @@ If a provider changes or is replaced, only its respective adapter requires updat
 
 1. **Editorial Typography:** High-contrast clamp headers (`clamp-h1`, `clamp-h2`) with deliberate letter-spacing and hierarchy.
 2. **Aggressive Whitespace:** Sections breathe; no crammed 20-card grids or AI neon gradients.
-3. **Verified Evidence:** All 100+ live client websites in [`content/projects.ts`](file:///C:/Users/tarik/Downloads/DEZO/content/projects.ts) represent real Indian and international businesses.
+3. **Verified Evidence:** Live production websites listed in `content/projects.ts` and `content/work-previews.ts` are real deployments. Never invent volume counts or sitewide ROI averages.
 4. **Progressive Enhancement:** HTML rendered server-side first; JavaScript only layers micro-interactions; zero reliance on client hydration for basic layout legibility.
 5. **Accessibility by Default:** Visible focus rings, keyboard navigability, WCAG 2.1 AA contrast compliance, and full support for `prefers-reduced-motion`.

@@ -7,15 +7,28 @@
 export const brand = {
   name: 'DEZO',
   domain: 'dezo.in',
-  tagline: 'Digital infrastructure for ambitious brands.',
-  heroLine: 'Digital infrastructure for ambitious brands.',
+  tagline: 'Digital infrastructure for ambitious businesses.',
+  heroLine: 'Digital infrastructure for ambitious businesses.',
   supporting:
-    'We build, market and grow businesses across websites, ecommerce, marketplaces, advertising and social media.',
+    'Websites, ecommerce, marketplaces, advertising, SEO, social and brand systems—built to work together.',
   tag: 'BUILD. MARKET. GROW.',
-  geo: 'Built in Odisha. Built for India. Built to scale.',
+  geo: 'Based in India. Built for businesses everywhere.',
+  studioLine: 'Studio in Bhubaneswar, Odisha · Delivery across India',
   positioning:
     'Digital commerce, brand, marketplace and growth company',
   onePartner: 'ONE PARTNER. EVERY DIGITAL TOUCHPOINT.',
+} as const;
+
+/**
+ * Single source of truth for company facts.
+ * Only publish numbers we can substantiate. Live deployment count is derived from portfolioData.
+ * Do not invent clients, ROI, or project totals elsewhere.
+ */
+export const companyFacts = {
+  liveDeploymentsNote: 'Live production websites in our public archive',
+  resultsNote:
+    'Results are published per case study when substantiated—not as sitewide vanity averages.',
+  noFakeClaims: true,
 } as const;
 
 export const leadership = {
@@ -33,6 +46,75 @@ export const leadership = {
     email: 'contact@dezo.in',
   },
 } as const;
+
+/** Five-category capability map for homepage */
+export const touchpointPillars = [
+  {
+    name: 'Build',
+    summary: 'Websites, ecommerce, applications',
+    href: '/services/web-development',
+  },
+  {
+    name: 'Grow',
+    summary: 'SEO, content, organic acquisition',
+    href: '/services/seo',
+  },
+  {
+    name: 'Advertise',
+    summary: 'Google, Meta, retargeting',
+    href: '/services/paid-ads',
+  },
+  {
+    name: 'Sell',
+    summary: 'Amazon, Flipkart, ecommerce',
+    href: '/services/amazon',
+  },
+  {
+    name: 'Brand',
+    summary: 'Identity, creative, social, content',
+    href: '/services/branding',
+  },
+] as const;
+
+/** Signature DEZO Engine flow */
+export const dezoEngine = [
+  'Brand',
+  'Website',
+  'SEO',
+  'Ads',
+  'Amazon / Flipkart',
+  'Conversion',
+  'Analytics',
+  'Scale',
+] as const;
+
+export const aboutHomePoints = [
+  {
+    title: 'Commercial thinking',
+    body: 'Every build and campaign is framed around the business outcome it must support.',
+  },
+  {
+    title: 'Technical execution',
+    body: 'Engineering standards, measurement foundations and QA before scale.',
+  },
+  {
+    title: 'Long-term partnership',
+    body: 'One operating cadence across web, growth and marketplace—not vendor churn.',
+  },
+] as const;
+
+export const heroChannels =
+  'Web · Ecommerce · Amazon · Flipkart · SEO · Meta · Google · Social · Brand' as const;
+
+export const performancePipeline = [
+  'Research',
+  'Tracking',
+  'Creative',
+  'Campaign',
+  'Test',
+  'Optimize',
+  'Report',
+] as const;
 
 export const contact = {
   phone: '+919114411026',
@@ -254,11 +336,15 @@ export const howWeWork = processSteps.map((s, i) => ({
 export const faqItems = [
   {
     q: 'Is DEZO an agency or a platform?',
-    a: 'We operate as a growth partner with agency craft, public DEZO LAB diagnostics, and a Client Portal path for ongoing work.',
+    a: 'We operate as a digital growth company: agency craft, public DEZO LAB diagnostics, and a Client Portal path for ongoing work—connected as one commercial system.',
   },
   {
     q: 'Do you only build websites?',
     a: 'No. Web is one capability. We also run Amazon and Flipkart growth, Meta and Google ads, SEO, social, brand systems, and CRO.',
+  },
+  {
+    q: 'What does DEZO guarantee?',
+    a: 'We guarantee what we control: defined scope, documented deliverables, QA, transparent reporting, implementation accountability and clear communication. We do not guarantee rankings, ROAS, sales or revenue unless a contract explicitly defines those outcomes.',
   },
   {
     q: 'What is DEZO LAB?',
@@ -266,7 +352,7 @@ export const faqItems = [
   },
   {
     q: 'Where are you based?',
-    a: 'Bhubaneswar, Odisha — working with brands across India.',
+    a: 'Studio in Bhubaneswar, Odisha. Built for businesses everywhere.',
   },
 ] as const;
 

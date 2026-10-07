@@ -71,6 +71,11 @@ export function DezoFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/promise" className="hover:text-white">
+                  DEZO Standard
+                </Link>
+              </li>
+              <li>
                 <Link href="/pricing" className="hover:text-white">
                   Pricing
                 </Link>

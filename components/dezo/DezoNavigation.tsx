@@ -6,7 +6,38 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { DezoButton } from './DezoButton';
 import { DezoContainer } from './DezoContainer';
-import { serviceRows, industries } from '@/content/site';
+
+const SERVICE_GROUPS = [
+  {
+    label: 'Build',
+    items: [
+      { name: 'Web Development', href: '/services/web-development' },
+      { name: 'Ecommerce', href: '/services/web-development' },
+      { name: 'Growth Systems', href: '/services/growth-systems' },
+    ],
+  },
+  {
+    label: 'Grow',
+    items: [
+      { name: 'SEO', href: '/services/seo' },
+      { name: 'Brand & Creative', href: '/services/branding' },
+    ],
+  },
+  {
+    label: 'Sell',
+    items: [
+      { name: 'Amazon', href: '/services/amazon' },
+      { name: 'Flipkart', href: '/services/flipkart' },
+    ],
+  },
+  {
+    label: 'Advertise',
+    items: [
+      { name: 'Meta & Google Ads', href: '/services/paid-ads' },
+      { name: 'Social Media', href: '/services/social' },
+    ],
+  },
+] as const;
 
 export function DezoNavigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -53,7 +84,7 @@ export function DezoNavigation() {
             </span>
           </Link>
 
-          <nav aria-label="Primary" className="hidden lg:flex items-center gap-8">
+          <nav aria-label="Primary" className="hidden lg:flex items-center gap-7">
             <div
               className="relative"
               onMouseEnter={() => setServicesOpen(true)}
@@ -66,22 +97,29 @@ export function DezoNavigation() {
                 Services <ChevronDown size={12} />
               </Link>
               <div
-                className={`absolute top-full left-0 w-64 pt-3 transition-opacity ${
+                className={`absolute top-full left-0 pt-3 transition-opacity ${
                   servicesOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
                 }`}
               >
-                <div className="bg-dezo-surface border border-dezo-border shadow-dezo-card p-2 flex flex-col">
-                  {serviceRows.map((s) => (
-                    <Link
-                      key={s.href}
-                      href={s.href}
-                      className="px-3 py-2.5 text-sm text-dezo-text-secondary hover:text-dezo-text-primary hover:bg-dezo-bg transition-colors"
-                    >
-                      <span className="font-mono text-[10px] text-dezo-text-muted mr-2">
-                        {s.num}
-                      </span>
-                      {s.name}
-                    </Link>
+                <div className="bg-dezo-surface border border-dezo-border shadow-dezo-card p-5 w-[28rem] grid grid-cols-2 gap-6">
+                  {SERVICE_GROUPS.map((group) => (
+                    <div key={group.label}>
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-dezo-text-muted mb-2">
+                        {group.label}
+                      </p>
+                      <ul className="flex flex-col gap-1.5">
+                        {group.items.map((item) => (
+                          <li key={item.name}>
+                            <Link
+                              href={item.href}
+                              className="text-sm text-dezo-text-secondary hover:text-dezo-text-primary transition-colors"
+                            >
+                              {item.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -93,6 +131,9 @@ export function DezoNavigation() {
             <Link href="/work" className={linkClass('/work')}>
               Work
             </Link>
+            <Link href="/growth-lab" className={linkClass('/growth-lab')}>
+              Lab
+            </Link>
             <Link href="/resources" className={linkClass('/resources')}>
               Insights
             </Link>
@@ -103,13 +144,13 @@ export function DezoNavigation() {
 
           <div className="hidden lg:flex items-center gap-4">
             <Link
-              href="/growth-lab"
+              href="/promise"
               className="text-[12px] font-medium text-dezo-text-secondary hover:text-dezo-text-primary transition-colors"
             >
-              DEZO LAB
+              Standard
             </Link>
-            <DezoButton href="/contact" size="sm">
-              Let&apos;s Talk
+            <DezoButton href="/start-a-project" size="sm">
+              Start a Project
             </DezoButton>
           </div>
 
@@ -135,24 +176,20 @@ export function DezoNavigation() {
             ['Services', '/services'],
             ['Solutions', '/industries'],
             ['Work', '/work'],
+            ['Lab', '/growth-lab'],
             ['Insights', '/resources'],
             ['About', '/about'],
-            ['DEZO LAB', '/growth-lab'],
-            ['Results', '/results'],
+            ['DEZO Standard', '/promise'],
             ['Contact', '/contact'],
           ].map(([label, href]) => (
-            <Link
-              key={href}
-              href={href}
-              className="font-display text-2xl text-dezo-text-primary"
-            >
+            <Link key={href} href={href} className="font-display text-2xl text-dezo-text-primary">
               {label}
             </Link>
           ))}
         </div>
         <div className="mt-auto pt-8">
-          <DezoButton href="/contact" size="lg" className="w-full">
-            Let&apos;s Talk
+          <DezoButton href="/start-a-project" size="lg" className="w-full">
+            Start a Project
           </DezoButton>
         </div>
       </div>

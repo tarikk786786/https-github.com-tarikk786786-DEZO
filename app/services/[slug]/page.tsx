@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { PlatformPageScaffold } from '@/components/platform/PlatformPageScaffold';
+import { ServicePromiseBlock } from '@/components/promise/ServicePromise';
 import { servicePillars } from '@/content/site';
 import { constructMetadata } from '@/lib/seo/metadata';
 
@@ -149,7 +150,7 @@ export default async function ServiceDetailPage({
             </ul>
           </section>
         </div>
-        <aside className="lg:col-span-5 p-6 rounded-dezo-lg border border-dezo-border bg-dezo-surface h-fit">
+        <aside className="lg:col-span-5 p-6 border border-dezo-border bg-dezo-surface h-fit">
           <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-dezo-primary mb-3">
             How it works
           </p>
@@ -161,6 +162,7 @@ export default async function ServiceDetailPage({
           </ol>
         </aside>
       </div>
+      <ServicePromiseBlock slug={slug} />
     </PlatformPageScaffold>
   );
 }

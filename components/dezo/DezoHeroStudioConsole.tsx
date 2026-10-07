@@ -65,9 +65,9 @@ const NODES: PipelineNode[] = [
     subtitle: 'Server-side attribution & high ROAS',
     category: 'GROWTH',
     icon: TrendingUp,
-    metric: '4.8x',
-    metricLabel: 'Target Portfolio ROAS',
-    badge: 'Zero Signal Loss',
+    metric: 'Tracked',
+    metricLabel: 'Measurement-first campaigns',
+    badge: 'Attribution Ready',
     deliverables: [
       'Meta Conversions API (CAPI) direct telemetry',
       'Google Shopping Performance Max campaigns',

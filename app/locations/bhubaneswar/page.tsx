@@ -1,80 +1,162 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { MapPin, Phone, Mail, CheckCircle2, ArrowUpRight } from 'lucide-react';
 import { DezoContainer } from '@/components/dezo/DezoContainer';
-import { DezoHeading } from '@/components/dezo/DezoHeading';
 import { DezoSection } from '@/components/dezo/DezoSection';
 import { DezoButton } from '@/components/dezo/DezoButton';
+import { ServiceBanner } from '@/components/dezo/visual';
 import { constructMetadata } from '@/lib/seo/metadata';
-import { generateLocalBusinessSchema } from '@/lib/seo/jsonld';
+import {
+  generateLocalBusinessSchema,
+  generateFaqSchema,
+  generateBreadcrumbSchema,
+} from '@/lib/seo/jsonld';
+import { locationBanners } from '@/content/banners';
+import { napCanonical } from '@/content/seo/nap';
+import { serviceRows, contact } from '@/content/site';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Web Development & Digital Growth Agency in Bhubaneswar, Odisha',
+  title: 'Digital Growth Studio in Bhubaneswar, Odisha',
   description:
-    'DEZO is Bhubaneswar’s leading digital engineering and commerce technology company located in Patia. High-speed websites, ecommerce, Amazon & Flipkart management, and performance ads.',
+    'DEZO builds websites, ecommerce, Amazon & Flipkart programs, SEO and performance marketing from Patia, Bhubaneswar — for local businesses and India-scale brands.',
   canonicalUrl: 'https://dezo.in/locations/bhubaneswar',
 });
 
+const faqs = [
+  {
+    question: 'Where is the DEZO studio in Bhubaneswar?',
+    answer: `DEZO operates from ${napCanonical.fullAddress}. Studio visits are by appointment.`,
+  },
+  {
+    question: 'What services does DEZO offer in Bhubaneswar?',
+    answer:
+      'Web development, ecommerce, SEO and local SEO, Meta and Google ads, Amazon and Flipkart growth, branding, social, and DEZO LAB diagnostics.',
+  },
+  {
+    question: 'Do you only work with Bhubaneswar clients?',
+    answer:
+      'No. The studio is in Bhubaneswar; we deliver across Odisha and India. Local presence helps for workshops and reviews when useful.',
+  },
+];
+
 export default function BhubaneswarLocationPage() {
   const localSchema = generateLocalBusinessSchema();
+  const faqSchema = generateFaqSchema(faqs);
+  const crumbs = generateBreadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Locations', path: '/locations/odisha' },
+    { name: 'Bhubaneswar', path: '/locations/bhubaneswar' },
+  ]);
 
   return (
-    <div className="pt-28 sm:pt-36 pb-20">
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localSchema) }}
       />
-      <DezoSection spacing="compact">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
+
+      <ServiceBanner data={locationBanners.bhubaneswar} />
+
+      <DezoSection spacing="normal">
         <DezoContainer size="wide">
-          <div className="max-w-3xl mb-12">
-            <DezoHeading
-              badge="Bhubaneswar Studio · Patia"
-              as="h1"
-              subtitle="Direct engineering and performance marketing partnerships for companies located across Bhubaneswar, Cuttack, and the Odisha capital region."
-            >
-              Bhubaneswar's Premier Digital Commerce & Growth Studio
-            </DezoHeading>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
-            <div className="lg:col-span-7 flex flex-col gap-6 text-sm sm:text-base text-dezo-text-secondary leading-relaxed">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-7 space-y-5 text-base text-dezo-text-secondary leading-relaxed">
               <p>
-                From our studio located in Patia, Bhubaneswar, we collaborate directly with local business owners, healthcare leaders, coaching institutes, and manufacturing executives who want high-performance digital results without dealing with remote agency delays.
+                From Patia, we work with founders, manufacturers, healthcare brands, education
+                institutions and retailers who need digital systems that sell—not slide decks.
               </p>
               <p>
-                Whether you need a high-speed Next.js corporate portal, a direct-to-consumer Shopify storefront, Amazon and Flipkart seller scaling, or Google Local 3-Pack search dominance across Bhubaneswar, we are just a phone call or in-person meeting away.
+                Engagements typically combine a commercial website or ecommerce foundation with the
+                growth channels that matter: organic search, Meta and Google, and Amazon or Flipkart
+                when product distribution requires it.
               </p>
-              <div className="pt-4 flex flex-wrap gap-4">
-                <DezoButton href="/contact" size="md">
-                  Visit Our Patia Studio
-                </DezoButton>
-                <DezoButton href="/locations/odisha" variant="secondary" size="md">
-                  View All-Odisha Solutions
-                </DezoButton>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 p-8 rounded-dezo-xl bg-dezo-surface border border-dezo-border">
-              <div className="flex items-center gap-3 text-dezo-accent mb-4">
-                <MapPin size={22} />
-                <h3 className="text-lg font-bold text-dezo-text-primary">Studio Address</h3>
-              </div>
-              <p className="text-sm text-dezo-text-secondary leading-relaxed mb-6">
-                Phase 2, Patia<br />
-                Bhubaneswar, Odisha<br />
-                PIN: 751024, India
+              <p>
+                We do not promise map-pack or ranking outcomes we cannot control. We do deliver
+                defined scope, measurement, and accountable execution under the{' '}
+                <Link href="/promise" className="text-dezo-text-primary border-b border-dezo-border">
+                  DEZO Standard
+                </Link>
+                .
               </p>
-              <div className="pt-4 border-t border-dezo-border flex flex-col gap-3 text-xs">
-                <a href="tel:+919114411026" className="text-dezo-text-primary hover:text-dezo-accent font-semibold flex items-center gap-2">
-                  <Phone size={14} className="text-dezo-accent" /> +91 9114411026 / +91 77870 63088
-                </a>
-                <a href="mailto:contact@dezo.in" className="text-dezo-text-primary hover:text-dezo-accent font-semibold flex items-center gap-2">
-                  <Mail size={14} className="text-dezo-accent" /> contact@dezo.in
-                </a>
-              </div>
             </div>
+            <aside className="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-dezo-border pt-6 lg:pt-0 lg:pl-10">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-text-muted mb-4">
+                Studio NAP
+              </p>
+              <p className="font-display text-xl text-dezo-text-primary mb-2">{napCanonical.name}</p>
+              <p className="text-sm text-dezo-text-secondary leading-relaxed mb-4">
+                {napCanonical.fullAddress}
+              </p>
+              <p className="text-sm text-dezo-text-primary font-medium">
+                <a href={`tel:${contact.phone}`}>{contact.phoneFormatted}</a>
+              </p>
+              <p className="text-sm text-dezo-text-secondary mt-1">
+                <a href={`mailto:${contact.email}`}>{contact.email}</a>
+              </p>
+              <p className="text-xs text-dezo-text-muted mt-4">{napCanonical.hoursNote}</p>
+            </aside>
           </div>
+        </DezoContainer>
+      </DezoSection>
+
+      <DezoSection spacing="normal" className="bg-dezo-surface border-y border-dezo-border">
+        <DezoContainer size="wide">
+          <h2 className="font-display text-2xl sm:text-3xl tracking-tight text-dezo-text-primary mb-8">
+            Services from Bhubaneswar
+          </h2>
+          <ul className="divide-y divide-dezo-border border-y border-dezo-border">
+            {serviceRows.map((row) => (
+              <li key={row.href}>
+                <Link
+                  href={row.href}
+                  className="group grid grid-cols-12 gap-4 py-6 items-start hover:bg-dezo-bg/60 -mx-2 px-2 transition-colors"
+                >
+                  <span className="col-span-2 sm:col-span-1 font-mono text-xs text-dezo-text-muted">
+                    {row.num}
+                  </span>
+                  <span className="col-span-10 sm:col-span-4 font-display text-lg sm:text-xl text-dezo-text-primary group-hover:text-dezo-primary">
+                    {row.name}
+                  </span>
+                  <span className="col-span-12 sm:col-span-7 text-sm text-dezo-text-secondary leading-relaxed">
+                    {row.summary}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <DezoButton href="/work" variant="outline" size="sm">
+              Selected work
+            </DezoButton>
+            <DezoButton href="/growth-lab" variant="outline" size="sm">
+              DEZO LAB
+            </DezoButton>
+            <DezoButton href="/locations/odisha" variant="outline" size="sm">
+              Odisha hub
+            </DezoButton>
+          </div>
+        </DezoContainer>
+      </DezoSection>
+
+      <DezoSection spacing="normal">
+        <DezoContainer size="wide">
+          <h2 className="font-display text-2xl text-dezo-text-primary mb-8">FAQ</h2>
+          <dl className="max-w-3xl divide-y divide-dezo-border border-y border-dezo-border">
+            {faqs.map((f) => (
+              <div key={f.question} className="py-6">
+                <dt className="font-display text-lg text-dezo-text-primary mb-2">{f.question}</dt>
+                <dd className="text-sm text-dezo-text-secondary leading-relaxed">{f.answer}</dd>
+              </div>
+            ))}
+          </dl>
         </DezoContainer>
       </DezoSection>
     </div>

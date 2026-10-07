@@ -32,7 +32,7 @@ export function constructMetadata({
 } = {}): Metadata {
   const metaTitle = title
     ? `${title} | DEZO`
-    : 'DEZO | We Build Brands That Sell — Digital Commerce India';
+    : 'DEZO | BUILD. MARKET. GROW. — Digital infrastructure for ambitious businesses';
 
   return {
     title: metaTitle,

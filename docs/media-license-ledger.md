@@ -12,6 +12,8 @@ Date: 2026-10-07.
 | `dezo-hero-poster.jpg` | Same as above | `/public/hero/dezo-hero-poster.jpg` | **Unverified** | No until cleared | Unknown | Same | **NOT used in production hero** | **HOLD** |
 | Lucide icons | Lucide | npm `lucide-react` | ISC | Yes | Per package | — | UI icons | **APPROVED** |
 | Fonts (Instrument Serif, DM Sans, etc.) | Google Fonts / next/font | `app/layout.tsx` | OFL / respective | Yes | — | — | Global type | **APPROVED** |
+| Banner chapter / OG imagery | Same work-preview captures | `content/banners.ts` → `/work-previews/*` | Client portfolio rights | Yes | Host shown where relevant | No fake client photography | ChapterBanner, ServiceBanner, ProjectMosaic, OG templates | **APPROVED** |
+| Typographic statement banners | Original DEZO copy + CSS composition | `StatementBanner` / `CTASection` | DEZO owned | Yes | — | No stock required | Homepage statements, final CTA | **APPROVED** |
 
 ## Policy
 

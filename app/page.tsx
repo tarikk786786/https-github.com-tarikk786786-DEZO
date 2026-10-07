@@ -19,6 +19,11 @@ import {
   DezoMagnetic,
 } from '@/lib/motion/MotionAdapter';
 import { PromiseHomeTeaser } from '@/components/promise/PromiseGuaranteeSystem';
+import { ChapterBanner, ProjectMosaic, CTASection } from '@/components/dezo/visual';
+import {
+  chapterBanners,
+  finalCtaBanner,
+} from '@/content/banners';
 import {
   brand,
   serviceRows,
@@ -259,7 +264,16 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* 06 Capabilities — editorial rows */}
+      {/* Chapter banners — Build / Grow / Sell (WOW budget) */}
+      {chapterBanners
+        .filter((c) => ['build', 'grow', 'sell'].includes(c.chapter))
+        .map((chapter, i) => (
+          <ChapterBanner key={chapter.id} data={chapter} reverse={i % 2 === 1} />
+        ))}
+
+      <ProjectMosaic />
+
+      {/* Capabilities — editorial rows */}
       <DezoSection spacing="normal" id="services">
         <DezoContainer size="wide">
           <DezoReveal>
@@ -811,39 +825,7 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* 19 Final CTA */}
-      <DezoSection spacing="relaxed">
-        <DezoContainer size="wide">
-          <DezoReveal>
-            <div className="max-w-2xl">
-              <h2 className="font-display text-3xl sm:text-5xl tracking-tight leading-[1.1] text-dezo-text-primary mb-5">
-                Have a business to build or grow?
-              </h2>
-              <p className="text-dezo-text-secondary text-base leading-relaxed mb-8 max-w-lg">
-                Tell us what you&apos;re building, what isn&apos;t working and where you want to go
-                next.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <DezoMagnetic>
-                  <DezoButton
-                    href="/start-a-project"
-                    size="lg"
-                    magnetic
-                    icon={<ArrowUpRight size={16} className="dezo-cta-arrow" />}
-                  >
-                    Start a Project
-                  </DezoButton>
-                </DezoMagnetic>
-                <DezoMagnetic strength={0.14}>
-                  <DezoButton href="/growth-lab" variant="outline" size="lg" magnetic>
-                    Request a Growth Audit
-                  </DezoButton>
-                </DezoMagnetic>
-              </div>
-            </div>
-          </DezoReveal>
-        </DezoContainer>
-      </DezoSection>
+      <CTASection data={finalCtaBanner} />
     </>
   );
 }

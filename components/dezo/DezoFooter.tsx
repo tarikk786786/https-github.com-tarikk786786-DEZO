@@ -56,8 +56,13 @@ export function DezoFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/results" className="hover:text-white">
-                  Results
+                <Link href="/locations/bhubaneswar" className="hover:text-white">
+                  Bhubaneswar
+                </Link>
+              </li>
+              <li>
+                <Link href="/locations/odisha" className="hover:text-white">
+                  Odisha
                 </Link>
               </li>
               <li>
@@ -76,13 +81,8 @@ export function DezoFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/pricing" className="hover:text-white">
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link href="/portal" className="hover:text-white">
-                  Client Portal
+                <Link href="/contact" className="hover:text-white">
+                  Contact
                 </Link>
               </li>
             </ul>

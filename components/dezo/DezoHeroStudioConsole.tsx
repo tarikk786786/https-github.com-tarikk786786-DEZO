@@ -230,7 +230,7 @@ export function DezoHeroStudioConsole() {
           <div className="pt-6 mt-4 border-t border-dezo-border/60 flex items-center justify-between relative z-10">
             <div className="flex items-center gap-2 text-xs text-dezo-text-muted">
               <ShieldCheck size={14} className="text-emerald-400" />
-              <span>Verified in 100+ live deployments</span>
+              <span>Live production deployments</span>
             </div>
 
             <Link

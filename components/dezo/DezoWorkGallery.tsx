@@ -17,10 +17,6 @@ export function DezoWorkGallery({
   /** When true, render every live match (no Load More). */
   showAll?: boolean;
 }) {
-  const liveTotal = useMemo(
-    () => portfolioData.filter((item) => item.isLive).length,
-    [],
-  );
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [displayCount, setDisplayCount] = useState<number>(
@@ -56,20 +52,6 @@ export function DezoWorkGallery({
   return (
     <div className="w-full flex flex-col gap-8">
       <div className="flex flex-col gap-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <p className="text-sm text-dezo-text-secondary">
-            Showing{' '}
-            <span className="font-semibold text-dezo-text-primary tabular-nums">
-              {visibleProjects.length}
-            </span>{' '}
-            of{' '}
-            <span className="font-semibold text-dezo-text-primary tabular-nums">
-              {liveTotal}
-            </span>{' '}
-            live websites
-            {activeCategory !== 'All' ? ` in ${activeCategory}` : ''}.
-          </p>
-        </div>
         <div className="relative max-w-md w-full mx-auto sm:mx-0">
           <Search
             size={16}
@@ -148,7 +130,7 @@ export function DezoWorkGallery({
             size="md"
             onClick={() => setDisplayCount((prev) => prev + 9)}
           >
-            Load More Projects ({filteredProjects.length - displayCount} remaining)
+            Load more
           </DezoButton>
         </div>
       )}

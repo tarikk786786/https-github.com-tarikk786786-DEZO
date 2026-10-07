@@ -23,19 +23,18 @@ import {
   heroChannels,
   performancePipeline,
   faqItems,
+  leadership,
 } from '@/content/site';
-import { company } from '@/content/company';
 import { portfolioData } from '@/content/projects';
 
 export default function HomePage() {
-  const liveCount = company.liveDeployments;
   const featured = featuredCaseStudies.slice(0, 5);
   const [hoveredService, setHoveredService] = useState<string | null>(null);
   const [activeGoal, setActiveGoal] = useState(0);
 
-  const trustHosts = portfolioData
-    .filter((p) => p.isLive && p.featured)
-    .slice(0, 8);
+  const allLiveSites = [...portfolioData]
+    .filter((p) => p.isLive)
+    .sort((a, b) => a.title.localeCompare(b.title));
 
   const goals = [
     {
@@ -132,41 +131,43 @@ export default function HomePage() {
         </DezoContainer>
       </section>
 
-      {/* 03 Trust — real hosts only */}
+      {/* 03 Live projects — every listed URL, no volume stats */}
       <DezoSection spacing="compact" className="border-y border-dezo-border bg-dezo-surface">
         <DezoContainer size="wide">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-text-muted mb-2">
-                Selected live projects
+                Live projects
               </p>
               <p className="font-display text-xl sm:text-2xl text-dezo-text-primary">
-                {liveCount} production websites in our public archive
+                Production websites we ship and stand behind
               </p>
             </div>
             <Link
               href="/work"
               className="text-sm font-medium text-dezo-text-primary border-b border-dezo-ink pb-0.5 hover:text-dezo-primary hover:border-dezo-primary transition-colors inline-flex items-center gap-1"
             >
-              Full archive <ArrowRight size={14} />
+              Browse with previews <ArrowRight size={14} />
             </Link>
           </div>
-          <div className="flex flex-wrap gap-x-8 gap-y-3">
-            {trustHosts.map((p) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-0">
+            {allLiveSites.map((site) => (
               <a
-                key={p.url}
-                href={p.url}
+                key={site.url}
+                href={site.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-xs sm:text-sm text-dezo-text-secondary hover:text-dezo-primary transition-colors"
+                className="group flex items-baseline justify-between gap-3 border-t border-dezo-border py-3"
               >
-                {cleanHost(p.url)}
+                <span className="text-sm text-dezo-text-primary group-hover:text-dezo-primary transition-colors truncate">
+                  {site.title}
+                </span>
+                <span className="font-mono text-[10px] text-dezo-text-muted shrink-0 truncate max-w-[42%]">
+                  {cleanHost(site.url)}
+                </span>
               </a>
             ))}
           </div>
-          <p className="mt-5 text-xs text-dezo-text-muted">
-            We publish live URLs—not invented client counts, ROI averages or awards.
-          </p>
         </DezoContainer>
       </DezoSection>
 
@@ -530,30 +531,23 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* 12 Results — only verifiable */}
+      {/* 12 Positioning strip — no volume quantities */}
       <DezoSection spacing="compact" className="bg-dezo-ink text-dezo-text-inverse">
         <DezoContainer size="wide">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 py-4">
             <div>
-              <p className="font-display text-4xl sm:text-5xl tracking-tight tabular-nums">
-                {liveCount}
-              </p>
-              <p className="text-sm text-white/55 mt-2">Live websites in public archive</p>
+              <p className="font-display text-2xl sm:text-3xl tracking-tight">Build</p>
+              <p className="text-sm text-white/55 mt-2">Websites, ecommerce, applications</p>
             </div>
             <div>
-              <p className="font-display text-4xl sm:text-5xl tracking-tight tabular-nums">
-                {company.industriesRepresented}
-              </p>
-              <p className="text-sm text-white/55 mt-2">Industries represented</p>
+              <p className="font-display text-2xl sm:text-3xl tracking-tight">Market</p>
+              <p className="text-sm text-white/55 mt-2">Search, ads, marketplaces, social</p>
             </div>
             <div>
-              <p className="font-display text-4xl sm:text-5xl tracking-tight">IN</p>
-              <p className="text-sm text-white/55 mt-2">India studio · worldwide delivery</p>
+              <p className="font-display text-2xl sm:text-3xl tracking-tight">Grow</p>
+              <p className="text-sm text-white/55 mt-2">Measure, optimize, operate</p>
             </div>
           </div>
-          <p className="text-xs text-white/35 mt-4">
-            Case-level metrics publish with sources. Sitewide ROI averages are not invented.
-          </p>
         </DezoContainer>
       </DezoSection>
 
@@ -682,7 +676,7 @@ export default function HomePage() {
               <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-text-muted mb-6">
                 Leadership
               </p>
-              {company.leadership.map((person) => (
+              {[leadership.primary, leadership.partner].map((person) => (
                 <div key={person.name} className="mb-8">
                   <p className="font-display text-xl text-dezo-text-primary">{person.name}</p>
                   <p className="text-sm text-dezo-primary mt-1">{person.role}</p>

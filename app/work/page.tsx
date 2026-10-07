@@ -10,14 +10,13 @@ import { constructMetadata } from '@/lib/seo/metadata';
 import { portfolioData } from '@/content/projects';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Work — Live Client Deployments',
+  title: 'Work — Live Client Websites',
   description:
-    'Browse DEZO live client deployments — real URLs with production previews.',
+    'Browse DEZO live client websites — real production URLs with previews. Every listed project is shown.',
   canonicalUrl: 'https://dezo.in/work',
 });
 
 export default function WorkPage() {
-  const liveCount = portfolioData.filter((p) => p.isLive).length;
   const featuredPriority = [
     'yasanabeautyrituals.in',
     'sonvicasarees.com',
@@ -43,9 +42,9 @@ export default function WorkPage() {
               <DezoHeading
                 badge="Work"
                 as="h1"
-                subtitle={`${liveCount} live production websites in our public archive — every listed URL below. Featured sites open first; the full catalog follows.`}
+                subtitle="Every listed live website in our archive — real production URLs, not mockups. Featured stories first; the complete directory follows."
               >
-                All live websites
+                Live websites
               </DezoHeading>
             </div>
           </DezoReveal>
@@ -54,14 +53,9 @@ export default function WorkPage() {
             <DezoFeaturedWork projects={featured} />
           </div>
           <DezoReveal>
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
-              <h2 className="font-display text-2xl sm:text-3xl text-dezo-text-primary">
-                Full live archive
-              </h2>
-              <p className="font-mono text-xs text-dezo-text-muted">
-                {liveCount} live URLs · all shown
-              </p>
-            </div>
+            <h2 className="font-display text-2xl sm:text-3xl text-dezo-text-primary mb-8">
+              Complete archive
+            </h2>
           </DezoReveal>
           <DezoWorkGallery showAll featuredFirst />
         </DezoContainer>

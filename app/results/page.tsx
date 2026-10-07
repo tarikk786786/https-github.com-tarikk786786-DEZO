@@ -3,8 +3,6 @@ import type { Metadata } from 'next';
 import { PlatformPageScaffold } from '@/components/platform/PlatformPageScaffold';
 import { featuredCaseStudies } from '@/content/site';
 import { constructMetadata } from '@/lib/seo/metadata';
-import { portfolioData } from '@/content/projects';
-
 export const metadata: Metadata = constructMetadata({
   title: 'Results — Verified Outcomes',
   description: 'Live deployments and structured case studies — verified figures only.',
@@ -12,13 +10,11 @@ export const metadata: Metadata = constructMetadata({
 });
 
 export default function ResultsPage() {
-  const liveCount = portfolioData.filter((p) => p.isLive).length;
-
   return (
     <PlatformPageScaffold
       badge="Results"
       title="Verified outcomes only"
-      subtitle={`${liveCount}+ live URLs catalogued. Case studies use challenge and result framing — no invented metrics.`}
+      subtitle="Case studies use challenge and result framing — no invented volume metrics or sitewide ROI averages."
       ctaHref="/work"
       ctaLabel="Browse work"
     >

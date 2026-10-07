@@ -21,6 +21,7 @@ import {
 import { PromiseHomeTeaser } from '@/components/promise/PromiseGuaranteeSystem';
 import { CTASection } from '@/components/dezo/visual';
 import { DezoHeroMedia } from '@/components/dezo/DezoHeroMedia';
+import { DezoHeroChapters } from '@/components/dezo/DezoHeroChapters';
 import { finalCtaBanner } from '@/content/banners';
 import {
   brand,
@@ -153,11 +154,13 @@ export default function HomePage() {
                   </DezoButton>
                 </DezoMagnetic>
               </div>
+
+              <DezoHeroChapters />
             </div>
 
             <div
               data-hero-item
-              className="mt-14 sm:mt-16 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 border-t border-dezo-border/60 pt-5 max-w-4xl"
+              className="mt-10 sm:mt-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 border-t border-dezo-border/60 pt-5 max-w-4xl"
             >
               <p className="text-[11px] sm:text-xs text-dezo-text-muted tracking-wide">
                 {brand.studioLine}

@@ -9,9 +9,10 @@ const LOOP_MP4 = '/hero/dezo-hero-loop.mp4';
 const LOOP_MOBILE = '/hero/dezo-hero-loop-mobile.mp4';
 
 /**
- * Full-bleed cinematic hero plane — muted autoplay loop from DEZO work assets.
- * Sharp BUILD → MARKET → GROW plates interleaved with chrome-free project stills.
- * Poster + reduced-motion fallback; mobile uses lighter 720p encode.
+ * Full-bleed site-showcase hero plane — muted autoplay loop from DEZO work assets.
+ * Sharp chapter plates (Build → Market → Grow → Work → Engine → Lab → Standard → Studio)
+ * interleaved with chrome-free project stills. Poster + reduced-motion fallback;
+ * mobile uses lighter 720p encode.
  */
 export function DezoHeroMedia() {
   const videoRef = useRef<HTMLVideoElement>(null);

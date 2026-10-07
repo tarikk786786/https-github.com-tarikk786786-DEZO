@@ -177,34 +177,34 @@ body {
 }
 
 /*
-  Hero paper field — readable type on the left, showcase reel open on the right.
-  Previous wash covered ~half the frame and killed the animation.
+  Hero paper field — solid under DEZO type, then a soft feather so the
+  showcase reel stays open on the right (no harsh vertical wipe).
 */
 .dezo-hero-atmosphere {
   background:
     linear-gradient(180deg, #F5F3EE 0%, #F5F3EE 4.75rem, transparent 7.5rem),
     linear-gradient(
-      98deg,
+      92deg,
       #F5F3EE 0%,
-      #F5F3EE 26%,
-      rgba(245, 243, 238, 0.94) 34%,
-      rgba(245, 243, 238, 0.42) 44%,
-      rgba(245, 243, 238, 0.08) 54%,
-      transparent 62%,
-      rgba(11, 11, 10, 0.18) 100%
+      #F5F3EE 22%,
+      rgba(245, 243, 238, 0.88) 30%,
+      rgba(245, 243, 238, 0.28) 40%,
+      rgba(245, 243, 238, 0.04) 50%,
+      transparent 58%,
+      rgba(11, 11, 10, 0.2) 100%
     );
 }
 @media (max-width: 639px) {
-  /* Mobile: clear reel in the upper half; solid paper under type */
+  /* Mobile: reel reads in the upper half; paper under type */
   .dezo-hero-atmosphere {
     background:
       linear-gradient(180deg, #F5F3EE 0%, #F5F3EE 4.25rem, transparent 6.5rem),
       linear-gradient(
         180deg,
-        rgba(245, 243, 238, 0.28) 0%,
-        rgba(245, 243, 238, 0.08) 34%,
-        rgba(245, 243, 238, 0.55) 58%,
-        #F5F3EE 76%
+        rgba(245, 243, 238, 0.22) 0%,
+        rgba(245, 243, 238, 0.05) 30%,
+        rgba(245, 243, 238, 0.5) 56%,
+        #F5F3EE 74%
       );
   }
 }

@@ -7,6 +7,7 @@ import { DezoHeading } from '@/components/dezo/DezoHeading';
 import { DezoSection } from '@/components/dezo/DezoSection';
 import { DezoButton } from '@/components/dezo/DezoButton';
 import { constructMetadata } from '@/lib/seo/metadata';
+import { generateLocalBusinessSchema } from '@/lib/seo/jsonld';
 
 export const metadata: Metadata = constructMetadata({
   title: 'Web Development & Digital Growth Agency in Bhubaneswar, Odisha',
@@ -16,8 +17,14 @@ export const metadata: Metadata = constructMetadata({
 });
 
 export default function BhubaneswarLocationPage() {
+  const localSchema = generateLocalBusinessSchema();
+
   return (
     <div className="pt-28 sm:pt-36 pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localSchema) }}
+      />
       <DezoSection spacing="compact">
         <DezoContainer size="wide">
           <div className="max-w-3xl mb-12">

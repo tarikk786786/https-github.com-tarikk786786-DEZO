@@ -24,3 +24,4 @@ coverage/
 .trae
 .windsurf
 .vercel
+*.tsbuildinfo

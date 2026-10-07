@@ -8,6 +8,7 @@ import { DezoSection } from '@/components/dezo/DezoSection';
 import { DezoCard } from '@/components/dezo/DezoCard';
 import { DezoButton } from '@/components/dezo/DezoButton';
 import { constructMetadata } from '@/lib/seo/metadata';
+import { generateServiceSchema } from '@/lib/seo/jsonld';
 
 interface PillarData {
   title: string;
@@ -161,8 +162,18 @@ export default async function SolutionDetailPage({
     notFound();
   }
 
+  const serviceSchema = generateServiceSchema(
+    pillar.title,
+    pillar.description,
+    `/solutions/${slug}`
+  );
+
   return (
     <div className="pt-28 sm:pt-36 pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       <DezoSection spacing="compact">
         <DezoContainer size="wide">
           <div className="mb-8">

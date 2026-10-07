@@ -6,6 +6,7 @@ import { DezoHeading } from '@/components/dezo/DezoHeading';
 import { DezoSection } from '@/components/dezo/DezoSection';
 import { DezoCard } from '@/components/dezo/DezoCard';
 import { DezoLabCanvas } from '@/components/dezo/DezoLabCanvas';
+import { DezoKeywordIntelligenceLab } from '@/components/dezo/tools/DezoKeywordIntelligenceLab';
 import { constructMetadata } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = constructMetadata({
@@ -28,6 +29,22 @@ export default function LabPage() {
             >
               Interactive Systems & Research
             </DezoHeading>
+          </div>
+
+          {/* Interactive Keyword Intelligence Engine */}
+          <div className="mb-20">
+            <div className="mb-6">
+              <h2 className="text-xl font-bold text-dezo-text-primary flex items-center gap-2">
+                <span>Autonomous Keyword Intelligence Engine</span>
+                <span className="text-xs px-2.5 py-0.5 rounded-full bg-dezo-primary/10 text-dezo-accent border border-dezo-primary/20 font-mono">
+                  v2.4 OSS STACK
+                </span>
+              </h2>
+              <p className="text-sm text-dezo-text-secondary mt-1">
+                Real-time multi-vector Google autocomplete harvest, ZensInk heuristic intent categorizer, trend velocity estimation, and semantic topic cluster mapping.
+              </p>
+            </div>
+            <DezoKeywordIntelligenceLab />
           </div>
 
           {/* Interactive Canvas Demo */}

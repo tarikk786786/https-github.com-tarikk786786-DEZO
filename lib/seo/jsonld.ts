@@ -49,6 +49,55 @@ export function generateWebSiteSchema() {
     publisher: {
       '@id': `${siteConfig.url}/#organization`,
     },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${siteConfig.url}/tools?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+}
+
+export function generateLocalBusinessSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': `${siteConfig.url}/locations/bhubaneswar/#localbusiness`,
+    name: 'DEZO — Digital Commerce & Growth Studio',
+    image: `${siteConfig.url}/dezo-logo-transparent.png`,
+    telephone: siteConfig.phone,
+    email: siteConfig.email,
+    url: `${siteConfig.url}/locations/bhubaneswar`,
+    priceRange: '₹₹ - ₹₹₹₹',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: siteConfig.address.street,
+      addressLocality: siteConfig.address.city,
+      addressRegion: siteConfig.address.region,
+      postalCode: siteConfig.address.postalCode,
+      addressCountry: siteConfig.address.country,
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: '20.355',
+      longitude: '85.818',
+    },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        opens: '09:30',
+        closes: '19:30',
+      },
+    ],
+    areaServed: [
+      { '@type': 'City', name: 'Bhubaneswar' },
+      { '@type': 'City', name: 'Cuttack' },
+      { '@type': 'AdministrativeArea', name: 'Odisha' },
+      { '@type': 'Country', name: 'India' },
+    ],
   };
 }
 

@@ -18,6 +18,7 @@ import { DezoSection } from '@/components/dezo/DezoSection';
 import { DezoCard } from '@/components/dezo/DezoCard';
 import { DezoButton } from '@/components/dezo/DezoButton';
 import { constructMetadata } from '@/lib/seo/metadata';
+import { generateServiceSchema, generateFaqSchema } from '@/lib/seo/jsonld';
 
 export const metadata: Metadata = constructMetadata({
   title: 'DEZO Odisha — Digital Growth Technology for Odisha Businesses',
@@ -27,6 +28,26 @@ export const metadata: Metadata = constructMetadata({
 });
 
 export default function DezoOdishaPage() {
+  const serviceSchema = generateServiceSchema(
+    'Digital Transformation & Ecommerce Agency in Odisha',
+    'Comprehensive web engineering, Amazon & Flipkart onboarding, local SEO, and performance marketing tailored for businesses and manufacturers across Odisha.',
+    '/locations/odisha'
+  );
+
+  const faqSchema = generateFaqSchema([
+    {
+      question: 'Where is DEZO located in Odisha?',
+      answer: 'DEZO is physically headquartered in Phase 2, Patia, Bhubaneswar, Odisha (PIN 751024), serving clients across Bhubaneswar, Cuttack, Rourkela, Berhampur, and pan-India.',
+    },
+    {
+      question: 'What digital marketing and web services does DEZO provide in Odisha?',
+      answer: 'DEZO provides custom Next.js web application development, Shopify store builds, Amazon & Flipkart marketplace management, Google Local 3-Pack SEO, and performance marketing funnels.',
+    },
+    {
+      question: 'Can DEZO help Odisha manufacturers sell on Amazon and Flipkart?',
+      answer: 'Yes, DEZO specializes in onboarding, brand registry, A+ content, catalog optimization, and advertising for Odisha handicraft, textile, FMCG, and industrial manufacturers.',
+    },
+  ]);
   const odishaSectors = [
     {
       icon: <GraduationCap size={20} />,
@@ -62,6 +83,14 @@ export default function DezoOdishaPage() {
 
   return (
     <div className="pt-28 sm:pt-36 pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <DezoSection spacing="compact">
         <DezoContainer size="wide">
           <div className="max-w-4xl mb-16">

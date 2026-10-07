@@ -117,13 +117,13 @@ export default function HomePage() {
             fetchPriority="high"
             className="absolute inset-0 h-full w-full object-cover object-[72%_45%] dezo-hero-kenburns scale-105"
           />
-          {/* Opaque left panel so client art never reads as DEZO chrome */}
+          {/* Opaque left + top band so client art never reads as DEZO chrome */}
           <div
-            className="absolute inset-0 dezo-atmosphere"
+            className="absolute inset-0"
             data-hero-atmosphere
             style={{
               background:
-                'linear-gradient(100deg, #F5F3EE 0%, #F5F3EE 38%, rgba(245,243,238,0.92) 52%, rgba(245,243,238,0.35) 72%, rgba(11,11,10,0.2) 100%)',
+                'linear-gradient(180deg, #F5F3EE 0%, #F5F3EE 5.5rem, transparent 5.5rem), linear-gradient(100deg, #F5F3EE 0%, #F5F3EE 42%, rgba(245,243,238,0.94) 56%, rgba(245,243,238,0.4) 74%, rgba(11,11,10,0.18) 100%)',
             }}
           />
         </div>

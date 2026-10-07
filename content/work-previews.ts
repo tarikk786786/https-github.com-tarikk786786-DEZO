@@ -11,10 +11,24 @@ export const workPreviewMap: Record<string, string> = {
   'greatindiapublicschool.org': '/work-previews/great-india-public-school.jpg',
 };
 
+/** Hero-safe stills — chrome cropped out (no client nav/search/widgets) */
+export const heroStillMap: Record<string, string> = {
+  'yasanabeautyrituals.in': '/work-previews/yasana-beauty-rituals-hero.jpg',
+};
+
 export function previewPathForUrl(url: string): string | null {
   try {
     const host = new URL(url).hostname.replace(/^www\./, '');
     return workPreviewMap[host] || null;
+  } catch {
+    return null;
+  }
+}
+
+export function heroStillForUrl(url: string): string | null {
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, '');
+    return heroStillMap[host] || workPreviewMap[host] || null;
   } catch {
     return null;
   }

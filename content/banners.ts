@@ -42,9 +42,10 @@ export const heroBanner: BannerBase = {
   body: 'Websites, ecommerce, marketplaces, advertising, SEO, social and brand systems—built to work together.',
   tone: 'warm',
   media: {
-    kind: 'work-preview',
-    host: 'yasanabeautyrituals.in',
-    objectPosition: 'top',
+    kind: 'image',
+    src: '/work-previews/yasana-beauty-rituals-hero.jpg',
+    alt: 'Featured commerce photography from Yasana Beauty Rituals',
+    objectPosition: '72% 45%',
   },
   primaryCta: { label: 'Start a Project', href: '/start-a-project', variant: 'primary' },
   secondaryCta: { label: 'View Our Work', href: '/work', variant: 'outline' },

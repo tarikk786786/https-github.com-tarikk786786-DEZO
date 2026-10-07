@@ -19,11 +19,9 @@ import {
   DezoMagnetic,
 } from '@/lib/motion/MotionAdapter';
 import { PromiseHomeTeaser } from '@/components/promise/PromiseGuaranteeSystem';
-import { ChapterBanner, ProjectMosaic, CTASection } from '@/components/dezo/visual';
-import {
-  chapterBanners,
-  finalCtaBanner,
-} from '@/content/banners';
+import { CTASection } from '@/components/dezo/visual';
+import { finalCtaBanner } from '@/content/banners';
+import { heroStillForUrl } from '@/content/work-previews';
 import {
   brand,
   serviceRows,
@@ -40,8 +38,11 @@ import {
 } from '@/content/site';
 export default function HomePage() {
   /** Homepage shows only image-led featured stories — full archive lives on /work */
-  const featured = featuredCaseStudies.slice(0, 5);
+  const featured = featuredCaseStudies.slice(0, 3);
   const capabilityChips = heroChannels.split(' · ');
+  const heroStill =
+    heroStillForUrl(featured[0]?.url || 'https://yasanabeautyrituals.in/') ||
+    '/work-previews/yasana-beauty-rituals-hero.jpg';
   const [hoveredService, setHoveredService] = useState<string | null>(null);
   const [activeGoal, setActiveGoal] = useState(0);
 
@@ -103,21 +104,26 @@ export default function HomePage() {
     <>
       <DezoScrollProgress />
 
-      {/* 02 Hero — full-bleed live proof + brand-first composition */}
+      {/* 02 Hero — chrome-free work still + DEZO UI only */}
       <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
         <div className="absolute inset-0 bg-dezo-bg-warm" aria-hidden>
-          <LiveSitePreview
-            url={featured[0]?.url || 'https://yasanabeautyrituals.in/'}
-            title={featured[0]?.title || 'Featured work'}
-            eager
-            className="absolute inset-0 w-full h-full object-cover object-top dezo-hero-kenburns"
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={heroStill}
+            alt=""
+            width={1178}
+            height={496}
+            decoding="async"
+            fetchPriority="high"
+            className="absolute inset-0 h-full w-full object-cover object-[72%_45%] dezo-hero-kenburns scale-105"
           />
+          {/* Opaque left panel so client art never reads as DEZO chrome */}
           <div
             className="absolute inset-0 dezo-atmosphere"
             data-hero-atmosphere
             style={{
               background:
-                'linear-gradient(105deg, rgba(245,243,238,0.97) 0%, rgba(245,243,238,0.9) 36%, rgba(245,243,238,0.5) 58%, rgba(11,11,10,0.32) 100%)',
+                'linear-gradient(100deg, #F5F3EE 0%, #F5F3EE 38%, rgba(245,243,238,0.92) 52%, rgba(245,243,238,0.35) 72%, rgba(11,11,10,0.2) 100%)',
             }}
           />
         </div>
@@ -264,23 +270,14 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* Chapter banners — Build / Grow / Sell (WOW budget) */}
-      {chapterBanners
-        .filter((c) => ['build', 'grow', 'sell'].includes(c.chapter))
-        .map((chapter, i) => (
-          <ChapterBanner key={chapter.id} data={chapter} reverse={i % 2 === 1} />
-        ))}
-
-      <ProjectMosaic />
-
-      {/* Capabilities — editorial rows */}
+      {/* Capabilities — editorial rows (single services pass) */}
       <DezoSection spacing="normal" id="services">
         <DezoContainer size="wide">
           <DezoReveal>
             <DezoHeading
               badge="Capabilities"
               as="h2"
-              subtitle="Editorial service rows—not ten generic cards saying the same thing."
+              subtitle="One row per capability—linked to the full service."
             >
               What we deliver
             </DezoHeading>
@@ -589,8 +586,8 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* 11 DEZO Lab */}
-      <DezoSection spacing="normal">
+      {/* DEZO Lab teaser */}
+      <DezoSection spacing="normal" className="bg-dezo-bg-warm border-y border-dezo-border">
         <DezoContainer size="wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
             <div className="lg:col-span-7">
@@ -598,9 +595,9 @@ export default function HomePage() {
                 <DezoHeading
                   badge="DEZO LAB"
                   as="h2"
-                  subtitle="Practical tools for understanding your digital business—not a dashboard spectacle."
+                  subtitle="Run a public audit — scores and opportunities. No fake dashboards."
                 >
-                  Analyst toolkit
+                  Check your digital foundation
                 </DezoHeading>
               </DezoReveal>
             </div>
@@ -608,26 +605,6 @@ export default function HomePage() {
               <DezoButton href="/growth-lab" size="lg" icon={<ArrowUpRight size={16} />}>
                 Open DEZO LAB
               </DezoButton>
-            </div>
-          </div>
-        </DezoContainer>
-      </DezoSection>
-
-      {/* 12 Positioning strip — no volume quantities */}
-      <DezoSection spacing="compact" className="bg-dezo-ink text-dezo-text-inverse">
-        <DezoContainer size="wide">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 py-4">
-            <div>
-              <p className="font-display text-2xl sm:text-3xl tracking-tight">Build</p>
-              <p className="text-sm text-white/55 mt-2">Websites, ecommerce, applications</p>
-            </div>
-            <div>
-              <p className="font-display text-2xl sm:text-3xl tracking-tight">Market</p>
-              <p className="text-sm text-white/55 mt-2">Search, ads, marketplaces, social</p>
-            </div>
-            <div>
-              <p className="font-display text-2xl sm:text-3xl tracking-tight">Grow</p>
-              <p className="text-sm text-white/55 mt-2">Measure, optimize, operate</p>
             </div>
           </div>
         </DezoContainer>
@@ -731,37 +708,10 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* 15 DEZO Standard */}
+      {/* DEZO Standard */}
       <PromiseHomeTeaser />
 
-      {/* 16 Evidence — verified only, no invented averages */}
-      <DezoSection spacing="normal" className="bg-dezo-bg-warm border-y border-dezo-border">
-        <DezoContainer size="wide">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
-            <div className="lg:col-span-7">
-              <DezoReveal>
-                <DezoHeading
-                  badge="Evidence"
-                  as="h2"
-                  subtitle="Results are published per case study when substantiated—not as sitewide vanity averages."
-                >
-                  Proof lives in the work
-                </DezoHeading>
-              </DezoReveal>
-            </div>
-            <div className="lg:col-span-5 flex flex-wrap gap-3 lg:justify-end">
-              <DezoButton href="/work" variant="outline" size="sm">
-                Selected work
-              </DezoButton>
-              <DezoButton href="/results" size="sm">
-                Results
-              </DezoButton>
-            </div>
-          </div>
-        </DezoContainer>
-      </DezoSection>
-
-      {/* 17 About / leadership */}
+      {/* About / leadership */}
       <DezoSection spacing="normal">
         <DezoContainer size="wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">

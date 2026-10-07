@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from '@/lib/motion/useReducedMotion';
 
 /** Cache-bust so apex + www edges pick up the showcase reel */
-const ASSET_V = 'v4';
+const ASSET_V = 'v5';
 const POSTER = `/hero/dezo-hero-poster.jpg?${ASSET_V}`;
 const LOOP_WEBM = `/hero/dezo-hero-loop.webm?${ASSET_V}`;
 const LOOP_MP4 = `/hero/dezo-hero-loop.mp4?${ASSET_V}`;

@@ -195,16 +195,16 @@ body {
     );
 }
 @media (max-width: 639px) {
-  /* Mobile: reel reads in the upper half; paper under type */
+  /* Mobile: reel peeks above; solid paper under DEZO type (no plate clash) */
   .dezo-hero-atmosphere {
     background:
       linear-gradient(180deg, #F5F3EE 0%, #F5F3EE 4.25rem, transparent 6.5rem),
       linear-gradient(
         180deg,
-        rgba(245, 243, 238, 0.22) 0%,
-        rgba(245, 243, 238, 0.05) 30%,
-        rgba(245, 243, 238, 0.5) 56%,
-        #F5F3EE 74%
+        rgba(245, 243, 238, 0.12) 0%,
+        rgba(245, 243, 238, 0.28) 26%,
+        rgba(245, 243, 238, 0.9) 48%,
+        #F5F3EE 64%
       );
   }
 }

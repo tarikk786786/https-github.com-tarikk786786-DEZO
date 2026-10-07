@@ -99,21 +99,20 @@ export default function HomePage() {
     <>
       <DezoScrollProgress />
 
-      {/* Hero — cinematic BUILD→MARKET→GROW shoot + text-dominant UI */}
+      {/* Hero — full-bleed site-showcase reel; paper wash only under type */}
       <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden bg-dezo-bg-warm">
         <div className="absolute inset-0" aria-hidden>
           <DezoHeroMedia />
-          {/* Paper field keeps DEZO copy dominant over the shoot */}
           <div
             className="absolute inset-0 dezo-hero-atmosphere"
             data-hero-atmosphere
           />
-          <div className="absolute inset-0 dezo-hero-grain pointer-events-none opacity-[0.03] mix-blend-multiply" />
+          <div className="absolute inset-0 dezo-hero-grain pointer-events-none opacity-[0.025] mix-blend-multiply" />
         </div>
 
         <DezoContainer size="wide" className="relative z-10 pt-32 pb-12 sm:pb-16 lg:pb-20">
           <DezoHeroMotion>
-            <div className="max-w-[38rem] lg:max-w-[42rem]">
+            <div className="max-w-[34rem] lg:max-w-[36rem]">
               <p
                 data-hero-item
                 className="font-display text-[3.25rem] leading-none tracking-tight text-dezo-text-primary sm:text-6xl lg:text-[5.5rem]"

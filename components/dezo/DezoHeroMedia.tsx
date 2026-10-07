@@ -3,10 +3,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from '@/lib/motion/useReducedMotion';
 
-const POSTER = '/hero/dezo-hero-poster.jpg';
-const LOOP_WEBM = '/hero/dezo-hero-loop.webm';
-const LOOP_MP4 = '/hero/dezo-hero-loop.mp4';
-const LOOP_MOBILE = '/hero/dezo-hero-loop-mobile.mp4';
+/** Cache-bust so apex + www edges pick up the showcase reel */
+const ASSET_V = 'v3';
+const POSTER = `/hero/dezo-hero-poster.jpg?${ASSET_V}`;
+const LOOP_WEBM = `/hero/dezo-hero-loop.webm?${ASSET_V}`;
+const LOOP_MP4 = `/hero/dezo-hero-loop.mp4?${ASSET_V}`;
+const LOOP_MOBILE = `/hero/dezo-hero-loop-mobile.mp4?${ASSET_V}`;
 
 /**
  * Full-bleed site-showcase hero plane — muted autoplay loop from DEZO work assets.
@@ -74,8 +76,8 @@ export function DezoHeroMedia() {
         height={1080}
         decoding="async"
         fetchPriority="high"
-        className={`absolute inset-0 h-full w-full object-cover object-[68%_42%] transition-opacity duration-700 ${
-          useVideo ? 'opacity-0' : 'opacity-100 dezo-hero-kenburns'
+        className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-500 ${
+          useVideo ? 'opacity-0' : 'opacity-100'
         }`}
       />
 
@@ -83,7 +85,7 @@ export function DezoHeroMedia() {
         <video
           ref={videoRef}
           key={isNarrow ? 'mobile' : 'desktop'}
-          className={`absolute inset-0 h-full w-full object-cover object-[68%_42%] sm:object-center transition-opacity duration-700 ${
+          className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-500 ${
             useVideo ? 'opacity-100' : 'opacity-0'
           }`}
           poster={POSTER}
@@ -91,7 +93,7 @@ export function DezoHeroMedia() {
           playsInline
           loop
           autoPlay
-          preload="metadata"
+          preload="auto"
           aria-hidden
           tabIndex={-1}
         >

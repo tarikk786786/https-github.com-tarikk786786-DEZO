@@ -349,7 +349,7 @@ export default function HomePage() {
                         url={study.url}
                         title={study.title}
                         eager={i < 2}
-                        className="absolute inset-0 w-full h-full object-cover object-top dezo-img-zoom"
+                        className="absolute inset-0 w-full h-full object-cover object-[center_18%] dezo-img-zoom"
                       />
                     </DezoImageReveal>
                     <div

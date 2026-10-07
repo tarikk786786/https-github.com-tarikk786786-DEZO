@@ -1,10 +1,11 @@
 /**
  * Local JPEG previews of real live sites (captured for portfolio reliability).
  * Keyed by normalized hostname without www.
+ * Full-page captures are chrome-cropped (client nav/search/widgets removed).
+ * Hosts without a clean still omit here so LiveSitePreview uses the title card.
  */
 export const workPreviewMap: Record<string, string> = {
   'yasanabeautyrituals.in': '/work-previews/yasana-beauty-rituals.jpg',
-  'sonvicasarees.com': '/work-previews/sonvica-sarees.jpg',
   'shreeayurved.com': '/work-previews/shree-ayurved.jpg',
   'nilkanthpaints.com': '/work-previews/nilkanth-paints.jpg',
   'thepaanluxe.com': '/work-previews/the-paan-luxe.jpg',

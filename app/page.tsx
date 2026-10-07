@@ -21,7 +21,7 @@ import {
 import { PromiseHomeTeaser } from '@/components/promise/PromiseGuaranteeSystem';
 import { CTASection } from '@/components/dezo/visual';
 import { finalCtaBanner } from '@/content/banners';
-import { heroStillForUrl } from '@/content/work-previews';
+import { heroStillForUrl, heroStillMobileForUrl } from '@/content/work-previews';
 import {
   brand,
   serviceRows,
@@ -37,9 +37,12 @@ import {
 export default function HomePage() {
   /** Homepage shows only image-led featured stories — full archive lives on /work */
   const featured = featuredCaseStudies.slice(0, 3);
+  const heroProofUrl = featured[0]?.url || 'https://yasanabeautyrituals.in/';
   const heroStill =
-    heroStillForUrl(featured[0]?.url || 'https://yasanabeautyrituals.in/') ||
-    '/work-previews/yasana-beauty-rituals-hero.jpg';
+    heroStillForUrl(heroProofUrl) || '/work-previews/yasana-beauty-rituals-hero.jpg';
+  const heroStillMobile =
+    heroStillMobileForUrl(heroProofUrl) ||
+    '/work-previews/yasana-beauty-rituals-hero-mobile.jpg';
   const [hoveredService, setHoveredService] = useState<string | null>(null);
   const [activeGoal, setActiveGoal] = useState(0);
 
@@ -101,58 +104,67 @@ export default function HomePage() {
     <>
       <DezoScrollProgress />
 
-      {/* 02 Hero — chrome-free work still + DEZO UI only */}
-      <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
-        <div className="absolute inset-0 bg-dezo-bg-warm" aria-hidden>
+      {/* Hero — text-dominant editorial + chrome-free work still */}
+      <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden bg-dezo-bg-warm">
+        <div className="absolute inset-0" aria-hidden>
+          {/* Desktop landscape still */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={heroStill}
             alt=""
-            width={1178}
-            height={496}
+            width={620}
+            height={480}
             decoding="async"
             fetchPriority="high"
-            className="absolute inset-0 h-full w-full object-cover object-[72%_45%] dezo-hero-kenburns scale-105"
+            className="absolute inset-0 hidden h-full w-full object-cover object-[68%_42%] dezo-hero-kenburns sm:block"
           />
-          {/* Opaque left + top band so client art never reads as DEZO chrome */}
+          {/* Mobile portrait still — intentional crop */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={heroStillMobile}
+            alt=""
+            width={520}
+            height={680}
+            decoding="async"
+            fetchPriority="high"
+            className="absolute inset-0 h-full w-full object-cover object-[62%_38%] dezo-hero-kenburns sm:hidden"
+          />
+          {/* Paper field for type + soft blend into proof image */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 dezo-hero-atmosphere"
             data-hero-atmosphere
-            style={{
-              background:
-                'linear-gradient(180deg, #F5F3EE 0%, #F5F3EE 5.5rem, transparent 5.5rem), linear-gradient(100deg, #F5F3EE 0%, #F5F3EE 42%, rgba(245,243,238,0.94) 56%, rgba(245,243,238,0.4) 74%, rgba(11,11,10,0.18) 100%)',
-            }}
           />
+          {/* Fine editorial grain — atmosphere, not decoration noise */}
+          <div className="absolute inset-0 dezo-hero-grain pointer-events-none opacity-[0.035] mix-blend-multiply" />
         </div>
 
-        <DezoContainer size="wide" className="relative z-10 pt-28 pb-14 sm:pb-20">
+        <DezoContainer size="wide" className="relative z-10 pt-32 pb-12 sm:pb-16 lg:pb-20">
           <DezoHeroMotion>
-            <div className="max-w-2xl">
+            <div className="max-w-[38rem] lg:max-w-[42rem]">
               <p
                 data-hero-item
-                className="font-display text-5xl sm:text-6xl lg:text-7xl tracking-tight text-dezo-text-primary mb-3"
+                className="font-display text-[3.25rem] leading-none tracking-tight text-dezo-text-primary sm:text-6xl lg:text-[5.5rem]"
               >
                 {brand.name}
               </p>
-              <p
-                data-hero-item
-                className="text-[11px] font-semibold uppercase tracking-[0.18em] text-dezo-primary mb-5"
-              >
-                {brand.companyLabel}
-              </p>
+
+              <div data-hero-item className="mt-7 sm:mt-9 mb-6 sm:mb-8 h-px w-14 bg-dezo-primary" />
+
               <h1
                 data-hero-item
-                className="font-display text-[2rem] sm:text-4xl lg:text-[2.75rem] tracking-tightest leading-[1.08] text-dezo-text-primary mb-5"
+                className="font-display text-[1.85rem] sm:text-4xl lg:text-[3.15rem] tracking-tightest leading-[1.05] text-dezo-text-primary uppercase"
               >
                 {brand.tag}
               </h1>
+
               <p
                 data-hero-item
-                className="text-base sm:text-lg text-dezo-text-secondary leading-relaxed max-w-lg mb-9"
+                className="mt-5 sm:mt-6 text-base sm:text-lg lg:text-xl text-dezo-text-secondary leading-relaxed max-w-md"
               >
-                {brand.supporting}
+                {brand.tagline}
               </p>
-              <div data-hero-item className="flex flex-wrap gap-3">
+
+              <div data-hero-item className="mt-9 sm:mt-10 flex flex-wrap gap-3">
                 <DezoMagnetic>
                   <DezoButton
                     href="/start-a-project"
@@ -173,19 +185,23 @@ export default function HomePage() {
 
             <div
               data-hero-item
-              className="mt-12 sm:mt-16 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 border-t border-dezo-border/70 pt-5"
+              className="mt-14 sm:mt-16 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 border-t border-dezo-border/60 pt-5 max-w-4xl"
             >
-              <p className="text-xs text-dezo-text-muted">{brand.geo}</p>
+              <p className="text-[11px] sm:text-xs text-dezo-text-muted tracking-wide">
+                {brand.studioLine}
+              </p>
               {featured[0] && (
                 <a
                   href={featured[0].url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 font-mono text-xs text-dezo-text-secondary hover:text-dezo-primary transition-colors"
+                  className="group inline-flex items-center gap-2 font-mono text-[11px] sm:text-xs text-dezo-text-secondary hover:text-dezo-primary transition-colors"
                 >
+                  <span className="text-dezo-text-muted uppercase tracking-[0.12em]">
+                    Proof
+                  </span>
+                  <span className="text-dezo-border">·</span>
                   <span>{featured[0].title}</span>
-                  <span className="text-dezo-text-muted">·</span>
-                  <span>{cleanHost(featured[0].url)}</span>
                   <ArrowUpRight size={12} className="dezo-cta-arrow" />
                 </a>
               )}

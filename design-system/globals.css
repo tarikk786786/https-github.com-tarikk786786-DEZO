@@ -164,16 +164,49 @@ body {
 
 /* Slow cinematic ken burns on real hero proof media */
 .dezo-hero-kenburns {
-  animation: dezo-kenburns 22s ease-in-out infinite alternate;
+  animation: dezo-kenburns 28s ease-in-out infinite alternate;
   will-change: transform;
 }
 @keyframes dezo-kenburns {
   from {
-    transform: scale(1.02) translate3d(0, 0, 0);
+    transform: scale(1.03) translate3d(0, 0, 0);
   }
   to {
-    transform: scale(1.08) translate3d(-1.5%, -1%, 0);
+    transform: scale(1.07) translate3d(-1.2%, -0.8%, 0);
   }
+}
+
+/* Hero paper field — type stays dominant; image reads as full-bleed proof */
+.dezo-hero-atmosphere {
+  background:
+    linear-gradient(180deg, #F5F3EE 0%, #F5F3EE 4.75rem, transparent 7.5rem),
+    linear-gradient(
+      105deg,
+      #F5F3EE 0%,
+      #F5F3EE 34%,
+      rgba(245, 243, 238, 0.96) 46%,
+      rgba(245, 243, 238, 0.55) 62%,
+      rgba(245, 243, 238, 0.12) 78%,
+      rgba(11, 11, 10, 0.22) 100%
+    );
+}
+@media (max-width: 639px) {
+  .dezo-hero-atmosphere {
+    background:
+      linear-gradient(180deg, #F5F3EE 0%, #F5F3EE 4.25rem, transparent 6.5rem),
+      linear-gradient(
+        180deg,
+        rgba(245, 243, 238, 0.55) 0%,
+        rgba(245, 243, 238, 0.2) 28%,
+        rgba(245, 243, 238, 0.72) 52%,
+        #F5F3EE 78%
+      );
+  }
+}
+
+.dezo-hero-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
 }
 
 .dezo-cta-arrow {

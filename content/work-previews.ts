@@ -12,9 +12,14 @@ export const workPreviewMap: Record<string, string> = {
   'greatindiapublicschool.org': '/work-previews/great-india-public-school.jpg',
 };
 
-/** Hero-safe stills — chrome cropped out (no client nav/search/widgets) */
+/** Hero-safe stills — product/atmosphere only (no client nav/search/widgets/CTAs) */
 export const heroStillMap: Record<string, string> = {
   'yasanabeautyrituals.in': '/work-previews/yasana-beauty-rituals-hero.jpg',
+};
+
+/** Portrait crop for small viewports — intentional mobile framing */
+export const heroStillMobileMap: Record<string, string> = {
+  'yasanabeautyrituals.in': '/work-previews/yasana-beauty-rituals-hero-mobile.jpg',
 };
 
 export function previewPathForUrl(url: string): string | null {
@@ -30,6 +35,15 @@ export function heroStillForUrl(url: string): string | null {
   try {
     const host = new URL(url).hostname.replace(/^www\./, '');
     return heroStillMap[host] || workPreviewMap[host] || null;
+  } catch {
+    return null;
+  }
+}
+
+export function heroStillMobileForUrl(url: string): string | null {
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, '');
+    return heroStillMobileMap[host] || heroStillMap[host] || workPreviewMap[host] || null;
   } catch {
     return null;
   }

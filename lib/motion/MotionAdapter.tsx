@@ -277,3 +277,74 @@ export function DezoPageTransition({
     </AnimatePresence>
   );
 }
+
+/**
+ * Editorial image reveal — clip from bottom, subtle scale settle.
+ */
+export function DezoImageReveal({
+  children,
+  className = '',
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const isReducedMotion = useReducedMotion();
+
+  if (isReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      className={`overflow-hidden ${className}`}
+      initial={{ clipPath: 'inset(12% 0 0 0)', opacity: 0.55 }}
+      whileInView={{ clipPath: 'inset(0% 0 0 0)', opacity: 1 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.9, delay, ease: dezoEase }}
+    >
+      <motion.div
+        initial={{ scale: 1.06 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true, margin: '-80px' }}
+        transition={{ duration: 1.15, delay, ease: dezoEase }}
+        className="h-full w-full"
+      >
+        {children}
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/** Thin top progress bar for scroll depth — premium, not flashy */
+export function DezoScrollProgress() {
+  const isReducedMotion = useReducedMotion();
+  const [progress, setProgress] = React.useState(0);
+
+  React.useEffect(() => {
+    if (isReducedMotion) return;
+    const onScroll = () => {
+      const el = document.documentElement;
+      const max = el.scrollHeight - el.clientHeight;
+      setProgress(max > 0 ? el.scrollTop / max : 0);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isReducedMotion]);
+
+  if (isReducedMotion) return null;
+
+  return (
+    <div
+      className="fixed top-0 left-0 right-0 z-[60] h-[2px] pointer-events-none"
+      aria-hidden
+    >
+      <div
+        className="h-full bg-dezo-primary origin-left transition-[width] duration-150 ease-out"
+        style={{ width: `${Math.min(100, progress * 100)}%` }}
+      />
+    </div>
+  );
+}

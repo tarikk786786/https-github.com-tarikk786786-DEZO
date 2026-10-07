@@ -9,7 +9,15 @@ import { DezoButton } from '@/components/dezo/DezoButton';
 import { DezoSection } from '@/components/dezo/DezoSection';
 import { LiveSitePreview, cleanHost } from '@/components/dezo/LiveSitePreview';
 import { DezoEngine } from '@/components/dezo/DezoEngine';
-import { DezoReveal, DezoStagger, DezoStaggerItem } from '@/lib/motion/MotionAdapter';
+import {
+  DezoReveal,
+  DezoStagger,
+  DezoStaggerItem,
+  DezoHeroMotion,
+  DezoImageReveal,
+  DezoScrollProgress,
+  DezoMagnetic,
+} from '@/lib/motion/MotionAdapter';
 import { PromiseHomeTeaser } from '@/components/promise/PromiseGuaranteeSystem';
 import {
   brand,
@@ -20,7 +28,6 @@ import {
   contact,
   touchpointPillars,
   aboutHomePoints,
-  heroChannels,
   performancePipeline,
   faqItems,
   leadership,
@@ -83,74 +90,113 @@ export default function HomePage() {
     },
   ];
 
+  const trustLoop = [...trustHosts, ...trustHosts];
+
   return (
     <>
-      {/* 02 Hero */}
-      <section className="relative min-h-[92svh] flex flex-col justify-end pt-28 pb-16 sm:pb-24 overflow-hidden">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          aria-hidden
-          style={{
-            background:
-              'radial-gradient(ellipse 60% 45% at 88% 12%, rgba(176,141,87,0.07), transparent 55%), linear-gradient(180deg, #F5F3EE 0%, #EFECE5 100%)',
-          }}
-        />
-        <DezoContainer size="wide" className="relative z-10">
-          <div className="max-w-4xl">
-            <DezoReveal>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-dezo-primary mb-5">
+      <DezoScrollProgress />
+
+      {/* 02 Hero — full-bleed live proof + brand-first composition */}
+      <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
+        <div className="absolute inset-0 bg-dezo-bg-warm" aria-hidden>
+          <LiveSitePreview
+            url={featured[0]?.url || 'https://yasanabeautyrituals.in/'}
+            title={featured[0]?.title || 'Featured work'}
+            eager
+            className="absolute inset-0 w-full h-full object-cover object-top scale-[1.02] dezo-img-zoom"
+          />
+          <div
+            className="absolute inset-0 dezo-atmosphere"
+            data-hero-atmosphere
+            style={{
+              background:
+                'linear-gradient(105deg, rgba(245,243,238,0.96) 0%, rgba(245,243,238,0.88) 38%, rgba(245,243,238,0.45) 62%, rgba(11,11,10,0.28) 100%)',
+            }}
+          />
+        </div>
+
+        <DezoContainer size="wide" className="relative z-10 pt-28 pb-14 sm:pb-20">
+          <DezoHeroMotion>
+            <div className="max-w-2xl">
+              <p
+                data-hero-item
+                className="font-display text-5xl sm:text-6xl lg:text-7xl tracking-tight text-dezo-text-primary mb-5"
+              >
+                {brand.name}
+              </p>
+              <h1
+                data-hero-item
+                className="font-display text-[2rem] sm:text-4xl lg:text-[2.75rem] tracking-tightest leading-[1.08] text-dezo-text-primary mb-5"
+              >
                 {brand.tag}
-              </p>
-            </DezoReveal>
-            <DezoReveal delay={0.05}>
-              <h1 className="font-display text-[2.75rem] sm:text-6xl lg:text-[5rem] tracking-tightest leading-[1.05] text-dezo-text-primary mb-6">
-                {brand.heroLine}
               </h1>
-            </DezoReveal>
-            <DezoReveal delay={0.1}>
-              <p className="text-lg sm:text-xl text-dezo-text-secondary leading-relaxed max-w-2xl mb-4">
-                We build websites, ecommerce systems, marketplace operations and performance
-                marketing programs designed to work together.
+              <p
+                data-hero-item
+                className="text-base sm:text-lg text-dezo-text-secondary leading-relaxed max-w-lg mb-9"
+              >
+                {brand.supporting}
               </p>
-            </DezoReveal>
-            <DezoReveal delay={0.12}>
-              <p className="font-mono text-[11px] sm:text-xs text-dezo-text-muted tracking-wide mb-10">
-                {heroChannels}
-              </p>
-            </DezoReveal>
-            <DezoReveal delay={0.15}>
-              <div className="flex flex-wrap gap-3">
-                <DezoButton href="/start-a-project" size="lg" icon={<ArrowUpRight size={16} />}>
-                  Start a Project
-                </DezoButton>
-                <DezoButton href="/work" variant="outline" size="lg">
-                  View Our Work
-                </DezoButton>
+              <div data-hero-item className="flex flex-wrap gap-3">
+                <DezoMagnetic>
+                  <DezoButton
+                    href="/start-a-project"
+                    size="lg"
+                    magnetic
+                    icon={<ArrowUpRight size={16} className="dezo-cta-arrow" />}
+                  >
+                    Start a Project
+                  </DezoButton>
+                </DezoMagnetic>
+                <DezoMagnetic strength={0.14}>
+                  <DezoButton href="/work" variant="outline" size="lg" magnetic>
+                    View Our Work
+                  </DezoButton>
+                </DezoMagnetic>
               </div>
-            </DezoReveal>
-            <DezoReveal delay={0.2}>
-              <p className="mt-10 text-xs text-dezo-text-muted">{brand.geo}</p>
-            </DezoReveal>
-          </div>
+            </div>
+
+            <div
+              data-hero-item
+              className="mt-12 sm:mt-16 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 border-t border-dezo-border/70 pt-5"
+            >
+              <p className="text-xs text-dezo-text-muted">{brand.geo}</p>
+              {featured[0] && (
+                <a
+                  href={featured[0].url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 font-mono text-xs text-dezo-text-secondary hover:text-dezo-primary transition-colors"
+                >
+                  <span>{featured[0].title}</span>
+                  <span className="text-dezo-text-muted">·</span>
+                  <span>{cleanHost(featured[0].url)}</span>
+                  <ArrowUpRight size={12} className="dezo-cta-arrow" />
+                </a>
+              )}
+            </div>
+          </DezoHeroMotion>
         </DezoContainer>
       </section>
 
-      {/* 03 Trust — short host strip only (full archive on /work) */}
-      <DezoSection spacing="compact" className="border-y border-dezo-border bg-dezo-surface">
+      {/* 03 Trust — animated host strip (not a full dump) */}
+      <DezoSection spacing="compact" className="border-y border-dezo-border bg-dezo-surface overflow-hidden">
         <DezoContainer size="wide">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-text-muted shrink-0">
+          <div className="flex flex-col gap-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-text-muted">
               Selected live sites
             </p>
-            <div className="flex flex-wrap gap-x-6 gap-y-2">
-              {trustHosts.map((host) => (
-                <span
-                  key={host}
-                  className="font-mono text-xs sm:text-sm text-dezo-text-secondary tracking-wide"
-                >
-                  {host}
-                </span>
-              ))}
+            <div className="relative overflow-hidden">
+              <div className="dezo-trust-marquee" aria-hidden>
+                {trustLoop.map((host, i) => (
+                  <span
+                    key={`${host}-${i}`}
+                    className="font-mono text-xs sm:text-sm text-dezo-text-secondary tracking-wide whitespace-nowrap"
+                  >
+                    {host}
+                  </span>
+                ))}
+              </div>
+              <p className="sr-only">{trustHosts.join(', ')}</p>
             </div>
           </div>
         </DezoContainer>
@@ -215,7 +261,7 @@ export default function HomePage() {
               <Link
                 key={row.num}
                 href={row.href}
-                className="group grid grid-cols-12 gap-4 py-7 sm:py-8 items-start transition-colors hover:bg-dezo-bg/60 -mx-2 px-2"
+                className="dezo-service-row group grid grid-cols-12 gap-4 py-7 sm:py-8 items-start -mx-2 px-2"
                 onMouseEnter={() => setHoveredService(row.num)}
                 onMouseLeave={() => setHoveredService(null)}
               >
@@ -239,7 +285,7 @@ export default function HomePage() {
                   </p>
                 </div>
                 <span className="hidden lg:flex col-span-1 justify-end items-center text-dezo-text-muted group-hover:text-dezo-primary transition-colors">
-                  <ArrowRight size={16} />
+                  <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
               </Link>
             ))}
@@ -273,21 +319,24 @@ export default function HomePage() {
                   rel="noopener noreferrer"
                   className="group block"
                 >
-                  <div className="relative w-full overflow-hidden bg-dezo-bg border border-dezo-border aspect-[16/9] sm:aspect-[21/10] mb-8 lg:mb-10">
+                  <DezoImageReveal
+                    delay={i * 0.03}
+                    className="relative w-full bg-dezo-bg border border-dezo-border aspect-[16/9] sm:aspect-[21/10] mb-8 lg:mb-10"
+                  >
                     <LiveSitePreview
                       url={study.url}
                       title={study.title}
                       eager={i < 2}
                       className="absolute inset-0 w-full h-full object-cover object-top dezo-img-zoom"
                     />
-                  </div>
+                  </DezoImageReveal>
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12">
                     <div className="lg:col-span-5">
                       <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary mb-3">
                         {study.industry}
                         {study.stack?.length ? ` · ${study.stack.slice(0, 3).join(' · ')}` : ''}
                       </p>
-                      <h3 className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] tracking-tight text-dezo-text-primary group-hover:text-dezo-primary transition-colors">
+                      <h3 className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] tracking-tight text-dezo-text-primary group-hover:text-dezo-primary transition-colors duration-300">
                         {study.title}
                       </h3>
                       <p className="font-mono text-xs text-dezo-text-muted mt-3">
@@ -308,7 +357,8 @@ export default function HomePage() {
                         {study.result}
                       </p>
                       <span className="inline-flex items-center gap-1.5 text-sm font-medium text-dezo-text-primary border-b border-dezo-ink pb-0.5 mt-2 group-hover:border-dezo-primary group-hover:text-dezo-primary transition-colors">
-                        Visit live site <ArrowUpRight size={14} />
+                        Visit live site{' '}
+                        <ArrowUpRight size={14} className="dezo-cta-arrow" />
                       </span>
                     </div>
                   </div>
@@ -593,18 +643,20 @@ export default function HomePage() {
               Discover → Optimize
             </DezoHeading>
           </DezoReveal>
-          <ol className="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+          <DezoStagger className="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6" stagger={0.06}>
             {processSteps.map((step, i) => (
-              <li key={step} className="border-t border-dezo-border pt-4">
-                <span className="font-mono text-[10px] text-dezo-text-muted">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <p className="font-display text-lg sm:text-xl text-dezo-text-primary mt-2">
-                  {step}
-                </p>
-              </li>
+              <DezoStaggerItem key={step}>
+                <li className="border-t border-dezo-border pt-4 list-none group cursor-default">
+                  <span className="font-mono text-[10px] text-dezo-text-muted group-hover:text-dezo-primary transition-colors">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <p className="font-display text-lg sm:text-xl text-dezo-text-primary mt-2 transition-transform duration-300 group-hover:translate-x-0.5">
+                    {step}
+                  </p>
+                </li>
+              </DezoStaggerItem>
             ))}
-          </ol>
+          </DezoStagger>
         </DezoContainer>
       </DezoSection>
 
@@ -715,12 +767,21 @@ export default function HomePage() {
                 next.
               </p>
               <div className="flex flex-wrap gap-3">
-                <DezoButton href="/start-a-project" size="lg" icon={<ArrowUpRight size={16} />}>
-                  Start a Project
-                </DezoButton>
-                <DezoButton href="/growth-lab" variant="outline" size="lg">
-                  Request a Growth Audit
-                </DezoButton>
+                <DezoMagnetic>
+                  <DezoButton
+                    href="/start-a-project"
+                    size="lg"
+                    magnetic
+                    icon={<ArrowUpRight size={16} className="dezo-cta-arrow" />}
+                  >
+                    Start a Project
+                  </DezoButton>
+                </DezoMagnetic>
+                <DezoMagnetic strength={0.14}>
+                  <DezoButton href="/growth-lab" variant="outline" size="lg" magnetic>
+                    Request a Growth Audit
+                  </DezoButton>
+                </DezoMagnetic>
               </div>
             </div>
           </DezoReveal>

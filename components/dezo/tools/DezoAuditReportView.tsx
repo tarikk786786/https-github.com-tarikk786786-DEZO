@@ -303,7 +303,7 @@ export function DezoAuditReportView({
               Diagnostic Findings & Actionable Fixes ({report.findings.length})
             </h3>
             <span className="text-xs text-dezo-text-muted">
-              Prioritized by commercial revenue impact (P0 Immediate to P3 Minor)
+              Sorted by what to fix first — urgent issues at the top
             </span>
           </div>
 

@@ -19,13 +19,16 @@ import {
   contact,
 } from '@/content/site';
 import { portfolioData } from '@/content/projects';
+import { cleanHost } from '@/components/dezo/LiveSitePreview';
 
 export default function HomePage() {
-  const liveCount = portfolioData.filter((p) => p.isLive).length;
+  const liveSites = portfolioData.filter((p) => p.isLive);
+  const liveCount = liveSites.length;
   const featured = featuredCaseStudies.slice(0, 3);
   const [hoveredService, setHoveredService] = useState<string | null>(null);
+  const [showAllHosts, setShowAllHosts] = useState(false);
 
-  const clientHosts = [
+  const featuredHosts = [
     'yasanabeautyrituals.in',
     'sonvicasarees.com',
     'shreeayurved.com',
@@ -33,6 +36,15 @@ export default function HomePage() {
     'thepaanluxe.com',
     'greatindiapublicschool.org',
   ];
+  const sortedLiveSites = [...liveSites].sort((a, b) => {
+    const ai = featuredHosts.findIndex((h) => a.url.includes(h));
+    const bi = featuredHosts.findIndex((h) => b.url.includes(h));
+    const aRank = ai === -1 ? 99 : ai;
+    const bRank = bi === -1 ? 99 : bi;
+    if (aRank !== bRank) return aRank - bRank;
+    return a.title.localeCompare(b.title);
+  });
+  const visibleHosts = showAllHosts ? sortedLiveSites : sortedLiveSites.slice(0, 24);
 
   return (
     <>
@@ -77,22 +89,60 @@ export default function HomePage() {
         </DezoContainer>
       </section>
 
-      {/* 03 Selected clients — real hosts only */}
+      {/* 03 Live deployments — every listed production URL */}
       <DezoSection spacing="compact" className="border-y border-dezo-border bg-dezo-surface">
         <DezoContainer size="wide">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-text-muted mb-6">
-            Selected live deployments
-          </p>
-          <div className="flex flex-wrap gap-x-8 gap-y-3">
-            {clientHosts.map((host) => (
-              <span
-                key={host}
-                className="font-mono text-xs sm:text-sm text-dezo-text-secondary tracking-wide"
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-text-muted mb-2">
+                Live deployments
+              </p>
+              <p className="font-display text-xl sm:text-2xl text-dezo-text-primary">
+                {liveCount} production websites
+              </p>
+            </div>
+            <Link
+              href="/work"
+              className="text-sm font-medium text-dezo-text-primary border-b border-dezo-ink pb-0.5 hover:text-dezo-primary hover:border-dezo-primary transition-colors inline-flex items-center gap-1"
+            >
+              Open full archive <ArrowRight size={14} />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-3">
+            {visibleHosts.map((site) => (
+              <a
+                key={site.url}
+                href={site.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-baseline justify-between gap-3 border-t border-dezo-border pt-2.5"
               >
-                {host}
-              </span>
+                <span className="text-sm text-dezo-text-primary group-hover:text-dezo-primary transition-colors truncate">
+                  {site.title}
+                </span>
+                <span className="font-mono text-[10px] text-dezo-text-muted shrink-0 truncate max-w-[45%]">
+                  {cleanHost(site.url)}
+                </span>
+              </a>
             ))}
           </div>
+          {!showAllHosts && liveCount > visibleHosts.length && (
+            <button
+              type="button"
+              onClick={() => setShowAllHosts(true)}
+              className="mt-8 text-sm font-medium text-dezo-text-primary border-b border-dezo-border pb-0.5 hover:text-dezo-primary hover:border-dezo-primary transition-colors"
+            >
+              Show all {liveCount} live websites
+            </button>
+          )}
+          {showAllHosts && (
+            <p className="mt-8 font-mono text-xs text-dezo-text-muted">
+              All {liveCount} listed live URLs shown ·{' '}
+              <Link href="/work" className="underline underline-offset-2 hover:text-dezo-primary">
+                browse with previews
+              </Link>
+            </p>
+          )}
         </DezoContainer>
       </DezoSection>
 
@@ -254,8 +304,10 @@ export default function HomePage() {
               <p className="text-sm text-white/55 mt-2">Live deployments catalogued</p>
             </div>
             <div>
-              <p className="font-display text-4xl sm:text-5xl tracking-tight">5</p>
-              <p className="text-sm text-white/55 mt-2">Core service disciplines</p>
+              <p className="font-display text-4xl sm:text-5xl tracking-tight tabular-nums">
+                {liveCount}
+              </p>
+              <p className="text-sm text-white/55 mt-2">Live websites listed</p>
             </div>
             <div>
               <p className="font-display text-4xl sm:text-5xl tracking-tight">IN</p>

@@ -43,9 +43,9 @@ export default function WorkPage() {
               <DezoHeading
                 badge="Work"
                 as="h1"
-                subtitle={`${liveCount}+ live URLs in our public archive. Featured sites are production websites — not mockups.`}
+                subtitle={`${liveCount} live production websites in our public archive — every listed URL below. Featured sites open first; the full catalog follows.`}
               >
-                Selected work
+                All live websites
               </DezoHeading>
             </div>
           </DezoReveal>
@@ -54,11 +54,16 @@ export default function WorkPage() {
             <DezoFeaturedWork projects={featured} />
           </div>
           <DezoReveal>
-            <h2 className="font-display text-2xl sm:text-3xl text-dezo-text-primary mb-8">
-              Full live archive
-            </h2>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+              <h2 className="font-display text-2xl sm:text-3xl text-dezo-text-primary">
+                Full live archive
+              </h2>
+              <p className="font-mono text-xs text-dezo-text-muted">
+                {liveCount} live URLs · all shown
+              </p>
+            </div>
           </DezoReveal>
-          <DezoWorkGallery initialLimit={18} featuredFirst />
+          <DezoWorkGallery showAll featuredFirst />
         </DezoContainer>
       </DezoSection>
     </div>

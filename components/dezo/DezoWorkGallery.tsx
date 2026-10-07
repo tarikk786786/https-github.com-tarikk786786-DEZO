@@ -10,13 +10,22 @@ import { DezoStagger, DezoStaggerItem } from '@/lib/motion/MotionAdapter';
 export function DezoWorkGallery({
   initialLimit = 9,
   featuredFirst = false,
+  showAll = false,
 }: {
   initialLimit?: number;
   featuredFirst?: boolean;
+  /** When true, render every live match (no Load More). */
+  showAll?: boolean;
 }) {
+  const liveTotal = useMemo(
+    () => portfolioData.filter((item) => item.isLive).length,
+    [],
+  );
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [displayCount, setDisplayCount] = useState<number>(initialLimit);
+  const [displayCount, setDisplayCount] = useState<number>(
+    showAll ? Number.MAX_SAFE_INTEGER : initialLimit,
+  );
 
   const filteredProjects = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -39,12 +48,28 @@ export function DezoWorkGallery({
     return list;
   }, [activeCategory, searchQuery, featuredFirst]);
 
-  const visibleProjects = filteredProjects.slice(0, displayCount);
-  const hasMore = displayCount < filteredProjects.length;
+  const visibleProjects = showAll
+    ? filteredProjects
+    : filteredProjects.slice(0, displayCount);
+  const hasMore = !showAll && displayCount < filteredProjects.length;
 
   return (
     <div className="w-full flex flex-col gap-8">
       <div className="flex flex-col gap-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <p className="text-sm text-dezo-text-secondary">
+            Showing{' '}
+            <span className="font-semibold text-dezo-text-primary tabular-nums">
+              {visibleProjects.length}
+            </span>{' '}
+            of{' '}
+            <span className="font-semibold text-dezo-text-primary tabular-nums">
+              {liveTotal}
+            </span>{' '}
+            live websites
+            {activeCategory !== 'All' ? ` in ${activeCategory}` : ''}.
+          </p>
+        </div>
         <div className="relative max-w-md w-full mx-auto sm:mx-0">
           <Search
             size={16}
@@ -69,7 +94,7 @@ export function DezoWorkGallery({
                 type="button"
                 onClick={() => {
                   setActiveCategory(category);
-                  setDisplayCount(initialLimit);
+                  setDisplayCount(showAll ? Number.MAX_SAFE_INTEGER : initialLimit);
                 }}
                 className={`shrink-0 px-3.5 py-2 rounded-dezo-md text-xs font-semibold uppercase tracking-wider transition-colors duration-200 cursor-pointer ${
                   isSelected

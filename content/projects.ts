@@ -220,6 +220,9 @@ export const projectCategories = [
   "Real Estate",
   "Food & Grocery",
   "Travel",
+  "Hospitality",
   "Photography",
   "Education",
+  "International",
+  "Agency",
 ] as const;

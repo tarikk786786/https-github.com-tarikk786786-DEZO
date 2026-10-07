@@ -311,6 +311,30 @@ export const featuredCaseStudies = [
     url: 'https://nilkanthpaints.com/',
     stack: ['Web', 'Corporate Portal'],
   },
+  {
+    title: 'The Paan Luxe',
+    industry: 'Ecommerce',
+    location: 'India',
+    challenge: 'Specialty lifestyle brand needed a conversion-focused D2C storefront.',
+    problem: 'Specialty lifestyle brand needed a conversion-focused D2C storefront.',
+    strategy: 'Commerce architecture with clear product hierarchy and brand-led UX.',
+    execution: 'Shipped a live ecommerce experience for direct orders.',
+    result: 'Live D2C storefront in production.',
+    url: 'https://thepaanluxe.com',
+    stack: ['Ecommerce', 'Brand'],
+  },
+  {
+    title: 'Great India Public School',
+    industry: 'Education',
+    location: 'India',
+    challenge: 'School needed admissions-focused digital presence with clear programs.',
+    problem: 'School needed admissions-focused digital presence with clear programs.',
+    strategy: 'Information architecture for programs, trust, and inquiry pathways.',
+    execution: 'Built and launched a live education website.',
+    result: 'Live school site supporting admissions inquiries.',
+    url: 'https://greatindiapublicschool.org/',
+    stack: ['Web', 'Education'],
+  },
 ] as const;
 
 /** Legacy alias */

@@ -108,7 +108,7 @@ export default function HomePage() {
         <div className="flex min-h-[100svh] flex-col lg:block">
           {/* Media stage — tall edge-to-edge cinema on mobile; absolute full-bleed on lg+ */}
           <div
-            className="relative h-[42vh] min-h-[260px] max-h-[420px] w-full shrink-0 overflow-hidden sm:h-[46vh] sm:max-h-none lg:absolute lg:inset-0 lg:h-auto lg:min-h-0 lg:max-h-none"
+            className="relative h-[50vh] min-h-[300px] w-full shrink-0 overflow-hidden sm:h-[52vh] lg:absolute lg:inset-0 lg:h-auto lg:min-h-0"
             aria-hidden
           >
             <DezoHeroMedia />

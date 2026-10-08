@@ -1,13 +1,14 @@
 ---
-description: Core agent behavior for this repository
+description: Thin repo-specific core (defers to master system)
 alwaysApply: true
 ---
 
-# Core
+# Repo core
 
-- Prefer search → plan → minimal edit → targeted verify.
-- Reuse existing components, utilities, and design tokens before adding new ones.
-- Do not invent APIs, packages, or config that already exist in the repo.
-- Keep diffs small and focused on the request.
-- Never commit secrets, tokens, or `.env` values.
-- Follow `AGENTS.md` / Next.js docs under `node_modules/next/dist/docs/` before using Next APIs.
+Follow `.cursor/rules/00-master-system.mdc` for all tasks.
+
+Repo-specific:
+
+- Follow `AGENTS.md` and Next.js docs under `node_modules/next/dist/docs/` before using Next APIs.
+- Prefer existing components in `components/`, `app/`, `lib/`, and `design-system/`.
+- Do not invent parallel deploy configs when `vercel.json` / `netlify.toml` / `render.yaml` already exist.

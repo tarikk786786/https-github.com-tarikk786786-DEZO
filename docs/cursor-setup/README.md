@@ -54,6 +54,12 @@ Add specialty MCPs from:
 - [Cursor Marketplace](https://cursor.com/marketplace)
 - Official vendor docs (Stripe, Linear, Notion, Slack, AWS, …)
 
+## Master system prompt
+
+- Always-on (condensed): `.cursor/rules/00-master-system.mdc`
+- Full prompt: [`MASTER_SYSTEM_PROMPT.md`](./MASTER_SYSTEM_PROMPT.md)
+- Skill: `.cursor/skills/workflow/master-development-system/`
+
 ## Rules
 
 Project rules live in `.cursor/rules/` (`00-core` … `15-review`), including always-on **token-saving** rules.

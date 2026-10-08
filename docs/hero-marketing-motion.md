@@ -30,15 +30,15 @@ No overlays on media (no floating badges/chips). Chapter UI lives in the type co
 | --- | --- | --- |
 | 1. Media settle | GSAP on `[data-hero-media]` | opacity 0→1, scale 1.04→1, ~1.2s |
 | 2. Atmosphere | GSAP on `[data-hero-atmosphere]` (lg+) | fade in ~1.45s after slight delay |
-| 3. Type stagger | GSAP on `[data-hero-item]` | y 36→0, stagger 0.07s, power3 |
-| 4. Poster ken burns | CSS `.dezo-hero-kenburns` | only while video not playing |
-| 5. Video crossfade | opacity transition 700ms | poster → muted loop |
-| 6. Chapter sync | `HeroShowcaseContext` from `video.currentTime` | 8 chapters across ~12.5s desktop / ~10.4s mobile |
-| 7. Chapter crossfade | Motion `AnimatePresence` | label/hint y + opacity ~0.35–0.4s |
-| 8. Progress bar | `scaleX` from loop / chapter progress | rAF-driven |
-| 9. Active chapter dot | CSS pulse | desktop index only |
-| 10. Magnetic CTAs | spring (desktop hover) | disabled under reduced-motion |
-| 11. Scroll progress | gold top bar sitewide | after hero |
+| 3. Eyebrow track-in | Motion letter-spacing settle | ~0.9s |
+| 4. Brand clip rise | Motion y 110%→0 in overflow mask | ~0.95s |
+| 5. Gold rule draw | Motion `scaleX` 0→1 | ~0.7s |
+| 6. **Pillar rotate** | BUILD → MARKET → GROW clip wipe | 2.2s each, loop |
+| 7. Body de-blur | Motion blur 6px→0 | ~0.8s |
+| 8. CTA / trailer / proof | GSAP on `[data-hero-item]` | y stagger after type |
+| 9. Poster ken burns | CSS `.dezo-hero-kenburns` | only while video not playing |
+| 10. Chapter sync | `HeroShowcaseContext` from reel time | 8 trailer chapters |
+| 11. Magnetic CTAs | spring (desktop hover) | disabled under reduced-motion |
 
 **Reduced motion:** poster only, no reel, no ken burns, no chapter pulse; chapters freeze at index 0 (or interval off).
 

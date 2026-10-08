@@ -22,6 +22,7 @@ import { PromiseHomeTeaser } from '@/components/promise/PromiseGuaranteeSystem';
 import { CTASection } from '@/components/dezo/visual';
 import { DezoHeroMedia } from '@/components/dezo/DezoHeroMedia';
 import { DezoHeroChapters } from '@/components/dezo/DezoHeroChapters';
+import { DezoHeroText } from '@/components/dezo/DezoHeroText';
 import { HeroShowcaseProvider } from '@/components/dezo/HeroShowcaseContext';
 import { finalCtaBanner, heroBanner } from '@/content/banners';
 import {
@@ -101,9 +102,8 @@ export default function HomePage() {
       <DezoScrollProgress />
 
       {/*
-        Hero — marketing site trailer.
-        Mobile: stacked cinema (sharp reel + solid type). Desktop: full-bleed + paper feather.
-        Motion: media settle → atmosphere → brand stagger → reel-synced chapter ticker.
+        Hero — kinetic text stage (rotating BUILD/MARKET/GROW) + site trailer.
+        Mobile: stacked cinema. Desktop: full-bleed + paper feather.
         See docs/hero-marketing-motion.md
       */}
       <section className="relative overflow-hidden bg-dezo-bg-warm">
@@ -125,71 +125,44 @@ export default function HomePage() {
               <div className="pointer-events-none absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-dezo-bg-warm via-dezo-bg-warm/55 to-transparent lg:hidden" />
             </div>
 
-            {/* Type stack — solid paper on mobile (top-aligned so CTAs stay in first viewport) */}
+            {/* Type stack — kinetic brand + rotating pillars */}
             <div className="relative z-10 flex flex-1 flex-col justify-start bg-dezo-bg-warm lg:min-h-[100svh] lg:justify-end lg:bg-transparent">
               <DezoContainer size="wide" className="w-full pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:pt-8 sm:pb-16 lg:pt-32 lg:pb-20">
-                <div className="max-w-[34rem] lg:max-w-[36rem]">
-                  <p
-                    data-hero-item
-                    className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-dezo-primary mb-2 sm:mb-3"
-                  >
-                    {heroBanner.eyebrow ?? brand.companyLabel}
-                  </p>
+                <DezoHeroText
+                  brandName={brand.name}
+                  eyebrow={heroBanner.eyebrow ?? brand.companyLabel}
+                  body={heroBanner.body ?? brand.supporting}
+                />
 
-                  <p
-                    data-hero-item
-                    className="font-display text-[2.5rem] leading-none tracking-tight text-dezo-text-primary sm:text-6xl lg:text-[5.5rem]"
-                  >
-                    {brand.name}
-                  </p>
+                <div
+                  data-hero-item
+                  className="mt-5 sm:mt-9 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3 max-w-[36rem]"
+                >
+                  <DezoMagnetic>
+                    <DezoButton
+                      href={heroBanner.primaryCta?.href ?? '/start-a-project'}
+                      size="lg"
+                      magnetic
+                      className="w-full sm:w-auto justify-center"
+                      icon={<ArrowUpRight size={16} className="dezo-cta-arrow" />}
+                    >
+                      {heroBanner.primaryCta?.label ?? 'Start a Project'}
+                    </DezoButton>
+                  </DezoMagnetic>
+                  <DezoMagnetic strength={0.14}>
+                    <DezoButton
+                      href={heroBanner.secondaryCta?.href ?? '/work'}
+                      variant="outline"
+                      size="lg"
+                      magnetic
+                      className="w-full sm:w-auto justify-center"
+                    >
+                      {heroBanner.secondaryCta?.label ?? 'View Our Work'}
+                    </DezoButton>
+                  </DezoMagnetic>
+                </div>
 
-                  <div
-                    data-hero-item
-                    className="mt-4 mb-3 h-px w-12 bg-dezo-primary sm:mt-7 sm:mb-6 sm:w-14 lg:mt-9 lg:mb-8"
-                  />
-
-                  <h1
-                    data-hero-item
-                    className="font-display text-[1.4rem] sm:text-4xl lg:text-[3.15rem] tracking-tightest leading-[1.06] text-dezo-text-primary uppercase"
-                  >
-                    {heroBanner.title}
-                  </h1>
-
-                  <p
-                    data-hero-item
-                    className="mt-2.5 sm:mt-5 text-[0.95rem] sm:text-lg lg:text-xl text-dezo-text-secondary leading-relaxed max-w-md"
-                  >
-                    {heroBanner.body ?? brand.supporting}
-                  </p>
-
-                  <div
-                    data-hero-item
-                    className="mt-5 sm:mt-9 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3"
-                  >
-                    <DezoMagnetic>
-                      <DezoButton
-                        href={heroBanner.primaryCta?.href ?? '/start-a-project'}
-                        size="lg"
-                        magnetic
-                        className="w-full sm:w-auto justify-center"
-                        icon={<ArrowUpRight size={16} className="dezo-cta-arrow" />}
-                      >
-                        {heroBanner.primaryCta?.label ?? 'Start a Project'}
-                      </DezoButton>
-                    </DezoMagnetic>
-                    <DezoMagnetic strength={0.14}>
-                      <DezoButton
-                        href={heroBanner.secondaryCta?.href ?? '/work'}
-                        variant="outline"
-                        size="lg"
-                        magnetic
-                        className="w-full sm:w-auto justify-center"
-                      >
-                        {heroBanner.secondaryCta?.label ?? 'View Our Work'}
-                      </DezoButton>
-                    </DezoMagnetic>
-                  </div>
-
+                <div data-hero-item className="max-w-[36rem]">
                   <DezoHeroChapters />
                 </div>
 

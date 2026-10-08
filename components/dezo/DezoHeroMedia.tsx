@@ -4,17 +4,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from '@/lib/motion/useReducedMotion';
 
 /** Cache-bust so apex + www edges pick up the showcase reel */
-const ASSET_V = 'v5';
+const ASSET_V = 'v6';
 const POSTER = `/hero/dezo-hero-poster.jpg?${ASSET_V}`;
+const POSTER_MOBILE = `/hero/dezo-hero-poster-mobile.jpg?${ASSET_V}`;
 const LOOP_WEBM = `/hero/dezo-hero-loop.webm?${ASSET_V}`;
 const LOOP_MP4 = `/hero/dezo-hero-loop.mp4?${ASSET_V}`;
 const LOOP_MOBILE = `/hero/dezo-hero-loop-mobile.mp4?${ASSET_V}`;
 
 /**
- * Full-bleed site-showcase hero plane — muted autoplay loop from DEZO work assets.
- * Sharp chapter plates (Build → Market → Grow → Work → Engine → Lab → Standard → Studio)
- * interleaved with chrome-free project stills. Poster + reduced-motion fallback;
- * mobile uses lighter 720p encode.
+ * Full-bleed site-showcase hero plane.
+ * Desktop: landscape WebM/MP4. Mobile: portrait 9:16 encode framed for the
+ * stacked cinema stage (sharp product + chapter plates, no cream wash).
  */
 export function DezoHeroMedia() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -65,35 +65,36 @@ export function DezoHeroMedia() {
     };
   }, [reduced, isNarrow]);
 
+  const poster = isNarrow ? POSTER_MOBILE : POSTER;
+
   return (
     <div className="absolute inset-0 overflow-hidden" aria-hidden>
-      {/* Poster — paint + reduced-motion / autoplay-block fallback */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={POSTER}
+        src={poster}
         alt=""
-        width={1920}
-        height={1080}
+        width={isNarrow ? 1080 : 1920}
+        height={isNarrow ? 1920 : 1080}
         decoding="async"
         fetchPriority="high"
-        className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-500 ${
-          useVideo ? 'opacity-0' : 'opacity-100'
-        }`}
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+          isNarrow ? 'object-[center_35%]' : 'object-center'
+        } ${useVideo ? 'opacity-0' : 'opacity-100'}`}
       />
 
       {!reduced && (
         <video
           ref={videoRef}
           key={isNarrow ? 'mobile' : 'desktop'}
-          className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-500 ${
-            useVideo ? 'opacity-100' : 'opacity-0'
-          }`}
-          poster={POSTER}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+            isNarrow ? 'object-[center_35%]' : 'object-center'
+          } ${useVideo ? 'opacity-100' : 'opacity-0'}`}
+          poster={poster}
           muted
           playsInline
           loop
           autoPlay
-          preload="auto"
+          preload={isNarrow ? 'metadata' : 'auto'}
           aria-hidden
           tabIndex={-1}
         >

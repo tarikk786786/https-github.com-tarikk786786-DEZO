@@ -194,17 +194,21 @@ body {
       rgba(11, 11, 10, 0.2) 100%
     );
 }
-@media (max-width: 639px) {
-  /* Mobile: reel peeks above; solid paper under DEZO type (no plate clash) */
+/*
+  Mobile uses a stacked cinema layout (sharp reel stage + solid type below),
+  so the atmosphere wash is lg-only. Keep a soft fallback for mid breakpoints
+  that still overlay (sm–md) until lg takes over absolute media.
+*/
+@media (max-width: 1023px) {
   .dezo-hero-atmosphere {
     background:
-      linear-gradient(180deg, #F5F3EE 0%, #F5F3EE 4.25rem, transparent 6.5rem),
+      linear-gradient(180deg, #F5F3EE 0%, #F5F3EE 4.5rem, transparent 7rem),
       linear-gradient(
         180deg,
-        rgba(245, 243, 238, 0.12) 0%,
-        rgba(245, 243, 238, 0.28) 26%,
-        rgba(245, 243, 238, 0.9) 48%,
-        #F5F3EE 64%
+        rgba(245, 243, 238, 0.2) 0%,
+        rgba(245, 243, 238, 0.08) 40%,
+        rgba(245, 243, 238, 0.75) 70%,
+        #F5F3EE 88%
       );
   }
 }

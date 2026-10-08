@@ -42,7 +42,7 @@ Map routes/sections → short plates (not every URL):
 | 08 | STUDIO | Bhubaneswar / Odisha | Typographic plate |
 | 09 | START | CTA resolve | Product still hold |
 
-Duration target: **~14–16s** loop (desktop WebM/MP4 + lighter mobile). Poster = strongest product frame.
+Duration target: **~12–14s** loop (desktop WebM/MP4 + **portrait 9:16 mobile**). Poster = strongest product frame. Mobile UI is a **stacked cinema** (see `docs/mobile-hero-research.md`), not a washed overlay.
 
 ## UI redesign (hero chrome)
 

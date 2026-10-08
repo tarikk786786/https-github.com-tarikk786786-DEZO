@@ -1,0 +1,11 @@
+---
+description: Git and PR hygiene
+alwaysApply: false
+---
+
+# Git
+
+- Use clear, descriptive commit messages.
+- Keep commits scoped to one logical change when practical.
+- Do not force-push shared branches unless requested.
+- Do not skip hooks unless explicitly asked.

@@ -1,0 +1,12 @@
+---
+description: Coding standards for implementation work
+alwaysApply: false
+---
+
+# Coding
+
+- Match existing style, naming, and patterns in nearby files.
+- Prefer editing existing files over creating new ones.
+- Avoid drive-by refactors unrelated to the task.
+- TypeScript: keep types honest; avoid `any` unless matching local style.
+- React: follow repo React Compiler guidance; do not add `useMemo`/`useCallback` by default.

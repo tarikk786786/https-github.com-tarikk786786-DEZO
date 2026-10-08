@@ -1,0 +1,10 @@
+---
+description: Deploy and infra guidance
+alwaysApply: false
+---
+
+# DevOps
+
+- Respect existing `vercel.json`, `netlify.toml`, `render.yaml`.
+- Do not add duplicate deploy configs without reason.
+- Document required env vars when deploy steps change.

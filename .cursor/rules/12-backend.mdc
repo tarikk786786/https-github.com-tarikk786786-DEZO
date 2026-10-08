@@ -1,0 +1,11 @@
+---
+description: Backend / API guidance
+globs: server.ts,**/api/**/*.{ts,tsx},lib/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Backend
+
+- Keep handlers thin; share validation with existing Zod patterns when present.
+- Prefer typed errors and stable status codes.
+- Do not expose internal errors or secrets to clients.

@@ -218,8 +218,8 @@ export function DezoHeroMotion({
         gsap.to(targets, {
           opacity: 1,
           y: 0,
-          duration: 0.85,
-          stagger: 0.11,
+          duration: 0.7,
+          stagger: 0.07,
           ease: 'power3.out',
           clearProps: 'transform',
         });

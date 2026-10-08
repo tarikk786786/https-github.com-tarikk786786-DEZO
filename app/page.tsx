@@ -106,9 +106,9 @@ export default function HomePage() {
       */}
       <section className="relative overflow-hidden bg-dezo-bg-warm">
         <div className="flex min-h-[100svh] flex-col lg:block">
-          {/* Media stage — edge-to-edge on mobile; absolute full-bleed on lg+ */}
+          {/* Media stage — tall edge-to-edge cinema on mobile; absolute full-bleed on lg+ */}
           <div
-            className="relative h-[48svh] min-h-[300px] w-full shrink-0 overflow-hidden sm:h-[52svh] lg:absolute lg:inset-0 lg:h-auto lg:min-h-0"
+            className="relative h-[42vh] min-h-[260px] max-h-[420px] w-full shrink-0 overflow-hidden sm:h-[46vh] sm:max-h-none lg:absolute lg:inset-0 lg:h-auto lg:min-h-0 lg:max-h-none"
             aria-hidden
           >
             <DezoHeroMedia />
@@ -122,40 +122,40 @@ export default function HomePage() {
             <div className="pointer-events-none absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-dezo-bg-warm via-dezo-bg-warm/55 to-transparent lg:hidden" />
           </div>
 
-          {/* Type stack — solid paper on mobile; transparent overlay on desktop */}
-          <div className="relative z-10 flex flex-1 flex-col justify-end bg-dezo-bg-warm lg:min-h-[100svh] lg:bg-transparent">
-            <DezoContainer size="wide" className="w-full pt-7 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:pt-10 sm:pb-16 lg:pt-32 lg:pb-20">
+          {/* Type stack — solid paper on mobile (top-aligned so CTAs stay in first viewport) */}
+          <div className="relative z-10 flex flex-1 flex-col justify-start bg-dezo-bg-warm lg:min-h-[100svh] lg:justify-end lg:bg-transparent">
+            <DezoContainer size="wide" className="w-full pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:pt-8 sm:pb-16 lg:pt-32 lg:pb-20">
               <DezoHeroMotion>
                 <div className="max-w-[34rem] lg:max-w-[36rem]">
                   <p
                     data-hero-item
-                    className="font-display text-[2.75rem] leading-none tracking-tight text-dezo-text-primary sm:text-6xl lg:text-[5.5rem]"
+                    className="font-display text-[2.5rem] leading-none tracking-tight text-dezo-text-primary sm:text-6xl lg:text-[5.5rem]"
                   >
                     {brand.name}
                   </p>
 
                   <div
                     data-hero-item
-                    className="mt-5 mb-4 h-px w-12 bg-dezo-primary sm:mt-7 sm:mb-6 sm:w-14 lg:mt-9 lg:mb-8"
+                    className="mt-4 mb-3 h-px w-12 bg-dezo-primary sm:mt-7 sm:mb-6 sm:w-14 lg:mt-9 lg:mb-8"
                   />
 
                   <h1
                     data-hero-item
-                    className="font-display text-[1.55rem] sm:text-4xl lg:text-[3.15rem] tracking-tightest leading-[1.06] text-dezo-text-primary uppercase"
+                    className="font-display text-[1.4rem] sm:text-4xl lg:text-[3.15rem] tracking-tightest leading-[1.06] text-dezo-text-primary uppercase"
                   >
                     {brand.tag}
                   </h1>
 
                   <p
                     data-hero-item
-                    className="mt-3 sm:mt-5 text-[0.95rem] sm:text-lg lg:text-xl text-dezo-text-secondary leading-relaxed max-w-md"
+                    className="mt-2.5 sm:mt-5 text-[0.95rem] sm:text-lg lg:text-xl text-dezo-text-secondary leading-relaxed max-w-md"
                   >
                     {brand.tagline}
                   </p>
 
                   <div
                     data-hero-item
-                    className="mt-7 sm:mt-9 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3"
+                    className="mt-5 sm:mt-9 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3"
                   >
                     <DezoMagnetic>
                       <DezoButton
@@ -186,7 +186,7 @@ export default function HomePage() {
 
                 <div
                   data-hero-item
-                  className="mt-7 sm:mt-10 lg:mt-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 sm:gap-3 border-t border-dezo-border/60 pt-4 sm:pt-5 max-w-4xl"
+                  className="mt-5 sm:mt-10 lg:mt-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 sm:gap-3 border-t border-dezo-border/60 pt-3.5 sm:pt-5 max-w-4xl"
                 >
                   <p className="text-[11px] sm:text-xs text-dezo-text-muted tracking-wide">
                     {brand.studioLine}

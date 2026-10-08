@@ -30,8 +30,10 @@ export function constructMetadata({
   canonicalUrl?: string;
   noIndex?: boolean;
 } = {}): Metadata {
-  const metaTitle = title
-    ? `${title} | DEZO`
+  // Avoid "Title — DEZO | DEZO" when callers already bake the brand into title
+  const cleaned = title?.replace(/\s*[—|-]\s*DEZO\s*$/i, '').trim();
+  const metaTitle = cleaned
+    ? `${cleaned} | DEZO`
     : 'DEZO | BUILD. MARKET. GROW. — Digital infrastructure for ambitious businesses';
 
   return {

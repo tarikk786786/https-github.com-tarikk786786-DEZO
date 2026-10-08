@@ -1,89 +1,136 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import Link from 'next/link';
+import { AnimatePresence, motion } from 'motion/react';
 import { useReducedMotion } from '@/lib/motion/useReducedMotion';
+import {
+  HERO_SITE_CHAPTERS,
+  useHeroShowcase,
+} from '@/components/dezo/HeroShowcaseContext';
 
-/** Site chapters mirrored in the hero showcase reel. */
-export const HERO_SITE_CHAPTERS = [
-  { id: 'build', label: 'Build', hint: 'Web · brand · commerce' },
-  { id: 'market', label: 'Market', hint: 'Ecommerce · Amazon · Flipkart' },
-  { id: 'grow', label: 'Grow', hint: 'SEO · ads · measurement' },
-  { id: 'work', label: 'Work', hint: 'Live project stories' },
-  { id: 'engine', label: 'Engine', hint: 'One connected system' },
-  { id: 'lab', label: 'Lab', hint: 'Public diagnostics' },
-  { id: 'standard', label: 'Standard', hint: 'Guarantees we control' },
-  { id: 'studio', label: 'Studio', hint: 'Bhubaneswar · Odisha' },
-] as const;
+export { HERO_SITE_CHAPTERS };
 
 /**
  * Editorial chapter index for the site-showcase reel.
- * Mobile: compact single-line ticker (thumb-friendly).
- * Desktop: full index grid under the active chapter.
+ * Synced to reel time via HeroShowcaseContext (marketing trailer chapters).
+ * Mobile: compact single-line ticker. Desktop: full index + active highlight.
  */
 export function DezoHeroChapters() {
   const reduced = useReducedMotion();
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (reduced) return;
-    const id = window.setInterval(() => {
-      setIndex((i) => (i + 1) % HERO_SITE_CHAPTERS.length);
-    }, 1600);
-    return () => window.clearInterval(id);
-  }, [reduced]);
-
-  const chapter = HERO_SITE_CHAPTERS[index];
-  const step = String(index + 1).padStart(2, '0');
-  const total = String(HERO_SITE_CHAPTERS.length).padStart(2, '0');
+  const { chapterIndex, loopProgress, chapterCount } = useHeroShowcase();
+  const chapter = HERO_SITE_CHAPTERS[chapterIndex];
+  const step = String(chapterIndex + 1).padStart(2, '0');
+  const total = String(chapterCount).padStart(2, '0');
+  const chapterProgress = Math.min(
+    1,
+    Math.max(0, loopProgress * chapterCount - chapterIndex)
+  );
 
   return (
     <div className="mt-5 sm:mt-8" aria-live="polite" data-hero-item>
       <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-dezo-text-muted mb-1.5 sm:mb-2">
-        Watching the site
+        Site trailer · what we build for you
       </p>
 
       {/* Mobile — one active chapter + progress (no dense grid) */}
       <div className="sm:hidden">
-        <div className="flex items-baseline justify-between gap-3">
-          <p className="font-display text-2xl text-dezo-text-primary tracking-tight">
-            {chapter.label}
-          </p>
-          <p className="font-mono text-[10px] text-dezo-text-muted tabular-nums">
-            {step} / {total}
-          </p>
+        <div className="relative min-h-[4.25rem]">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={chapter.id}
+              initial={reduced ? false : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduced ? undefined : { opacity: 0, y: -8 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="flex items-baseline justify-between gap-3">
+                <p className="font-display text-2xl text-dezo-text-primary tracking-tight">
+                  <Link
+                    href={chapter.href}
+                    className="hover:text-dezo-primary transition-colors"
+                  >
+                    {chapter.label}
+                  </Link>
+                </p>
+                <p className="font-mono text-[10px] text-dezo-text-muted tabular-nums shrink-0">
+                  {step} / {total}
+                </p>
+              </div>
+              <p className="mt-1 font-mono text-xs text-dezo-text-secondary">
+                {chapter.hint}
+              </p>
+            </motion.div>
+          </AnimatePresence>
         </div>
-        <p className="mt-1 font-mono text-xs text-dezo-text-secondary">{chapter.hint}</p>
         <div
           className="mt-3 h-px w-full bg-dezo-border/70 overflow-hidden"
           aria-hidden
         >
           <div
-            className="h-full bg-dezo-primary transition-[width] duration-500 ease-out"
-            style={{
-              width: `${((index + 1) / HERO_SITE_CHAPTERS.length) * 100}%`,
-            }}
+            className="h-full bg-dezo-primary origin-left dezo-hero-chapter-progress"
+            style={{ transform: `scaleX(${chapterProgress || 0.02})` }}
           />
         </div>
       </div>
 
-      {/* Desktop+ — richer index */}
+      {/* Desktop+ — richer index for prospects scanning capabilities */}
       <div className="hidden sm:block">
-        <p className="font-display text-xl sm:text-2xl text-dezo-text-primary tracking-tight">
-          {chapter.label}
-        </p>
-        <p className="mt-1 font-mono text-xs text-dezo-text-secondary">{chapter.hint}</p>
-        <ol className="mt-4 grid grid-cols-4 gap-x-2 gap-y-1.5" aria-hidden>
-          {HERO_SITE_CHAPTERS.map((c, i) => (
-            <li
-              key={c.id}
-              className={`font-mono text-[9px] uppercase tracking-[0.1em] transition-colors duration-300 ${
-                i === index ? 'text-dezo-primary' : 'text-dezo-text-muted/50'
-              }`}
+        <div className="relative min-h-[2.25rem]">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={chapter.id}
+              initial={reduced ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduced ? undefined : { opacity: 0, y: -10 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-              {String(i + 1).padStart(2, '0')} {c.label}
+              <p className="font-display text-xl sm:text-2xl text-dezo-text-primary tracking-tight">
+                <Link
+                  href={chapter.href}
+                  className="hover:text-dezo-primary transition-colors"
+                >
+                  {chapter.label}
+                </Link>
+              </p>
+              <p className="mt-1 font-mono text-xs text-dezo-text-secondary">
+                {chapter.hint}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <ol className="mt-4 grid grid-cols-4 gap-x-2 gap-y-1.5">
+          {HERO_SITE_CHAPTERS.map((c, i) => (
+            <li key={c.id}>
+              <Link
+                href={c.href}
+                className={`font-mono text-[9px] uppercase tracking-[0.1em] transition-colors duration-300 inline-flex items-center gap-1 ${
+                  i === chapterIndex
+                    ? 'text-dezo-primary'
+                    : 'text-dezo-text-muted/50 hover:text-dezo-text-secondary'
+                }`}
+                aria-current={i === chapterIndex ? 'true' : undefined}
+              >
+                {i === chapterIndex && (
+                  <span
+                    className="inline-block h-1 w-1 rounded-full bg-dezo-primary dezo-hero-chapter-dot"
+                    aria-hidden
+                  />
+                )}
+                {String(i + 1).padStart(2, '0')} {c.label}
+              </Link>
             </li>
           ))}
         </ol>
+        <div
+          className="mt-3 h-px w-full max-w-md bg-dezo-border/60 overflow-hidden"
+          aria-hidden
+        >
+          <div
+            className="h-full bg-dezo-primary/80 origin-left dezo-hero-chapter-progress"
+            style={{ transform: `scaleX(${loopProgress || 0.02})` }}
+          />
+        </div>
       </div>
     </div>
   );

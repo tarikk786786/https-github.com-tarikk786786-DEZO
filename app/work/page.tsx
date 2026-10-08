@@ -5,7 +5,9 @@ import { DezoHeading } from '@/components/dezo/DezoHeading';
 import { DezoSection } from '@/components/dezo/DezoSection';
 import { DezoWorkGallery } from '@/components/dezo/DezoWorkGallery';
 import { DezoFeaturedWork } from '@/components/dezo/DezoFeaturedWork';
+import { CTASection, ServiceBanner } from '@/components/dezo/visual';
 import { DezoReveal } from '@/lib/motion/MotionAdapter';
+import { finalCtaBanner, workIndexBanner } from '@/content/banners';
 import { constructMetadata } from '@/lib/seo/metadata';
 import { portfolioData } from '@/content/projects';
 
@@ -34,32 +36,36 @@ export default function WorkPage() {
     });
 
   return (
-    <div className="pt-28 sm:pt-32 pb-24 min-h-screen">
-      <DezoSection spacing="compact">
+    <>
+      <ServiceBanner data={workIndexBanner} compact />
+
+      <DezoSection spacing="normal">
         <DezoContainer size="wide">
           <DezoReveal>
-            <div className="max-w-3xl mb-10">
-              <DezoHeading
-                badge="Work"
-                as="h1"
-                subtitle="Every listed live website in our archive — real production URLs, not mockups. Featured stories first; the complete directory follows."
-              >
-                Live websites
-              </DezoHeading>
-            </div>
+            <DezoHeading
+              badge="Featured"
+              as="h2"
+              subtitle="Image-led project stories with live production URLs."
+            >
+              Evidence over decoration
+            </DezoHeading>
           </DezoReveal>
-          <div className="dezo-section-rule mb-14" />
-          <div className="mb-20">
+          <div className="mt-12 mb-20">
             <DezoFeaturedWork projects={featured} />
           </div>
           <DezoReveal>
-            <h2 className="font-display text-2xl sm:text-3xl text-dezo-text-primary mb-8">
+            <h2
+              id="archive"
+              className="font-display text-2xl sm:text-3xl text-dezo-text-primary mb-8 scroll-mt-28"
+            >
               Complete archive
             </h2>
           </DezoReveal>
           <DezoWorkGallery showAll featuredFirst />
         </DezoContainer>
       </DezoSection>
-    </div>
+
+      <CTASection data={finalCtaBanner} />
+    </>
   );
 }

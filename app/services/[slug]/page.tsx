@@ -1,8 +1,12 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { PlatformPageScaffold } from '@/components/platform/PlatformPageScaffold';
+import { CTASection, ServiceBanner } from '@/components/dezo/visual';
+import { DezoContainer } from '@/components/dezo/DezoContainer';
+import { DezoSection } from '@/components/dezo/DezoSection';
+import { DezoReveal, DezoStagger, DezoStaggerItem } from '@/lib/motion/MotionAdapter';
 import { ServicePromiseBlock } from '@/components/promise/ServicePromise';
+import { finalCtaBanner, serviceDetailBanners } from '@/content/banners';
 import { servicePillars } from '@/content/site';
 import { constructMetadata } from '@/lib/seo/metadata';
 
@@ -95,7 +99,7 @@ export async function generateMetadata({
   const pillar = servicePillars.find((p) => p.slug === pillarSlug);
   if (!pillar) return {};
   return constructMetadata({
-    title: `${pillar.title} — DEZO`,
+    title: pillar.title,
     description: pillar.summary,
     canonicalUrl: `https://dezo.in/services/${slug}`,
   });
@@ -112,57 +116,94 @@ export default async function ServiceDetailPage({
   const pillar = servicePillars.find((p) => p.slug === pillarSlug);
   if (!pillar) notFound();
   const deliverables = DELIVERABLES[slug as ServiceSlug];
+  const banner = serviceDetailBanners[slug] ?? {
+    id: `svc-${slug}`,
+    eyebrow: pillar.name,
+    title: pillar.title,
+    body: pillar.summary,
+    tone: 'warm' as const,
+    primaryCta: { label: 'Start a Project', href: '/start-a-project', variant: 'primary' as const },
+  };
 
   return (
-    <PlatformPageScaffold
-      badge={pillar.name}
-      title={pillar.title}
-      subtitle={pillar.summary}
-    >
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        <div className="lg:col-span-7 space-y-8">
-          <section>
-            <h2 className="font-display text-xl font-bold text-dezo-text-primary mb-3">
-              Problem we solve
-            </h2>
-            <p className="text-sm text-dezo-text-secondary leading-relaxed">
-              Brands lose growth when {pillar.name.toLowerCase()} is treated as a one-off
-              vendor task instead of part of a connected commercial system.
-            </p>
-          </section>
-          <section>
-            <h2 className="font-display text-xl font-bold text-dezo-text-primary mb-3">
-              What we do
-            </h2>
-            <p className="text-sm text-dezo-text-secondary leading-relaxed">{pillar.summary}</p>
-          </section>
-          <section>
-            <h2 className="font-display text-xl font-bold text-dezo-text-primary mb-3">
-              Deliverables
-            </h2>
-            <ul className="space-y-2">
-              {deliverables.map((d) => (
-                <li key={d} className="text-sm text-dezo-text-secondary flex gap-2">
-                  <span className="text-dezo-primary">·</span>
-                  {d}
-                </li>
-              ))}
-            </ul>
-          </section>
-        </div>
-        <aside className="lg:col-span-5 p-6 border border-dezo-border bg-dezo-surface h-fit">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-dezo-primary mb-3">
-            How it works
-          </p>
-          <ol className="space-y-3 text-sm text-dezo-text-secondary">
-            <li>01 — Diagnose channel readiness</li>
-            <li>02 — Architect the stack</li>
-            <li>03 — Execute with specialists</li>
-            <li>04 — Operate & report</li>
-          </ol>
-        </aside>
-      </div>
-      <ServicePromiseBlock slug={slug} />
-    </PlatformPageScaffold>
+    <>
+      <ServiceBanner data={banner} />
+
+      <DezoSection spacing="normal">
+        <DezoContainer size="wide">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-7 space-y-10">
+              <DezoReveal>
+                <section>
+                  <h2 className="font-display text-2xl text-dezo-text-primary mb-3">
+                    Problem we solve
+                  </h2>
+                  <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed max-w-xl">
+                    Brands lose growth when {pillar.name.toLowerCase()} is treated as a one-off
+                    vendor task instead of part of a connected commercial system.
+                  </p>
+                </section>
+              </DezoReveal>
+              <DezoReveal delay={0.06}>
+                <section>
+                  <h2 className="font-display text-2xl text-dezo-text-primary mb-3">What we do</h2>
+                  <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed max-w-xl">
+                    {pillar.summary}
+                  </p>
+                </section>
+              </DezoReveal>
+              <DezoReveal delay={0.1}>
+                <section>
+                  <h2 className="font-display text-2xl text-dezo-text-primary mb-4">
+                    Deliverables
+                  </h2>
+                  <DezoStagger className="space-y-0 border-y border-dezo-border divide-y divide-dezo-border" stagger={0.04}>
+                    {deliverables.map((d, i) => (
+                      <DezoStaggerItem key={d}>
+                        <li className="list-none flex gap-4 py-4 text-sm text-dezo-text-secondary">
+                          <span className="font-mono text-[10px] text-dezo-text-muted shrink-0 pt-0.5">
+                            {String(i + 1).padStart(2, '0')}
+                          </span>
+                          {d}
+                        </li>
+                      </DezoStaggerItem>
+                    ))}
+                  </DezoStagger>
+                </section>
+              </DezoReveal>
+            </div>
+            <aside className="lg:col-span-5">
+              <DezoReveal delay={0.08}>
+                <div className="border border-dezo-border bg-dezo-surface p-6 sm:p-8 sticky top-28">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-dezo-primary mb-5">
+                    How it works
+                  </p>
+                  <ol className="space-y-4 text-sm text-dezo-text-secondary">
+                    {[
+                      'Diagnose channel readiness',
+                      'Architect the stack',
+                      'Execute with specialists',
+                      'Operate & report',
+                    ].map((step, i) => (
+                      <li key={step} className="flex gap-3 border-t border-dezo-border pt-4 first:border-0 first:pt-0">
+                        <span className="font-mono text-[10px] text-dezo-text-muted">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        {step}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </DezoReveal>
+            </aside>
+          </div>
+          <div className="mt-16">
+            <ServicePromiseBlock slug={slug} />
+          </div>
+        </DezoContainer>
+      </DezoSection>
+
+      <CTASection data={finalCtaBanner} />
+    </>
   );
 }

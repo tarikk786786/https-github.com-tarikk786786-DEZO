@@ -218,6 +218,30 @@ body {
   background-size: 180px 180px;
 }
 
+/* Marketing trailer — chapter progress + active pulse (synced via JS transform) */
+.dezo-hero-media-stage {
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+.dezo-hero-chapter-progress {
+  transform-origin: left center;
+  will-change: transform;
+}
+.dezo-hero-chapter-dot {
+  animation: dezo-hero-dot-pulse 1.4s ease-in-out infinite;
+}
+@keyframes dezo-hero-dot-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.7);
+  }
+}
+
 .dezo-cta-arrow {
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -261,7 +285,8 @@ html.lenis body {
   }
   .dezo-trust-marquee,
   .dezo-atmosphere,
-  .dezo-hero-kenburns {
+  .dezo-hero-kenburns,
+  .dezo-hero-chapter-dot {
     animation: none !important;
   }
 }

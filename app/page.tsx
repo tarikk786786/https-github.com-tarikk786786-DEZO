@@ -222,12 +222,12 @@ export default function HomePage() {
         </HeroShowcaseProvider>
       </section>
 
-      {/* 03 Trust — animated host strip (not a full dump) */}
+      {/* 03 Trust — animated host strip (proof after trailer) */}
       <DezoSection spacing="compact" className="border-y border-dezo-border bg-dezo-surface overflow-hidden">
         <DezoContainer size="wide">
           <div className="flex flex-col gap-4">
             <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-text-muted">
-              Selected live sites
+              Proof from the trailer · selected live sites
             </p>
             <div className="relative overflow-hidden">
               <div className="dezo-trust-marquee" aria-hidden>
@@ -463,13 +463,15 @@ export default function HomePage() {
       {/* Goals — entry by outcome, not another services list */}
       <DezoSection spacing="normal">
         <DezoContainer size="wide">
-          <DezoHeading
-            badge="Start here"
-            as="h2"
-            subtitle="Pick the outcome. We assemble the stack."
-          >
-            What are you trying to grow?
-          </DezoHeading>
+          <DezoReveal>
+            <DezoHeading
+              badge="Start here"
+              as="h2"
+              subtitle="Pick the outcome. We assemble the stack."
+            >
+              What are you trying to grow?
+            </DezoHeading>
+          </DezoReveal>
           <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-10">
             <ul className="lg:col-span-5 flex flex-col border-y border-dezo-border divide-y divide-dezo-border">
               {goals.map((g, i) => (

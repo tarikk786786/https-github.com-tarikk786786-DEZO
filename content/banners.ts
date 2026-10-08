@@ -52,6 +52,127 @@ export const heroBanner: BannerBase = {
   meta: 'Studio in Bhubaneswar, Odisha · Delivery across India',
 };
 
+export const servicesIndexBanner: BannerBase = {
+  id: 'banner-services-index',
+  eyebrow: 'Services',
+  title: 'Capabilities across the full commercial stack',
+  body: 'Web, performance marketing, marketplaces, SEO, and brand — delivered as one partner, not five disconnected vendors.',
+  tone: 'warm',
+  media: {
+    kind: 'image',
+    src: '/work-previews/yasana-beauty-rituals-hero.jpg',
+    alt: 'Premium product photography from DEZO commerce work',
+    objectPosition: '72% 40%',
+  },
+  primaryCta: { label: 'Start a Project', href: '/start-a-project', variant: 'primary' },
+  secondaryCta: { label: 'View Our Work', href: '/work', variant: 'outline' },
+  meta: 'Build · Grow · Sell · Advertise · Brand',
+};
+
+export const workIndexBanner: BannerBase = {
+  id: 'banner-work-index',
+  eyebrow: 'Selected work',
+  title: 'Live websites. Real proof.',
+  body: 'Every listed project is a production URL — image-led stories first, then the complete archive.',
+  tone: 'warm',
+  media: {
+    kind: 'image',
+    src: '/work-previews/yasana-beauty-rituals-hero.jpg',
+    alt: 'Yasana Beauty Rituals product photography',
+    objectPosition: '70% 45%',
+  },
+  primaryCta: { label: 'Start a Project', href: '/start-a-project', variant: 'primary' },
+  secondaryCta: { label: 'Browse archive', href: '#archive', variant: 'outline' },
+};
+
+/** Service detail heroes keyed by route slug */
+export const serviceDetailBanners: Record<string, BannerBase> = {
+  'web-development': {
+    id: 'svc-web',
+    eyebrow: 'Build',
+    title: 'Websites & Ecommerce',
+    body: 'Shopify, Next.js, WordPress, landing pages and custom apps engineered for speed and conversion.',
+    tone: 'warm',
+    media: {
+      kind: 'image',
+      src: '/work-previews/yasana-beauty-rituals-hero.jpg',
+      alt: 'Commerce product still from DEZO web build',
+      objectPosition: '70% 45%',
+    },
+    primaryCta: { label: 'Start a Project', href: '/start-a-project', variant: 'primary' },
+    secondaryCta: { label: 'See live work', href: '/work', variant: 'outline' },
+  },
+  seo: {
+    id: 'svc-seo',
+    eyebrow: 'Grow',
+    title: 'SEO & Discovery',
+    body: 'Technical SEO, content architecture and local visibility — without ranking promises we cannot control.',
+    tone: 'surface',
+    media: { kind: 'work-preview', host: 'shreeayurved.com', objectPosition: 'top' },
+    primaryCta: { label: 'Request SEO audit', href: '/growth-lab', variant: 'primary' },
+    secondaryCta: { label: 'Start a Project', href: '/start-a-project', variant: 'outline' },
+  },
+  amazon: {
+    id: 'svc-amazon',
+    eyebrow: 'Sell',
+    title: 'Amazon growth',
+    body: 'Listings, catalog health, creative and advertising with transparent reporting.',
+    tone: 'warm',
+    media: { kind: 'work-preview', host: 'nilkanthpaints.com', objectPosition: 'top' },
+    primaryCta: { label: 'Talk Amazon', href: '/contact', variant: 'primary' },
+    secondaryCta: { label: 'Flipkart too', href: '/services/flipkart', variant: 'outline' },
+  },
+  flipkart: {
+    id: 'svc-flipkart',
+    eyebrow: 'Sell',
+    title: 'Flipkart growth',
+    body: 'Catalog, promotions, ads and reporting — operated with marketplace rules in mind.',
+    tone: 'paper',
+    media: { kind: 'work-preview', host: 'nilkanthpaints.com', objectPosition: 'top' },
+    primaryCta: { label: 'Talk Flipkart', href: '/contact', variant: 'primary' },
+    secondaryCta: { label: 'Amazon too', href: '/services/amazon', variant: 'outline' },
+  },
+  'paid-ads': {
+    id: 'svc-ads',
+    eyebrow: 'Advertise',
+    title: 'Meta & Google',
+    body: 'Tracking, creative testing and optimization — strategy before spend.',
+    tone: 'paper',
+    media: { kind: 'work-preview', host: 'thepaanluxe.com', objectPosition: 'top' },
+    primaryCta: { label: 'Start a Project', href: '/start-a-project', variant: 'primary' },
+    secondaryCta: { label: 'Open DEZO LAB', href: '/growth-lab', variant: 'outline' },
+  },
+  social: {
+    id: 'svc-social',
+    eyebrow: 'Brand',
+    title: 'Social & content',
+    body: 'Strategy, creative, calendars and measurement that support the commercial system.',
+    tone: 'surface',
+    media: { kind: 'work-preview', host: 'thepaanluxe.com', objectPosition: 'top' },
+    primaryCta: { label: 'Start a Project', href: '/start-a-project', variant: 'primary' },
+  },
+  branding: {
+    id: 'svc-brand',
+    eyebrow: 'Brand',
+    title: 'Brand & creative',
+    body: 'Positioning, visual systems, packaging and campaign creative that sell.',
+    tone: 'ink',
+    media: { kind: 'work-preview', host: 'greatindiapublicschool.org', objectPosition: 'top' },
+    primaryCta: { label: 'Start a Project', href: '/start-a-project', variant: 'primary' },
+    secondaryCta: { label: 'View Our Work', href: '/work', variant: 'outline' },
+  },
+  'growth-systems': {
+    id: 'svc-systems',
+    eyebrow: 'Systems',
+    title: 'Growth systems',
+    body: 'Diagnostics, reporting cadence and operating systems that keep every channel honest.',
+    tone: 'paper',
+    media: { kind: 'work-preview', host: 'yasanabeautyrituals.in', objectPosition: 'top' },
+    primaryCta: { label: 'Open DEZO LAB', href: '/growth-lab', variant: 'primary' },
+    secondaryCta: { label: 'Read the promise', href: '/promise', variant: 'outline' },
+  },
+};
+
 export const chapterBanners: ChapterBannerData[] = [
   {
     id: 'chapter-build',
@@ -62,7 +183,12 @@ export const chapterBanners: ChapterBannerData[] = [
     body: 'Next.js, Shopify, WordPress and custom applications engineered for speed and clarity.',
     href: '/services/web-development',
     tone: 'paper',
-    media: { kind: 'work-preview', host: 'sonvicasarees.com', objectPosition: 'top' },
+    media: {
+      kind: 'image',
+      src: '/work-previews/yasana-beauty-rituals.jpg',
+      alt: 'Live commerce storefront from DEZO Build chapter',
+      objectPosition: 'top',
+    },
   },
   {
     id: 'chapter-grow',

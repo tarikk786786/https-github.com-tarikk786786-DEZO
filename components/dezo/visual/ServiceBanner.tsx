@@ -27,14 +27,14 @@ export function ServiceBanner({
     >
       {hasMedia && (
         <div className="absolute inset-0" aria-hidden>
-          <BannerMedia media={data.media} priority className="dezo-hero-kenburns opacity-40" />
+          <BannerMedia media={data.media} priority className="dezo-hero-kenburns opacity-[0.58]" />
           <div
             className="absolute inset-0"
             style={{
               background:
                 data.tone === 'ink'
-                  ? 'linear-gradient(105deg, rgba(11,11,10,0.94) 0%, rgba(11,11,10,0.75) 55%, rgba(11,11,10,0.45) 100%)'
-                  : 'linear-gradient(105deg, rgba(245,243,238,0.97) 0%, rgba(245,243,238,0.88) 45%, rgba(245,243,238,0.55) 100%)',
+                  ? 'linear-gradient(105deg, rgba(11,11,10,0.94) 0%, rgba(11,11,10,0.72) 52%, rgba(11,11,10,0.4) 100%)'
+                  : 'linear-gradient(105deg, rgba(245,243,238,0.96) 0%, rgba(245,243,238,0.82) 38%, rgba(245,243,238,0.42) 100%)',
             }}
           />
         </div>

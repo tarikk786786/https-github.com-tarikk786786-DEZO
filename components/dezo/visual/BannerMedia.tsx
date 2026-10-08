@@ -3,11 +3,12 @@
 import React from 'react';
 import type { BannerMedia as BannerMediaType } from '@/content/banners';
 import { LiveSitePreview } from '@/components/dezo/LiveSitePreview';
-import { workPreviewMap } from '@/content/work-previews';
+import { heroStillMap, workPreviewMap } from '@/content/work-previews';
 
+/** Prefer chrome-free hero stills for marketing banners, then archive previews. */
 function previewUrlForHost(host: string): string | null {
   const key = host.replace(/^www\./, '');
-  return workPreviewMap[key] || null;
+  return heroStillMap[key] || workPreviewMap[key] || null;
 }
 
 export function BannerMedia({
@@ -53,7 +54,7 @@ export function BannerMedia({
       <img
         src={media.src}
         alt={media.alt}
-        className={`h-full w-full object-cover ${className}`}
+        className={`absolute inset-0 h-full w-full object-cover ${className}`}
         style={{ objectPosition: media.objectPosition || 'center' }}
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"

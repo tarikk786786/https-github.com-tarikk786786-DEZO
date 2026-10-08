@@ -196,7 +196,8 @@ export function DezoHoverLift({
 }
 
 /**
- * GSAP hero entrance — brand mark, headline, CTAs, geo line.
+ * GSAP hero entrance — media plane, atmosphere, brand, headline, CTAs, trailer ticker.
+ * Expects `[data-hero-item]`, optional `[data-hero-atmosphere]`, optional `[data-hero-media]`.
  */
 export function DezoHeroMotion({
   children,
@@ -212,6 +213,32 @@ export function DezoHeroMotion({
     if (isReducedMotion || !rootRef.current) return;
 
     const ctx = gsap.context(() => {
+      const media = rootRef.current?.querySelectorAll('[data-hero-media]');
+      if (media?.length) {
+        gsap.fromTo(
+          media,
+          { opacity: 0, scale: 1.04 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 1.2,
+            ease: 'power2.out',
+            clearProps: 'transform',
+          }
+        );
+      }
+
+      const atmosphere = rootRef.current?.querySelectorAll('[data-hero-atmosphere]');
+      if (atmosphere?.length) {
+        gsap.set(atmosphere, { opacity: 0 });
+        gsap.to(atmosphere, {
+          opacity: 1,
+          duration: 1.45,
+          delay: 0.15,
+          ease: 'power2.out',
+        });
+      }
+
       const targets = rootRef.current?.querySelectorAll('[data-hero-item]');
       if (targets?.length) {
         gsap.set(targets, { opacity: 0, y: 36 });
@@ -220,19 +247,9 @@ export function DezoHeroMotion({
           y: 0,
           duration: 0.7,
           stagger: 0.07,
+          delay: 0.12,
           ease: 'power3.out',
           clearProps: 'transform',
-        });
-      }
-
-      const atmosphere = rootRef.current?.querySelectorAll('[data-hero-atmosphere]');
-      if (atmosphere?.length) {
-        gsap.set(atmosphere, { opacity: 0, scale: 0.96 });
-        gsap.to(atmosphere, {
-          opacity: 1,
-          scale: 1,
-          duration: 1.35,
-          ease: 'power2.out',
         });
       }
     }, rootRef);

@@ -22,7 +22,8 @@ import { PromiseHomeTeaser } from '@/components/promise/PromiseGuaranteeSystem';
 import { CTASection } from '@/components/dezo/visual';
 import { DezoHeroMedia } from '@/components/dezo/DezoHeroMedia';
 import { DezoHeroChapters } from '@/components/dezo/DezoHeroChapters';
-import { finalCtaBanner } from '@/content/banners';
+import { HeroShowcaseProvider } from '@/components/dezo/HeroShowcaseContext';
+import { finalCtaBanner, heroBanner } from '@/content/banners';
 import {
   brand,
   serviceRows,
@@ -100,33 +101,41 @@ export default function HomePage() {
       <DezoScrollProgress />
 
       {/*
-        Hero — mobile: stacked cinema (sharp reel stage + solid type).
-        Desktop: full-bleed overlay with soft left paper feather.
-        See docs/mobile-hero-research.md
+        Hero — marketing site trailer.
+        Mobile: stacked cinema (sharp reel + solid type). Desktop: full-bleed + paper feather.
+        Motion: media settle → atmosphere → brand stagger → reel-synced chapter ticker.
+        See docs/hero-marketing-motion.md
       */}
       <section className="relative overflow-hidden bg-dezo-bg-warm">
-        <div className="flex min-h-[100svh] flex-col lg:block">
-          {/* Media stage — tall edge-to-edge cinema on mobile; absolute full-bleed on lg+ */}
-          <div
-            className="relative h-[50vh] min-h-[300px] w-full shrink-0 overflow-hidden sm:h-[52vh] lg:absolute lg:inset-0 lg:h-auto lg:min-h-0"
-            aria-hidden
-          >
-            <DezoHeroMedia />
-            {/* Desktop atmosphere only — mobile keeps the reel unwashed */}
+        <HeroShowcaseProvider>
+          <DezoHeroMotion className="flex min-h-[100svh] flex-col lg:block">
+            {/* Media stage — tall edge-to-edge cinema on mobile; absolute full-bleed on lg+ */}
             <div
-              className="absolute inset-0 dezo-hero-atmosphere hidden lg:block"
-              data-hero-atmosphere
-            />
-            <div className="absolute inset-0 dezo-hero-grain pointer-events-none opacity-[0.025] mix-blend-multiply hidden lg:block" />
-            {/* Mobile: thin nav band only */}
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-dezo-bg-warm via-dezo-bg-warm/55 to-transparent lg:hidden" />
-          </div>
+              className="relative h-[50vh] min-h-[300px] w-full shrink-0 overflow-hidden sm:h-[52vh] lg:absolute lg:inset-0 lg:h-auto lg:min-h-0"
+              aria-hidden
+            >
+              <DezoHeroMedia />
+              {/* Desktop atmosphere only — mobile keeps the reel unwashed */}
+              <div
+                className="absolute inset-0 dezo-hero-atmosphere hidden lg:block"
+                data-hero-atmosphere
+              />
+              <div className="absolute inset-0 dezo-hero-grain pointer-events-none opacity-[0.025] mix-blend-multiply hidden lg:block" />
+              {/* Mobile: thin nav band only */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-dezo-bg-warm via-dezo-bg-warm/55 to-transparent lg:hidden" />
+            </div>
 
-          {/* Type stack — solid paper on mobile (top-aligned so CTAs stay in first viewport) */}
-          <div className="relative z-10 flex flex-1 flex-col justify-start bg-dezo-bg-warm lg:min-h-[100svh] lg:justify-end lg:bg-transparent">
-            <DezoContainer size="wide" className="w-full pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:pt-8 sm:pb-16 lg:pt-32 lg:pb-20">
-              <DezoHeroMotion>
+            {/* Type stack — solid paper on mobile (top-aligned so CTAs stay in first viewport) */}
+            <div className="relative z-10 flex flex-1 flex-col justify-start bg-dezo-bg-warm lg:min-h-[100svh] lg:justify-end lg:bg-transparent">
+              <DezoContainer size="wide" className="w-full pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:pt-8 sm:pb-16 lg:pt-32 lg:pb-20">
                 <div className="max-w-[34rem] lg:max-w-[36rem]">
+                  <p
+                    data-hero-item
+                    className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-dezo-primary mb-2 sm:mb-3"
+                  >
+                    {heroBanner.eyebrow ?? brand.companyLabel}
+                  </p>
+
                   <p
                     data-hero-item
                     className="font-display text-[2.5rem] leading-none tracking-tight text-dezo-text-primary sm:text-6xl lg:text-[5.5rem]"
@@ -143,14 +152,14 @@ export default function HomePage() {
                     data-hero-item
                     className="font-display text-[1.4rem] sm:text-4xl lg:text-[3.15rem] tracking-tightest leading-[1.06] text-dezo-text-primary uppercase"
                   >
-                    {brand.tag}
+                    {heroBanner.title}
                   </h1>
 
                   <p
                     data-hero-item
                     className="mt-2.5 sm:mt-5 text-[0.95rem] sm:text-lg lg:text-xl text-dezo-text-secondary leading-relaxed max-w-md"
                   >
-                    {brand.tagline}
+                    {heroBanner.body ?? brand.supporting}
                   </p>
 
                   <div
@@ -159,24 +168,24 @@ export default function HomePage() {
                   >
                     <DezoMagnetic>
                       <DezoButton
-                        href="/start-a-project"
+                        href={heroBanner.primaryCta?.href ?? '/start-a-project'}
                         size="lg"
                         magnetic
                         className="w-full sm:w-auto justify-center"
                         icon={<ArrowUpRight size={16} className="dezo-cta-arrow" />}
                       >
-                        Start a Project
+                        {heroBanner.primaryCta?.label ?? 'Start a Project'}
                       </DezoButton>
                     </DezoMagnetic>
                     <DezoMagnetic strength={0.14}>
                       <DezoButton
-                        href="/work"
+                        href={heroBanner.secondaryCta?.href ?? '/work'}
                         variant="outline"
                         size="lg"
                         magnetic
                         className="w-full sm:w-auto justify-center"
                       >
-                        View Our Work
+                        {heroBanner.secondaryCta?.label ?? 'View Our Work'}
                       </DezoButton>
                     </DezoMagnetic>
                   </div>
@@ -189,7 +198,7 @@ export default function HomePage() {
                   className="mt-5 sm:mt-10 lg:mt-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 sm:gap-3 border-t border-dezo-border/60 pt-3.5 sm:pt-5 max-w-4xl"
                 >
                   <p className="text-[11px] sm:text-xs text-dezo-text-muted tracking-wide">
-                    {brand.studioLine}
+                    {heroBanner.meta ?? brand.studioLine}
                   </p>
                   {featured[0] && (
                     <a
@@ -207,10 +216,10 @@ export default function HomePage() {
                     </a>
                   )}
                 </div>
-              </DezoHeroMotion>
-            </DezoContainer>
-          </div>
-        </div>
+              </DezoContainer>
+            </div>
+          </DezoHeroMotion>
+        </HeroShowcaseProvider>
       </section>
 
       {/* 03 Trust — animated host strip (not a full dump) */}
@@ -273,7 +282,11 @@ export default function HomePage() {
       </DezoSection>
 
       {/* 05 DEZO Engine — signature system (before capability rows) */}
-      <DezoSection spacing="normal" className="bg-dezo-surface border-y border-dezo-border">
+      <DezoSection
+        id="engine"
+        spacing="normal"
+        className="bg-dezo-surface border-y border-dezo-border"
+      >
         <DezoContainer size="wide">
           <DezoEngine />
         </DezoContainer>

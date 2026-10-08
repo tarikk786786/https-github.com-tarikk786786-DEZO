@@ -74,3 +74,7 @@ Synced loosely to reel timing; `prefers-reduced-motion` freezes on Work.
 - Type remains readable at all times
 - No client chrome, neon, fake stats
 - Mobile uses lighter encode or poster
+
+## Follow-on
+
+Marketing motion + prospect copy + reel-synced ticker: see `docs/hero-marketing-motion.md`.

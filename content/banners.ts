@@ -39,17 +39,17 @@ export const heroBanner: BannerBase = {
   id: 'hero-home',
   eyebrow: 'Digital growth company',
   title: 'BUILD. MARKET. GROW.',
-  body: 'Websites, ecommerce, marketplaces, advertising, SEO, social and brand systems—built to work together.',
+  body: 'Websites, ecommerce, marketplaces, advertising, SEO, social and brand—connected into one commercial system for businesses ready to scale.',
   tone: 'warm',
   media: {
-    kind: 'image',
-    src: '/work-previews/yasana-beauty-rituals-hero.jpg',
-    alt: 'Featured commerce photography from Yasana Beauty Rituals',
-    objectPosition: '72% 45%',
+    kind: 'video',
+    src: '/hero/dezo-hero-loop.mp4',
+    poster: '/hero/dezo-hero-poster.jpg',
+    alt: 'DEZO site trailer — Build, Market, Grow chapters with live project proof',
   },
   primaryCta: { label: 'Start a Project', href: '/start-a-project', variant: 'primary' },
   secondaryCta: { label: 'View Our Work', href: '/work', variant: 'outline' },
-  meta: 'Based in India. Built for businesses everywhere.',
+  meta: 'Studio in Bhubaneswar, Odisha · Delivery across India',
 };
 
 export const chapterBanners: ChapterBannerData[] = [

@@ -1,0 +1,12 @@
+---
+description: Frontend guidance for this Next.js app
+globs: app/**/*.{tsx,ts,css},components/**/*.{tsx,ts},src/**/*.{tsx,ts}
+alwaysApply: false
+---
+
+# Frontend
+
+- Preserve established visual language; no generic AI purple/cream defaults when redesigning.
+- Hero/landing: one composition, brand-first, full-bleed imagery when promotional.
+- Prefer existing motion libraries already in package.json (GSAP, motion, three).
+- Ensure desktop and mobile both work.

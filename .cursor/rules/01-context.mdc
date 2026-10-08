@@ -1,0 +1,12 @@
+---
+description: How to gather context efficiently
+alwaysApply: true
+---
+
+# Context gathering
+
+- Identify relevant files with search/symbols before opening files.
+- Read only the sections needed for the change.
+- Prefer ripgrep / semantic search over directory dumps.
+- Ignore `node_modules`, build output, caches, binaries, and lockfile bodies unless required.
+- Do not re-read files already in context.

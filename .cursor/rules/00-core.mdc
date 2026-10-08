@@ -1,0 +1,13 @@
+---
+description: Core agent behavior for this repository
+alwaysApply: true
+---
+
+# Core
+
+- Prefer search → plan → minimal edit → targeted verify.
+- Reuse existing components, utilities, and design tokens before adding new ones.
+- Do not invent APIs, packages, or config that already exist in the repo.
+- Keep diffs small and focused on the request.
+- Never commit secrets, tokens, or `.env` values.
+- Follow `AGENTS.md` / Next.js docs under `node_modules/next/dist/docs/` before using Next APIs.

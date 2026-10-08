@@ -37,7 +37,7 @@ export function DezoHeroChapters() {
   const total = String(HERO_SITE_CHAPTERS.length).padStart(2, '0');
 
   return (
-    <div className="mt-6 sm:mt-8" aria-live="polite" data-hero-item>
+    <div className="mt-5 sm:mt-8" aria-live="polite" data-hero-item>
       <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-dezo-text-muted mb-1.5 sm:mb-2">
         Watching the site
       </p>

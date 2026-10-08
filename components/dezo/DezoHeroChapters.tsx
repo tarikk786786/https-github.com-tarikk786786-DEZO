@@ -35,42 +35,34 @@ export function DezoHeroChapters() {
 
       {/* Mobile — one active chapter + progress (no dense grid) */}
       <div className="sm:hidden">
-        <div className="flex items-baseline justify-between gap-3 min-h-[2.5rem]">
-          <div className="relative min-h-[1.75rem] flex-1 overflow-hidden">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.p
-                key={chapter.id}
-                initial={reduced ? false : { opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={reduced ? undefined : { opacity: 0, y: -8 }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                className="font-display text-2xl text-dezo-text-primary tracking-tight"
-              >
-                <Link
-                  href={chapter.href}
-                  className="hover:text-dezo-primary transition-colors"
-                >
-                  {chapter.label}
-                </Link>
-              </motion.p>
-            </AnimatePresence>
-          </div>
-          <p className="font-mono text-[10px] text-dezo-text-muted tabular-nums shrink-0">
-            {step} / {total}
-          </p>
+        <div className="relative min-h-[4.25rem]">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={chapter.id}
+              initial={reduced ? false : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduced ? undefined : { opacity: 0, y: -8 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="flex items-baseline justify-between gap-3">
+                <p className="font-display text-2xl text-dezo-text-primary tracking-tight">
+                  <Link
+                    href={chapter.href}
+                    className="hover:text-dezo-primary transition-colors"
+                  >
+                    {chapter.label}
+                  </Link>
+                </p>
+                <p className="font-mono text-[10px] text-dezo-text-muted tabular-nums shrink-0">
+                  {step} / {total}
+                </p>
+              </div>
+              <p className="mt-1 font-mono text-xs text-dezo-text-secondary">
+                {chapter.hint}
+              </p>
+            </motion.div>
+          </AnimatePresence>
         </div>
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.p
-            key={`${chapter.id}-hint`}
-            initial={reduced ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={reduced ? undefined : { opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mt-1 font-mono text-xs text-dezo-text-secondary"
-          >
-            {chapter.hint}
-          </motion.p>
-        </AnimatePresence>
         <div
           className="mt-3 h-px w-full bg-dezo-border/70 overflow-hidden"
           aria-hidden

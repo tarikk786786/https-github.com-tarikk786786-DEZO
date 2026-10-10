@@ -1,8 +1,8 @@
 {
   "name": "snapsolve-ai",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
-  "description": "SnapSolve AI — Universal Screen Question Solver Chrome Extension (MV3)",
+  "description": "SnapSolve — screen question study companion for Chrome (MV3). Made by TarikIslam.in",
   "type": "module",
   "scripts": {
     "dev": "vite build --watch",

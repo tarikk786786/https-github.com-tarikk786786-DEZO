@@ -107,19 +107,15 @@ export default defineConfig({
     sourcemap: true,
     modulePreload: false,
     rollupOptions: {
+      // UI pages only — background/content are bundled separately via esbuild
+      // so MV3 service workers are not broken by shared code-split chunks.
       input: {
         popup: resolve(__dirname, "src/popup/popup.html"),
         sidepanel: resolve(__dirname, "src/sidepanel/sidepanel.html"),
         options: resolve(__dirname, "src/options/options.html"),
-        background: resolve(__dirname, "src/background/service-worker.ts"),
-        content: resolve(__dirname, "src/content/content-script.ts"),
       },
       output: {
-        entryFileNames: (chunk) => {
-          if (chunk.name === "background") return "background.js";
-          if (chunk.name === "content") return "content.js";
-          return "assets/[name]-[hash].js";
-        },
+        entryFileNames: "assets/[name]-[hash].js",
         chunkFileNames: "assets/[name]-[hash].js",
         assetFileNames: "assets/[name]-[hash][extname]",
       },

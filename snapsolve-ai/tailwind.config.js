@@ -5,41 +5,30 @@ export default {
   theme: {
     extend: {
       colors: {
-        navy: {
-          950: "#070b16",
-          900: "#0b1224",
-          800: "#121a2f",
-          700: "#1a2540",
-          600: "#243156",
+        ink: {
+          950: "#0e1218",
+          900: "#171c24",
+          700: "#3a4454",
+          500: "#5c6778",
+          200: "#d5dbe3",
+          50: "#f0f2f5",
         },
-        accent: {
-          violet: "#8b5cf6",
-          cyan: "#22d3ee",
-          mint: "#34d399",
+        pine: {
+          700: "#0b5448",
+          600: "#0f6b5c",
+          100: "#e3f1ee",
         },
       },
       fontFamily: {
-        display: ['"Sora"', "system-ui", "sans-serif"],
-        body: ['"IBM Plex Sans"', "system-ui", "sans-serif"],
+        display: ['"Literata"', "Georgia", "serif"],
+        body: ['"Figtree"', '"Segoe UI"', "sans-serif"],
         mono: ['"IBM Plex Mono"', "ui-monospace", "monospace"],
       },
+      borderRadius: {
+        ss: "8px",
+      },
       boxShadow: {
-        glass: "0 8px 32px rgba(7, 11, 22, 0.35)",
-        glow: "0 0 24px rgba(34, 211, 238, 0.18)",
-      },
-      animation: {
-        "pulse-soft": "pulse-soft 1.8s ease-in-out infinite",
-        "fade-up": "fade-up 0.35s ease-out",
-      },
-      keyframes: {
-        "pulse-soft": {
-          "0%, 100%": { opacity: "0.55" },
-          "50%": { opacity: "1" },
-        },
-        "fade-up": {
-          from: { opacity: "0", transform: "translateY(6px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
+        ss: "0 1px 2px rgba(23, 28, 36, 0.06)",
       },
     },
   },

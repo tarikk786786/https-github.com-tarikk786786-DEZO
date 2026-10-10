@@ -1,7 +1,7 @@
 import type { ProviderConfig, Settings } from "@/shared/types";
 
 export const DEFAULT_PROVIDERS: ProviderConfig[] = [
-  { id: "demo", label: "Demo Mode", enabled: true, model: "demo-solver", supportsCatalog: false },
+  { id: "demo", label: "Sample answers", enabled: true, model: "demo-solver", supportsCatalog: false },
   {
     id: "openai",
     label: "OpenAI",
@@ -155,11 +155,11 @@ export const DEFAULT_PROVIDERS: ProviderConfig[] = [
 ];
 
 export const DEFAULT_SETTINGS: Settings = {
-  theme: "dark",
-  accent: "cyan",
+  theme: "light",
+  accent: "mint",
   fontSize: "md",
   density: "comfortable",
-  animations: true,
+  animations: false,
   floatingToolbar: false,
   floatingToolbarExcludedHosts: [],
   answerMode: "learn",
@@ -178,7 +178,7 @@ export const DEFAULT_SETTINGS: Settings = {
   defaultProvider: "demo",
   providers: DEFAULT_PROVIDERS,
   systemInstructions:
-    "You are SnapSolve AI by Tarik Islam (https://tarikislam.in), a careful study companion. Help the user learn. Do not encourage cheating on active graded exams. Prefer explanations and conceptual guidance for assessments. Never invent citations.",
+    "You are SnapSolve by Tarik Islam (https://tarikislam.in), a careful study companion. Help the user learn. Do not encourage cheating on active graded exams. Prefer explanations and conceptual guidance for assessments. Never invent citations.",
   requestTimeoutMs: 60000,
   retryCount: 1,
   historyRetentionDays: 30,
@@ -200,8 +200,9 @@ export const DEFAULT_SETTINGS: Settings = {
 };
 
 export const BRAND = {
-  product: "SnapSolve AI",
+  product: "SnapSolve",
   creator: "Tarik Islam",
   attribution: "Made by TarikIslam.in",
   website: "https://tarikislam.in",
+  tagline: "Questions from your screen, answers you can study from.",
 } as const;

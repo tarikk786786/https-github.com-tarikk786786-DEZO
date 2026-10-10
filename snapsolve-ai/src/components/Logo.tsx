@@ -8,15 +8,20 @@ export function Logo({ size = 28 }: { size?: number }) {
       aria-hidden
       role="img"
     >
-      <rect width="64" height="64" rx="16" fill="#0b1224" />
+      <rect width="64" height="64" rx="10" fill="#0f6b5c" />
       <path
-        d="M14 40c8-18 28-22 36-10"
-        stroke="#22d3ee"
-        strokeWidth="4"
+        d="M18 40.5c6.5-12 14.5-18 28-19.5"
+        stroke="#ffffff"
+        strokeWidth="3.5"
         strokeLinecap="round"
       />
-      <circle cx="42" cy="24" r="8" fill="#8b5cf6" />
-      <path d="M22 44h20" stroke="#34d399" strokeWidth="3" strokeLinecap="round" />
+      <path
+        d="M20 44h24"
+        stroke="#d7ebe6"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <circle cx="44" cy="22" r="4.5" fill="#ffffff" />
     </svg>
   );
 }

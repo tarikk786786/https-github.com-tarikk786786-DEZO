@@ -1,5 +1,6 @@
 import type { Settings, SolveRequest } from "@/shared/types";
-import { wrapUntrustedContent } from "@/privacy/sanitize";
+import { wrapUntrustedForModel } from "@/security/prompt-guard";
+import { LIMITS, truncate } from "@/security/limits";
 
 export function buildSystemPrompt(settings: Settings): string {
   const modeHints: Record<string, string> = {
@@ -15,7 +16,7 @@ export function buildSystemPrompt(settings: Settings): string {
   };
 
   return [
-    settings.systemInstructions,
+    truncate(settings.systemInstructions, LIMITS.maxSystemInstructionsChars),
     modeHints[settings.answerMode] ?? modeHints.learn,
     `Explanation depth: ${settings.explanationDepth}.`,
     `Expertise level: ${settings.expertiseLevel}.`,
@@ -51,5 +52,5 @@ export function buildUserPrompt(request: SolveRequest): string {
     .filter(Boolean)
     .join("\n\n");
 
-  return wrapUntrustedContent(body);
+  return wrapUntrustedForModel(body);
 }

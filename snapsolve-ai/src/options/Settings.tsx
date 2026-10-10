@@ -198,7 +198,7 @@ export function SettingsApp() {
 
   return (
     <div className="mx-auto grid min-h-screen max-w-6xl gap-4 p-4 md:grid-cols-[220px_1fr]">
-      <aside className="ss-glass h-fit rounded-2xl p-3 md:sticky md:top-4">
+      <aside className="ss-panel h-fit p-3 md:sticky md:top-4">
         <div className="mb-3 flex items-center gap-2">
           <Logo size={28} />
           <div>
@@ -208,7 +208,7 @@ export function SettingsApp() {
         </div>
         {(
           [
-            ["providers", "AI Providers"],
+            ["providers", "Providers"],
             ["free-models", "Free Models"],
             ["routing", "Routing & Cost"],
             ["capture", "Capture & OCR"],
@@ -220,9 +220,7 @@ export function SettingsApp() {
           <button
             key={id}
             type="button"
-            className={`mb-1 w-full rounded-xl px-3 py-2 text-left text-sm ${
-              nav === id ? "ss-btn-primary ss-btn" : "hover:bg-white/5"
-            }`}
+            className={`ss-btn mb-1 w-full justify-start text-left text-sm ${nav === id ? "ss-btn-primary" : ""}`}
             onClick={() => setNav(id)}
           >
             {label}
@@ -235,8 +233,8 @@ export function SettingsApp() {
           <div
             className={`rounded-xl px-3 py-2 text-sm ${
               error
-                ? "border border-rose-400/40 bg-rose-500/10 text-rose-100"
-                : "border border-emerald-400/30 bg-emerald-500/10 text-emerald-100"
+                ? "ss-alert"
+                : "ss-panel text-[var(--ss-accent)]"
             }`}
             role="status"
           >
@@ -247,10 +245,9 @@ export function SettingsApp() {
         {nav === "providers" && (
           <section className="space-y-3">
             <header>
-              <h1 className="font-display text-2xl font-semibold">AI Providers</h1>
+              <h1 className="font-display text-2xl font-semibold tracking-tight">Providers</h1>
               <p className="ss-muted mt-1 text-sm">
-                Official API credentials or local OpenAI-compatible gateways. Consumer ChatGPT /
-                Claude / Gemini subscriptions are not API access.
+                Connect an API key or a local server. App subscriptions (ChatGPT Plus, Claude Pro, Gemini) are not the same as API access.
               </p>
             </header>
             <div className="flex flex-wrap gap-2">
@@ -262,7 +259,7 @@ export function SettingsApp() {
               </button>
             </div>
             {settings.providers.map((p) => (
-              <article key={p.id} className="ss-glass rounded-2xl p-4">
+              <article key={p.id} className="ss-panel p-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div>
                     <h2 className="font-semibold">{p.label || p.id}</h2>
@@ -366,10 +363,9 @@ export function SettingsApp() {
         {nav === "free-models" && (
           <section className="space-y-3">
             <header>
-              <h1 className="font-display text-2xl font-semibold">Free Models</h1>
+              <h1 className="font-display text-2xl font-semibold tracking-tight">Free models</h1>
               <p className="ss-muted mt-1 text-sm">
-                Discovery uses live provider catalogs when configured (especially OpenRouter). Free
-                listings can change; SnapSolve never guarantees unlimited free access.
+                Pulled from provider catalogs when available. “Free” means free at fetch time — it can change.
               </p>
             </header>
             <div className="flex flex-wrap gap-2">
@@ -426,7 +422,7 @@ export function SettingsApp() {
                 </p>
               )}
               {filtered.slice(0, 80).map((m) => (
-                <article key={`${m.provider}:${m.id}`} className="ss-glass rounded-xl p-3 text-sm">
+                <article key={`${m.provider}:${m.id}`} className="ss-panel p-3 text-sm">
                   <div className="flex flex-wrap items-start justify-between gap-2">
                     <div>
                       <p className="font-semibold">{m.name}</p>
@@ -465,8 +461,8 @@ export function SettingsApp() {
         )}
 
         {nav === "routing" && (
-          <section className="ss-glass space-y-3 rounded-2xl p-4">
-            <h1 className="font-display text-2xl font-semibold">Routing & cost</h1>
+          <section className="ss-panel space-y-3 p-4">
+            <h1 className="font-display text-2xl font-semibold tracking-tight">Routing & cost</h1>
             <label className="block text-sm">
               Routing mode
               <select
@@ -558,15 +554,15 @@ export function SettingsApp() {
         )}
 
         {nav === "capture" && (
-          <section className="ss-glass space-y-3 rounded-2xl p-4">
-            <h1 className="font-display text-2xl font-semibold">Capture & OCR</h1>
+          <section className="ss-panel space-y-3 p-4">
+            <h1 className="font-display text-2xl font-semibold tracking-tight">Capture & OCR</h1>
             <label className="flex items-center gap-2 text-sm">
               <input
                 type="checkbox"
                 checked={settings.floatingToolbar}
                 onChange={(e) => void update({ floatingToolbar: e.target.checked })}
               />
-              Enable floating toolbar on websites (opt-in, Shadow DOM isolated)
+              Show a small toolbar on websites (off by default)
             </label>
             <label className="block text-sm">
               Excluded hosts (comma-separated)
@@ -603,14 +599,14 @@ export function SettingsApp() {
               />
             </label>
             <p className="ss-muted text-xs">
-              No continuous screenshot capture. Region capture runs only when you start it.
+              Nothing is captured until you click Capture.
             </p>
           </section>
         )}
 
         {nav === "appearance" && (
-          <section className="ss-glass space-y-3 rounded-2xl p-4">
-            <h1 className="font-display text-2xl font-semibold">Appearance</h1>
+          <section className="ss-panel space-y-3 p-4">
+            <h1 className="font-display text-2xl font-semibold tracking-tight">Appearance</h1>
             <label className="block text-sm">
               Theme
               <select
@@ -655,8 +651,8 @@ export function SettingsApp() {
         )}
 
         {nav === "privacy" && (
-          <section className="ss-glass space-y-3 rounded-2xl p-4">
-            <h1 className="font-display text-2xl font-semibold">Privacy</h1>
+          <section className="ss-panel space-y-3 p-4">
+            <h1 className="font-display text-2xl font-semibold tracking-tight">Privacy</h1>
             <label className="flex items-center gap-2 text-sm">
               <input
                 type="checkbox"
@@ -715,8 +711,8 @@ export function SettingsApp() {
         )}
 
         {nav === "about" && (
-          <section className="ss-glass space-y-3 rounded-2xl p-4 leading-relaxed">
-            <h1 className="font-display text-2xl font-semibold">About</h1>
+          <section className="ss-panel space-y-3 p-4 leading-relaxed">
+            <h1 className="font-display text-2xl font-semibold tracking-tight">About</h1>
             <p>
               {BRAND.product} is made by {BRAND.creator}.{" "}
               <a className="ss-brand-link" href={BRAND.website} target="_blank" rel="noopener noreferrer">
@@ -724,9 +720,7 @@ export function SettingsApp() {
               </a>
             </p>
             <p className="ss-muted text-sm">
-              Manifest V3 Chrome extension. Popup and side panel own the complex UI. Content scripts
-              stay idle unless you capture or enable the optional Shadow DOM toolbar. API keys stay
-              in extension storage and are never injected into webpages.
+              Chrome extension (Manifest V3). Heavy UI stays in the popup and side panel. Keys stay in extension storage and are never injected into websites.
             </p>
             <ul className="ss-muted list-disc space-y-1 pl-5 text-sm">
               <li>Shortcuts: Alt+Shift+S capture · Alt+Shift+A side panel</li>

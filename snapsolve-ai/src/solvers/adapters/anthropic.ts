@@ -1,6 +1,9 @@
 import type { ProviderConfig, Settings, SolveRequest, SolveResponse } from "@/shared/types";
 import { SolveResponseSchema } from "@/shared/types";
 import { buildSystemPrompt, buildUserPrompt } from "../prompt";
+import { assertSafeProviderUrl, isAllowedDataImageUrl } from "@/security/endpoints";
+import { LIMITS, truncate } from "@/security/limits";
+import { redactSecrets } from "@/privacy/sanitize";
 
 function extractJson(text: string): unknown {
   const trimmed = text.trim();
@@ -20,18 +23,19 @@ export async function solveWithAnthropic(
   if (!provider.apiKey) throw new Error("Add an Anthropic API key in Settings.");
 
   const base = (provider.baseUrl || "https://api.anthropic.com").replace(/\/$/, "");
+  const messagesUrl = assertSafeProviderUrl("anthropic", `${base}/v1/messages`);
   const content: Array<Record<string, unknown>> = [
     { type: "text", text: buildUserPrompt(request) },
   ];
 
-  if (request.imageDataUrl?.startsWith("data:")) {
-    const match = request.imageDataUrl.match(/^data:(.+);base64,(.+)$/);
+  if (request.imageDataUrl && isAllowedDataImageUrl(request.imageDataUrl)) {
+    const match = request.imageDataUrl.match(/^data:(image\/(?:png|jpe?g|webp));base64,(.+)$/i);
     if (match) {
       content.unshift({
         type: "image",
         source: {
           type: "base64",
-          media_type: match[1],
+          media_type: match[1].toLowerCase(),
           data: match[2],
         },
       });
@@ -42,7 +46,7 @@ export async function solveWithAnthropic(
   const timeout = setTimeout(() => controller.abort(), settings.requestTimeoutMs);
 
   try {
-    const response = await fetch(`${base}/v1/messages`, {
+    const response = await fetch(messagesUrl.toString(), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +65,11 @@ export async function solveWithAnthropic(
 
     if (!response.ok) {
       const errText = await response.text();
-      throw new Error(`Anthropic error (${response.status}): ${errText.slice(0, 300)}`);
+      throw new Error(
+        redactSecrets(
+          `Anthropic error (${response.status}): ${truncate(errText, LIMITS.maxProviderErrorChars)}`
+        )
+      );
     }
 
     const data = (await response.json()) as {

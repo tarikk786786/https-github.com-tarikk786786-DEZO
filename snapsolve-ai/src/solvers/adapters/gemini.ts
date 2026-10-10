@@ -1,6 +1,10 @@
 import type { ProviderConfig, Settings, SolveRequest, SolveResponse } from "@/shared/types";
 import { SolveResponseSchema } from "@/shared/types";
 import { buildSystemPrompt, buildUserPrompt } from "../prompt";
+import { assertSafeProviderUrl } from "@/security/endpoints";
+import { LIMITS, truncate } from "@/security/limits";
+import { redactSecrets } from "@/privacy/sanitize";
+import { isAllowedDataImageUrl } from "@/security/endpoints";
 
 function extractJson(text: string): unknown {
   const trimmed = text.trim();
@@ -18,16 +22,21 @@ export async function solveWithGemini(
   if (!provider.apiKey) throw new Error("Add a Gemini API key in Settings.");
 
   const base = (provider.baseUrl || "https://generativelanguage.googleapis.com/v1beta").replace(/\/$/, "");
-  const url = `${base}/models/${provider.model}:generateContent?key=${encodeURIComponent(provider.apiKey)}`;
+  const modelPath = provider.model.replace(/[^\w./:-]/g, "");
+  const endpoint = assertSafeProviderUrl(
+    "gemini",
+    `${base}/models/${modelPath}:generateContent`
+  );
+  const url = `${endpoint.toString()}?key=${encodeURIComponent(provider.apiKey)}`;
   const parts: Array<Record<string, unknown>> = [
     { text: `${buildSystemPrompt(settings)}\n\n${buildUserPrompt(request)}` },
   ];
 
-  if (request.imageDataUrl?.startsWith("data:")) {
-    const match = request.imageDataUrl.match(/^data:(.+);base64,(.+)$/);
+  if (request.imageDataUrl && isAllowedDataImageUrl(request.imageDataUrl)) {
+    const match = request.imageDataUrl.match(/^data:(image\/(?:png|jpe?g|webp));base64,(.+)$/i);
     if (match) {
       parts.push({
-        inline_data: { mime_type: match[1], data: match[2] },
+        inline_data: { mime_type: match[1].toLowerCase(), data: match[2] },
       });
     }
   }
@@ -52,7 +61,11 @@ export async function solveWithGemini(
 
     if (!response.ok) {
       const errText = await response.text();
-      throw new Error(`Gemini error (${response.status}): ${errText.slice(0, 300)}`);
+      throw new Error(
+        redactSecrets(
+          `Gemini error (${response.status}): ${truncate(errText, LIMITS.maxProviderErrorChars)}`
+        )
+      );
     }
 
     const data = (await response.json()) as {

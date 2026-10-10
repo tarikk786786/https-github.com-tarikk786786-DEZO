@@ -11,6 +11,6 @@ describe("demo solver", () => {
     });
     expect(response.isDemo).toBe(true);
     expect(response.answer.toLowerCase()).toContain("evaporation");
-    expect(response.warnings.some((w) => /demo/i.test(w))).toBe(true);
+    expect(response.warnings.some((w) => /sample|provider/i.test(w))).toBe(true);
   });
 });

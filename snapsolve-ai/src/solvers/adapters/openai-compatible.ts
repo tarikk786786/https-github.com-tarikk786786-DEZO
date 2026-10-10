@@ -1,6 +1,9 @@
 import type { ProviderConfig, Settings, SolveRequest, SolveResponse } from "@/shared/types";
 import { SolveResponseSchema } from "@/shared/types";
 import { buildSystemPrompt, buildUserPrompt } from "../prompt";
+import { assertSafeProviderUrl, isAllowedDataImageUrl } from "@/security/endpoints";
+import { LIMITS, truncate } from "@/security/limits";
+import { redactSecrets } from "@/privacy/sanitize";
 
 function extractJson(text: string): unknown {
   const trimmed = text.trim();
@@ -29,7 +32,7 @@ export async function solveWithOpenAICompatible(
   }
 
   const baseUrl = (provider.baseUrl || "https://api.openai.com/v1").replace(/\/$/, "");
-  const url = `${baseUrl}/chat/completions`;
+  const url = `${assertSafeProviderUrl(provider.id, `${baseUrl}/chat/completions`)}`;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), settings.requestTimeoutMs);
 
@@ -37,6 +40,9 @@ export async function solveWithOpenAICompatible(
     { type: "text", text: buildUserPrompt(request) },
   ];
   if (request.imageDataUrl) {
+    if (!isAllowedDataImageUrl(request.imageDataUrl)) {
+      throw new Error("Unsupported image type for solve request.");
+    }
     userContent.push({
       type: "image_url",
       image_url: { url: request.imageDataUrl },
@@ -71,7 +77,11 @@ export async function solveWithOpenAICompatible(
 
     if (!response.ok) {
       const errText = await response.text();
-      throw new Error(`${provider.id} error (${response.status}): ${errText.slice(0, 300)}`);
+      throw new Error(
+        redactSecrets(
+          `${provider.id} error (${response.status}): ${truncate(errText, LIMITS.maxProviderErrorChars)}`
+        )
+      );
     }
 
     const data = (await response.json()) as {

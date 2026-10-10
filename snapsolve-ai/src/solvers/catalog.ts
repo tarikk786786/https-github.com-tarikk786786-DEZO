@@ -1,5 +1,7 @@
 import type { CatalogModel, ProviderConfig, ProviderId, Settings } from "@/shared/types";
 import { getCatalogCache, setCatalogCache } from "@/storage/settings";
+import { assertSafeProviderUrl } from "@/security/endpoints";
+import { assertCatalogRateLimit } from "@/security/rate-limit";
 
 function baseCapabilities(partial?: Partial<CatalogModel["capabilities"]>): CatalogModel["capabilities"] {
   return {
@@ -40,9 +42,10 @@ function isZeroPrice(prompt?: number | null, completion?: number | null): boolea
 
 async function fetchOpenRouterModels(provider: ProviderConfig): Promise<CatalogModel[]> {
   const base = (provider.baseUrl || "https://openrouter.ai/api/v1").replace(/\/$/, "");
+  const modelsUrl = assertSafeProviderUrl("openrouter", `${base}/models`);
   const headers: Record<string, string> = { Accept: "application/json" };
   if (provider.apiKey) headers.Authorization = `Bearer ${provider.apiKey}`;
-  const res = await fetch(`${base}/models`, { headers });
+  const res = await fetch(modelsUrl.toString(), { headers });
   if (!res.ok) throw new Error(`OpenRouter catalog failed (${res.status})`);
   const data = (await res.json()) as {
     data?: Array<{
@@ -90,7 +93,8 @@ async function fetchOpenAICompatibleModels(
 ): Promise<CatalogModel[]> {
   if (!provider.baseUrl) return [];
   const base = provider.baseUrl.replace(/\/$/, "");
-  const url = provider.id === "ollama" ? `${base}/api/tags` : `${base}/models`;
+  const raw = provider.id === "ollama" ? `${base}/api/tags` : `${base}/models`;
+  const url = assertSafeProviderUrl(provider.id, raw).toString();
   const headers: Record<string, string> = { Accept: "application/json" };
   if (provider.apiKey) headers.Authorization = `Bearer ${provider.apiKey}`;
 
@@ -137,7 +141,10 @@ async function fetchGeminiModels(provider: ProviderConfig): Promise<CatalogModel
     /\/$/,
     ""
   );
-  const res = await fetch(`${base}/models?key=${encodeURIComponent(provider.apiKey)}`);
+  const modelsUrl = assertSafeProviderUrl("gemini", `${base}/models`);
+  const res = await fetch(
+    `${modelsUrl.toString()}?key=${encodeURIComponent(provider.apiKey)}`
+  );
   if (!res.ok) throw new Error(`Gemini catalog failed (${res.status})`);
   const data = (await res.json()) as {
     models?: Array<{ name: string; displayName?: string; inputTokenLimit?: number; supportedGenerationMethods?: string[] }>;
@@ -169,6 +176,7 @@ export async function refreshModelCatalog(
   if (!opts?.force && cache && Date.now() - cache.updatedAt < maxAge) {
     return { models: cache.models, errors: [] };
   }
+  if (opts?.force) assertCatalogRateLimit();
 
   const errors: string[] = [];
   const models: CatalogModel[] = [

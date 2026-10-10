@@ -200,16 +200,16 @@ async function ensureToolbar() {
     style.textContent = `
       #ss-toolbar {
         position: fixed; right: 16px; bottom: 16px; display: flex; gap: 6px;
-        padding: 8px; border-radius: 14px; pointer-events: auto;
-        background: rgba(11, 18, 36, 0.94); border: 1px solid rgba(34, 211, 238, 0.35);
-        box-shadow: 0 8px 28px rgba(7,11,22,0.35); font-family: system-ui, sans-serif;
-        color: #e8eefc; z-index: 2147483646;
+        padding: 8px; border-radius: 8px; pointer-events: auto;
+        background: #ffffff; border: 1px solid #d5dbe3;
+        box-shadow: 0 1px 3px rgba(23,28,36,0.12); font-family: system-ui, sans-serif;
+        color: #171c24; z-index: 2147483646;
       }
       #ss-toolbar button {
-        border: 0; border-radius: 10px; padding: 6px 10px; cursor: pointer;
-        background: rgba(36, 49, 86, 0.95); color: #e8eefc; font-size: 12px; font-weight: 600;
+        border: 1px solid #d5dbe3; border-radius: 6px; padding: 6px 10px; cursor: pointer;
+        background: #f0f2f5; color: #171c24; font-size: 12px; font-weight: 600;
       }
-      #ss-toolbar button:focus-visible { outline: 2px solid #22d3ee; outline-offset: 2px; }
+      #ss-toolbar button:focus-visible { outline: 2px solid #0f6b5c; outline-offset: 2px; }
     `;
     if (!pack.shadow.querySelector("style[data-ss]")) {
       style.setAttribute("data-ss", "1");
@@ -219,7 +219,7 @@ async function ensureToolbar() {
     const bar = document.createElement("div");
     bar.id = "ss-toolbar";
     bar.setAttribute("role", "toolbar");
-    bar.setAttribute("aria-label", "SnapSolve AI quick actions");
+    bar.setAttribute("aria-label", "SnapSolve quick actions");
 
     const mk = (label: string, title: string, onClick: () => void) => {
       const el = document.createElement("button");
@@ -293,8 +293,8 @@ async function startRegionCapture() {
     const box = document.createElement("div");
     Object.assign(box.style, {
       position: "absolute",
-      border: "2px solid #22d3ee",
-      background: "rgba(34, 211, 238, 0.12)",
+      border: "2px solid #0f6b5c",
+      background: "rgba(15, 107, 92, 0.12)",
       display: "none",
       pointerEvents: "none",
     } as CSSStyleDeclaration);
@@ -307,13 +307,13 @@ async function startRegionCapture() {
       top: "16px",
       left: "50%",
       transform: "translateX(-50%)",
-      background: "rgba(11,18,36,0.95)",
-      color: "#e8eefc",
+      background: "#171c24",
+      color: "#ffffff",
       padding: "8px 14px",
-      borderRadius: "999px",
+      borderRadius: "8px",
       fontFamily: "system-ui, sans-serif",
       fontSize: "13px",
-      border: "1px solid rgba(34,211,238,0.35)",
+      border: "1px solid #323944",
       pointerEvents: "none",
     } as CSSStyleDeclaration);
     overlay.appendChild(hint);
@@ -398,24 +398,22 @@ async function startRegionCapture() {
   }
 }
 
-function isSnapSolveMessage(message: unknown): message is ExtensionMessage {
-  return (
-    !!message &&
-    typeof message === "object" &&
-    "type" in message &&
-    typeof (message as { type: unknown }).type === "string"
-  );
-}
-
-chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
-  if (!isSnapSolveMessage(message)) {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  // Only accept messages from this extension.
+  if (sender.id && sender.id !== chrome.runtime.id) {
+    sendResponse({ ok: false, error: "untrusted_sender" });
+    return false;
+  }
+  if (!message || typeof message !== "object" || typeof (message as { type?: unknown }).type !== "string") {
     sendResponse({ ok: false, error: "invalid_message" });
     return false;
   }
 
+  const type = (message as ExtensionMessage).type;
+
   (async () => {
     try {
-      switch (message.type) {
+      switch (type) {
         case "START_REGION_CAPTURE":
           await startRegionCapture();
           sendResponse({ ok: true, channel: MSG_PREFIX });
@@ -432,7 +430,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
           sendResponse({ type: "PONG" });
           break;
         default:
-          sendResponse({ ok: false });
+          sendResponse({ ok: false, error: "disallowed" });
       }
     } catch {
       sendResponse({ ok: false, error: "content_script_fault_isolated" });

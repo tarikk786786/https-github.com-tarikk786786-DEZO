@@ -41,9 +41,7 @@ function pickDemoAnswer(request: SolveRequest): SolveResponse {
       provider: "demo",
       model: "demo-solver",
       isDemo: true,
-      warnings: [
-        "Demo mode is active. This is a simulated study-aid response, not a live model answer.",
-      ],
+      warnings: ["Sample answer — connect a provider in Settings for live results."],
       latencyMs: 0,
     };
   }
@@ -62,9 +60,7 @@ function pickDemoAnswer(request: SolveRequest): SolveResponse {
       provider: "demo",
       model: "demo-solver",
       isDemo: true,
-      warnings: [
-        "Demo mode is active. This is a simulated study-aid response, not a live model answer.",
-      ],
+      warnings: ["Sample answer — connect a provider in Settings for live results."],
       latencyMs: 0,
     };
   }
@@ -83,26 +79,24 @@ function pickDemoAnswer(request: SolveRequest): SolveResponse {
       provider: "demo",
       model: "demo-solver",
       isDemo: true,
-      warnings: ["Demo mode is active."],
+      warnings: ["Sample answer — connect a provider in Settings for live results."],
       latencyMs: 0,
     };
   }
 
   return {
-    answer: "Configure an AI provider in Settings for live answers, or refine the question text.",
+    answer: "Add a provider in Settings for a live answer.",
     explanation:
-      "Demo mode can parse your capture and illustrate the answer layout. It only ships a few canned examples so simulated answers are never mistaken for real model output.",
+      "Sample mode only covers a few examples so it never pretends to be a live model.",
     steps: [
-      "Edit the recognized question if needed.",
-      "Open Settings and add an API key for OpenAI, Gemini, Anthropic, OpenRouter, or Ollama.",
-      "Disable Demo Mode, then solve again.",
+      "Edit the question if needed.",
+      "Open Settings and add an API key (or a local server).",
+      "Turn off sample mode, then solve again.",
     ],
     provider: "demo",
     model: "demo-solver",
     isDemo: true,
-    warnings: [
-      "Demo mode is active. This is a simulated study-aid response, not a live model answer.",
-    ],
+    warnings: ["Sample answer — connect a provider in Settings for live results."],
     latencyMs: 0,
   };
 }

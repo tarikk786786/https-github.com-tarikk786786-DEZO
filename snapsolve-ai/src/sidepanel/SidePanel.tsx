@@ -51,7 +51,7 @@ export function SidePanel() {
   useEffect(() => {
     void (async () => {
       try {
-        setProgress("Loading capture…");
+        setProgress("Checking for a pending capture…");
         const pending = await loadPendingIntoEditor();
         if (pending.text || pending.imageDataUrl) {
           setText(pending.text);
@@ -76,17 +76,17 @@ export function SidePanel() {
   const onSolve = async (follow?: string) => {
     if (solvingRef.current) return;
     if (!text.trim() && !imageDataUrl) {
-      setError("Add a question via capture, upload, or typing.");
+      setError("Add a question first — type it, capture it, or upload a file.");
       return;
     }
     solvingRef.current = true;
     setBusy(true);
     setError(null);
-    setProgress("Contacting configured provider…");
+    setProgress("Sending to your configured model…");
     try {
       let solveText = text;
       if (!solveText && imageDataUrl) {
-        setProgress("Running OCR…");
+        setProgress("Reading text from the image…");
         const ocr = await recognizeImage(imageDataUrl, settings.ocrLanguage);
         solveText = ocr.text;
         setText(solveText);
@@ -117,14 +117,14 @@ export function SidePanel() {
     setBusy(true);
     try {
       if (file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")) {
-        setProgress("Extracting PDF text…");
+        setProgress("Extracting text from the PDF…");
         const pdf = await extractPdfText(file, settings.batchLimit);
         setText(pdf.text);
         setSource("pdf");
         setImageDataUrl(undefined);
         if (pdf.warnings.length) setError(pdf.warnings.join(" "));
       } else {
-        setProgress("Running OCR…");
+        setProgress("Reading text from the image…");
         const dataUrl = await fileToDataUrl(file);
         const ocr = await recognizeImage(file, settings.ocrLanguage);
         setImageDataUrl(dataUrl);
@@ -143,7 +143,7 @@ export function SidePanel() {
   const onBatchSolve = async () => {
     const questions = parseQuestions(text);
     if (questions.length > 1 && settings.confirmBatchSolve) {
-      const ok = window.confirm(`Solve ${questions.length} detected questions?`);
+      const ok = window.confirm(`Solve all ${questions.length} questions found in this text?`);
       if (!ok) return;
     }
     await onSolve();
@@ -165,17 +165,17 @@ export function SidePanel() {
   return (
     <div className="mx-auto flex min-h-screen max-w-3xl flex-col gap-3 p-4">
       <header className="flex items-start gap-3">
-        <Logo size={36} />
+        <Logo size={34} />
         <div className="min-w-0 flex-1">
-          <h1 className="font-display text-lg font-semibold">{BRAND.product}</h1>
-          <p className="ss-muted text-xs">Solution workspace · learning-focused study aid</p>
+          <h1 className="font-display text-xl font-semibold tracking-tight">{BRAND.product}</h1>
+          <p className="ss-muted text-xs">Workspace</p>
         </div>
         <button className="ss-btn text-xs" type="button" onClick={() => chrome.runtime.openOptionsPage()}>
           Settings
         </button>
       </header>
 
-      <nav className="flex gap-1" aria-label="Workspace sections">
+      <nav className="flex flex-wrap gap-1.5" aria-label="Sections">
         {([
           ["solve", "Solve"],
           ["history", "History"],
@@ -184,8 +184,8 @@ export function SidePanel() {
           <button
             key={id}
             type="button"
-            className={`ss-btn text-xs ${tab === id ? "ss-btn-primary" : ""}`}
-            aria-current={tab === id}
+            className={`ss-btn ss-nav-btn text-xs ${tab === id ? "ss-btn-primary" : ""}`}
+            aria-current={tab === id ? "page" : undefined}
             onClick={() => setTab(id)}
           >
             {label}
@@ -197,7 +197,7 @@ export function SidePanel() {
         <>
           <div className="flex flex-wrap gap-2">
             <button className="ss-btn text-xs" type="button" disabled={busy} onClick={() => void requestRegionCapture()}>
-              Capture region
+              Capture area
             </button>
             <button
               className="ss-btn text-xs"
@@ -213,10 +213,10 @@ export function SidePanel() {
                 })
               }
             >
-              Analyze page
+              Read page
             </button>
             <button className="ss-btn text-xs" type="button" disabled={busy} onClick={() => fileRef.current?.click()}>
-              Upload image/PDF
+              Upload file
             </button>
             <input
               ref={fileRef}
@@ -230,12 +230,13 @@ export function SidePanel() {
             />
           </div>
 
-          <section className="ss-glass rounded-2xl p-3">
-            <div className="mb-2 flex items-center justify-between">
-              <h2 className="text-xs font-semibold uppercase tracking-wide ss-muted">Recognized question</h2>
+          <section className="ss-panel p-3">
+            <div className="mb-2 flex items-center justify-between gap-2">
+              <h2 className="ss-label mb-0">Question</h2>
               {parsed && (
-                <span className="text-[11px] ss-muted">
-                  {parsed.type} · parse {(parsed.confidence * 100).toFixed(0)}%
+                <span className="ss-muted text-[11px]">
+                  {parsed.type.replace(/-/g, " ")}
+                  {parsed.confidence >= 0.5 ? "" : " · check the text"}
                 </span>
               )}
             </div>
@@ -243,14 +244,14 @@ export function SidePanel() {
               className="ss-input min-h-[140px]"
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="Editable question text appears here after capture or OCR…"
-              aria-label="Editable question text"
+              placeholder="Edit the question here before solving…"
+              aria-label="Question text"
             />
             {imageDataUrl && (
               <img
                 src={imageDataUrl}
-                alt="Captured question region"
-                className="mt-2 max-h-40 rounded-xl border border-[var(--ss-border)] object-contain"
+                alt="Captured region"
+                className="mt-2 max-h-40 rounded-[6px] border border-[var(--ss-border)] object-contain"
               />
             )}
             {parsed?.options && parsed.options.length > 0 && (
@@ -266,23 +267,23 @@ export function SidePanel() {
 
           <div className="flex flex-wrap items-center gap-2">
             <select
-              className="ss-input max-w-[180px]"
-              aria-label="Answer mode"
+              className="ss-input max-w-[170px]"
+              aria-label="Answer style"
               value={settings.answerMode}
               onChange={(e) => void update({ answerMode: e.target.value as typeof settings.answerMode })}
             >
-              <option value="quick">Quick Answer</option>
-              <option value="learn">Learn Mode</option>
-              <option value="practice">Practice</option>
+              <option value="quick">Short answer</option>
+              <option value="learn">Step by step</option>
+              <option value="practice">Practice first</option>
               <option value="tutor">Tutor</option>
-              <option value="revision">Revision</option>
+              <option value="revision">Revision notes</option>
               <option value="research">Research</option>
-              <option value="coding">Coding</option>
-              <option value="assessment-review">Assessment Review</option>
+              <option value="coding">Code help</option>
+              <option value="assessment-review">Review mode</option>
             </select>
             <select
               className="ss-input max-w-[160px]"
-              aria-label="Default provider"
+              aria-label="Provider"
               value={settings.defaultProvider}
               onChange={(e) =>
                 void update({
@@ -299,7 +300,13 @@ export function SidePanel() {
                   </option>
                 ))}
             </select>
-            <button className="ss-btn-primary ss-btn" type="button" disabled={busy} onClick={() => void onBatchSolve()}>
+            <button
+              className="ss-btn-primary ss-btn"
+              type="button"
+              disabled={busy}
+              data-action="solve"
+              onClick={() => void onBatchSolve()}
+            >
               {busy ? "Working…" : "Solve"}
             </button>
             <button
@@ -308,21 +315,21 @@ export function SidePanel() {
               disabled={busy}
               onClick={() => void update({ verifyAnswers: !settings.verifyAnswers })}
             >
-              Verify: {settings.verifyAnswers ? "On" : "Off"}
+              Second check: {settings.verifyAnswers ? "On" : "Off"}
             </button>
           </div>
 
-          {progress && <p className="ss-muted animate-pulse-soft text-xs">{progress}</p>}
+          {progress && <p className="ss-muted text-xs">{progress}</p>}
           {error && (
-            <p className="rounded-xl border border-rose-400/40 bg-rose-500/10 px-3 py-2 text-xs text-rose-200" role="alert">
+            <p className="ss-alert" role="alert">
               {error}
             </p>
           )}
 
           {response && (
-            <section className="ss-glass animate-fade-up rounded-2xl p-4">
-              <p className="ss-muted mb-1 text-[11px] uppercase tracking-wide">Answer</p>
-              <p className="font-display text-xl font-semibold">{response.answer}</p>
+            <section className="ss-panel p-4">
+              <p className="ss-label">Answer</p>
+              <p className="font-display text-xl font-semibold leading-snug">{response.answer}</p>
               <p className="mt-3 text-sm leading-relaxed">{response.explanation}</p>
               {response.steps && response.steps.length > 0 && (
                 <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm">
@@ -333,7 +340,7 @@ export function SidePanel() {
               )}
               {response.incorrectOptions && (
                 <div className="mt-3 text-sm">
-                  <p className="ss-muted text-xs uppercase">Why other options are weaker</p>
+                  <p className="ss-label">Other options</p>
                   <ul className="mt-1 space-y-1">
                     {Object.entries(response.incorrectOptions).map(([k, v]) => (
                       <li key={k}>
@@ -344,21 +351,20 @@ export function SidePanel() {
                 </div>
               )}
               <p className="ss-muted mt-3 text-[11px]">
-                {response.isDemo ? "Demo mode · " : ""}
-                {response.provider}/{response.model} · {response.latencyMs}ms
-                {response.confidence != null ? ` · model confidence ${(response.confidence * 100).toFixed(0)}%` : ""}
+                {response.provider}/{response.model}
+                {response.latencyMs ? ` · ${response.latencyMs} ms` : ""}
               </p>
               {response.warnings?.map((w) => (
-                <p key={w} className="mt-1 text-[11px] text-amber-200">
+                <p key={w} className="ss-note mt-2">
                   {w}
                 </p>
               ))}
               {verification && (
-                <div className="mt-3 rounded-xl border border-[var(--ss-border)] p-3 text-sm">
-                  <p className="font-semibold">Verification · {verification.agreement}</p>
+                <div className="mt-3 rounded-[6px] border border-[var(--ss-border)] p-3 text-sm">
+                  <p className="font-semibold">Second opinion · {verification.agreement}</p>
                   <p className="mt-1">{verification.assessment}</p>
                   <p className="ss-muted mt-2 text-xs">
-                    Secondary: {verification.secondary.provider}/{verification.secondary.model} —{" "}
+                    {verification.secondary.provider}/{verification.secondary.model}:{" "}
                     {verification.secondary.answer}
                   </p>
                 </div>
@@ -368,7 +374,7 @@ export function SidePanel() {
                   Copy
                 </button>
                 <button className="ss-btn text-xs" type="button" disabled={busy} onClick={() => void onSolve()}>
-                  Regenerate
+                  Try again
                 </button>
               </div>
               <div className="mt-3 flex gap-2">
@@ -377,7 +383,7 @@ export function SidePanel() {
                   placeholder="Ask a follow-up…"
                   value={followUp}
                   onChange={(e) => setFollowUp(e.target.value)}
-                  aria-label="Follow-up question"
+                  aria-label="Follow-up"
                 />
                 <button
                   className="ss-btn text-xs"
@@ -389,7 +395,7 @@ export function SidePanel() {
                     void onSolve(q);
                   }}
                 >
-                  Send
+                  Ask
                 </button>
               </div>
             </section>
@@ -398,9 +404,9 @@ export function SidePanel() {
       )}
 
       {tab === "history" && (
-        <section className="ss-glass rounded-2xl p-3">
+        <section className="ss-panel p-3">
           <div className="mb-2 flex items-center justify-between">
-            <h2 className="font-semibold">History</h2>
+            <h2 className="font-display text-base font-semibold">History</h2>
             <button
               className="ss-btn text-xs"
               type="button"
@@ -409,13 +415,13 @@ export function SidePanel() {
               Clear all
             </button>
           </div>
-          {history.length === 0 && <p className="ss-muted text-sm">No saved questions yet.</p>}
+          {history.length === 0 && <p className="ss-muted text-sm">Nothing saved yet.</p>}
           <ul className="space-y-2">
             {history.map((h) => (
               <li key={h.id}>
                 <button
                   type="button"
-                  className="w-full rounded-xl border border-[var(--ss-border)] p-2 text-left text-sm hover:bg-white/5"
+                  className="w-full rounded-[6px] border border-[var(--ss-border)] p-2 text-left text-sm hover:bg-[var(--ss-accent-soft)]"
                   onClick={() => {
                     setText(h.question.rawText);
                     setResponse(h.response ?? null);
@@ -435,18 +441,17 @@ export function SidePanel() {
       )}
 
       {tab === "about" && (
-        <section className="ss-glass rounded-2xl p-4 text-sm leading-relaxed">
+        <section className="ss-panel space-y-3 p-4 text-sm leading-relaxed">
           <h2 className="font-display text-lg font-semibold">{BRAND.product}</h2>
-          <p className="mt-2">
-            Created by {BRAND.creator}. Official site:{" "}
+          <p>
+            Built by {BRAND.creator}.{" "}
             <a className="ss-brand-link" href={BRAND.website} target="_blank" rel="noopener noreferrer">
-              {BRAND.website}
+              {BRAND.website.replace("https://", "")}
             </a>
           </p>
-          <p className="mt-3 ss-muted">
-            SnapSolve is a learning aid. It does not automate graded exam submission, bypass
-            proctoring, or continuously capture your screen. Floating page toolbar is optional and
-            isolated in Shadow DOM.
+          <p className="ss-muted">
+            Use it for homework review, practice papers, and studying. It won’t submit answers for you,
+            and it doesn’t watch your screen in the background.
           </p>
         </section>
       )}
@@ -462,7 +467,7 @@ function fileToDataUrl(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(String(reader.result));
-    reader.onerror = () => reject(new Error("Failed to read file"));
+    reader.onerror = () => reject(new Error("Could not read that file."));
     reader.readAsDataURL(file);
   });
 }

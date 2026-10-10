@@ -1,5 +1,11 @@
 import { DEFAULT_PROVIDERS, DEFAULT_SETTINGS } from "./defaults";
 import type { CatalogModel, HistoryItem, Settings } from "@/shared/types";
+import {
+  decryptProviderSecrets,
+  encryptProviderSecrets,
+} from "@/security/secrets";
+import { LIMITS, truncate } from "@/security/limits";
+import { redactSecrets } from "@/privacy/sanitize";
 
 const SETTINGS_KEY = "snapsolve_settings";
 const HISTORY_KEY = "snapsolve_history";
@@ -17,7 +23,20 @@ function mergeSettings(stored: Partial<Settings> | undefined): Settings {
 
 export async function getSettings(): Promise<Settings> {
   const result = await chrome.storage.local.get(SETTINGS_KEY);
-  return mergeSettings(result[SETTINGS_KEY] as Partial<Settings> | undefined);
+  const merged = mergeSettings(result[SETTINGS_KEY] as Partial<Settings> | undefined);
+  merged.providers = await decryptProviderSecrets(merged.providers);
+  return merged;
+}
+
+/** Settings as stored (API keys remain encrypted). For export UI. */
+export async function getSettingsForExport(): Promise<Settings> {
+  const result = await chrome.storage.local.get(SETTINGS_KEY);
+  const merged = mergeSettings(result[SETTINGS_KEY] as Partial<Settings> | undefined);
+  merged.providers = merged.providers.map(({ apiKey: _k, ...rest }) => ({
+    ...rest,
+    apiKey: undefined,
+  }));
+  return merged;
 }
 
 export async function saveSettings(patch: Partial<Settings>): Promise<Settings> {
@@ -30,7 +49,16 @@ export async function saveSettings(patch: Partial<Settings>): Promise<Settings> 
       return { ...defaultProvider, ...existing, ...override };
     });
   }
-  await chrome.storage.local.set({ [SETTINGS_KEY]: next });
+  next.systemInstructions = truncate(
+    next.systemInstructions,
+    LIMITS.maxSystemInstructionsChars
+  );
+
+  const toStore: Settings = {
+    ...next,
+    providers: await encryptProviderSecrets(next.providers),
+  };
+  await chrome.storage.local.set({ [SETTINGS_KEY]: toStore });
   return next;
 }
 
@@ -55,7 +83,19 @@ export async function saveHistoryItem(item: HistoryItem): Promise<void> {
   if (!settings.historyEnabled) return;
   const result = await chrome.storage.local.get(HISTORY_KEY);
   const items = (result[HISTORY_KEY] as HistoryItem[] | undefined) ?? [];
-  const next = [item, ...items.filter((x) => x.id !== item.id)].slice(0, 200);
+  const sanitized: HistoryItem = {
+    ...item,
+    notes: item.notes ? truncate(redactSecrets(item.notes), LIMITS.maxHistoryNotesChars) : item.notes,
+    question: {
+      ...item.question,
+      rawText: truncate(item.question.rawText, LIMITS.maxQuestionChars),
+      questionText: truncate(item.question.questionText, LIMITS.maxQuestionChars),
+    },
+  };
+  const next = [sanitized, ...items.filter((x) => x.id !== item.id)].slice(
+    0,
+    LIMITS.maxHistoryItems
+  );
   await chrome.storage.local.set({ [HISTORY_KEY]: next });
 }
 
@@ -79,7 +119,12 @@ export interface PendingQuestion {
 }
 
 export async function setPendingQuestion(pending: PendingQuestion): Promise<void> {
-  await chrome.storage.session.set({ [PENDING_KEY]: pending });
+  await chrome.storage.session.set({
+    [PENDING_KEY]: {
+      ...pending,
+      text: truncate(pending.text ?? "", LIMITS.maxPendingTextChars),
+    },
+  });
 }
 
 export async function getPendingQuestion(): Promise<PendingQuestion | null> {

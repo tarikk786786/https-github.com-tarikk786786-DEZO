@@ -1,8 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "SnapSolve",
+  "name": "SnapSolve — AI Study Companion",
+  "short_name": "SnapSolve",
   "version": "1.1.0",
-  "description": "Capture on-screen questions and study the answers. By Tarik Islam — tarikislam.in",
+  "description": "Capture on-screen questions and study answers with free LLMs or your AI keys. By Tarik Islam — tarikislam.in",
+  "homepage_url": "https://dezo.in/snapsolve",
   "permissions": [
     "storage",
     "sidePanel",
@@ -17,7 +19,7 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "SnapSolve",
+    "default_title": "SnapSolve — capture & study",
     "default_icon": {
       "16": "icons/icon16.png",
       "32": "icons/icon32.png",

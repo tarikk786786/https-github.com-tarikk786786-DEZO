@@ -12,3 +12,8 @@
 | 2026-10-07 | Footer | Locations links | Internal linking | Equity to hubs | Shipped |
 | 2026-10-07 | `lib/seo/jsonld.ts` | Breadcrumb helper; SearchAction softened | Accurate schema | Valid structured data | Shipped |
 | 2026-10-07 | Default meta title | Align to BUILD. MARKET. GROW. | Brand consistency | Clear SERP brand | Shipped |
+| 2026-10-10 | `/snapsolve` | Public SnapSolve landing + SoftwareApplication/FAQ schema | Product SEO for Chrome extension | Indexable product page | Shipped |
+| 2026-10-10 | `app/sitemap.ts` + `public/sitemap.xml` | Add `/snapsolve` | Crawl discovery | Weekly priority 0.9 | Shipped |
+| 2026-10-10 | Footer | SnapSolve link | Internal linking | Equity to product | Shipped |
+| 2026-10-10 | `public/llms.txt` | AI crawler summary incl. SnapSolve | Assistant-friendly discovery | Accurate product facts | Shipped |
+| 2026-10-10 | `snapsolve-ai/STORE_LISTING.md` + manifest SEO | CWS / public listing copy | Store + SERP readiness | Keyword-rich descriptions | Shipped |

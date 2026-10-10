@@ -71,6 +71,11 @@ export function DezoFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/snapsolve" className="hover:text-white">
+                  SnapSolve
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="hover:text-white">
                   About
                 </Link>

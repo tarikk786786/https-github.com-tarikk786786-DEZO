@@ -4,6 +4,8 @@ Capture a question from your screen. Study the answer.
 
 **Made by TarikIslam.in** · [tarikislam.in](https://tarikislam.in) · Tarik Islam
 
+**Public page:** [dezo.in/snapsolve](https://dezo.in/snapsolve) · Store / SEO copy: [STORE_LISTING.md](./STORE_LISTING.md) · [SEO.md](./SEO.md)
+
 Chrome extension (Manifest V3). Built for students and lifelong learners — not for cheating on live exams.
 
 ## Install

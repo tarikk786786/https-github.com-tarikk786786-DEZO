@@ -139,3 +139,54 @@ export function generateFaqSchema(faqs: { question: string; answer: string }[]) 
     })),
   };
 }
+
+export function generateSnapSolveSoftwareSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    '@id': `${siteConfig.url}/snapsolve#software`,
+    name: 'SnapSolve',
+    applicationCategory: 'EducationalApplication',
+    applicationSubCategory: 'BrowserExtension',
+    operatingSystem: 'Chrome, Chromium',
+    browserRequirements: 'Requires Google Chrome or Chromium with Manifest V3 support',
+    description:
+      'SnapSolve is a Chrome study companion that captures on-screen questions and answers them with free or connected AI models. Made by Tarik Islam.',
+    url: `${siteConfig.url}/snapsolve`,
+    downloadUrl:
+      'https://github.com/tarikk786786/https-github.com-tarikk786786-DEZO/raw/cursor/snapsolve-ai-extension-f701/snapsolve-ai/snapsolve-ai-extension.zip',
+    author: {
+      '@type': 'Person',
+      name: 'Tarik Islam',
+      url: 'https://tarikislam.in',
+    },
+    publisher: {
+      '@id': `${siteConfig.url}/#organization`,
+    },
+    offers: [
+      {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+        name: 'SnapSolve Free',
+        description: 'Free LLMs via OpenRouter, Groq, Hugging Face, and local Ollama. Daily solve limits apply.',
+      },
+      {
+        '@type': 'Offer',
+        price: '9',
+        priceCurrency: 'USD',
+        name: 'SnapSolve Pro',
+        description: 'Unlock paid cloud providers, higher limits, verification, and custom endpoints.',
+        url: 'https://tarikislam.in/#snapsolve-pro',
+      },
+    ],
+    featureList: [
+      'Capture questions from any tab',
+      'Default free LLM routing',
+      'Connect OpenAI, Gemini, Claude, Groq, and more',
+      'Local Ollama and LM Studio support',
+      'Privacy-first: keys stay in the extension',
+    ],
+    isAccessibleForFree: true,
+  };
+}

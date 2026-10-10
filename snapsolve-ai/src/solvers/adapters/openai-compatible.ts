@@ -55,8 +55,8 @@ export async function solveWithOpenAICompatible(
     };
     if (provider.apiKey) headers.Authorization = `Bearer ${provider.apiKey}`;
     if (provider.id === "openrouter") {
-      headers["HTTP-Referer"] = "https://snapsolve.local";
-      headers["X-Title"] = "SnapSolve AI";
+      headers["HTTP-Referer"] = "https://dezo.in/snapsolve";
+      headers["X-Title"] = "SnapSolve";
     }
 
     const response = await fetch(url, {

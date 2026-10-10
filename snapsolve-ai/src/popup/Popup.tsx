@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BrandFooter } from "@/components/BrandFooter";
 import { Logo } from "@/components/Logo";
+import { ExternalConsentCard } from "@/components/ExternalConsentCard";
 import { applyTheme, useSettings } from "@/hooks/useSettings";
 import {
   analyzeVisiblePage,
@@ -11,6 +12,11 @@ import {
 import { BRAND } from "@/storage/defaults";
 import { purchaseUrl } from "@/licensing/license";
 import { freeSolvesRemaining, isPro } from "@/licensing/gate";
+import {
+  CONSENT_REQUIRED_MESSAGE,
+  isConsentRequiredError,
+  needsExternalConsent,
+} from "@/privacy/consent";
 
 export function Popup() {
   const { settings, ready, update } = useSettings();
@@ -18,10 +24,15 @@ export function Popup() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [answerPreview, setAnswerPreview] = useState<string | null>(null);
+  const [forceConsent, setForceConsent] = useState(false);
 
   useEffect(() => {
     if (ready) applyTheme(settings.theme);
   }, [ready, settings.theme]);
+
+  useEffect(() => {
+    if (settings.consentedExternalTransfer) setForceConsent(false);
+  }, [settings.consentedExternalTransfer]);
 
   const openSidePanel = async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -76,9 +87,14 @@ export function Popup() {
     }
   };
 
-  const onSolve = async () => {
+  const onSolve = async (opts?: { afterConsent?: boolean }) => {
     if (!question.trim()) {
       setError("Add a question first.");
+      return;
+    }
+    if (!opts?.afterConsent && needsExternalConsent(settings)) {
+      setForceConsent(true);
+      setError(CONSENT_REQUIRED_MESSAGE);
       return;
     }
     setBusy(true);
@@ -91,7 +107,9 @@ export function Popup() {
       });
       setAnswerPreview(response.answer);
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      const msg = e instanceof Error ? e.message : String(e);
+      if (isConsentRequiredError(msg)) setForceConsent(true);
+      setError(msg);
     } finally {
       setBusy(false);
     }
@@ -142,10 +160,24 @@ export function Popup() {
         </div>
       )}
 
+      {ready && (
+        <ExternalConsentCard
+          settings={settings}
+          busy={busy}
+          force={forceConsent}
+          update={update}
+          onAllowed={() => {
+            setError(null);
+            setForceConsent(false);
+            if (question.trim()) void onSolve({ afterConsent: true });
+          }}
+        />
+      )}
+
       {needsKey && (
         <p className="ss-note mb-3 text-xs">
-          Connect {provider.label || provider.id} in Settings — paste a free API key to use the default free
-          LLM, or sample answers work offline.
+          Add a free API key for {provider.label || provider.id} in Settings → Connect AI. Without a
+          key, SnapSolve falls back to sample answers.
         </p>
       )}
 
@@ -201,7 +233,12 @@ export function Popup() {
             <option value="coding">Code help</option>
             <option value="assessment-review">Review mode</option>
           </select>
-          <button className="ss-btn-primary ss-btn shrink-0" type="button" onClick={onSolve} disabled={busy}>
+          <button
+            className="ss-btn-primary ss-btn shrink-0"
+            type="button"
+            onClick={() => void onSolve()}
+            disabled={busy}
+          >
             {busy ? "Working…" : "Solve"}
           </button>
         </div>

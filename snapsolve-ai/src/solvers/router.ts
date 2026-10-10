@@ -18,6 +18,7 @@ import {
   assertCanUseHostedProvider,
   assertCanVerify,
 } from "@/licensing/gate";
+import { CONSENT_REQUIRED_MESSAGE, isLocalProvider } from "@/privacy/consent";
 
 const OPENAI_COMPATIBLE: ProviderId[] = [
   "openai",
@@ -199,15 +200,12 @@ export async function solveQuestion(
   const providerId = selectProvider(settings, request);
   assertCanUseHostedProvider(settings, providerId);
 
-  const isExternal = !["demo", "ollama", "lmstudio"].includes(providerId);
   if (
-    isExternal &&
+    !isLocalProvider(providerId) &&
     settings.requireConsentBeforeExternal &&
     !settings.consentedExternalTransfer
   ) {
-    throw new Error(
-      "External AI transfer is blocked until you consent in Settings → Privacy."
-    );
+    throw new Error(CONSENT_REQUIRED_MESSAGE);
   }
 
   let lastError: unknown;

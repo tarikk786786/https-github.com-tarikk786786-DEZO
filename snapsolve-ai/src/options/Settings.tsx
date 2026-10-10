@@ -9,6 +9,8 @@ import type { CatalogModel, ProviderConfig, ProviderId, RoutingMode } from "@/sh
 import { redactSecrets } from "@/privacy/sanitize";
 import { FREE_PLAN_PROVIDERS, purchaseUrl, verifyLicenseKey, PRICING } from "@/licensing/license";
 import { emptyLicense, freeSolvesRemaining, isPro } from "@/licensing/gate";
+import { ExternalConsentCard } from "@/components/ExternalConsentCard";
+import { consentPatch, isLocalProvider } from "@/privacy/consent";
 
 type Nav =
   | "providers"
@@ -243,6 +245,7 @@ export function SettingsApp() {
     const providers = settings.providers.map((p) =>
       p.id === id ? { ...p, enabled: true } : p
     );
+    const hosted = !isLocalProvider(id);
     await update({
       providers,
       defaultProvider: id,
@@ -253,7 +256,9 @@ export function SettingsApp() {
     setStatus(
       id === "demo"
         ? "Sample answers selected (works offline)."
-        : `Connected ${id}. Paste your API key below if needed, then Test connection.`
+        : hosted && !settings.consentedExternalTransfer
+          ? `Connected ${id}. Allow external AI below (or in Privacy), then paste your API key and Test connection.`
+          : `Connected ${id}. Paste your API key below if needed, then Test connection.`
     );
   };
 
@@ -385,6 +390,32 @@ export function SettingsApp() {
                 Reset providers
               </button>
             </div>
+
+            <ExternalConsentCard
+              settings={settings}
+              update={update}
+              onAllowed={() => setStatus("External AI allowed. You can solve with free LLMs now.")}
+            />
+            {!settings.consentedExternalTransfer && settings.requireConsentBeforeExternal && (
+              <label className="ss-panel flex items-start gap-2 p-3 text-sm">
+                <input
+                  type="checkbox"
+                  className="mt-0.5"
+                  checked={false}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      void update(consentPatch()).then(() =>
+                        setStatus("External AI allowed for connected providers.")
+                      );
+                    }
+                  }}
+                />
+                <span>
+                  I allow SnapSolve to send questions I submit to my connected AI providers (OpenRouter,
+                  Groq, OpenAI, …). Revoke anytime under Privacy.
+                </span>
+              </label>
+            )}
 
             {PROVIDER_GROUPS.map((group) => (
               <div key={group.title} className="space-y-3">
@@ -859,6 +890,15 @@ export function SettingsApp() {
         {nav === "privacy" && (
           <section className="ss-panel space-y-3 p-4">
             <h1 className="font-display text-2xl font-semibold tracking-tight">Privacy</h1>
+            <p className="ss-muted text-sm">
+              Hosted free LLMs and cloud providers need one-time consent. Local sample / Ollama / LM Studio
+              never leave your machine.
+            </p>
+            <ExternalConsentCard
+              settings={settings}
+              update={update}
+              onAllowed={() => setStatus("External AI allowed.")}
+            />
             <label className="flex items-center gap-2 text-sm">
               <input
                 type="checkbox"
@@ -873,7 +913,7 @@ export function SettingsApp() {
                 checked={settings.consentedExternalTransfer}
                 onChange={(e) => void update({ consentedExternalTransfer: e.target.checked })}
               />
-              I understand captured questions may be sent to my configured provider
+              I allow sending questions I submit to my configured AI provider
             </label>
             <label className="flex items-center gap-2 text-sm">
               <input

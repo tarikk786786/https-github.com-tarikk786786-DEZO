@@ -12,10 +12,12 @@ API keys are **not** perfectly secure in extension storage. Do not use shared/pr
 
 ## What leaves your browser
 
-Only when you solve with a **non-demo / non-local** provider, and only after privacy consent when that setting is enabled:
+Only when you solve with a **non-demo / non-local** provider, and only after you allow external AI (popup, workspace, Connect AI, or Settings → Privacy):
 
 - The question text you submit (and optional image crop)
 - Minimal prompt metadata required for the model
+
+Consent is one click (“Allow & continue”) and can be revoked anytime under Settings → Privacy. Sample answers, Ollama, and LM Studio stay on your machine.
 
 SnapSolve does not collect browsing history in the background and does not continuously capture the screen.
 

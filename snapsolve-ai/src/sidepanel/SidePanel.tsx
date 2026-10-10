@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { BrandFooter } from "@/components/BrandFooter";
 import { Logo } from "@/components/Logo";
+import { ExternalConsentCard } from "@/components/ExternalConsentCard";
 import { applyTheme, useSettings } from "@/hooks/useSettings";
 import { parseQuestion, parseQuestions } from "@/capture/question-parser";
 import { extractPdfText } from "@/capture/pdf";
@@ -15,6 +16,11 @@ import { clearHistory, getHistory } from "@/storage/settings";
 import { BRAND } from "@/storage/defaults";
 import { purchaseUrl } from "@/licensing/license";
 import { clampBatchLimit, freeSolvesRemaining, isPro } from "@/licensing/gate";
+import {
+  CONSENT_REQUIRED_MESSAGE,
+  isConsentRequiredError,
+  needsExternalConsent,
+} from "@/privacy/consent";
 import type {
   CaptureMethod,
   HistoryItem,
@@ -39,12 +45,17 @@ export function SidePanel() {
   const [error, setError] = useState<string | null>(null);
   const [followUp, setFollowUp] = useState("");
   const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [forceConsent, setForceConsent] = useState(false);
   const solvingRef = useRef(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (ready) applyTheme(settings.theme);
   }, [ready, settings.theme]);
+
+  useEffect(() => {
+    if (settings.consentedExternalTransfer) setForceConsent(false);
+  }, [settings.consentedExternalTransfer]);
 
   const refreshHistory = useCallback(async () => {
     setHistory(await getHistory());
@@ -75,10 +86,15 @@ export function SidePanel() {
     else setParsed(null);
   }, [text]);
 
-  const onSolve = async (follow?: string) => {
+  const onSolve = async (follow?: string, opts?: { afterConsent?: boolean }) => {
     if (solvingRef.current) return;
     if (!text.trim() && !imageDataUrl) {
       setError("Add a question first — type it, capture it, or upload a file.");
+      return;
+    }
+    if (!opts?.afterConsent && needsExternalConsent(settings)) {
+      setForceConsent(true);
+      setError(CONSENT_REQUIRED_MESSAGE);
       return;
     }
     solvingRef.current = true;
@@ -106,7 +122,9 @@ export function SidePanel() {
       setVerification(result.verification ?? null);
       await refreshHistory();
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      const msg = e instanceof Error ? e.message : String(e);
+      if (isConsentRequiredError(msg)) setForceConsent(true);
+      setError(msg);
     } finally {
       solvingRef.current = false;
       setBusy(false);
@@ -191,6 +209,22 @@ export function SidePanel() {
             Get Pro
           </a>
         </div>
+      )}
+
+      {ready && (
+        <ExternalConsentCard
+          settings={settings}
+          busy={busy}
+          force={forceConsent}
+          update={update}
+          onAllowed={() => {
+            setError(null);
+            setForceConsent(false);
+            if (text.trim() || imageDataUrl) {
+              void onSolve(undefined, { afterConsent: true });
+            }
+          }}
+        />
       )}
 
       <nav className="flex flex-wrap gap-1.5" aria-label="Sections">

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import type { LicenseState } from "@/licensing/license";
 
 export type ThemeMode = "light" | "dark" | "system";
 export type AnswerMode =
@@ -238,6 +239,7 @@ export interface Settings {
   exportIncludeBranding: boolean;
   requireConsentBeforeExternal: boolean;
   consentedExternalTransfer: boolean;
+  license: LicenseState;
 }
 
 export const SolveResponseSchema = z.object({

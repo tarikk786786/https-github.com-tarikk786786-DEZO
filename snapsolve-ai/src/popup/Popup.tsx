@@ -9,6 +9,8 @@ import {
   runSolve,
 } from "@/shared/solveClient";
 import { BRAND } from "@/storage/defaults";
+import { purchaseUrl } from "@/licensing/license";
+import { freeSolvesRemaining, isPro } from "@/licensing/gate";
 
 export function Popup() {
   const { settings, ready, update } = useSettings();
@@ -96,6 +98,14 @@ export function Popup() {
   };
 
   const provider = settings.providers.find((p) => p.id === settings.defaultProvider);
+  const pro = ready && isPro(settings);
+  const solvesLeft = ready ? freeSolvesRemaining(settings) : 0;
+  const needsKey =
+    ready &&
+    !settings.demoMode &&
+    provider &&
+    !["demo", "ollama", "lmstudio"].includes(provider.id) &&
+    !provider.apiKey;
 
   return (
     <div className="w-[360px] p-4">
@@ -115,6 +125,29 @@ export function Popup() {
           Settings
         </button>
       </header>
+
+      {!pro && (
+        <div className="ss-panel mb-3 flex items-center justify-between gap-2 p-2.5 text-xs">
+          <span className="ss-muted">
+            Free · {solvesLeft} left today · free LLM default
+          </span>
+          <a
+            className="ss-brand-link shrink-0 font-medium"
+            href={purchaseUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Get Pro
+          </a>
+        </div>
+      )}
+
+      {needsKey && (
+        <p className="ss-note mb-3 text-xs">
+          Connect {provider.label || provider.id} in Settings — paste a free API key to use the default free
+          LLM, or sample answers work offline.
+        </p>
+      )}
 
       <label className="ss-label" htmlFor="q">
         Question
@@ -147,7 +180,11 @@ export function Popup() {
           <span className="ss-muted">Using</span>
           <span className="font-medium">
             {provider?.label || settings.defaultProvider}
-            {settings.demoMode ? " (sample mode)" : ""}
+            {settings.demoMode
+              ? " (sample)"
+              : settings.freeOnlyMode || settings.routingMode === "free-only"
+                ? " (free LLM)"
+                : ""}
           </span>
         </div>
         <div className="flex gap-2">

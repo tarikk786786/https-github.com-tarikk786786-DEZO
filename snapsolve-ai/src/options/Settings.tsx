@@ -7,9 +7,12 @@ import { BRAND, DEFAULT_PROVIDERS } from "@/storage/defaults";
 import { getCatalogCache, saveSettings } from "@/storage/settings";
 import type { CatalogModel, ProviderConfig, ProviderId, RoutingMode } from "@/shared/types";
 import { redactSecrets } from "@/privacy/sanitize";
+import { FREE_PLAN_PROVIDERS, purchaseUrl, verifyLicenseKey, PRICING } from "@/licensing/license";
+import { emptyLicense, freeSolvesRemaining, isPro } from "@/licensing/gate";
 
 type Nav =
   | "providers"
+  | "license"
   | "free-models"
   | "routing"
   | "capture"
@@ -20,19 +23,50 @@ type Nav =
 const HELP_LINKS: Partial<Record<ProviderId, string>> = {
   openai: "https://platform.openai.com/api-keys",
   gemini: "https://aistudio.google.com/apikey",
-  anthropic: "https://console.anthropic.com/",
+  anthropic: "https://console.anthropic.com/settings/keys",
   openrouter: "https://openrouter.ai/keys",
   groq: "https://console.groq.com/keys",
-  mistral: "https://console.mistral.ai/",
-  deepseek: "https://platform.deepseek.com/",
-  together: "https://api.together.xyz/",
-  fireworks: "https://fireworks.ai/",
+  mistral: "https://console.mistral.ai/api-keys",
+  deepseek: "https://platform.deepseek.com/api_keys",
+  together: "https://api.together.xyz/settings/api-keys",
+  fireworks: "https://fireworks.ai/account/api-keys",
   cerebras: "https://cloud.cerebras.ai/",
-  cohere: "https://dashboard.cohere.com/",
+  cohere: "https://dashboard.cohere.com/api-keys",
   huggingface: "https://huggingface.co/settings/tokens",
-  ollama: "https://ollama.com/",
+  ollama: "https://ollama.com/download",
   lmstudio: "https://lmstudio.ai/",
+  custom: "https://tarikislam.in",
 };
+
+const PROVIDER_GROUPS: { title: string; blurb: string; ids: ProviderId[] }[] = [
+  {
+    title: "Free LLMs (default)",
+    blurb: "No paid API required. Connect a free key or run models on your machine.",
+    ids: ["openrouter", "groq", "huggingface", "ollama", "lmstudio", "demo"],
+  },
+  {
+    title: "Cloud AI — connect any provider",
+    blurb: "Sign in at the provider site, create an API key, paste it here. Pro unlocks paid cloud solves.",
+    ids: [
+      "openai",
+      "gemini",
+      "anthropic",
+      "mistral",
+      "deepseek",
+      "together",
+      "fireworks",
+      "cerebras",
+      "cohere",
+      "custom",
+    ],
+  },
+];
+
+function providerConnected(p: ProviderConfig): boolean {
+  if (p.id === "demo") return true;
+  if (["ollama", "lmstudio"].includes(p.id)) return Boolean(p.baseUrl);
+  return Boolean(p.apiKey?.trim());
+}
 
 export function SettingsApp() {
   const { settings, ready, update } = useSettings();
@@ -44,10 +78,16 @@ export function SettingsApp() {
   const [query, setQuery] = useState("");
   const [filters, setFilters] = useState<FreeModelFilter[]>(["free"]);
   const [testingId, setTestingId] = useState<ProviderId | null>(null);
+  const [licenseDraft, setLicenseDraft] = useState("");
+  const [licenseBusy, setLicenseBusy] = useState(false);
 
   useEffect(() => {
     if (ready) applyTheme(settings.theme);
   }, [ready, settings.theme]);
+
+  useEffect(() => {
+    if (ready) setLicenseDraft(settings.license?.key ?? "");
+  }, [ready, settings.license?.key]);
 
   useEffect(() => {
     void getCatalogCache().then((c) => {
@@ -188,13 +228,79 @@ export function SettingsApp() {
   };
 
   const resetProviders = async () => {
-    await update({ providers: DEFAULT_PROVIDERS, defaultProvider: "demo", demoMode: true });
-    setStatus("Providers reset to defaults.");
+    await update({
+      providers: DEFAULT_PROVIDERS,
+      defaultProvider: "openrouter",
+      demoMode: false,
+      freeOnlyMode: true,
+      allowPaidModels: false,
+      routingMode: "free-only",
+    });
+    setStatus("Providers reset — default free LLM (OpenRouter) restored.");
+  };
+
+  const connectProvider = async (id: ProviderId) => {
+    const providers = settings.providers.map((p) =>
+      p.id === id ? { ...p, enabled: true } : p
+    );
+    await update({
+      providers,
+      defaultProvider: id,
+      demoMode: id === "demo",
+      freeOnlyMode: (FREE_PLAN_PROVIDERS as readonly string[]).includes(id),
+      allowPaidModels: !(FREE_PLAN_PROVIDERS as readonly string[]).includes(id),
+    });
+    setStatus(
+      id === "demo"
+        ? "Sample answers selected (works offline)."
+        : `Connected ${id}. Paste your API key below if needed, then Test connection.`
+    );
+  };
+
+  const activateLicense = async () => {
+    setLicenseBusy(true);
+    setError(null);
+    setStatus(null);
+    try {
+      const payload = await verifyLicenseKey(licenseDraft);
+      await update({
+        license: {
+          tier: "pro",
+          key: licenseDraft.trim().replace(/\s+/g, ""),
+          payload,
+          activatedAt: Date.now(),
+          lastCheckedAt: Date.now(),
+        },
+        allowPaidModels: true,
+        freeOnlyMode: false,
+      });
+      setStatus("SnapSolve Pro activated. All connected AI providers are unlocked.");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setLicenseBusy(false);
+    }
+  };
+
+  const deactivateLicense = async () => {
+    await update({
+      license: emptyLicense(),
+      allowPaidModels: false,
+      freeOnlyMode: true,
+      routingMode: "free-only",
+      defaultProvider: "openrouter",
+      demoMode: false,
+    });
+    setLicenseDraft("");
+    setStatus("Back on Free plan — default free LLM routing restored.");
   };
 
   if (!ready) {
     return <div className="p-6 ss-muted">Loading settings…</div>;
   }
+
+  const pro = isPro(settings);
+  const solvesLeft = freeSolvesRemaining(settings);
 
   return (
     <div className="mx-auto grid min-h-screen max-w-6xl gap-4 p-4 md:grid-cols-[220px_1fr]">
@@ -208,7 +314,8 @@ export function SettingsApp() {
         </div>
         {(
           [
-            ["providers", "Providers"],
+            ["providers", "Connect AI"],
+            ["license", pro ? "Pro license" : "Free / Pro"],
             ["free-models", "Free Models"],
             ["routing", "Routing & Cost"],
             ["capture", "Capture & OCR"],
@@ -243,14 +350,34 @@ export function SettingsApp() {
         )}
 
         {nav === "providers" && (
-          <section className="space-y-3">
+          <section className="space-y-4">
             <header>
-              <h1 className="font-display text-2xl font-semibold tracking-tight">Providers</h1>
+              <h1 className="font-display text-2xl font-semibold tracking-tight">Connect AI</h1>
               <p className="ss-muted mt-1 text-sm">
-                Connect an API key or a local server. App subscriptions (ChatGPT Plus, Claude Pro, Gemini) are not the same as API access.
+                Sign in at any provider below, create an API key, and paste it here. Default routing uses a{" "}
+                <strong className="font-medium text-[var(--ss-fg)]">free LLM</strong> (OpenRouter). ChatGPT
+                Plus / Claude Pro / Gemini app subscriptions are not API keys.
+              </p>
+              <p className="ss-muted mt-2 text-xs">
+                Active default:{" "}
+                <span className="font-medium text-[var(--ss-fg)]">
+                  {settings.providers.find((p) => p.id === settings.defaultProvider)?.label ||
+                    settings.defaultProvider}
+                </span>
+                {settings.freeOnlyMode || settings.routingMode === "free-only"
+                  ? " · free-LLM mode on"
+                  : ""}
+                {pro ? " · Pro" : ` · Free · ${solvesLeft} solves left today`}
               </p>
             </header>
             <div className="flex flex-wrap gap-2">
+              <button
+                className="ss-btn-primary ss-btn text-xs"
+                type="button"
+                onClick={() => void connectProvider("openrouter")}
+              >
+                Use default free LLM
+              </button>
               <button className="ss-btn text-xs" type="button" onClick={() => void exportConfig()}>
                 Export config (no secrets)
               </button>
@@ -258,105 +385,178 @@ export function SettingsApp() {
                 Reset providers
               </button>
             </div>
-            {settings.providers.map((p) => (
-              <article key={p.id} className="ss-panel p-4">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div>
-                    <h2 className="font-semibold">{p.label || p.id}</h2>
-                    <p className="ss-muted text-xs">
-                      Status: {p.connectionStatus ?? "unknown"}
-                      {p.lastLatencyMs != null ? ` · ${p.lastLatencyMs}ms` : ""}
-                      {p.lastError ? ` · ${p.lastError}` : ""}
-                    </p>
-                  </div>
-                  <label className="flex items-center gap-2 text-sm">
-                    <input
-                      type="checkbox"
-                      checked={p.enabled}
-                      onChange={(e) => void patchProvider(p.id, { enabled: e.target.checked })}
-                    />
-                    Enabled
-                  </label>
+
+            {PROVIDER_GROUPS.map((group) => (
+              <div key={group.title} className="space-y-3">
+                <div>
+                  <h2 className="font-display text-lg font-semibold">{group.title}</h2>
+                  <p className="ss-muted text-xs">{group.blurb}</p>
                 </div>
-                {p.id !== "demo" && (
-                  <div className="mt-3 grid gap-2 md:grid-cols-2">
-                    <label className="text-xs ss-muted">
-                      API key
-                      <input
-                        className="ss-input mt-1"
-                        type="password"
-                        autoComplete="off"
-                        placeholder="Stored locally in extension storage"
-                        value={p.apiKey ?? ""}
-                        onChange={(e) => void patchProvider(p.id, { apiKey: e.target.value })}
-                      />
-                    </label>
-                    <label className="text-xs ss-muted">
-                      Base URL
-                      <input
-                        className="ss-input mt-1"
-                        value={p.baseUrl ?? ""}
-                        onChange={(e) => void patchProvider(p.id, { baseUrl: e.target.value })}
-                      />
-                    </label>
-                    <label className="text-xs ss-muted">
-                      Model
-                      <input
-                        className="ss-input mt-1"
-                        value={p.model}
-                        onChange={(e) => void patchProvider(p.id, { model: e.target.value })}
-                      />
-                    </label>
-                    <label className="text-xs ss-muted">
-                      Temperature
-                      <input
-                        className="ss-input mt-1"
-                        type="number"
-                        step="0.1"
-                        min={0}
-                        max={2}
-                        value={p.temperature ?? 0.2}
-                        onChange={(e) =>
-                          void patchProvider(p.id, { temperature: Number(e.target.value) })
-                        }
-                      />
-                    </label>
-                  </div>
-                )}
-                <div className="mt-3 flex flex-wrap gap-2">
-                  <button
-                    className="ss-btn text-xs"
-                    type="button"
-                    disabled={testingId === p.id}
-                    onClick={() => void testConnection(p)}
-                  >
-                    {testingId === p.id ? "Testing…" : "Test connection"}
-                  </button>
-                  {HELP_LINKS[p.id] && (
-                    <a
-                      className="ss-btn text-xs"
-                      href={HELP_LINKS[p.id]}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Official setup docs
-                    </a>
-                  )}
-                  <button
-                    className="ss-btn text-xs"
-                    type="button"
-                    onClick={() =>
-                      void update({
-                        defaultProvider: p.id,
-                        demoMode: p.id === "demo",
-                      })
-                    }
-                  >
-                    Set default
-                  </button>
-                </div>
-              </article>
+                {group.ids.map((id) => {
+                  const p = settings.providers.find((x) => x.id === id);
+                  if (!p) return null;
+                  const connected = providerConnected(p);
+                  const isDefault = settings.defaultProvider === p.id;
+                  const freeOk = (FREE_PLAN_PROVIDERS as readonly string[]).includes(p.id);
+                  return (
+                    <article key={p.id} className="ss-panel p-4">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                          <h3 className="font-semibold">
+                            {p.label || p.id}
+                            {isDefault ? (
+                              <span className="ss-muted ml-2 text-xs font-normal">default</span>
+                            ) : null}
+                          </h3>
+                          <p className="ss-muted text-xs">
+                            {connected ? "Key / endpoint saved" : "Not connected"}
+                            {" · "}
+                            {p.enabled ? "enabled" : "disabled"}
+                            {p.connectionStatus ? ` · ${p.connectionStatus}` : ""}
+                            {p.lastLatencyMs != null ? ` · ${p.lastLatencyMs}ms` : ""}
+                            {!freeOk && !pro ? " · Pro to solve" : ""}
+                            {p.lastError ? ` · ${p.lastError}` : ""}
+                          </p>
+                        </div>
+                        <label className="flex items-center gap-2 text-sm">
+                          <input
+                            type="checkbox"
+                            checked={p.enabled}
+                            onChange={(e) => void patchProvider(p.id, { enabled: e.target.checked })}
+                          />
+                          Enabled
+                        </label>
+                      </div>
+                      {p.id !== "demo" && (
+                        <div className="mt-3 grid gap-2 md:grid-cols-2">
+                          {!["ollama", "lmstudio"].includes(p.id) && (
+                            <label className="text-xs ss-muted md:col-span-2">
+                              API key (sign in at the provider → create key → paste)
+                              <input
+                                className="ss-input mt-1"
+                                type="password"
+                                autoComplete="off"
+                                placeholder="Stored only in this extension"
+                                value={p.apiKey ?? ""}
+                                onChange={(e) => void patchProvider(p.id, { apiKey: e.target.value })}
+                              />
+                            </label>
+                          )}
+                          <label className="text-xs ss-muted">
+                            Base URL
+                            <input
+                              className="ss-input mt-1"
+                              value={p.baseUrl ?? ""}
+                              onChange={(e) => void patchProvider(p.id, { baseUrl: e.target.value })}
+                            />
+                          </label>
+                          <label className="text-xs ss-muted">
+                            Model
+                            <input
+                              className="ss-input mt-1"
+                              value={p.model}
+                              onChange={(e) => void patchProvider(p.id, { model: e.target.value })}
+                            />
+                          </label>
+                        </div>
+                      )}
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        <button
+                          className="ss-btn-primary ss-btn text-xs"
+                          type="button"
+                          onClick={() => void connectProvider(p.id)}
+                        >
+                          {connected ? "Use this AI" : "Connect & use"}
+                        </button>
+                        <button
+                          className="ss-btn text-xs"
+                          type="button"
+                          disabled={testingId === p.id}
+                          onClick={() => void testConnection(p)}
+                        >
+                          {testingId === p.id ? "Testing…" : "Test connection"}
+                        </button>
+                        {HELP_LINKS[p.id] && (
+                          <a
+                            className="ss-btn text-xs"
+                            href={HELP_LINKS[p.id]}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Sign in / get key
+                          </a>
+                        )}
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
             ))}
+          </section>
+        )}
+
+        {nav === "license" && (
+          <section className="ss-panel space-y-4 p-4">
+            <header>
+              <h1 className="font-display text-2xl font-semibold tracking-tight">
+                {pro ? "SnapSolve Pro" : "Free plan & Pro"}
+              </h1>
+              <p className="ss-muted mt-1 text-sm">
+                Free includes free LLMs (OpenRouter, Groq, Hugging Face, Ollama) and sample answers. Pro unlocks
+                every connected cloud AI, higher daily limits, verification, and custom endpoints.
+              </p>
+            </header>
+            <div className="rounded-[6px] border border-[var(--ss-border)] p-3 text-sm">
+              <p className="font-semibold">{pro ? "Pro active" : "Free plan"}</p>
+              <p className="ss-muted mt-1 text-xs">
+                {pro
+                  ? settings.license.payload?.name
+                    ? `Licensed to ${settings.license.payload.name}`
+                    : "All AI providers unlocked for solving."
+                  : `${solvesLeft} solves left today · default free LLM routing`}
+              </p>
+              <p className="mt-2 text-xs">
+                {PRICING.product} · {PRICING.priceLabel}
+                <span className="ss-muted"> — {PRICING.priceNote}</span>
+              </p>
+              <a
+                className="ss-btn-primary ss-btn mt-3 inline-flex text-xs"
+                href={purchaseUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Get SnapSolve Pro
+              </a>
+            </div>
+            <label className="block text-sm">
+              License key
+              <textarea
+                className="ss-input mt-1 min-h-[88px] font-mono text-xs"
+                placeholder="SS1.… paste your Pro key"
+                value={licenseDraft}
+                onChange={(e) => setLicenseDraft(e.target.value)}
+                spellCheck={false}
+              />
+            </label>
+            <div className="flex flex-wrap gap-2">
+              <button
+                className="ss-btn-primary ss-btn text-xs"
+                type="button"
+                disabled={licenseBusy || !licenseDraft.trim()}
+                onClick={() => void activateLicense()}
+              >
+                {licenseBusy ? "Checking…" : "Activate Pro"}
+              </button>
+              {pro && (
+                <button className="ss-btn text-xs" type="button" onClick={() => void deactivateLicense()}>
+                  Remove license
+                </button>
+              )}
+            </div>
+            <p className="ss-muted text-xs">
+              Keys are verified with a public signature on your device. Client licenses are not DRM — see
+              SECURITY.md.
+            </p>
           </section>
         )}
 
@@ -498,9 +698,10 @@ export function SettingsApp() {
               <input
                 type="checkbox"
                 checked={settings.verifyAnswers}
+                disabled={!pro}
                 onChange={(e) => void update({ verifyAnswers: e.target.checked })}
               />
-              Multi-model verification (uses a second provider when available)
+              Multi-model verification {pro ? "(second provider)" : "(Pro)"}
             </label>
             <label className="block text-sm">
               Fallback provider
@@ -560,9 +761,10 @@ export function SettingsApp() {
               <input
                 type="checkbox"
                 checked={settings.floatingToolbar}
+                disabled={!pro}
                 onChange={(e) => void update({ floatingToolbar: e.target.checked })}
               />
-              Show a small toolbar on websites (off by default)
+              Show a small toolbar on websites {pro ? "(off by default)" : "(Pro)"}
             </label>
             <label className="block text-sm">
               Excluded hosts (comma-separated)
@@ -588,14 +790,18 @@ export function SettingsApp() {
               />
             </label>
             <label className="block text-sm">
-              Batch question limit
+              Batch question limit {pro ? "(up to 50)" : "(Free max 2)"}
               <input
                 className="ss-input mt-1"
                 type="number"
                 min={1}
-                max={50}
+                max={pro ? 50 : 2}
                 value={settings.batchLimit}
-                onChange={(e) => void update({ batchLimit: Number(e.target.value) })}
+                onChange={(e) =>
+                  void update({
+                    batchLimit: Math.min(Number(e.target.value) || 1, pro ? 50 : 2),
+                  })
+                }
               />
             </label>
             <p className="ss-muted text-xs">
@@ -723,6 +929,8 @@ export function SettingsApp() {
               Chrome extension (Manifest V3). Heavy UI stays in the popup and side panel. Keys stay in extension storage and are never injected into websites.
             </p>
             <ul className="ss-muted list-disc space-y-1 pl-5 text-sm">
+              <li>Default free LLM: OpenRouter (`meta-llama/llama-3.2-3b-instruct:free`)</li>
+              <li>Connect any AI under Settings → Connect AI</li>
               <li>Shortcuts: Alt+Shift+S capture · Alt+Shift+A side panel</li>
               <li>Permissions: storage, sidePanel, activeTab, scripting, contextMenus</li>
               <li>Optional host access only when interacting with a page</li>

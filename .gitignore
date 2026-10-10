@@ -25,3 +25,5 @@ coverage/
 .windsurf
 .vercel
 *.tsbuildinfo
+---
+snapsolve-ai/keys/license-private.jwk.json

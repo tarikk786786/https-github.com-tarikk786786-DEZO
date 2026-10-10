@@ -23,10 +23,15 @@ SnapSolve is hardened for a Chrome extension threat model. No client-side app is
 | Export scrubbing | Settings export strips API keys |
 | Error redaction | Provider errors scrub tokens before display |
 
+## Pro licensing
+
+SnapSolve Pro keys are `SS1.<payload>.<sig>` messages signed with ECDSA P-256. The extension verifies the signature with a public JWK shipped in the build. The private signing key stays off the client (`keys/license-private.jwk.json`, gitignored).
+
 ## What we do **not** claim
 
 - Perfect secrecy of keys on a compromised OS account  
 - Unbreakable DRM or anti-debug that stops a determined local attacker  
+- That a signed client license cannot be patched out of a local extension build  
 - Model immunity to all prompt injection  
 
 ## Reporting issues

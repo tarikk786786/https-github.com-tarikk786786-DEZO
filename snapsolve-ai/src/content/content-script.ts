@@ -180,10 +180,17 @@ async function ensureToolbar() {
   try {
     const settings = await chrome.storage.local.get("snapsolve_settings");
     const cfg = settings.snapsolve_settings as
-      | { floatingToolbar?: boolean; floatingToolbarExcludedHosts?: string[] }
+      | {
+          floatingToolbar?: boolean;
+          floatingToolbarExcludedHosts?: string[];
+          license?: { tier?: string; payload?: { exp?: number } };
+        }
       | undefined;
-    // Opt-in only — default false so browsing is unaffected.
-    if (!cfg?.floatingToolbar) {
+    // Opt-in + Pro only — default false so browsing is unaffected.
+    const proActive =
+      cfg?.license?.tier === "pro" &&
+      (cfg.license.payload?.exp == null || cfg.license.payload.exp > Date.now());
+    if (!cfg?.floatingToolbar || !proActive) {
       removeToolbar();
       return;
     }

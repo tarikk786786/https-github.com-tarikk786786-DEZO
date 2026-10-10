@@ -14,6 +14,7 @@ import { assertSolveRateLimit } from "@/security/rate-limit";
 import { hardenUntrustedText } from "@/security/prompt-guard";
 import { LIMITS, truncate } from "@/security/limits";
 import { redactSecrets } from "@/privacy/sanitize";
+import { assertCanVerify } from "@/licensing/gate";
 import type { SolveRequest } from "@/shared/types";
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -154,12 +155,22 @@ chrome.runtime.onMessage.addListener((raw, sender, sendResponse) => {
           : parseQuestion(rawText);
         const result = await solveQuestion(settings, { ...payload, question });
         if (settings.verifyAnswers) {
-          const verification = await verifyAnswer(
-            settings,
-            { ...payload, question },
-            result
-          );
-          sendResponse({ type: "SOLVE_RESULT", payload: result, verification });
+          try {
+            assertCanVerify(settings);
+            const verification = await verifyAnswer(
+              settings,
+              { ...payload, question },
+              result
+            );
+            sendResponse({ type: "SOLVE_RESULT", payload: result, verification });
+          } catch (verifyError) {
+            const warning =
+              verifyError instanceof Error
+                ? verifyError.message
+                : "Verification unavailable on this plan.";
+            result.warnings = [...(result.warnings ?? []), warning];
+            sendResponse({ type: "SOLVE_RESULT", payload: result });
+          }
         } else {
           sendResponse({ type: "SOLVE_RESULT", payload: result });
         }

@@ -6,6 +6,7 @@ import {
 } from "@/security/secrets";
 import { LIMITS, truncate } from "@/security/limits";
 import { redactSecrets } from "@/privacy/sanitize";
+import { emptyLicense, entitlementsFor } from "@/licensing/gate";
 
 const SETTINGS_KEY = "snapsolve_settings";
 const HISTORY_KEY = "snapsolve_history";
@@ -18,7 +19,10 @@ function mergeSettings(stored: Partial<Settings> | undefined): Settings {
     const override = stored?.providers?.find((p) => p.id === defaultProvider.id);
     return override ? { ...defaultProvider, ...override } : defaultProvider;
   });
-  return { ...base, providers };
+  const license = stored?.license
+    ? { ...emptyLicense(), ...stored.license }
+    : DEFAULT_SETTINGS.license;
+  return { ...base, providers, license };
 }
 
 export async function getSettings(): Promise<Settings> {
@@ -92,10 +96,9 @@ export async function saveHistoryItem(item: HistoryItem): Promise<void> {
       questionText: truncate(item.question.questionText, LIMITS.maxQuestionChars),
     },
   };
-  const next = [sanitized, ...items.filter((x) => x.id !== item.id)].slice(
-    0,
-    LIMITS.maxHistoryItems
-  );
+  const ent = entitlementsFor(settings);
+  const cap = Math.min(LIMITS.maxHistoryItems, ent.historyItems);
+  const next = [sanitized, ...items.filter((x) => x.id !== item.id)].slice(0, cap);
   await chrome.storage.local.set({ [HISTORY_KEY]: next });
 }
 

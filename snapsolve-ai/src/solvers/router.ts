@@ -13,6 +13,11 @@ import { solveWithGemini } from "./adapters/gemini";
 import { solveWithAnthropic } from "./adapters/anthropic";
 import { getCatalogCache } from "@/storage/settings";
 import { bumpRequestCount } from "@/storage/settings";
+import {
+  assertCanSolve,
+  assertCanUseHostedProvider,
+  assertCanVerify,
+} from "@/licensing/gate";
 
 const OPENAI_COMPATIBLE: ProviderId[] = [
   "openai",
@@ -69,10 +74,19 @@ export function selectProvider(settings: Settings, request: SolveRequest): Provi
   }
 
   if (settings.freeOnlyMode || settings.routingMode === "free-only" || !settings.allowPaidModels) {
-    const local = enabled.find((p) => ["ollama", "lmstudio", "custom"].includes(p.id));
+    const preferredFree = enabled.find(
+      (p) =>
+        p.id === settings.defaultProvider &&
+        ["openrouter", "groq", "huggingface", "ollama", "lmstudio"].includes(p.id) &&
+        (p.apiKey || ["ollama", "lmstudio"].includes(p.id))
+    );
+    if (preferredFree) return preferredFree.id;
+    const local = enabled.find((p) => ["ollama", "lmstudio"].includes(p.id));
     if (local) return local.id;
-    const openrouter = enabled.find((p) => p.id === "openrouter" && p.apiKey);
-    if (openrouter) return "openrouter";
+    const freeHosted = enabled.find(
+      (p) => ["openrouter", "groq", "huggingface"].includes(p.id) && p.apiKey
+    );
+    if (freeHosted) return freeHosted.id;
     if (enabled.some((p) => p.id === "demo")) return "demo";
   }
 
@@ -172,6 +186,8 @@ export async function solveQuestion(
   settings: Settings,
   request: SolveRequest
 ): Promise<SolveResponse> {
+  assertCanSolve(settings);
+
   if (
     settings.dailyRequestBudget != null &&
     settings.requestsDayKey === new Date().toISOString().slice(0, 10) &&
@@ -181,6 +197,8 @@ export async function solveQuestion(
   }
 
   const providerId = selectProvider(settings, request);
+  assertCanUseHostedProvider(settings, providerId);
+
   const isExternal = !["demo", "ollama", "lmstudio"].includes(providerId);
   if (
     isExternal &&
@@ -226,12 +244,16 @@ export async function verifyAnswer(
   request: SolveRequest,
   primary: SolveResponse
 ): Promise<VerificationResult> {
+  assertCanVerify(settings);
+
   const secondaryProvider =
     settings.verifyProvider ||
     settings.providers.find(
       (p) => p.enabled && p.id !== primary.provider && p.id !== "demo" && (p.apiKey || p.id === "ollama")
     )?.id ||
     "demo";
+
+  assertCanUseHostedProvider(settings, secondaryProvider);
 
   const secondary = await dispatch(settings, secondaryProvider, {
     ...request,

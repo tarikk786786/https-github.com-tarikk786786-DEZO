@@ -34,9 +34,9 @@ export const DEFAULT_PROVIDERS: ProviderConfig[] = [
   },
   {
     id: "openrouter",
-    label: "OpenRouter",
-    enabled: false,
-    model: "openrouter/auto",
+    label: "OpenRouter (free LLMs)",
+    enabled: true,
+    model: "meta-llama/llama-3.2-3b-instruct:free",
     baseUrl: "https://openrouter.ai/api/v1",
     temperature: 0.2,
     maxTokens: 2048,
@@ -46,7 +46,7 @@ export const DEFAULT_PROVIDERS: ProviderConfig[] = [
     id: "groq",
     label: "Groq",
     enabled: false,
-    model: "llama-3.3-70b-versatile",
+    model: "llama-3.1-8b-instant",
     baseUrl: "https://api.groq.com/openai/v1",
     temperature: 0.2,
     maxTokens: 2048,
@@ -174,8 +174,8 @@ export const DEFAULT_SETTINGS: Settings = {
   ocrLanguage: "eng",
   autoDetectBoundaries: true,
   captureDelayMs: 0,
-  batchLimit: 10,
-  defaultProvider: "demo",
+  batchLimit: 2,
+  defaultProvider: "openrouter",
   providers: DEFAULT_PROVIDERS,
   systemInstructions:
     "You are SnapSolve by Tarik Islam (https://tarikislam.in), a careful study companion. Help the user learn. Do not encourage cheating on active graded exams. Prefer explanations and conceptual guidance for assessments. Never invent citations.",
@@ -185,10 +185,10 @@ export const DEFAULT_SETTINGS: Settings = {
   historyEnabled: true,
   discloseExternalTransfer: true,
   onboardingComplete: false,
-  demoMode: true,
-  routingMode: "automatic",
-  allowPaidModels: true,
-  freeOnlyMode: false,
+  demoMode: false,
+  routingMode: "free-only",
+  allowPaidModels: false,
+  freeOnlyMode: true,
   verifyAnswers: false,
   catalogCacheMinutes: 60,
   requestsToday: 0,
@@ -197,6 +197,9 @@ export const DEFAULT_SETTINGS: Settings = {
   requireConsentBeforeExternal: true,
   consentedExternalTransfer: false,
   taskModels: {},
+  license: {
+    tier: "free",
+  },
 };
 
 export const BRAND = {
@@ -205,4 +208,5 @@ export const BRAND = {
   attribution: "Made by TarikIslam.in",
   website: "https://tarikislam.in",
   tagline: "Questions from your screen, answers you can study from.",
+  proName: "SnapSolve Pro",
 } as const;

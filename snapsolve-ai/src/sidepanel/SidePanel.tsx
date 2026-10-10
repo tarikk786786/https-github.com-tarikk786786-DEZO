@@ -13,6 +13,8 @@ import {
 } from "@/shared/solveClient";
 import { clearHistory, getHistory } from "@/storage/settings";
 import { BRAND } from "@/storage/defaults";
+import { purchaseUrl } from "@/licensing/license";
+import { clampBatchLimit, freeSolvesRemaining, isPro } from "@/licensing/gate";
 import type {
   CaptureMethod,
   HistoryItem,
@@ -118,7 +120,7 @@ export function SidePanel() {
     try {
       if (file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")) {
         setProgress("Extracting text from the PDF…");
-        const pdf = await extractPdfText(file, settings.batchLimit);
+        const pdf = await extractPdfText(file, clampBatchLimit(settings, settings.batchLimit));
         setText(pdf.text);
         setSource("pdf");
         setImageDataUrl(undefined);
@@ -174,6 +176,22 @@ export function SidePanel() {
           Settings
         </button>
       </header>
+
+      {ready && !isPro(settings) && (
+        <div className="ss-panel flex items-center justify-between gap-2 p-2.5 text-xs">
+          <span className="ss-muted">
+            Free · {freeSolvesRemaining(settings)} solves left · default free LLM
+          </span>
+          <a
+            className="ss-brand-link shrink-0 font-medium"
+            href={purchaseUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Get Pro
+          </a>
+        </div>
+      )}
 
       <nav className="flex flex-wrap gap-1.5" aria-label="Sections">
         {([
@@ -312,10 +330,11 @@ export function SidePanel() {
             <button
               className="ss-btn text-xs"
               type="button"
-              disabled={busy}
+              disabled={busy || !isPro(settings)}
+              title={isPro(settings) ? "Run a second model check" : "Pro feature"}
               onClick={() => void update({ verifyAnswers: !settings.verifyAnswers })}
             >
-              Second check: {settings.verifyAnswers ? "On" : "Off"}
+              Second check: {!isPro(settings) ? "Pro" : settings.verifyAnswers ? "On" : "Off"}
             </button>
           </div>
 

@@ -2,6 +2,7 @@ import type { CatalogModel, ProviderConfig, ProviderId, Settings } from "@/share
 import { getCatalogCache, setCatalogCache } from "@/storage/settings";
 import { assertSafeProviderUrl } from "@/security/endpoints";
 import { assertCatalogRateLimit } from "@/security/rate-limit";
+import { assertCanRefreshCatalog } from "@/licensing/gate";
 
 function baseCapabilities(partial?: Partial<CatalogModel["capabilities"]>): CatalogModel["capabilities"] {
   return {
@@ -176,7 +177,10 @@ export async function refreshModelCatalog(
   if (!opts?.force && cache && Date.now() - cache.updatedAt < maxAge) {
     return { models: cache.models, errors: [] };
   }
-  if (opts?.force) assertCatalogRateLimit();
+  if (opts?.force) {
+    assertCanRefreshCatalog(settings);
+    assertCatalogRateLimit();
+  }
 
   const errors: string[] = [];
   const models: CatalogModel[] = [

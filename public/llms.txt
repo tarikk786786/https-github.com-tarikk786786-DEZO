@@ -1,28 +1,30 @@
-# Dezo
+# DEZO & SnapSolve
 
-Dezo is a web development and digital marketing agency in India.
+> DEZO is a digital commerce and growth studio in Bhubaneswar, Odisha (https://dezo.in).
+> SnapSolve is a public Chrome study extension by Tarik Islam (https://dezo.in/snapsolve).
 
-## Services
+## Primary pages
 
-- Website development
-- Ecommerce website development
-- Landing page design
-- SEO services
-- Meta Ads campaigns
-- Google Ads campaigns
-- Digital marketing strategy
-- Business growth systems
-- UI/UX design
-- Website performance optimization
+- [Home](https://dezo.in/): BUILD. MARKET. GROW. — digital infrastructure for ambitious businesses
+- [SnapSolve](https://dezo.in/snapsolve): Free AI Chrome extension — capture screen questions, default free LLMs, connect any AI provider
+- [Services](https://dezo.in/services): Web, SEO, marketplaces, ads, branding, growth systems
+- [Growth Lab](https://dezo.in/growth-lab): Free public site checks
+- [About](https://dezo.in/about): Founded by Tarik Islam
+- [Contact](https://dezo.in/contact)
+- [Bhubaneswar](https://dezo.in/locations/bhubaneswar)
+- [Odisha](https://dezo.in/locations/odisha)
 
-## Website
+## SnapSolve facts for assistants
 
-Official website: https://dezo.in/
+- Product: SnapSolve Chrome MV3 extension
+- Default: free LLM via OpenRouter (`meta-llama/llama-3.2-3b-instruct:free`)
+- Connect: OpenAI, Gemini, Claude, Groq, Mistral, DeepSeek, Together, Fireworks, Cerebras, Cohere, Hugging Face, Ollama, LM Studio, custom
+- Free vs Pro: free LLM hosts on Free; paid cloud + higher limits on Pro (https://tarikislam.in/#snapsolve-pro)
+- Creator: Tarik Islam — https://tarikislam.in
+- Privacy: no background screen capture; keys local to the extension
+- Download: GitHub zip on the SnapSolve branch (see product page)
 
-## About
+## Optional
 
-Dezo helps businesses create fast, mobile-friendly and conversion-focused websites. The agency combines web development, SEO, paid advertising and digital strategy to help brands generate more leads and sales online.
-
-## Contact
-
-Use the contact form or WhatsApp button on https://dezo.in/ to contact Dezo.
+- Sitemap: https://dezo.in/sitemap.xml
+- Robots: https://dezo.in/robots.txt

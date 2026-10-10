@@ -1,0 +1,35 @@
+{
+  "theme": "dark",
+  "demoMode": true,
+  "defaultProvider": "demo",
+  "routingMode": "automatic",
+  "allowPaidModels": true,
+  "freeOnlyMode": false,
+  "floatingToolbar": false,
+  "requireConsentBeforeExternal": true,
+  "consentedExternalTransfer": false,
+  "verifyAnswers": false,
+  "providers": [
+    {
+      "id": "openrouter",
+      "enabled": false,
+      "model": "openrouter/auto",
+      "baseUrl": "https://openrouter.ai/api/v1",
+      "apiKey": "REPLACE_WITH_YOUR_KEY"
+    },
+    {
+      "id": "openai",
+      "enabled": false,
+      "model": "gpt-4o-mini",
+      "baseUrl": "https://api.openai.com/v1",
+      "apiKey": "REPLACE_WITH_YOUR_KEY"
+    },
+    {
+      "id": "ollama",
+      "enabled": false,
+      "model": "llama3.2",
+      "baseUrl": "http://127.0.0.1:11434"
+    }
+  ],
+  "_comment": "Import is manual — paste values in the Settings UI. Never commit real API keys."
+}

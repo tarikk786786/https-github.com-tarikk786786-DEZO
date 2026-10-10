@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --ss-bg: #070b16;
+  --ss-panel: rgba(18, 26, 47, 0.88);
+  --ss-border: rgba(34, 211, 238, 0.22);
+  --ss-text: #e8eefc;
+  --ss-muted: #9aa8c7;
+  --ss-accent: #22d3ee;
+  --ss-accent-2: #8b5cf6;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --ss-bg: #f4f7fc;
+  --ss-panel: rgba(255, 255, 255, 0.9);
+  --ss-border: rgba(36, 49, 86, 0.14);
+  --ss-text: #0b1224;
+  --ss-muted: #5b6b8c;
+  --ss-accent: #0891b2;
+  --ss-accent-2: #7c3aed;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(139, 92, 246, 0.18), transparent 55%),
+    radial-gradient(900px 500px at 90% 0%, rgba(34, 211, 238, 0.14), transparent 50%),
+    var(--ss-bg);
+  color: var(--ss-text);
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ss-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.ss-glass {
+  background: var(--ss-panel);
+  border: 1px solid var(--ss-border);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 32px rgba(7, 11, 22, 0.28);
+}
+
+.ss-btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold transition;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.22), rgba(139, 92, 246, 0.18));
+  border: 1px solid var(--ss-border);
+  color: var(--ss-text);
+}
+
+.ss-btn:hover {
+  filter: brightness(1.08);
+}
+
+.ss-btn-primary {
+  background: linear-gradient(135deg, #22d3ee, #8b5cf6);
+  color: #071018;
+  border: none;
+}
+
+.ss-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: none;
+}
+
+.ss-input {
+  @apply w-full rounded-xl px-3 py-2 text-sm;
+  background: rgba(7, 11, 22, 0.35);
+  border: 1px solid var(--ss-border);
+  color: var(--ss-text);
+}
+
+[data-theme="light"] .ss-input {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.ss-muted {
+  color: var(--ss-muted);
+}
+
+.ss-brand-link {
+  color: var(--ss-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.ss-brand-link:hover {
+  text-decoration: underline;
+}

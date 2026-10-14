@@ -23,12 +23,9 @@ export function DezoFooter() {
             </p>
             <p className="text-xs text-white/40">{brand.geo}</p>
             <div className="text-xs pt-2">
-              <p className="text-white/35 uppercase tracking-widest mb-1">Founding team</p>
+              <p className="text-white/35 uppercase tracking-widest mb-1">Founder</p>
               <p className="text-white/80 font-medium">
                 {leadership.primary.name} — {leadership.primary.role}
-              </p>
-              <p className="text-white/50">
-                {leadership.partner.name} — {leadership.partner.role}
               </p>
             </div>
           </div>

@@ -46,7 +46,7 @@ export default function AboutPage() {
                 systems.
               </p>
               <p>
-                Founding leadership:{' '}
+                Founded and led by{' '}
                 <Link
                   href={leadership.primary.profile}
                   className="text-dezo-primary font-semibold hover:underline"
@@ -55,7 +55,7 @@ export default function AboutPage() {
                 >
                   {leadership.primary.name}
                 </Link>
-                . Commercial partnership: {leadership.partner.name}.
+                , {leadership.primary.role}.
               </p>
             </div>
             <aside className="lg:col-span-5 lg:pl-8 lg:border-l border-dezo-border">
@@ -71,18 +71,26 @@ export default function AboutPage() {
                 {contact.address.region} {contact.address.postalCode}, India
               </p>
               <p className="text-sm text-dezo-text-primary font-medium">{contact.phoneFormatted}</p>
-              <p className="text-sm text-dezo-text-muted">{contact.email}</p>
-              <p className="text-sm text-dezo-text-muted">{contact.supportEmail}</p>
+              <p className="text-sm text-dezo-text-muted">
+                <a href={`mailto:${contact.email}`} className="hover:text-dezo-primary">
+                  {contact.email}
+                </a>
+              </p>
+              <p className="text-sm text-dezo-text-muted">
+                <a href={`mailto:${contact.supportEmail}`} className="hover:text-dezo-primary">
+                  {contact.supportEmail}
+                </a>
+              </p>
             </aside>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-dezo-border border border-dezo-border mb-16">
-            <article className="p-8 bg-dezo-surface">
-              <p className="text-[11px] uppercase tracking-[0.14em] text-dezo-primary mb-2">
-                {leadership.primary.role}
-              </p>
-              <h3 className="font-display text-2xl mb-3">{leadership.primary.name}</h3>
-              <p className="text-sm text-dezo-text-secondary mb-6">{leadership.primary.bio}</p>
+          <div className="border border-dezo-border bg-dezo-surface p-8 mb-16 max-w-2xl">
+            <p className="text-[11px] uppercase tracking-[0.14em] text-dezo-primary mb-2">
+              {leadership.primary.role}
+            </p>
+            <h3 className="font-display text-2xl mb-3">{leadership.primary.name}</h3>
+            <p className="text-sm text-dezo-text-secondary mb-6">{leadership.primary.bio}</p>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
               <a
                 href={leadership.primary.profile}
                 target="_blank"
@@ -91,15 +99,13 @@ export default function AboutPage() {
               >
                 tarikislam.in <ArrowUpRight size={14} />
               </a>
-            </article>
-            <article className="p-8 bg-dezo-bg">
-              <p className="text-[11px] uppercase tracking-[0.14em] text-dezo-text-muted mb-2">
-                {leadership.partner.role}
-              </p>
-              <h3 className="font-display text-2xl mb-3">{leadership.partner.name}</h3>
-              <p className="text-sm text-dezo-text-secondary mb-6">{leadership.partner.bio}</p>
-              <p className="font-mono text-sm text-dezo-text-muted">{leadership.partner.email}</p>
-            </article>
+              <a
+                href={`mailto:${contact.supportEmail}`}
+                className="font-mono text-sm text-dezo-text-muted hover:text-dezo-primary"
+              >
+                {contact.supportEmail}
+              </a>
+            </div>
           </div>
 
           <div className="p-10 sm:p-14 border border-dezo-border bg-dezo-surface text-center">

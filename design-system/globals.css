@@ -177,9 +177,28 @@ body {
 }
 
 /*
-  Hero paper field — solid under DEZO type, then a soft feather so the
-  showcase reel stays open on the right (no harsh vertical wipe).
+  Full-bleed cinema film grade — keeps type readable over the reel
+  without cream paper wash or floating chips.
 */
+.dezo-hero-film {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(11, 11, 10, 0.55) 0%,
+      rgba(11, 11, 10, 0.2) 38%,
+      rgba(11, 11, 10, 0.55) 68%,
+      rgba(11, 11, 10, 0.88) 100%
+    ),
+    linear-gradient(
+      105deg,
+      rgba(11, 11, 10, 0.72) 0%,
+      rgba(11, 11, 10, 0.35) 42%,
+      rgba(11, 11, 10, 0.15) 70%,
+      transparent 100%
+    );
+}
+
+/* Legacy atmosphere kept for service banners that still reference it */
 .dezo-hero-atmosphere {
   background:
     linear-gradient(180deg, #F5F3EE 0%, #F5F3EE 4.75rem, transparent 7.5rem),
@@ -194,11 +213,6 @@ body {
       rgba(11, 11, 10, 0.2) 100%
     );
 }
-/*
-  Mobile uses a stacked cinema layout (sharp reel stage + solid type below),
-  so the atmosphere wash is lg-only. Keep a soft fallback for mid breakpoints
-  that still overlay (sm–md) until lg takes over absolute media.
-*/
 @media (max-width: 1023px) {
   .dezo-hero-atmosphere {
     background:

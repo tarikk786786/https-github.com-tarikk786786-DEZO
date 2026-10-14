@@ -13,7 +13,6 @@ import {
   DezoReveal,
   DezoStagger,
   DezoStaggerItem,
-  DezoHeroMotion,
   DezoImageReveal,
   DezoScrollProgress,
   DezoMagnetic,
@@ -21,10 +20,10 @@ import {
 import { PromiseHomeTeaser } from '@/components/promise/PromiseGuaranteeSystem';
 import { CTASection, StatementBanner } from '@/components/dezo/visual';
 import { DezoHeroMedia } from '@/components/dezo/DezoHeroMedia';
-import { DezoHeroChapters } from '@/components/dezo/DezoHeroChapters';
 import { DezoHeroText } from '@/components/dezo/DezoHeroText';
-import { HeroShowcaseProvider } from '@/components/dezo/HeroShowcaseContext';
 import { finalCtaBanner, heroBanner, statementBanners } from '@/content/banners';
+import { motion } from 'motion/react';
+import { useReducedMotion } from '@/lib/motion/useReducedMotion';
 import {
   brand,
   serviceRows,
@@ -43,6 +42,7 @@ export default function HomePage() {
   const featured = featuredCaseStudies.slice(0, 3);
   const [hoveredService, setHoveredService] = useState<string | null>(null);
   const [activeGoal, setActiveGoal] = useState(0);
+  const reducedMotion = useReducedMotion();
 
   const trustHosts = [
     'yasanabeautyrituals.in',
@@ -103,92 +103,69 @@ export default function HomePage() {
       <DezoScrollProgress />
 
       {/*
-        Hero — editorial split: solid type panel + sharp cinema plane.
-        Three-line BUILD / MARKET / GROW reveal (not single-word rotator).
-        See docs/hero-marketing-motion.md
+        Hero — full-bleed cinema impact.
+        Media shoots in; brand slams; BUILD / MARKET / GROW streak.
+        No root DezoHeroMotion / chapter ticker. See docs/hero-marketing-motion.md
       */}
-      <section className="relative overflow-hidden bg-dezo-bg-warm">
-        <HeroShowcaseProvider>
-          <DezoHeroMotion className="flex min-h-[100svh] flex-col lg:grid lg:grid-cols-12 lg:min-h-[100svh]">
-            {/* Media — stacked on mobile; sharp right plane on desktop (no cream wash) */}
-            <div
-              className="relative h-[46vh] min-h-[280px] w-full shrink-0 overflow-hidden sm:h-[48vh] lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:h-auto lg:min-h-[100svh]"
-              aria-hidden
+      <section className="relative min-h-[100svh] overflow-hidden bg-dezo-ink">
+        <DezoHeroMedia />
+        <div
+          className="pointer-events-none absolute inset-0 dezo-hero-film"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 dezo-hero-grain opacity-[0.07] mix-blend-overlay"
+          aria-hidden
+        />
+
+        <div className="relative z-10 flex min-h-[100svh] flex-col justify-end pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-28 sm:justify-center sm:pb-20 sm:pt-32">
+          <DezoContainer size="wide" className="w-full">
+            <DezoHeroText
+              brandName={brand.name}
+              eyebrow={heroBanner.eyebrow ?? brand.companyLabel}
+              body={heroBanner.body ?? brand.supporting}
+            />
+
+            <motion.div
+              className="mt-7 sm:mt-9 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3"
+              initial={reducedMotion ? false : { opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
-              <DezoHeroMedia />
-              <div className="absolute inset-0 dezo-hero-grain pointer-events-none opacity-[0.03] mix-blend-multiply hidden lg:block" />
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-dezo-bg-warm via-dezo-bg-warm/50 to-transparent lg:hidden" />
-              {/* Soft edge only where panel meets media */}
-              <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-dezo-bg-warm/40 to-transparent hidden lg:block" />
-            </div>
-
-            {/* Type panel — solid paper, brand-first manifesto */}
-            <div className="relative z-10 flex flex-1 flex-col justify-start overflow-hidden bg-dezo-bg-warm lg:col-span-5 lg:col-start-1 lg:row-start-1 lg:min-h-[100svh] lg:justify-center lg:border-r lg:border-dezo-border/50">
-              <DezoContainer size="wide" className="w-full pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:pt-8 sm:pb-14 lg:max-w-none lg:px-10 xl:px-14 lg:pt-28 lg:pb-16">
-                <DezoHeroText
-                  brandName={brand.name}
-                  eyebrow={heroBanner.eyebrow ?? brand.companyLabel}
-                  body={heroBanner.body ?? brand.supporting}
-                />
-
-                <div
-                  data-hero-item
-                  className="mt-6 sm:mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3"
+              <DezoMagnetic>
+                <DezoButton
+                  href={heroBanner.primaryCta?.href ?? '/start-a-project'}
+                  size="lg"
+                  magnetic
+                  className="w-full sm:w-auto justify-center !bg-dezo-primary !border-dezo-primary !text-dezo-ink hover:!bg-dezo-primary-hover"
+                  icon={<ArrowUpRight size={16} className="dezo-cta-arrow" />}
                 >
-                  <DezoMagnetic>
-                    <DezoButton
-                      href={heroBanner.primaryCta?.href ?? '/start-a-project'}
-                      size="lg"
-                      magnetic
-                      className="w-full sm:w-auto justify-center"
-                      icon={<ArrowUpRight size={16} className="dezo-cta-arrow" />}
-                    >
-                      {heroBanner.primaryCta?.label ?? 'Start a Project'}
-                    </DezoButton>
-                  </DezoMagnetic>
-                  <DezoMagnetic strength={0.14}>
-                    <DezoButton
-                      href={heroBanner.secondaryCta?.href ?? '/work'}
-                      variant="outline"
-                      size="lg"
-                      magnetic
-                      className="w-full sm:w-auto justify-center"
-                    >
-                      {heroBanner.secondaryCta?.label ?? 'View Our Work'}
-                    </DezoButton>
-                  </DezoMagnetic>
-                </div>
-
-                <div
-                  data-hero-item
-                  className="mt-7 sm:mt-10 flex flex-col gap-3 border-t border-dezo-border/60 pt-4 max-w-md"
+                  {heroBanner.primaryCta?.label ?? 'Start a Project'}
+                </DezoButton>
+              </DezoMagnetic>
+              <DezoMagnetic strength={0.14}>
+                <DezoButton
+                  href={heroBanner.secondaryCta?.href ?? '/work'}
+                  variant="outline"
+                  size="lg"
+                  magnetic
+                  className="w-full sm:w-auto justify-center !border-white/45 !text-dezo-text-inverse hover:!bg-white/10 hover:!border-white/70"
                 >
-                  <p className="text-[11px] sm:text-xs text-dezo-text-muted tracking-wide">
-                    {heroBanner.meta ?? brand.studioLine}
-                  </p>
-                  {featured[0] && (
-                    <a
-                      href={featured[0].url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group inline-flex items-center gap-2 font-mono text-[11px] sm:text-xs text-dezo-text-secondary hover:text-dezo-primary transition-colors min-h-11 sm:min-h-0"
-                    >
-                      <span className="text-dezo-text-muted uppercase tracking-[0.12em]">
-                        Proof
-                      </span>
-                      <span className="text-dezo-border">·</span>
-                      <span>{featured[0].title}</span>
-                      <ArrowUpRight size={12} className="dezo-cta-arrow" />
-                    </a>
-                  )}
-                </div>
+                  {heroBanner.secondaryCta?.label ?? 'View Our Work'}
+                </DezoButton>
+              </DezoMagnetic>
+            </motion.div>
 
-                {/* Compact reel chapter status — not a dense grid */}
-                <DezoHeroChapters />
-              </DezoContainer>
-            </div>
-          </DezoHeroMotion>
-        </HeroShowcaseProvider>
+            <motion.p
+              className="mt-8 sm:mt-10 max-w-md text-[11px] sm:text-xs tracking-wide text-white/55"
+              initial={reducedMotion ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.05 }}
+            >
+              {heroBanner.meta ?? brand.studioLine}
+            </motion.p>
+          </DezoContainer>
+        </div>
       </section>
 
       {/* 03 Trust — animated host strip (proof after trailer) */}
@@ -582,23 +559,27 @@ export default function HomePage() {
               <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-text-muted mb-6">
                 Leadership
               </p>
-              {[leadership.primary, leadership.partner].map((person) => (
-                <div key={person.name} className="mb-8">
-                  <p className="font-display text-xl text-dezo-text-primary">{person.name}</p>
-                  <p className="text-sm text-dezo-primary mt-1">{person.role}</p>
-                  <p className="text-sm text-dezo-text-secondary mt-2 leading-relaxed">
-                    {person.bio}
-                  </p>
-                </div>
-              ))}
+              <div className="mb-8">
+                <p className="font-display text-xl text-dezo-text-primary">
+                  {leadership.primary.name}
+                </p>
+                <p className="text-sm text-dezo-primary mt-1">{leadership.primary.role}</p>
+                <p className="text-sm text-dezo-text-secondary mt-2 leading-relaxed">
+                  {leadership.primary.bio}
+                </p>
+              </div>
               <p className="text-sm text-dezo-text-muted mt-6">
                 {contact.address.street}, {contact.address.city}
                 <br />
                 {contact.phoneFormatted}
                 <br />
-                {contact.email}
+                <a href={`mailto:${contact.email}`} className="hover:text-dezo-primary">
+                  {contact.email}
+                </a>
                 <br />
-                {contact.supportEmail}
+                <a href={`mailto:${contact.supportEmail}`} className="hover:text-dezo-primary">
+                  {contact.supportEmail}
+                </a>
               </p>
             </div>
           </div>

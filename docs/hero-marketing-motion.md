@@ -1,6 +1,6 @@
 # DEZO — Marketing Hero Banner & Animation Spec
 
-Date: 2026-10-08  
+Date: 2026-10-14  
 Audience: prospects on first visit (conversion + brand authority)
 
 ## Job of the hero
@@ -10,57 +10,36 @@ In one viewport, a prospect should understand:
 1. **Who** — DEZO (hero-level brand)
 2. **What** — BUILD. MARKET. GROW.
 3. **Why now** — connected digital infrastructure, not fragmented freelancers
-4. **Proof** — real product stills + live work link
-5. **Next step** — Start a Project / View Our Work
-
-The reel is a **site trailer**, not decoration: chapters map to the product (Build → Studio).
+4. **Next step** — Start a Project / View Our Work
 
 ## Composition
 
 | Surface | Layout | Media |
 | --- | --- | --- |
-| Mobile | Stacked cinema: ~50vh sharp reel → solid paper type | Portrait MP4 (`dezo-hero-loop-mobile.mp4`) |
-| Desktop | Full-bleed reel under left paper feather | Landscape WebM + MP4 |
+| All | Full-bleed cinema plane + film grade + type | Landscape WebM/MP4; portrait MP4 on narrow |
 
-No overlays on media (no floating badges/chips). Chapter UI lives in the type column only.
+No split panels. No chapter ticker in the first viewport. No floating badges/chips on media.
 
 ## Animation information (shipping)
 
 | Beat | Mechanism | Timing / notes |
 | --- | --- | --- |
-| 1. Layout | Editorial split: type panel (5) + sharp media (7) | no cream wash over reel |
-| 2. Media settle | GSAP on `[data-hero-media]` | opacity 0→1, scale 1.04→1, ~1.2s |
-| 3. Brand clip rise | Motion y 115%→0 | ~0.85s |
-| 4. **Three-line manifesto** | BUILD / MARKET / GROW staggered clip | 0.28 + 0.12s each |
-| 5. Body rise | Motion y + opacity | after lines |
-| 6. CTA / proof / trailer | GSAP on `[data-hero-item]` | y stagger |
-| 7. Compact trailer | Reel-synced single chapter + progress | 8 chapters |
-| 8. Magnetic CTAs | spring (desktop hover) | disabled under reduced-motion |
+| 1. Media shoot | Motion scale 1.22→1 + opacity | ~1.35s power settle |
+| 2. Brand slam | Clip-rise y 120%→0 + slight scale | ~0.95s |
+| 3. Accent line | scaleX 0→1 gold bar | delay ~0.35s |
+| 4. Word shoot | BUILD / MARKET / GROW x + blur streak | stagger 0.1s |
+| 5. Body + CTAs | opacity / y rise | after words |
+| 6. Ken burns | CSS fallback when video blocked | poster only |
 
-**Reduced motion:** poster only, no reel, no ken burns, no chapter pulse; chapters freeze at index 0 (or interval off).
-
-**Fallback:** if autoplay blocked, interval walks chapters using known reel durations so the marketing ticker still educates.
-
-## Chapter map (prospect language)
-
-| # | Label | Hint | Route |
-| --- | --- | --- | --- |
-| 01 | Build | Websites & commerce that convert | `/services/web-development` |
-| 02 | Market | Amazon, Flipkart & storefronts | `/services/amazon` |
-| 03 | Grow | SEO, ads & measurement | `/services/seo` |
-| 04 | Work | Live proof, not mockups | `/work` |
-| 05 | Engine | One connected growth system | `/#engine` |
-| 06 | Lab | Free diagnostics for your site | `/growth-lab` |
-| 07 | Standard | Guarantees we control | `/promise` |
-| 08 | Studio | Bhubaneswar · deliver India-wide | `/locations/bhubaneswar` |
+**Reduced motion:** poster only, no reel, no ken burns, static type.
 
 ## Content source
 
-Homepage hero copy/CTAs read from `content/banners.ts` → `heroBanner` so marketing can iterate without hunting JSX.
+Homepage hero copy/CTAs read from `content/banners.ts` → `heroBanner`.
 
 ## Do not
 
-- Reintroduce washed cream overlay on mobile
-- Put stats, schedule, or promo chips in the first viewport
+- Reintroduce editorial split / cream paper panel over reel
+- Put chapter ticker, stats, or promo chips in the first viewport
 - Neon / HUD / fake metrics
-- Client website chrome in reel frames
+- Root `DezoHeroMotion` GSAP on the homepage hero (entrance lives in hero components)

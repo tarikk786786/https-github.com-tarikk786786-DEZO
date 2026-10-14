@@ -4,15 +4,11 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { useReducedMotion } from '@/lib/motion/useReducedMotion';
 
-const LINES = [
-  { word: 'BUILD', hint: 'Web · brand · commerce' },
-  { word: 'MARKET', hint: 'Amazon · Flipkart · storefronts' },
-  { word: 'GROW', hint: 'SEO · ads · measurement' },
-] as const;
+const WORDS = ['BUILD', 'MARKET', 'GROW'] as const;
 
 /**
- * Editorial split hero type — three-line manifesto reveal.
- * Distinct from the prior single-word rotator.
+ * Full-bleed cinema type — brand slam + word-shoot manifesto.
+ * No root GSAP wrapper; entrance lives here.
  */
 export function DezoHeroText({
   brandName,
@@ -26,49 +22,62 @@ export function DezoHeroText({
   const reduced = useReducedMotion();
 
   return (
-    <div className="w-full max-w-[32rem] lg:max-w-none">
+    <div className="w-full max-w-3xl text-dezo-text-inverse">
       <motion.p
-        className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.2em] text-dezo-primary mb-3 sm:mb-4"
-        initial={reduced ? false : { opacity: 0, y: 12 }}
+        className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.22em] text-dezo-primary mb-4 sm:mb-5"
+        initial={reduced ? false : { opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       >
         {eyebrow}
       </motion.p>
 
+      {/* Brand slam — oversized, clip-rise with overshoot settle */}
       <div className="overflow-hidden">
         <motion.p
-          className="font-display text-[2.75rem] leading-[0.92] tracking-tight text-dezo-text-primary sm:text-6xl lg:text-[4.75rem]"
-          initial={reduced ? false : { y: '115%' }}
-          animate={{ y: '0%' }}
-          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+          className="font-display text-[4.25rem] leading-[0.86] tracking-tightest text-dezo-text-inverse sm:text-7xl md:text-8xl lg:text-[7.5rem]"
+          initial={reduced ? false : { y: '120%', scale: 1.08 }}
+          animate={{ y: '0%', scale: 1 }}
+          transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
         >
           {brandName}
         </motion.p>
       </div>
 
-      <h1 className="mt-5 sm:mt-7 lg:mt-9">
+      {/* Accent shoot-line */}
+      <motion.div
+        className="mt-5 sm:mt-6 h-[2px] origin-left bg-dezo-primary"
+        aria-hidden
+        initial={reduced ? false : { scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        style={{ width: 'min(12rem, 40%)' }}
+      />
+
+      <h1 className="mt-6 sm:mt-8">
         <span className="sr-only">BUILD. MARKET. GROW.</span>
-        <span className="flex flex-col gap-2.5 sm:gap-3.5" aria-hidden>
-          {LINES.map((line, i) => (
-            <span key={line.word} className="overflow-hidden block">
+        <span
+          className="flex flex-wrap items-baseline gap-x-3 gap-y-2 sm:gap-x-4"
+          aria-hidden
+        >
+          {WORDS.map((word, i) => (
+            <span key={word} className="overflow-hidden inline-block">
               <motion.span
-                className="block"
-                initial={reduced ? false : { y: '120%', opacity: 0 }}
-                animate={{ y: '0%', opacity: 1 }}
+                className="inline-block font-display text-[1.65rem] sm:text-3xl lg:text-[2.75rem] tracking-tightest uppercase leading-none"
+                initial={
+                  reduced
+                    ? false
+                    : { x: -48, opacity: 0, filter: 'blur(8px)' }
+                }
+                animate={{ x: 0, opacity: 1, filter: 'blur(0px)' }}
                 transition={{
-                  duration: 0.7,
-                  delay: 0.28 + i * 0.12,
+                  duration: 0.55,
+                  delay: 0.42 + i * 0.1,
                   ease: [0.16, 1, 0.3, 1],
                 }}
               >
-                <span className="font-display text-[1.55rem] sm:text-3xl lg:text-[2.65rem] tracking-tightest leading-none uppercase text-dezo-text-primary">
-                  {line.word}
-                  <span className="text-dezo-primary">.</span>
-                </span>
-                <span className="mt-1 block font-mono text-[10px] sm:text-[11px] tracking-[0.08em] text-dezo-text-muted">
-                  {line.hint}
-                </span>
+                {word}
+                <span className="text-dezo-primary">.</span>
               </motion.span>
             </span>
           ))}
@@ -76,10 +85,10 @@ export function DezoHeroText({
       </h1>
 
       <motion.p
-        className="mt-5 sm:mt-7 text-[0.95rem] sm:text-lg text-dezo-text-secondary leading-relaxed max-w-md"
-        initial={reduced ? false : { opacity: 0, y: 16 }}
+        className="mt-5 sm:mt-7 text-base sm:text-lg text-white/78 leading-relaxed max-w-md"
+        initial={reduced ? false : { opacity: 0, y: 22 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.65, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.55, delay: 0.78, ease: [0.22, 1, 0.36, 1] }}
       >
         {body}
       </motion.p>

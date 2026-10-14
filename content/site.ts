@@ -63,12 +63,6 @@ export const leadership = {
     email: 'princetarikislam@gmail.com',
     profile: 'https://tarikislam.in',
   },
-  partner: {
-    name: 'Rohan Dinkar Sanap',
-    role: 'Commercial Partner',
-    bio: 'Partners on client relationships, brand positioning, and performance campaign architecture alongside studio leadership.',
-    email: 'contact@dezo.in',
-  },
 } as const;
 
 /** Five-category capability map for homepage */

@@ -11,10 +11,7 @@ export const siteConfig = {
   phoneFormatted: contact.phoneFormatted,
   email: contact.email,
   address: contact.address,
-  founders: [
-    { name: leadership.primary.name, role: leadership.primary.role },
-    { name: leadership.partner.name, role: leadership.partner.role },
-  ],
+  founders: [{ name: leadership.primary.name, role: leadership.primary.role }],
 };
 
 export function constructMetadata({
@@ -70,6 +67,17 @@ export function constructMetadata({
     authors: [{ name: 'DEZO', url: siteConfig.url }],
     creator: 'DEZO',
     metadataBase: new URL(siteConfig.url),
+    icons: {
+      icon: [
+        { url: '/favicon.ico', sizes: 'any' },
+        { url: '/favicon.svg', type: 'image/svg+xml' },
+        { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+        { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      ],
+      apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+      shortcut: ['/favicon.ico'],
+    },
+    manifest: '/site.webmanifest',
     alternates: {
       canonical: canonicalUrl || siteConfig.url,
     },

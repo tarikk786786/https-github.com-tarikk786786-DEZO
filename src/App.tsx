@@ -645,24 +645,20 @@ export default function App() {
                   
                   <div className="space-y-8">
                     <div>
-                      <h4 className="text-xs font-bold text-main-dark uppercase tracking-[0.2em] mb-2 opacity-50">CEO</h4>
-                      <p className="text-xl font-black text-[var(--primary)]">Rohan Dinkar Sanap</p>
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-bold text-main-dark uppercase tracking-[0.2em] mb-2 opacity-50">Director</h4>
+                      <h4 className="text-xs font-bold text-main-dark uppercase tracking-[0.2em] mb-2 opacity-50">Founder & CEO</h4>
                       <p className="text-xl font-black text-[var(--primary)]">Tarik Islam</p>
                     </div>
                     <div>
                       <h4 className="text-xs font-bold text-main-dark uppercase tracking-[0.2em] mb-2 opacity-50">Contact Info</h4>
                       <div className="flex flex-col gap-2">
                         <a href="tel:+919114411026" className="text-main-dark font-bold hover:text-[var(--accent)] smooth-transition flex items-center gap-2">
-                          <Phone size={16} /> +91 77870 63088
-                        </a>
-                        <a href="mailto:princetarikislam@gmail.com" className="text-main-dark font-bold hover:text-[var(--accent)] smooth-transition flex items-center gap-2">
-                          <MessageSquare size={16} /> princetarikislam@gmail.com
+                          <Phone size={16} /> +91 9114411026
                         </a>
                         <a href="mailto:contact@dezo.in" className="text-main-dark font-bold hover:text-[var(--accent)] smooth-transition flex items-center gap-2">
                           <MessageSquare size={16} /> contact@dezo.in
+                        </a>
+                        <a href="mailto:support@dezo.in" className="text-main-dark font-bold hover:text-[var(--accent)] smooth-transition flex items-center gap-2">
+                          <MessageSquare size={16} /> support@dezo.in
                         </a>
                       </div>
                     </div>

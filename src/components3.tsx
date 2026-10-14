@@ -373,7 +373,7 @@ export const IndustriesTestimonialsSections = () => {
               },
               {
                 text: "We hired DEZO for Google Ads management and landing page design. The conversion rate skyrocketed from 2% to 8%. Absolutely premium quality work.",
-                author: "Rohan K.",
+                author: "Arjun K.",
                 role: "B2B SaaS CEO"
               }
             ].map((testimonial, i) => (

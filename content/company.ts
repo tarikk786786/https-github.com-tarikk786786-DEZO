@@ -23,12 +23,6 @@ export const company = {
       email: siteLeadership.primary.email,
       profile: siteLeadership.primary.profile,
     },
-    {
-      name: siteLeadership.partner.name,
-      role: siteLeadership.partner.role,
-      bio: siteLeadership.partner.bio,
-      email: siteLeadership.partner.email,
-    },
   ],
   /** Derived — safe to display */
   get liveDeployments() {

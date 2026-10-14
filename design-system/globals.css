@@ -1,0 +1,306 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-serif), Georgia, 'Times New Roman', serif;
+  --font-mono: var(--font-code), ui-monospace, monospace;
+
+  --bg-dezo: #f5f3ee;
+  --surface-dezo: #ffffff;
+  --border-dezo: rgba(11, 11, 10, 0.1);
+  --primary-dezo: #b08d57;
+  --accent-dezo: #b08d57;
+  --ink-dezo: #0b0b0a;
+}
+
+html {
+  background-color: var(--bg-dezo);
+  color: var(--ink-dezo);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-dezo);
+}
+
+::selection {
+  background-color: #b08d57;
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid #b08d57;
+  outline-offset: 3px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #efece5;
+}
+::-webkit-scrollbar-thumb {
+  background: #c8c4bb;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b08d57;
+}
+
+.dezo-section-rule {
+  height: 1px;
+  background: rgba(11, 11, 10, 0.1);
+}
+
+.dezo-accent-line {
+  display: block;
+  width: 2rem;
+  height: 1.5px;
+  background: #b08d57;
+}
+
+.dezo-card-lift {
+  transition:
+    transform 0.3s ease,
+    border-color 0.25s ease;
+}
+.dezo-card-lift:hover {
+  transform: translateY(-2px);
+  border-color: rgba(176, 141, 87, 0.4);
+}
+
+.dezo-nav-link {
+  position: relative;
+}
+.dezo-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.dezo-nav-link:hover::after,
+.dezo-nav-link[data-active='true']::after {
+  transform: scaleX(1);
+}
+
+.dezo-img-zoom {
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.group:hover .dezo-img-zoom,
+.dezo-img-zoom:hover {
+  transform: scale(1.045);
+}
+
+.dezo-service-row {
+  transition:
+    background-color 0.35s ease,
+    padding 0.35s ease;
+}
+.dezo-service-row:hover {
+  background-color: rgba(245, 243, 238, 0.7);
+}
+
+.dezo-engine-node {
+  transition:
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+}
+.dezo-engine-node:hover,
+.dezo-engine-node[data-active='true'] {
+  border-color: rgba(11, 11, 10, 0.35);
+}
+@media (max-width: 1023px) {
+  .dezo-engine-node:hover,
+  .dezo-engine-node[data-active='true'] {
+    transform: translateX(4px);
+  }
+}
+
+.dezo-trust-marquee {
+  display: flex;
+  width: max-content;
+  gap: 2.5rem;
+  animation: dezo-marquee 42s linear infinite;
+}
+.dezo-trust-marquee:hover {
+  animation-play-state: paused;
+}
+@keyframes dezo-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.dezo-atmosphere {
+  animation: dezo-atmosphere-drift 14s ease-in-out infinite alternate;
+}
+@keyframes dezo-atmosphere-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate3d(-1.5%, 1%, 0) scale(1.03);
+    opacity: 0.92;
+  }
+}
+
+/* Slow cinematic ken burns on real hero proof media */
+.dezo-hero-kenburns {
+  animation: dezo-kenburns 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes dezo-kenburns {
+  from {
+    transform: scale(1.03) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.07) translate3d(-1.2%, -0.8%, 0);
+  }
+}
+
+/*
+  Full-bleed cinema film grade — keeps type readable over the reel
+  without cream paper wash or floating chips.
+*/
+.dezo-hero-film {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(11, 11, 10, 0.55) 0%,
+      rgba(11, 11, 10, 0.2) 38%,
+      rgba(11, 11, 10, 0.55) 68%,
+      rgba(11, 11, 10, 0.88) 100%
+    ),
+    linear-gradient(
+      105deg,
+      rgba(11, 11, 10, 0.72) 0%,
+      rgba(11, 11, 10, 0.35) 42%,
+      rgba(11, 11, 10, 0.15) 70%,
+      transparent 100%
+    );
+}
+
+/* Legacy atmosphere kept for service banners that still reference it */
+.dezo-hero-atmosphere {
+  background:
+    linear-gradient(180deg, #F5F3EE 0%, #F5F3EE 4.75rem, transparent 7.5rem),
+    linear-gradient(
+      92deg,
+      #F5F3EE 0%,
+      #F5F3EE 22%,
+      rgba(245, 243, 238, 0.88) 30%,
+      rgba(245, 243, 238, 0.28) 40%,
+      rgba(245, 243, 238, 0.04) 50%,
+      transparent 58%,
+      rgba(11, 11, 10, 0.2) 100%
+    );
+}
+@media (max-width: 1023px) {
+  .dezo-hero-atmosphere {
+    background:
+      linear-gradient(180deg, #F5F3EE 0%, #F5F3EE 4.5rem, transparent 7rem),
+      linear-gradient(
+        180deg,
+        rgba(245, 243, 238, 0.2) 0%,
+        rgba(245, 243, 238, 0.08) 40%,
+        rgba(245, 243, 238, 0.75) 70%,
+        #F5F3EE 88%
+      );
+  }
+}
+
+.dezo-hero-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* Marketing trailer — chapter progress + active pulse (synced via JS transform) */
+.dezo-hero-media-stage {
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+.dezo-hero-chapter-progress {
+  transform-origin: left center;
+  will-change: transform;
+}
+.dezo-hero-chapter-dot {
+  animation: dezo-hero-dot-pulse 1.4s ease-in-out infinite;
+}
+@keyframes dezo-hero-dot-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.7);
+  }
+}
+
+.dezo-cta-arrow {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .dezo-cta-arrow {
+  transform: translate(2px, -2px);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .dezo-card-lift:hover,
+  .group:hover .dezo-img-zoom,
+  .dezo-img-zoom:hover,
+  .dezo-engine-node:hover,
+  .dezo-engine-node[data-active='true'],
+  .group:hover .dezo-cta-arrow {
+    transform: none;
+  }
+  .dezo-trust-marquee,
+  .dezo-atmosphere,
+  .dezo-hero-kenburns,
+  .dezo-hero-chapter-dot {
+    animation: none !important;
+  }
+}

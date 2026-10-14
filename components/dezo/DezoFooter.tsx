@@ -15,12 +15,15 @@ export function DezoFooter() {
             <Link href="/">
               <span className="font-display text-3xl tracking-tight text-white">DEZO</span>
             </Link>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary">
+              {brand.companyLabel}
+            </p>
             <p className="text-sm text-white/60 leading-relaxed max-w-sm">
-              {brand.supporting}
+              {brand.launchLine} {brand.supporting}
             </p>
             <p className="text-xs text-white/40">{brand.geo}</p>
             <div className="text-xs pt-2">
-              <p className="text-white/35 uppercase tracking-widest mb-1">Leadership</p>
+              <p className="text-white/35 uppercase tracking-widest mb-1">Founding team</p>
               <p className="text-white/80 font-medium">
                 {leadership.primary.name} — {leadership.primary.role}
               </p>
@@ -32,7 +35,7 @@ export function DezoFooter() {
 
           <div className="lg:col-span-3">
             <h4 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40 mb-4">
-              Services
+              Product
             </h4>
             <ul className="flex flex-col gap-2.5 text-sm text-white/60">
               {serviceRows.map((s) => (
@@ -42,6 +45,16 @@ export function DezoFooter() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/growth-lab" className="hover:text-white">
+                  DEZO LAB
+                </Link>
+              </li>
+              <li>
+                <Link href="/pricing" className="hover:text-white">
+                  Pricing
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -56,21 +69,6 @@ export function DezoFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/locations/bhubaneswar" className="hover:text-white">
-                  Bhubaneswar
-                </Link>
-              </li>
-              <li>
-                <Link href="/locations/odisha" className="hover:text-white">
-                  Odisha
-                </Link>
-              </li>
-              <li>
-                <Link href="/growth-lab" className="hover:text-white">
-                  DEZO LAB
-                </Link>
-              </li>
-              <li>
                 <Link href="/about" className="hover:text-white">
                   About
                 </Link>
@@ -81,8 +79,18 @@ export function DezoFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/locations/bhubaneswar" className="hover:text-white">
+                  Bhubaneswar
+                </Link>
+              </li>
+              <li>
                 <Link href="/contact" className="hover:text-white">
                   Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/start-a-project" className="hover:text-white">
+                  Get started
                 </Link>
               </li>
             </ul>
@@ -120,7 +128,7 @@ export function DezoFooter() {
 
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/35">
           <div className="flex flex-wrap gap-5">
-            <p>© {year} DEZO.in</p>
+            <p>© {year} DEZO · Founding studio, India</p>
             <Link href="/privacy" className="hover:text-white">
               Privacy
             </Link>

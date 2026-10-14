@@ -10,15 +10,38 @@ export const brand = {
   tagline: 'Digital infrastructure for ambitious businesses.',
   heroLine: 'Digital infrastructure for ambitious businesses.',
   supporting:
-    'Websites, ecommerce, marketplaces, advertising, SEO, social and brand systems—built to work together.',
+    'Websites, ecommerce, marketplaces, advertising, SEO, social and brand—connected into one commercial system.',
   tag: 'BUILD. MARKET. GROW.',
-  companyLabel: 'Digital growth company',
-  geo: 'Based in India. Built for businesses everywhere.',
-  studioLine: 'Studio in Bhubaneswar, Odisha · Delivery across India',
+  companyLabel: 'Introducing DEZO',
+  geo: 'Founded in India. Built for businesses everywhere.',
+  studioLine: 'Founding studio · Bhubaneswar, Odisha · Delivery across India',
   positioning:
     'Digital commerce, brand, marketplace and growth company',
   onePartner: 'ONE PARTNER. EVERY DIGITAL TOUCHPOINT.',
+  launchLine: 'A new growth company for brands ready to sell seriously.',
+  thesis:
+    'Most businesses assemble freelancers and agencies in pieces. DEZO ships the full stack—web, marketplaces, ads, SEO and brand—as one operating system.',
 } as const;
+
+/** Public engagement packages — exact rates after diagnostic */
+export const engagementPlans = [
+  {
+    name: 'START',
+    blurb: 'Foundation website or storefront, brand basics, and launch checklist.',
+  },
+  {
+    name: 'GROW',
+    blurb: 'Build plus SEO, ads, or marketplace focus — monthly operating cadence.',
+  },
+  {
+    name: 'SCALE',
+    blurb: 'Full stack: brand, web, marketplaces, paid media, social, reporting.',
+  },
+  {
+    name: 'CUSTOM',
+    blurb: 'Assemble your own stack — strategy call and scoped estimate.',
+  },
+] as const;
 
 /**
  * Single source of truth for company facts.

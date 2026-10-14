@@ -30,8 +30,11 @@ export function constructMetadata({
   canonicalUrl?: string;
   noIndex?: boolean;
 } = {}): Metadata {
-  // Avoid "Title — DEZO | DEZO" when callers already bake the brand into title
-  const cleaned = title?.replace(/\s*[—|-]\s*DEZO\s*$/i, '').trim();
+  // Avoid "About DEZO | DEZO" / "Title — DEZO | DEZO" when brand is already in title
+  const cleaned = title
+    ?.replace(/\s*[—|-]\s*DEZO\s*$/i, '')
+    .replace(/\s+DEZO\s*$/i, '')
+    .trim();
   const metaTitle = cleaned
     ? `${cleaned} | DEZO`
     : 'DEZO | BUILD. MARKET. GROW. — Digital infrastructure for ambitious businesses';

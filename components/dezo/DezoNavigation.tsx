@@ -125,17 +125,14 @@ export function DezoNavigation() {
               </div>
             </div>
 
-            <Link href="/solutions" className={linkClass('/solutions')}>
-              Solutions
-            </Link>
             <Link href="/work" className={linkClass('/work')}>
               Work
             </Link>
             <Link href="/growth-lab" className={linkClass('/growth-lab')}>
               Lab
             </Link>
-            <Link href="/resources" className={linkClass('/resources')}>
-              Insights
+            <Link href="/pricing" className={linkClass('/pricing')}>
+              Pricing
             </Link>
             <Link href="/about" className={linkClass('/about')}>
               About
@@ -150,7 +147,7 @@ export function DezoNavigation() {
               Standard
             </Link>
             <DezoButton href="/start-a-project" size="sm">
-              Start a Project
+              Get started
             </DezoButton>
           </div>
 
@@ -174,10 +171,9 @@ export function DezoNavigation() {
         <div className="flex flex-col gap-5">
           {[
             ['Services', '/services'],
-            ['Solutions', '/solutions'],
             ['Work', '/work'],
             ['Lab', '/growth-lab'],
-            ['Insights', '/resources'],
+            ['Pricing', '/pricing'],
             ['About', '/about'],
             ['DEZO Standard', '/promise'],
             ['Contact', '/contact'],
@@ -189,7 +185,7 @@ export function DezoNavigation() {
         </div>
         <div className="mt-auto pt-8">
           <DezoButton href="/start-a-project" size="lg" className="w-full">
-            Start a Project
+            Get started
           </DezoButton>
         </div>
       </div>

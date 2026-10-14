@@ -37,9 +37,9 @@ export interface ChapterBannerData extends BannerBase {
 
 export const heroBanner: BannerBase = {
   id: 'hero-home',
-  eyebrow: 'Digital growth company',
+  eyebrow: 'Introducing DEZO',
   title: 'BUILD. MARKET. GROW.',
-  body: 'Websites, ecommerce, marketplaces, advertising, SEO, social and brand—connected into one commercial system for businesses ready to scale.',
+  body: 'A new growth company that connects websites, marketplaces, advertising, SEO and brand into one commercial system—for businesses ready to scale.',
   tone: 'warm',
   media: {
     kind: 'video',
@@ -48,13 +48,13 @@ export const heroBanner: BannerBase = {
     alt: 'DEZO site trailer — Build, Market, Grow chapters with live project proof',
   },
   primaryCta: { label: 'Start a Project', href: '/start-a-project', variant: 'primary' },
-  secondaryCta: { label: 'View Our Work', href: '/work', variant: 'outline' },
-  meta: 'Studio in Bhubaneswar, Odisha · Delivery across India',
+  secondaryCta: { label: 'See the product', href: '/#engine', variant: 'outline' },
+  meta: 'Founding studio · Bhubaneswar, Odisha · Delivery across India',
 };
 
 export const servicesIndexBanner: BannerBase = {
   id: 'banner-services-index',
-  eyebrow: 'Services',
+  eyebrow: 'Product · Services',
   title: 'Capabilities across the full commercial stack',
   body: 'Web, performance marketing, marketplaces, SEO, and brand — delivered as one partner, not five disconnected vendors.',
   tone: 'warm',
@@ -238,6 +238,13 @@ export const chapterBanners: ChapterBannerData[] = [
 
 export const statementBanners: BannerBase[] = [
   {
+    id: 'statement-launch',
+    eyebrow: 'Why we exist',
+    title: 'ONE PARTNER. EVERY DIGITAL TOUCHPOINT.',
+    body: 'Most businesses assemble freelancers and agencies in pieces. DEZO ships the full stack—web, marketplaces, ads, SEO and brand—as one operating system.',
+    tone: 'paper',
+  },
+  {
     id: 'statement-one-partner',
     title: 'ONE PARTNER. EVERY DIGITAL TOUCHPOINT.',
     body: 'Your website, search, advertising, social and marketplace operations should not work in isolation.',
@@ -334,11 +341,12 @@ export const locationBanners = {
 
 export const finalCtaBanner: BannerBase = {
   id: 'banner-final-cta',
-  title: 'Have a business to build or grow?',
-  body: "Tell us what you're building, what isn't working and where you want to go next.",
+  eyebrow: 'Get started with DEZO',
+  title: 'Ready to build or grow?',
+  body: "Tell us what you're launching, what isn't working, and where you want to go next. We'll reply with a clear next step.",
   tone: 'paper',
   primaryCta: { label: 'Start a Project', href: '/start-a-project', variant: 'primary' },
-  secondaryCta: { label: 'Request a Growth Audit', href: '/growth-lab', variant: 'outline' },
+  secondaryCta: { label: 'Free site check', href: '/growth-lab', variant: 'outline' },
 };
 
 export const ogTemplates = {

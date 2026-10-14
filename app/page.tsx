@@ -19,12 +19,12 @@ import {
   DezoMagnetic,
 } from '@/lib/motion/MotionAdapter';
 import { PromiseHomeTeaser } from '@/components/promise/PromiseGuaranteeSystem';
-import { CTASection } from '@/components/dezo/visual';
+import { CTASection, StatementBanner } from '@/components/dezo/visual';
 import { DezoHeroMedia } from '@/components/dezo/DezoHeroMedia';
 import { DezoHeroChapters } from '@/components/dezo/DezoHeroChapters';
 import { DezoHeroText } from '@/components/dezo/DezoHeroText';
 import { HeroShowcaseProvider } from '@/components/dezo/HeroShowcaseContext';
-import { finalCtaBanner, heroBanner } from '@/content/banners';
+import { finalCtaBanner, heroBanner, statementBanners } from '@/content/banners';
 import {
   brand,
   serviceRows,
@@ -36,6 +36,7 @@ import {
   aboutHomePoints,
   faqItems,
   leadership,
+  engagementPlans,
 } from '@/content/site';
 export default function HomePage() {
   /** Homepage shows only image-led featured stories — full archive lives on /work */
@@ -199,9 +200,12 @@ export default function HomePage() {
       <DezoSection spacing="compact" className="border-y border-dezo-border bg-dezo-surface overflow-hidden">
         <DezoContainer size="wide">
           <div className="flex flex-col gap-4">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-text-muted">
-              Proof from the trailer · selected live sites
-            </p>
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-text-muted">
+                Live proof · selected production sites
+              </p>
+              <p className="text-[11px] text-dezo-text-muted tracking-wide">{brand.launchLine}</p>
+            </div>
             <div className="relative overflow-hidden">
               <div className="dezo-trust-marquee" aria-hidden>
                 {trustLoop.map((host, i) => (
@@ -219,22 +223,22 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* 04 One partner / touchpoints */}
+      {/* 04 Startup thesis */}
+      <StatementBanner data={statementBanners[0]} />
+
+      {/* Touchpoints */}
       <DezoSection spacing="normal">
         <DezoContainer size="wide">
           <DezoReveal>
-            <p className="font-display text-3xl sm:text-5xl lg:text-[3.5rem] tracking-tight leading-[1.15] text-dezo-text-primary max-w-4xl">
-              {brand.onePartner}
-            </p>
+            <DezoHeading
+              badge="The product"
+              as="h2"
+              subtitle="Five connected capabilities. One partner. No vendor stack."
+            >
+              What DEZO operates
+            </DezoHeading>
           </DezoReveal>
-          <DezoReveal delay={0.08}>
-            <p className="mt-6 text-base sm:text-lg text-dezo-text-secondary max-w-2xl leading-relaxed">
-              Your website, search visibility, advertising, social presence and marketplace
-              operations should not work in isolation. DEZO connects them into one commercial
-              system.
-            </p>
-          </DezoReveal>
-          <DezoStagger className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-0" stagger={0.05}>
+          <DezoStagger className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-0" stagger={0.05}>
             {touchpointPillars.map((pillar) => (
               <DezoStaggerItem key={pillar.name}>
                 <Link
@@ -254,7 +258,7 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* 05 DEZO Engine — signature system (before capability rows) */}
+      {/* 05 DEZO Engine — signature system */}
       <DezoSection
         id="engine"
         spacing="normal"
@@ -265,16 +269,16 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* Capabilities — editorial rows (single services pass) */}
+      {/* Capabilities — editorial rows */}
       <DezoSection spacing="normal" id="services">
         <DezoContainer size="wide">
           <DezoReveal>
             <DezoHeading
-              badge="Capabilities"
+              badge="Services"
               as="h2"
-              subtitle="One row per capability—linked to the full service."
+              subtitle="Clear offers for launch, growth and scale—linked to full service pages."
             >
-              What we deliver
+              How you can work with us
             </DezoHeading>
           </DezoReveal>
           <div className="mt-12 divide-y divide-dezo-border border-y border-dezo-border">
@@ -409,18 +413,18 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* Lab teaser — one invite; full toolkit lives on /growth-lab */}
+      {/* Lab — free product surface for prospects */}
       <DezoSection spacing="normal" className="bg-dezo-surface border-y border-dezo-border">
         <DezoContainer size="wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
             <div className="lg:col-span-7">
               <DezoReveal>
                 <DezoHeading
-                  badge="DEZO LAB"
+                  badge="Product · DEZO LAB"
                   as="h2"
-                  subtitle="Paste a URL. Get a practical score and clear next steps — free, no login."
+                  subtitle="Try the company before you hire it. Paste a URL—practical score and next steps, free, no login."
                 >
-                  Check your digital foundation
+                  Free diagnostics for your site
                 </DezoHeading>
               </DezoReveal>
             </div>
@@ -481,12 +485,16 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* 13 How we work */}
+      {/* How we work */}
       <DezoSection spacing="normal" className="bg-dezo-surface border-y border-dezo-border">
         <DezoContainer size="wide">
           <DezoReveal>
-            <DezoHeading badge="How we work" as="h2">
-              Discover → Optimize
+            <DezoHeading
+              badge="Operating model"
+              as="h2"
+              subtitle="A clear cadence from discovery to ongoing optimization."
+            >
+              How DEZO runs
             </DezoHeading>
           </DezoReveal>
           <DezoStagger className="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6" stagger={0.06}>
@@ -506,44 +514,61 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* 14 Industries */}
-      <DezoSection spacing="normal">
+      {/* Engagement packages — startup pricing clarity */}
+      <DezoSection spacing="normal" id="pricing">
         <DezoContainer size="wide">
-          <DezoReveal>
-            <DezoHeading
-              badge="Industries"
-              as="h2"
-              subtitle="Built for brands that need to sell—not just look premium."
-            >
-              Who we work with
-            </DezoHeading>
-          </DezoReveal>
-          <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3">
-            {industries.map((ind) => (
-              <li key={ind.href}>
-                <Link
-                  href={ind.href}
-                  className="text-base sm:text-lg text-dezo-text-secondary hover:text-dezo-primary transition-colors border-b border-transparent hover:border-dezo-primary pb-0.5"
-                >
-                  {ind.name}
-                </Link>
-              </li>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+            <DezoReveal>
+              <DezoHeading
+                badge="Pricing"
+                as="h2"
+                subtitle="Transparent packages. Exact rates after a short diagnostic—no vanity numbers."
+              >
+                Engagement models
+              </DezoHeading>
+            </DezoReveal>
+            <DezoButton href="/pricing" variant="outline" size="sm">
+              Full pricing
+            </DezoButton>
+          </div>
+          <DezoStagger
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-dezo-border border border-dezo-border"
+            stagger={0.05}
+          >
+            {engagementPlans.map((plan) => (
+              <DezoStaggerItem key={plan.name}>
+                <div className="h-full p-6 sm:p-8 bg-dezo-surface">
+                  <p className="font-display text-2xl text-dezo-text-primary mb-3">{plan.name}</p>
+                  <p className="text-sm text-dezo-text-secondary leading-relaxed">{plan.blurb}</p>
+                </div>
+              </DezoStaggerItem>
             ))}
-          </ul>
+          </DezoStagger>
+          <p className="mt-8 text-sm text-dezo-text-muted">
+            Built for{' '}
+            {industries
+              .slice(0, 5)
+              .map((i) => i.name)
+              .join(' · ')}
+            {industries.length > 5 ? ' · and more' : ''}.
+          </p>
         </DezoContainer>
       </DezoSection>
 
       {/* DEZO Standard */}
       <PromiseHomeTeaser />
 
-      {/* About / leadership */}
+      {/* Founding team */}
       <DezoSection spacing="normal">
         <DezoContainer size="wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-6">
-              <DezoHeading badge="About" as="h2">
-                Built for businesses that take their digital presence seriously
+              <DezoHeading badge="Founding team" as="h2">
+                A serious company for brands that sell
               </DezoHeading>
+              <p className="mt-5 text-base text-dezo-text-secondary leading-relaxed max-w-xl">
+                {brand.thesis}
+              </p>
               <div className="mt-10 space-y-6">
                 {aboutHomePoints.map((p) => (
                   <div key={p.title} className="border-t border-dezo-border pt-4">

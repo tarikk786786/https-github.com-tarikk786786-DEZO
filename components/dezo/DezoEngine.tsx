@@ -30,14 +30,14 @@ export function DezoEngine() {
     <div>
       <DezoReveal>
         <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary mb-3">
-          The DEZO Engine
+          Product · The DEZO Engine
         </p>
         <h2 className="font-display text-3xl sm:text-4xl lg:text-[3rem] tracking-tight text-dezo-text-primary mb-4 uppercase">
           Everything connected
         </h2>
         <p className="text-base text-dezo-text-secondary max-w-xl leading-relaxed mb-8">
           Brand → website → SEO &amp; ads → Amazon / Flipkart → conversion → analytics → scale.
-          One commercial system—not a stack of disconnected vendors.
+          The operating system behind every DEZO engagement—not a stack of disconnected vendors.
         </p>
         <p className="font-mono text-xs text-dezo-text-muted mb-10" aria-live="polite">
           Focus · {NODES[activeIndex].label}

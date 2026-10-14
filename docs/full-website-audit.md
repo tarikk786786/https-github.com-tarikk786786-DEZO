@@ -50,3 +50,7 @@ Scope: Marketing consistency, cinematic hero system, SEO, route health
 - No duplicated `| DEZO` in titles  
 - Lab has its own title/description  
 - Services page shows chapter media + capability index  
+
+## Startup launch polish (follow-on)
+
+Homepage reframed as a new-company showcase: Introducing DEZO → thesis → product (Engine/Lab) → proof → packages → founding team. Nav simplified (Work / Lab / Pricing / About). Pricing + About copy aligned to founding-studio voice. No invented metrics.

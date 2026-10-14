@@ -10,9 +10,9 @@ import { constructMetadata } from '@/lib/seo/metadata';
 import { brand, leadership, contact } from '@/content/site';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'About DEZO',
+  title: 'About',
   description:
-    'DEZO is a digital commerce, brand, marketplace and growth company founded by Tarik Islam in Bhubaneswar, Odisha.',
+    'Introducing DEZO — a new digital growth company founded in Bhubaneswar, Odisha by Tarik Islam.',
   canonicalUrl: 'https://dezo.in/about',
 });
 
@@ -23,24 +23,25 @@ export default function AboutPage() {
         <DezoContainer size="wide">
           <div className="max-w-3xl mb-10">
             <DezoHeading
-              badge="About"
+              badge="About · Introducing DEZO"
               as="h1"
-              subtitle={`${brand.positioning}. ${brand.geo}`}
+              subtitle={`${brand.launchLine} ${brand.geo}`}
             >
-              A serious company that handles digital business growth
+              A new growth company for brands that sell
             </DezoHeading>
           </div>
           <div className="dezo-section-rule mb-12" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
             <div className="lg:col-span-7 space-y-6 text-base text-dezo-text-secondary leading-relaxed">
+              <p>{brand.thesis}</p>
               <p>
                 DEZO builds and operates digital infrastructure for ambitious brands: storefronts,
                 brand systems, Amazon and Flipkart growth, and performance marketing — connected as
                 one commercial journey.
               </p>
               <p>
-                Based in Bhubaneswar, Odisha, we work with D2C brands, manufacturers, healthcare,
+                Founded in Bhubaneswar, Odisha, we work with D2C brands, manufacturers, healthcare,
                 education, and enterprise teams who need craftsmanship and measurable selling
                 systems.
               </p>

@@ -103,32 +103,28 @@ export default function HomePage() {
       <DezoScrollProgress />
 
       {/*
-        Hero — kinetic text stage (rotating BUILD/MARKET/GROW) + site trailer.
-        Mobile: stacked cinema. Desktop: full-bleed + paper feather.
+        Hero — editorial split: solid type panel + sharp cinema plane.
+        Three-line BUILD / MARKET / GROW reveal (not single-word rotator).
         See docs/hero-marketing-motion.md
       */}
       <section className="relative overflow-hidden bg-dezo-bg-warm">
         <HeroShowcaseProvider>
-          <DezoHeroMotion className="flex min-h-[100svh] flex-col lg:block">
-            {/* Media stage — tall edge-to-edge cinema on mobile; absolute full-bleed on lg+ */}
+          <DezoHeroMotion className="flex min-h-[100svh] flex-col lg:grid lg:grid-cols-12 lg:min-h-[100svh]">
+            {/* Media — stacked on mobile; sharp right plane on desktop (no cream wash) */}
             <div
-              className="relative h-[50vh] min-h-[300px] w-full shrink-0 overflow-hidden sm:h-[52vh] lg:absolute lg:inset-0 lg:h-auto lg:min-h-0"
+              className="relative h-[46vh] min-h-[280px] w-full shrink-0 overflow-hidden sm:h-[48vh] lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:h-auto lg:min-h-[100svh]"
               aria-hidden
             >
               <DezoHeroMedia />
-              {/* Desktop atmosphere only — mobile keeps the reel unwashed */}
-              <div
-                className="absolute inset-0 dezo-hero-atmosphere hidden lg:block"
-                data-hero-atmosphere
-              />
-              <div className="absolute inset-0 dezo-hero-grain pointer-events-none opacity-[0.025] mix-blend-multiply hidden lg:block" />
-              {/* Mobile: thin nav band only */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-dezo-bg-warm via-dezo-bg-warm/55 to-transparent lg:hidden" />
+              <div className="absolute inset-0 dezo-hero-grain pointer-events-none opacity-[0.03] mix-blend-multiply hidden lg:block" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-dezo-bg-warm via-dezo-bg-warm/50 to-transparent lg:hidden" />
+              {/* Soft edge only where panel meets media */}
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-dezo-bg-warm/40 to-transparent hidden lg:block" />
             </div>
 
-            {/* Type stack — kinetic brand + rotating pillars */}
-            <div className="relative z-10 flex flex-1 flex-col justify-start bg-dezo-bg-warm lg:min-h-[100svh] lg:justify-end lg:bg-transparent">
-              <DezoContainer size="wide" className="w-full pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:pt-8 sm:pb-16 lg:pt-32 lg:pb-20">
+            {/* Type panel — solid paper, brand-first manifesto */}
+            <div className="relative z-10 flex flex-1 flex-col justify-start overflow-hidden bg-dezo-bg-warm lg:col-span-5 lg:col-start-1 lg:row-start-1 lg:min-h-[100svh] lg:justify-center lg:border-r lg:border-dezo-border/50">
+              <DezoContainer size="wide" className="w-full pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:pt-8 sm:pb-14 lg:max-w-none lg:px-10 xl:px-14 lg:pt-28 lg:pb-16">
                 <DezoHeroText
                   brandName={brand.name}
                   eyebrow={heroBanner.eyebrow ?? brand.companyLabel}
@@ -137,7 +133,7 @@ export default function HomePage() {
 
                 <div
                   data-hero-item
-                  className="mt-5 sm:mt-9 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3 max-w-[36rem]"
+                  className="mt-6 sm:mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3"
                 >
                   <DezoMagnetic>
                     <DezoButton
@@ -163,13 +159,9 @@ export default function HomePage() {
                   </DezoMagnetic>
                 </div>
 
-                <div data-hero-item className="max-w-[36rem]">
-                  <DezoHeroChapters />
-                </div>
-
                 <div
                   data-hero-item
-                  className="mt-5 sm:mt-10 lg:mt-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 sm:gap-3 border-t border-dezo-border/60 pt-3.5 sm:pt-5 max-w-4xl"
+                  className="mt-7 sm:mt-10 flex flex-col gap-3 border-t border-dezo-border/60 pt-4 max-w-md"
                 >
                   <p className="text-[11px] sm:text-xs text-dezo-text-muted tracking-wide">
                     {heroBanner.meta ?? brand.studioLine}
@@ -190,6 +182,9 @@ export default function HomePage() {
                     </a>
                   )}
                 </div>
+
+                {/* Compact reel chapter status — not a dense grid */}
+                <DezoHeroChapters />
               </DezoContainer>
             </div>
           </DezoHeroMotion>

@@ -20,7 +20,7 @@ export function DezoCaseStudy({ project, className = '' }: DezoCaseStudyProps) {
       <article className="group relative flex flex-col justify-between h-full rounded-dezo-lg bg-dezo-surface border border-dezo-border p-5 sm:p-6 transition-colors duration-200 hover:border-dezo-primary/35">
         <div>
           <div className="relative w-full h-44 sm:h-52 mb-5 rounded-dezo-md overflow-hidden bg-dezo-bg-warm border border-dezo-border/60">
-            <WorkSitePreview url={project.url} title={project.title} pan="hover" />
+            <WorkSitePreview url={project.url} title={project.title} pan="auto" />
             {project.isLive && (
               <span className="absolute top-2.5 left-2.5 z-20 text-[10px] font-semibold uppercase tracking-wider bg-white/95 text-dezo-primary px-2 py-0.5 rounded-dezo-sm">
                 Live

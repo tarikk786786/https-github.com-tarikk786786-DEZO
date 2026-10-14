@@ -104,19 +104,19 @@ body {
 }
 
 /*
-  Work website “browse” pan — tall crop slides down on hover / auto loop.
-  Feels like scrolling a live site, not zooming a photo.
+  Work website “browse” pan — tall crop scrolls like a live site.
+  Auto loop is always-on so the change is obvious without hover.
 */
 .dezo-work-site-pan {
   transform: translate3d(0, 0, 0);
-  transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 2.2s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
 }
 .group:hover .dezo-work-site-pan {
-  transform: translate3d(0, -18%, 0);
+  transform: translate3d(0, -28%, 0);
 }
 .dezo-work-site-pan-auto {
-  animation: dezo-work-site-browse 9s ease-in-out infinite alternate;
+  animation: dezo-work-site-browse 6.5s ease-in-out infinite alternate;
   will-change: transform;
 }
 @keyframes dezo-work-site-browse {
@@ -124,7 +124,7 @@ body {
     transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translate3d(0, -22%, 0);
+    transform: translate3d(0, -32%, 0);
   }
 }
 

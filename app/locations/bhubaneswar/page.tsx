@@ -101,6 +101,9 @@ export default function BhubaneswarLocationPage() {
               <p className="text-sm text-dezo-text-secondary mt-1">
                 <a href={`mailto:${contact.email}`}>{contact.email}</a>
               </p>
+              <p className="text-sm text-dezo-text-secondary mt-1">
+                <a href={`mailto:${contact.supportEmail}`}>{contact.supportEmail}</a>
+              </p>
               <p className="text-xs text-dezo-text-muted mt-4">{napCanonical.hoursNote}</p>
             </aside>
           </div>

@@ -597,6 +597,8 @@ export default function HomePage() {
                 {contact.phoneFormatted}
                 <br />
                 {contact.email}
+                <br />
+                {contact.supportEmail}
               </p>
             </div>
           </div>

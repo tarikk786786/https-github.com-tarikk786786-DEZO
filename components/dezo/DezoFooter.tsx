@@ -115,6 +115,13 @@ export function DezoFooter() {
                 <Mail size={13} className="text-dezo-primary shrink-0" />
                 {contact.email}
               </a>
+              <a
+                href={`mailto:${contact.supportEmail}`}
+                className="flex items-center gap-2 hover:text-white"
+              >
+                <Mail size={13} className="text-dezo-primary shrink-0" />
+                {contact.supportEmail}
+              </a>
               <div className="flex items-start gap-2 text-white/45">
                 <MapPin size={13} className="text-dezo-primary shrink-0 mt-0.5" />
                 <span>

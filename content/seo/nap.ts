@@ -12,6 +12,7 @@ export const napCanonical = {
   phoneFormatted: contact.phoneFormatted,
   phoneAlt: contact.phoneAlt,
   email: contact.email,
+  supportEmail: contact.supportEmail,
   street: contact.address.street,
   city: contact.address.city,
   region: contact.address.region,

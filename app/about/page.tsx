@@ -72,6 +72,7 @@ export default function AboutPage() {
               </p>
               <p className="text-sm text-dezo-text-primary font-medium">{contact.phoneFormatted}</p>
               <p className="text-sm text-dezo-text-muted">{contact.email}</p>
+              <p className="text-sm text-dezo-text-muted">{contact.supportEmail}</p>
             </aside>
           </div>
 

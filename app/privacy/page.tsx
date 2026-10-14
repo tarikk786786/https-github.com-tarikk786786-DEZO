@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { DezoContainer } from '@/components/dezo/DezoContainer';
 import { DezoHeading } from '@/components/dezo/DezoHeading';
 import { DezoSection } from '@/components/dezo/DezoSection';
+import { contact } from '@/content/site';
 import { constructMetadata } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = constructMetadata({
@@ -37,7 +38,7 @@ export default function PrivacyPage() {
 
             <h3 className="text-lg font-bold text-dezo-text-primary mt-4">3. Contact & NDA Inquiries</h3>
             <p>
-              For privacy or data access inquiries, contact our data protection team directly at <a href="mailto:contact@dezo.in" className="text-dezo-accent underline">contact@dezo.in</a>.
+              For privacy or data access inquiries, contact our data protection team directly at <a href={`mailto:${contact.supportEmail}`} className="text-dezo-accent underline">{contact.supportEmail}</a>.
             </p>
           </div>
         </DezoContainer>

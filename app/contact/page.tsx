@@ -46,10 +46,21 @@ export default function ContactPage() {
                   <Mail size={16} className="text-dezo-primary shrink-0 mt-0.5" />
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-widest text-dezo-text-muted mb-1">
-                      Email
+                      Projects
                     </p>
                     <p className="font-medium text-dezo-text-primary group-hover:text-dezo-primary">
                       {contact.email}
+                    </p>
+                  </div>
+                </a>
+                <a href={`mailto:${contact.supportEmail}`} className="flex items-start gap-3 group">
+                  <Mail size={16} className="text-dezo-primary shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-[11px] font-semibold uppercase tracking-widest text-dezo-text-muted mb-1">
+                      Support
+                    </p>
+                    <p className="font-medium text-dezo-text-primary group-hover:text-dezo-primary">
+                      {contact.supportEmail}
                     </p>
                   </div>
                 </a>

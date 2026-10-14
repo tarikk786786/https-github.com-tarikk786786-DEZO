@@ -145,6 +145,7 @@ export const contact = {
   phoneFormatted: '+91 9114411026',
   phoneAlt: '+91 77870 63088',
   email: 'contact@dezo.in',
+  supportEmail: 'support@dezo.in',
   address: {
     street: 'Phase 2, Patia',
     city: 'Bhubaneswar',

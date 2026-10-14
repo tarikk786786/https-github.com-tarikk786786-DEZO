@@ -329,7 +329,7 @@ export default function HomePage() {
                         url={study.url}
                         title={study.title}
                         eager={i < 2}
-                        pan={i === 0 ? 'auto' : 'hover'}
+                        pan="auto"
                       />
                     </div>
                     <div

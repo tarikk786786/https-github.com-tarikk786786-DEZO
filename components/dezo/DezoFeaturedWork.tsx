@@ -71,7 +71,7 @@ export function DezoFeaturedWork({
                   className="group flex flex-col h-full overflow-hidden border border-dezo-border bg-dezo-surface"
                 >
                   <div className="relative h-52 sm:h-60 overflow-hidden bg-dezo-bg-warm">
-                    <WorkSitePreview url={project.url} title={project.title} pan="hover" />
+                    <WorkSitePreview url={project.url} title={project.title} pan="auto" />
                   </div>
                   <div className="flex flex-col flex-1 p-5 sm:p-6 gap-2">
                     <div className="flex items-center justify-between gap-2">
@@ -135,7 +135,7 @@ export function DezoCaseStudyStrip({
                 rel="noopener noreferrer"
                 className="relative block h-44 sm:h-52 overflow-hidden bg-dezo-bg-warm group"
               >
-                <WorkSitePreview url={study.url} title={study.title} pan="hover" />
+                <WorkSitePreview url={study.url} title={study.title} pan="auto" />
                 <span className="absolute top-3 left-3 z-20 text-[10px] font-semibold uppercase tracking-wider bg-dezo-surface/95 text-dezo-primary border border-dezo-border px-2 py-0.5">
                   Live case study
                 </span>

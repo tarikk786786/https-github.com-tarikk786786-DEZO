@@ -1,0 +1,11 @@
+---
+description: Testing expectations
+alwaysApply: false
+---
+
+# Testing
+
+- Prefer targeted tests for the changed behavior.
+- For UI, verify desktop and mobile when layout/CSS changes.
+- Do not add flaky E2E coverage for trivial unit logic.
+- If no test harness exists for an area, verify with the lightest available command (typecheck/lint/dev smoke).

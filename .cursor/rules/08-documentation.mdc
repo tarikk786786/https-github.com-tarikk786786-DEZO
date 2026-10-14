@@ -1,0 +1,10 @@
+---
+description: Documentation updates
+alwaysApply: false
+---
+
+# Documentation
+
+- Update docs when behavior, setup, or env vars change.
+- Prefer short, actionable docs over essays.
+- Keep `docs/cursor-setup/` as the source of truth for MCP/skills inventory.

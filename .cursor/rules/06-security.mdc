@@ -1,0 +1,12 @@
+---
+description: Security baseline
+alwaysApply: true
+---
+
+# Security
+
+- Never hardcode secrets; use env vars and document keys in `.env.example` only.
+- Validate untrusted input at boundaries.
+- Avoid XSS: do not inject unsanitized HTML.
+- Do not weaken auth, CORS, or CSP without an explicit request.
+- Dependency adds: prefer maintained packages; avoid abandoned MCP/npm packages.

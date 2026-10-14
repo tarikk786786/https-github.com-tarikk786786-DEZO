@@ -1,0 +1,11 @@
+---
+description: Self-review checklist before finishing
+alwaysApply: false
+---
+
+# Review checklist
+
+- Does the change solve the asked problem with minimal surface area?
+- Any secrets, dead code, or unrelated formatting?
+- Did targeted verification run?
+- Are docs/env examples updated if needed?

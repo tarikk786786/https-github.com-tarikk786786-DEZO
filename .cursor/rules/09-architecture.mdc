@@ -1,0 +1,11 @@
+---
+description: Architecture decisions
+alwaysApply: false
+---
+
+# Architecture
+
+- Prefer composition over new layers.
+- Keep server/client boundaries clear for Next.js.
+- Do not introduce new state libraries, routers, or UI kits without need.
+- Document non-obvious tradeoffs briefly in the PR or ADR when inventing structure.

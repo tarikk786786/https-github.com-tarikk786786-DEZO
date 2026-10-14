@@ -1,0 +1,26 @@
+---
+description: Token and context budget rules for Cursor
+alwaysApply: true
+---
+
+# Token-saving rules
+
+- Never read the entire repository unless explicitly required.
+- First identify relevant files.
+- Search symbols before opening files.
+- Read only the required sections.
+- Do not repeat code already available in context.
+- Do not reproduce unchanged files.
+- Return minimal patches/diffs when possible.
+- Reuse existing components and utilities.
+- Check existing dependencies before adding packages.
+- Check existing environment/configuration before creating new configuration.
+- Avoid unnecessary explanations during implementation.
+- Do not inspect generated files unless required.
+- Ignore `node_modules`, build output, caches, and binaries.
+- Prefer repository search over broad file loading.
+- For errors, inspect the smallest relevant execution path first.
+- Make one logical change at a time.
+- Run targeted tests before the full test suite.
+- Summarize completed changes instead of repeating source code.
+- Keep MCP tool usage focused; do not call every available MCP.

@@ -1,0 +1,12 @@
+---
+description: Debugging workflow
+alwaysApply: false
+---
+
+# Debugging
+
+1. Reproduce with the smallest failing path.
+2. Read the error, stack, and only the files on that path.
+3. Form one hypothesis; change one thing; retest.
+4. Prefer logs/tests over speculative rewrites.
+5. Leave temporary debug instrumentation out of the final commit.

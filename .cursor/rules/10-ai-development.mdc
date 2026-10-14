@@ -1,0 +1,11 @@
+---
+description: AI feature and MCP development guidance
+alwaysApply: false
+---
+
+# AI development
+
+- Prefer existing AI SDK / platform patterns already in the repo.
+- Keep prompts and tool schemas minimal and versioned.
+- Log model/tool failures with enough context to debug without dumping secrets.
+- Evaluate cost: cache, stream, and avoid redundant tool rounds.

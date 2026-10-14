@@ -1,0 +1,14 @@
+---
+description: Thin repo-specific core (defers to master system)
+alwaysApply: true
+---
+
+# Repo core
+
+Follow `.cursor/rules/00-master-system.mdc` for all tasks.
+
+Repo-specific:
+
+- Follow `AGENTS.md` and Next.js docs under `node_modules/next/dist/docs/` before using Next APIs.
+- Prefer existing components in `components/`, `app/`, `lib/`, and `design-system/`.
+- Do not invent parallel deploy configs when `vercel.json` / `netlify.toml` / `render.yaml` already exist.

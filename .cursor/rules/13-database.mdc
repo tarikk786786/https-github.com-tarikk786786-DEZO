@@ -1,0 +1,11 @@
+---
+description: Database and persistence guidance
+alwaysApply: false
+---
+
+# Database
+
+- Prefer migrations over ad-hoc schema edits.
+- Index for real query patterns; avoid speculative indexes.
+- Never log connection strings or PII.
+- Use MCP DB tools only when credentials are configured.

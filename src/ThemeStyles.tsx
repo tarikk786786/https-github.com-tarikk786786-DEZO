@@ -5,28 +5,28 @@ export const ThemeStyles = () => (
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
     :root {
-      /* Premium Dark Palette */
-      --bg-nav: rgba(10, 14, 20, 0.92);
-      --bg-dark: #0A0E14;
-      --bg-darker: #060A0F;
-      --bg-light: #111827;
-      --bg-white: #1A2232;
-      --text-dark: #E8EDF5;
+      /* Premium Deep Tech Obsidian & Electric Cyan Palette */
+      --bg-nav: rgba(6, 10, 18, 0.88);
+      --bg-dark: #060A12;
+      --bg-darker: #03060A;
+      --bg-light: #0B1120;
+      --bg-white: #0F172A;
+      --text-dark: #E2E8F0;
       --text-light: #FFFFFF;
-      --text-muted: #6B7A99;
+      --text-muted: #64748B;
       --text-light-muted: #94A3B8;
-      --primary: #3B82C4;
-      --primary-light: #60A5FA;
-      --accent: #F59E6B;
-      --accent-light: #FBD38D;
-      --gold: #C4A55A;
+      --primary: #2563EB;
+      --primary-light: #38BDF8;
+      --accent: #00D2FF;
+      --accent-light: #67E8F9;
+      --gold: #38BDF8;
       --border-light: rgba(255,255,255,0.08);
       --border-dark: rgba(255,255,255,0.04);
-      --shadow-soft: 0 25px 60px -15px rgba(59,130,196,0.25);
-      --glass-blur: blur(24px);
+      --shadow-soft: 0 25px 60px -15px rgba(0, 210, 255, 0.25);
+      --glass-blur: blur(28px);
       --line-height-body: 1.65;
       --tracking-body: 0.01em;
-      --hero-bg: linear-gradient(160deg, #0A0E14 0%, #0F1929 50%, #0A0E14 100%);
+      --hero-bg: radial-gradient(circle at 50% 0%, #0c1a36 0%, #060a12 60%, #03060a 100%);
     }
 
     *, *::before, *::after { box-sizing: border-box; }

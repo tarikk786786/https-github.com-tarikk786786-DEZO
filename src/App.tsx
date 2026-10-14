@@ -304,10 +304,21 @@ export default function App() {
       <header className={`fixed top-0 left-0 right-0 z-[60] smooth-transition ${scrolled ? 'bg-[var(--bg-nav)] backdrop-blur-[var(--glass-blur)] py-3.5 border-b border-[rgba(255,255,255,0.06)]' : 'bg-transparent py-5 lg:py-7'}`}>
         <div className="max-w-[90rem] mx-auto px-5 lg:px-10 flex justify-between items-center">
 
-          {/* Logo */}
+          {/* Brandmark Lockup */}
           <Magnetic>
-            <a href="#" className="flex items-center z-[70] group" aria-label="Dezo Home" onClick={handleLogoClick}>
-              <img src="/dezo-logo-transparent.png" alt="DEZO Logo" className="h-14 md:h-16 w-auto object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.3)] hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.6)] group-hover:scale-110 animate-float smooth-transition duration-500" />
+            <a href="#" className="flex items-center gap-3.5 z-[70] group" aria-label="DEZO Home" onClick={handleLogoClick}>
+              <div className="relative flex items-center justify-center">
+                <div className="absolute -inset-1.5 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] opacity-40 blur-md rounded-full group-hover:opacity-80 smooth-transition" />
+                <img src="/dezo-emblem.png" alt="DEZO Emblem" className="h-10 md:h-12 w-auto object-contain relative z-10 group-hover:scale-105 smooth-transition duration-300 drop-shadow-[0_0_15px_rgba(37,99,235,0.6)]" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-white font-black tracking-[0.18em] text-2xl md:text-[1.7rem] leading-none group-hover:text-[var(--primary-light)] smooth-transition">
+                  DEZO<span className="text-[var(--primary-light)]">.in</span>
+                </span>
+                <span className="text-[9px] font-bold tracking-[0.25em] text-[var(--accent)] uppercase mt-0.5">
+                  Growth & Tech
+                </span>
+              </div>
             </a>
           </Magnetic>
 
@@ -400,18 +411,18 @@ export default function App() {
                 {/* Left: Copy */}
                 <div className="lg:col-span-6">
                   <Reveal direction="up" delay={0}>
-                    <div className="inline-flex items-center gap-2.5 mb-6 px-4 py-2 rounded-full border border-white/12 bg-white/[0.05] backdrop-blur-sm">
-                      <Sparkles size={13} className="text-[var(--accent)]" aria-hidden />
-                      <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/70">Web · SEO · Ads · Ecommerce</span>
+                    <div className="inline-flex items-center gap-2.5 mb-6 px-4 py-2 rounded-full border border-[var(--primary)]/30 bg-[var(--primary)]/10 backdrop-blur-md shadow-[0_0_20px_rgba(37,99,235,0.2)]">
+                      <Sparkles size={13} className="text-[var(--accent)] animate-pulse" aria-hidden />
+                      <span className="text-[11px] font-black uppercase tracking-[0.18em] text-[var(--accent-light)]">We Build Brands That Sell · India</span>
                     </div>
                   </Reveal>
 
                   <Reveal direction="up" delay={80}>
-                    <h1 className="clamp-h1 text-white mb-5" style={{ letterSpacing: '-0.03em' }}>
-                      We Build Websites
+                    <h1 className="clamp-h1 text-white mb-5 font-black tracking-tight" style={{ letterSpacing: '-0.035em' }}>
+                      We Build Brands
                       <br />
-                      <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg, var(--primary-light) 0%, var(--accent-light) 100%)' }}>
-                        That Actually Earn
+                      <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg, #38BDF8 0%, #00D2FF 50%, #2563EB 100%)', textShadow: '0 0 40px rgba(0,210,255,0.3)' }}>
+                        That Actually Sell.
                       </span>
                     </h1>
                   </Reveal>
@@ -421,8 +432,8 @@ export default function App() {
                   </Reveal>
 
                   <Reveal direction="up" delay={280}>
-                    <p className="text-base md:text-lg text-white/60 mb-9 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
-                      DEZO helps Indian founders launch fast websites, high-converting funnels, and performance campaigns — turning traffic into paying customers.
+                    <p className="text-base md:text-lg text-white/70 mb-9 max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                      Websites, Shopify ecommerce, Amazon & Flipkart marketplace scaling, SEO, and performance marketing engineered together to help ambitious businesses build, sell, and dominate.
                     </p>
                   </Reveal>
 
@@ -782,8 +793,21 @@ export default function App() {
           <div className="max-w-[90rem] mx-auto px-4 lg:px-8 relative z-10">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
                   <div className="col-span-2 md:col-span-1">
-                    <img src="/dezo-logo-transparent.png" alt="DEZO Logo" className="h-16 md:h-20 w-auto object-contain mb-6 opacity-90 hover:opacity-100 hover:scale-105 hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.8)] animate-pulse-soft smooth-transition duration-500 drop-shadow-xl" />
-                    <p className="text-main-muted text-sm font-medium mb-6">Premium web development and digital marketing agency delivering scalable solutions for brands in India.</p>
+                    <div className="flex items-center gap-3.5 mb-6 group cursor-pointer" onClick={handleLogoClick}>
+                      <div className="relative flex items-center justify-center">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] opacity-40 blur-md rounded-full group-hover:opacity-75 smooth-transition" />
+                        <img src="/dezo-emblem.png" alt="DEZO Emblem" className="h-12 w-auto object-contain relative z-10 drop-shadow-[0_0_15px_rgba(37,99,235,0.6)]" />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-white font-black tracking-[0.18em] text-2xl leading-none">
+                          DEZO<span className="text-[var(--primary-light)]">.in</span>
+                        </span>
+                        <span className="text-[9px] font-bold tracking-[0.25em] text-[var(--accent)] uppercase mt-0.5">
+                          Growth & Technology
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-main-muted text-sm font-medium mb-6">India's digital commerce and growth technology company. Engineered in Odisha, built for India, built to scale.</p>
                     <div className="flex gap-4 text-main-light/70 text-sm font-bold">
                         <a href="#" aria-label="Facebook" className="hover:text-[var(--primary)] smooth-transition cursor-pointer"><Facebook size={20} /></a>
                         <a href="#" aria-label="Instagram" className="hover:text-[var(--primary)] smooth-transition cursor-pointer"><Instagram size={20} /></a>

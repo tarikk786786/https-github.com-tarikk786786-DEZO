@@ -375,9 +375,9 @@ export const HeroVisual = ({ nightMode }: { nightMode?: boolean }) => {
               <div style={{ width: 10, height: 10, borderRadius: '50%', background: 'rgba(255,189,46,0.8)' }} />
               <div style={{ width: 10, height: 10, borderRadius: '50%', background: 'rgba(39,201,63,0.8)' }} />
             </div>
-            <div style={{ margin: '0 auto', width: '44%', height: '22px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
-              <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'rgba(74,222,128,0.8)' }} />
-              <span style={{ fontSize: '9px', color: 'var(--text-muted)', letterSpacing: '0.06em', fontWeight: 600 }}>dezo.agency</span>
+            <div style={{ margin: '0 auto', width: '48%', height: '24px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(0,210,255,0.2)', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+              <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#00D2FF', boxShadow: '0 0 8px #00D2FF' }} />
+              <span style={{ fontSize: '10px', color: '#E2E8F0', letterSpacing: '0.06em', fontWeight: 700 }}>dezo.in</span>
             </div>
           </div>
 
@@ -445,22 +445,22 @@ export const HeroVisual = ({ nightMode }: { nightMode?: boolean }) => {
         {/* ── Strategy Card ── */}
         <div className="glass-card animate-float" style={{
           position: 'absolute', left: '-6%', top: '26%',
-          width: '50%', borderRadius: '1.2rem', padding: '16px',
+          width: '52%', borderRadius: '1.2rem', padding: '16px',
           ...cardStyle(65),
           animationDelay: '0.6s',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '7px', marginBottom: '10px' }}>
-            <div style={{ width: 22, height: 22, borderRadius: '50%', background: 'rgba(59,130,196,0.15)', border: '1px solid rgba(59,130,196,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <CheckCircle size={11} style={{ color: 'var(--primary)' }} />
+            <div style={{ width: 22, height: 22, borderRadius: '50%', background: 'rgba(0,210,255,0.15)', border: '1px solid rgba(0,210,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <CheckCircle size={11} style={{ color: '#00D2FF' }} />
             </div>
-            <span style={{ fontSize: 8, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>Performance</span>
+            <span style={{ fontSize: 8, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>Growth Engine</span>
           </div>
-          <p style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.88)', lineHeight: 1.5, fontStyle: 'italic', marginBottom: '10px' }}>
-            "Revenue-ready websites that actually convert."
+          <p style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.92)', lineHeight: 1.5, fontStyle: 'italic', marginBottom: '10px' }}>
+            "Brands engineered for national marketplace dominance."
           </p>
           <div style={{ display: 'flex', gap: '5px' }}>
-            {['SEO', 'Ads', 'Design'].map(t => (
-              <span key={t} style={{ fontSize: 8, fontWeight: 700, padding: '3px 8px', borderRadius: 99, border: '1px solid rgba(59,130,196,0.25)', color: 'var(--primary-light)', background: 'rgba(59,130,196,0.1)' }}>{t}</span>
+            {['Shopify', 'Amazon', 'Meta CAPI'].map(t => (
+              <span key={t} style={{ fontSize: 8, fontWeight: 700, padding: '3px 8px', borderRadius: 99, border: '1px solid rgba(0,210,255,0.3)', color: '#38BDF8', background: 'rgba(0,210,255,0.08)' }}>{t}</span>
             ))}
           </div>
         </div>

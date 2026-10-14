@@ -213,19 +213,20 @@ export const CustomCursor = () => {
   return (
     <>
       <div 
-        className="fixed top-0 left-0 w-2.5 h-2.5 bg-[var(--primary)] rounded-full pointer-events-none z-[9999]"
+        className="fixed top-0 left-0 w-2.5 h-2.5 bg-[#00D2FF] rounded-full pointer-events-none z-[9999] shadow-[0_0_12px_#00D2FF]"
         style={{
           transform: `translate3d(${pos.x - 5}px, ${pos.y - 5}px, 0) scale(${isHovered ? 0 : 1})`,
           transition: 'transform 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       />
       <div 
-        className="fixed top-0 left-0 w-10 h-10 border border-[var(--primary)] rounded-full pointer-events-none z-[9998] flex items-center justify-center"
+        className="fixed top-0 left-0 w-10 h-10 border border-[#00D2FF]/60 rounded-full pointer-events-none z-[9998] flex items-center justify-center backdrop-blur-[1px]"
         style={{
-          transform: `translate3d(${pos.x - 20}px, ${pos.y - 20}px, 0) scale(${isHovered ? 1.5 : 1})`,
-          transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-          background: isHovered ? 'rgba(59,130,196,0.1)' : 'transparent',
-          opacity: isHovered ? 1 : 0.6,
+          transform: `translate3d(${pos.x - 20}px, ${pos.y - 20}px, 0) scale(${isHovered ? 1.6 : 1})`,
+          transition: 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease',
+          background: isHovered ? 'rgba(0, 210, 255, 0.12)' : 'transparent',
+          boxShadow: isHovered ? '0 0 20px rgba(0, 210, 255, 0.35)' : 'none',
+          borderColor: isHovered ? '#00D2FF' : 'rgba(0, 210, 255, 0.4)',
         }}
       />
     </>
@@ -238,18 +239,18 @@ export const InfiniteMarquee = () => {
       <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#0a0f1a] to-transparent z-10 pointer-events-none" />
       <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#0a0f1a] to-transparent z-10 pointer-events-none" />
       <div className="animate-marquee inline-block flex items-center">
-        {Array(10).fill(['WEB DEVELOPMENT', 'SEO OPTIMIZATION', 'DIGITAL MARKETING', 'UI/UX DESIGN', 'E-COMMERCE']).flat().map((text, i) => (
+        {Array(10).fill(['WE BUILD BRANDS THAT SELL', 'NEXT.JS & SHOPIFY ARCHITECTURE', 'AMAZON & FLIPKART SCALING', 'META CONVERSIONS API', 'SEARCH QUERY PERFORMANCE', 'BUILT IN ODISHA · BUILT FOR INDIA']).flat().map((text, i) => (
           <div key={i} className="flex items-center mx-6">
-            <span className="text-[11px] sm:text-xs font-black tracking-[0.25em] text-white/80">{text}</span>
-            <span className="mx-6 w-1.5 h-1.5 rounded-full bg-[var(--primary)] opacity-70" />
+            <span className="text-[11px] sm:text-xs font-black tracking-[0.25em] text-white/90">{text}</span>
+            <span className="mx-6 w-1.5 h-1.5 rounded-full bg-[#00D2FF] shadow-[0_0_8px_#00D2FF]" />
           </div>
         ))}
       </div>
       <div className="animate-marquee inline-block flex items-center" aria-hidden="true">
-        {Array(10).fill(['WEB DEVELOPMENT', 'SEO OPTIMIZATION', 'DIGITAL MARKETING', 'UI/UX DESIGN', 'E-COMMERCE']).flat().map((text, i) => (
+        {Array(10).fill(['WE BUILD BRANDS THAT SELL', 'NEXT.JS & SHOPIFY ARCHITECTURE', 'AMAZON & FLIPKART SCALING', 'META CONVERSIONS API', 'SEARCH QUERY PERFORMANCE', 'BUILT IN ODISHA · BUILT FOR INDIA']).flat().map((text, i) => (
           <div key={i} className="flex items-center mx-6">
-            <span className="text-[11px] sm:text-xs font-black tracking-[0.25em] text-white/80">{text}</span>
-            <span className="mx-6 w-1.5 h-1.5 rounded-full bg-[var(--primary)] opacity-70" />
+            <span className="text-[11px] sm:text-xs font-black tracking-[0.25em] text-white/90">{text}</span>
+            <span className="mx-6 w-1.5 h-1.5 rounded-full bg-[#00D2FF] shadow-[0_0_8px_#00D2FF]" />
           </div>
         ))}
       </div>

@@ -59,17 +59,17 @@ export const ServicesSection = ({ nightMode }: { nightMode?: boolean }) => {
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {services.map((service, idx) => (
             <Reveal key={idx} delay={idx * 150} direction="up" className="h-full">
-              <div className="bg-main-light rounded-3xl p-8 lg:p-10 border border-main-light h-full hover:border-brand-primary smooth-transition flex flex-col group relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 blur-3xl rounded-full pointer-events-none group-hover:bg-brand-primary/10 smooth-transition"></div>
-                <div className="w-16 h-16 rounded-2xl bg-panel-white flex items-center justify-center text-brand-primary mb-8 shadow-sm border border-main-light group-hover:scale-110 smooth-transition">
+              <div className="bg-[#0B1120] rounded-3xl p-8 lg:p-10 border border-white/[0.08] h-full hover:border-[#00D2FF]/50 hover:shadow-[0_20px_50px_rgba(0,210,255,0.15)] hover:-translate-y-1.5 smooth-transition flex flex-col group relative overflow-hidden backdrop-blur-xl">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-[#00D2FF]/5 blur-3xl rounded-full pointer-events-none group-hover:bg-[#00D2FF]/15 smooth-transition"></div>
+                <div className="w-16 h-16 rounded-2xl bg-white/[0.05] border border-white/[0.1] flex items-center justify-center text-[#38BDF8] group-hover:text-[#00D2FF] group-hover:border-[#00D2FF]/40 mb-8 shadow-sm group-hover:scale-110 smooth-transition">
                   {service.icon}
                 </div>
-                <h3 className="text-2xl font-black text-main-dark mb-4">{service.title}</h3>
-                <p className="text-main-muted leading-relaxed mb-8 flex-grow">{service.description}</p>
-                <ul className="space-y-3">
+                <h3 className="text-2xl font-black text-white mb-4 group-hover:text-[#38BDF8] smooth-transition">{service.title}</h3>
+                <p className="text-white/60 leading-relaxed mb-8 flex-grow font-normal text-sm">{service.description}</p>
+                <ul className="space-y-3 pt-4 border-t border-white/[0.06]">
                   {service.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-center gap-3 text-sm font-bold text-main-dark">
-                      <div className="w-5 h-5 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary shrink-0">
+                    <li key={fIdx} className="flex items-center gap-3 text-sm font-semibold text-white/80">
+                      <div className="w-5 h-5 rounded-full bg-[#00D2FF]/15 border border-[#00D2FF]/30 flex items-center justify-center text-[#00D2FF] shrink-0">
                         <Check size={12} strokeWidth={3} />
                       </div>
                       {feature}

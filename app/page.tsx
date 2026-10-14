@@ -7,13 +7,13 @@ import { DezoContainer } from '@/components/dezo/DezoContainer';
 import { DezoHeading } from '@/components/dezo/DezoHeading';
 import { DezoButton } from '@/components/dezo/DezoButton';
 import { DezoSection } from '@/components/dezo/DezoSection';
-import { LiveSitePreview, cleanHost } from '@/components/dezo/LiveSitePreview';
+import { cleanHost } from '@/components/dezo/LiveSitePreview';
+import { WorkSitePreview } from '@/components/dezo/WorkSitePreview';
 import { DezoEngine } from '@/components/dezo/DezoEngine';
 import {
   DezoReveal,
   DezoStagger,
   DezoStaggerItem,
-  DezoImageReveal,
   DezoScrollProgress,
   DezoMagnetic,
 } from '@/lib/motion/MotionAdapter';
@@ -318,21 +318,20 @@ export default function HomePage() {
                     rel="noopener noreferrer"
                     className="group block"
                   >
-                    <DezoImageReveal
-                      delay={i * 0.03}
-                      className={`relative w-full bg-dezo-bg border border-dezo-border mb-8 lg:mb-10 ${
+                    <div
+                      className={`relative w-full overflow-hidden border border-dezo-border bg-dezo-bg mb-8 lg:mb-10 ${
                         i === 0
                           ? 'aspect-[16/10] sm:aspect-[21/9]'
                           : 'aspect-[16/9] sm:aspect-[21/10]'
                       }`}
                     >
-                      <LiveSitePreview
+                      <WorkSitePreview
                         url={study.url}
                         title={study.title}
                         eager={i < 2}
-                        className="absolute inset-0 w-full h-full object-cover object-[center_18%] dezo-img-zoom"
+                        pan={i === 0 ? 'auto' : 'hover'}
                       />
-                    </DezoImageReveal>
+                    </div>
                     <div
                       className={`grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 ${
                         reverse ? 'lg:[direction:rtl]' : ''

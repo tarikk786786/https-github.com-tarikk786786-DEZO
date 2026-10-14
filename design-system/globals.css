@@ -103,6 +103,31 @@ body {
   transform: scale(1.045);
 }
 
+/*
+  Work website “browse” pan — tall crop slides down on hover / auto loop.
+  Feels like scrolling a live site, not zooming a photo.
+*/
+.dezo-work-site-pan {
+  transform: translate3d(0, 0, 0);
+  transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.group:hover .dezo-work-site-pan {
+  transform: translate3d(0, -18%, 0);
+}
+.dezo-work-site-pan-auto {
+  animation: dezo-work-site-browse 9s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes dezo-work-site-browse {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -22%, 0);
+  }
+}
+
 .dezo-service-row {
   transition:
     background-color 0.35s ease,
@@ -300,7 +325,11 @@ html.lenis body {
   .dezo-trust-marquee,
   .dezo-atmosphere,
   .dezo-hero-kenburns,
-  .dezo-hero-chapter-dot {
+  .dezo-hero-chapter-dot,
+  .dezo-work-site-pan-auto {
     animation: none !important;
+  }
+  .group:hover .dezo-work-site-pan {
+    transform: none;
   }
 }

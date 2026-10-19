@@ -61,8 +61,16 @@ export function DezoNavigation() {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
   }, [mobileMenuOpen]);
 
+  const isHome = pathname === '/';
+  const isTransparent = isHome && !scrolled;
+
   const linkClass = (href: string) => {
     const active = pathname === href || (href !== '/' && pathname.startsWith(href));
+    if (isTransparent) {
+      return `dezo-nav-link text-[12px] font-medium tracking-wide transition-colors ${
+        active ? 'text-white' : 'text-white/75 hover:text-white'
+      }`;
+    }
     return `dezo-nav-link text-[12px] font-medium tracking-wide transition-colors ${
       active ? 'text-dezo-text-primary' : 'text-dezo-text-secondary hover:text-dezo-text-primary'
     }`;
@@ -72,14 +80,22 @@ export function DezoNavigation() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-dezo-bg/95 backdrop-blur-sm border-b border-dezo-border py-3'
-          : 'bg-dezo-bg-warm/95 backdrop-blur-sm py-5'
+          ? 'bg-dezo-bg/95 backdrop-blur-md border-b border-dezo-border py-3 shadow-xs'
+          : isHome
+          ? 'bg-transparent py-5 border-b border-white/[0.08]'
+          : 'bg-dezo-bg-warm/95 backdrop-blur-sm py-5 border-b border-transparent'
       }`}
     >
       <DezoContainer size="wide">
         <div className="flex items-center justify-between">
           <Link href="/" aria-label="DEZO homepage" className="group">
-            <span className="font-display text-2xl tracking-tight text-dezo-text-primary group-hover:text-dezo-primary transition-colors">
+            <span
+              className={`font-display text-2xl tracking-tight transition-colors ${
+                isTransparent
+                  ? 'text-white group-hover:text-dezo-primary'
+                  : 'text-dezo-text-primary group-hover:text-dezo-primary'
+              }`}
+            >
               DEZO
             </span>
           </Link>
@@ -142,11 +158,23 @@ export function DezoNavigation() {
           <div className="hidden lg:flex items-center gap-4">
             <Link
               href="/promise"
-              className="text-[12px] font-medium text-dezo-text-secondary hover:text-dezo-text-primary transition-colors"
+              className={`text-[12px] font-medium transition-colors ${
+                isTransparent
+                  ? 'text-white/75 hover:text-white'
+                  : 'text-dezo-text-secondary hover:text-dezo-text-primary'
+              }`}
             >
               Standard
             </Link>
-            <DezoButton href="/start-a-project" size="sm">
+            <DezoButton
+              href="/start-a-project"
+              size="sm"
+              className={
+                isTransparent
+                  ? '!bg-white !text-dezo-ink hover:!bg-white/90 border-transparent shadow-xs'
+                  : ''
+              }
+            >
               Get started
             </DezoButton>
           </div>
@@ -156,7 +184,11 @@ export function DezoNavigation() {
             aria-label={mobileMenuOpen ? 'Close' : 'Open'}
             aria-expanded={mobileMenuOpen}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 border border-dezo-border text-dezo-text-primary"
+            className={`lg:hidden p-2 border transition-colors ${
+              isTransparent
+                ? 'border-white/20 text-white hover:bg-white/10'
+                : 'border-dezo-border text-dezo-text-primary hover:bg-black/5'
+            }`}
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>

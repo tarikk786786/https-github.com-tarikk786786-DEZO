@@ -61,8 +61,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  const tools = TOOL_SLUGS.map((slug) => ({
-    url: `${baseUrl}/tools/${slug}`,
+  const tools = [
+    ...TOOL_SLUGS.map((slug) => ({
+      url: `${baseUrl}/tools/${slug}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.85,
+    })),
+    {
+      url: `${baseUrl}/tools/backlinks`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+  ];
+
+  const industryUrls = [
+    'd2c',
+    'ecommerce',
+    'local',
+    'startups',
+    'manufacturers',
+    'service',
+    'personal-brands',
+  ].map((slug) => ({
+    url: `${baseUrl}/industries/${slug}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,
     priority: 0.85,
@@ -75,5 +98,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  return [...core, ...services, ...tools, ...solutions];
+  return [...core, ...services, ...tools, ...industryUrls, ...solutions];
 }

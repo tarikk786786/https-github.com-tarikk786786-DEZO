@@ -14,7 +14,6 @@ import {
   TrendingUp,
   MapPin,
   BadgeCheck,
-  Link2,
 } from 'lucide-react';
 import { DezoContainer } from '@/components/dezo/DezoContainer';
 import { DezoSection } from '@/components/dezo/DezoSection';
@@ -38,7 +37,6 @@ const ICONS: Partial<Record<ToolCategory, React.ElementType>> = {
   brand: BadgeCheck,
   amazon: Package,
   flipkart: Package,
-  backlinks: Link2,
 };
 
 export default function DezoLabPage() {

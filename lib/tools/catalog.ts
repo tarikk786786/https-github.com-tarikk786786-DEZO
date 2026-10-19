@@ -120,16 +120,6 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
       'Listing completeness & F-Assured readiness checklist. Not connected to Flipkart seller APIs.',
     badge: 'Demo',
   },
-  {
-    slug: 'backlinks',
-    name: 'Backlinks Generator',
-    phase: 1,
-    availability: 'live',
-    tagline: '150+ High-DA Backlinks & Indexing Submissions',
-    description:
-      'Instantly generate 150+ authoritative directory listings, SEO audit profiles, WHOIS anchors, and web archive submissions with live ping verification and CSV export.',
-    badge: 'New & Live',
-  },
 ];
 
 export const LIVE_SCANNER_CATEGORIES: ToolCategory[] = TOOL_CATALOG.filter(

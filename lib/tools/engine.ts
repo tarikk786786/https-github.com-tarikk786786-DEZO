@@ -772,32 +772,6 @@ export async function runUniversalAudit(
     case 'flipkart':
       findings = buildFlipkartDemoFindings(cleanTarget);
       break;
-    case 'backlinks':
-      findings = [
-        finding({
-          id: 'backlinks-coverage',
-          metric: 'High-DA Directory Coverage',
-          status: 'good',
-          scoreImpact: 6,
-          title: '155 Authoritative Web Platforms Mapped',
-          observation: `Target domain mapped across 155 high-DA directories, WHOIS databases, and SEO analyzers.`,
-          whyItMatters: 'Foundational directory backlinks help search engine crawlers discover and index new URLs within hours.',
-          howToFix: 'Execute the batch ping submitter to distribute crawl requests to major search indexers.',
-          priority: 'P1 - High',
-        }),
-        finding({
-          id: 'backlinks-anchors',
-          metric: 'Brand Anchor Health',
-          status: 'good',
-          scoreImpact: 4,
-          title: 'Natural Naked URL & Brand Anchors',
-          observation: 'Submissions maintain clean brand domain anchor distribution.',
-          whyItMatters: 'Protects against unnatural over-optimization penalties and establishes foundational domain trust.',
-          howToFix: 'Maintain organic naked URL ratios alongside editorial digital PR links.',
-          priority: 'P2 - Moderate',
-        }),
-      ];
-      break;
     default:
       findings = buildSeoFindings(cleanTarget, probe);
   }

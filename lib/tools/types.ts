@@ -1,4 +1,4 @@
-/**
+﻿/**
  * DEZO Tools Lab Core Types & Unified Report Architecture
  * (PRD Section 4, 31, 52, 53)
  */
@@ -56,4 +56,6 @@ export type ToolCategory =
   | 'security'
   | 'accessibility'
   | 'local-seo'
-  | 'brand';
+  | 'brand'
+  | 'backlinks';
+

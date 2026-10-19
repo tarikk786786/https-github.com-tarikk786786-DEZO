@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -14,6 +14,7 @@ import {
   TrendingUp,
   MapPin,
   BadgeCheck,
+  Link2,
 } from 'lucide-react';
 import { DezoContainer } from '@/components/dezo/DezoContainer';
 import { DezoSection } from '@/components/dezo/DezoSection';
@@ -37,6 +38,7 @@ const ICONS: Partial<Record<ToolCategory, React.ElementType>> = {
   brand: BadgeCheck,
   amazon: Package,
   flipkart: Package,
+  backlinks: Link2,
 };
 
 export default function DezoLabPage() {
@@ -57,7 +59,7 @@ export default function DezoLabPage() {
               <DezoHeading
                 badge="DEZO LAB"
                 as="h1"
-                subtitle="Free public checks for your website and storefront. Marketplace tools stay labeled Demo — we never invent seller metrics."
+                subtitle="Free public checks for your website and storefront. Marketplace tools stay labeled Demo ΓÇö we never invent seller metrics."
               >
                 Check your site in minutes
               </DezoHeading>
@@ -164,10 +166,10 @@ export default function DezoLabPage() {
             {demoTools.length > 0 && (
               <div className="mt-14">
                 <h2 className="font-display text-xl text-dezo-text-primary mb-2">
-                  Marketplace · demo
+                  Marketplace ┬╖ demo
                 </h2>
                 <p className="text-sm text-dezo-text-secondary mb-6 max-w-2xl">
-                  Listing checklists from the public URL only — not connected to seller accounts.
+                  Listing checklists from the public URL only ΓÇö not connected to seller accounts.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-dezo-border">
                   {demoTools.map((cat) => (

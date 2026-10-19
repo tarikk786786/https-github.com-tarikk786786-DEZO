@@ -1,3 +1,15 @@
+# ANTIGRAVITY AGENT INSTRUCTIONS — DEZO WORKSPACE
+
+## 🛑 STRICT WORKSPACE BOUNDARIES
+1. **This workspace is for DEZO only.**
+2. **Never import or modify SEO-TOOLS files.**
+3. **Keep all changes within DEZO unless explicitly authorized.**
+4. **Inspect the project structure before introducing dependencies or frameworks.**
+5. Before every future task, verify the active workspace and confirm that the task concerns DEZO. If the workspace or target is ambiguous, ask the user before editing files.
+6. Do not inject SEO-specific features, dashboards, modules, routes, branding, or external SEO dependencies into DEZO.
+
+---
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know

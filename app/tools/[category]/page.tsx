@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import { useParams } from 'next/navigation';
@@ -8,6 +8,7 @@ import { DezoSection } from '@/components/dezo/DezoSection';
 import { DezoHeading } from '@/components/dezo/DezoHeading';
 import { DezoToolScanner } from '@/components/dezo/tools/DezoToolScanner';
 import { DezoAuditReportView } from '@/components/dezo/tools/DezoAuditReportView';
+import { DezoBacklinksGenerator } from '@/components/dezo/tools/DezoBacklinksGenerator';
 import { UniversalAuditReport, ToolCategory } from '@/lib/tools/types';
 import { ArrowLeft, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
 
@@ -152,6 +153,18 @@ const CATEGORY_CONFIGS: Record<ToolCategory, CategoryConfig> = {
     ],
     metricsMeasured: ['Pricing Parity', 'Omnichannel Identity', 'Brand Registry', 'Social Footprint', 'Trust Score'],
   },
+  backlinks: {
+    title: 'High-Authority Backlinks & Crawl Engine',
+    tagline: '150+ Verified Directory Submissions & Pings',
+    description: 'Generate 150+ high-authority directory profiles, SEO audit anchors, WHOIS records, and web archive submissions with live pinging and CSV export.',
+    highlights: [
+      '150+ verified submission targets across 6 diverse authority categories',
+      'High-DA (80-99) search engines, analyzers & business directories',
+      'Real-time link pinging, status tracking, and 1-click open in tabs',
+      'Complete CSV report download and clipboard export',
+    ],
+    metricsMeasured: ['High-DA Distribution', 'Category Diversity', 'DoFollow Coverage', 'Crawl Velocity', 'Indexed Profiles'],
+  },
 };
 
 export default function CategoryToolPage() {
@@ -160,6 +173,27 @@ export default function CategoryToolPage() {
   const config = CATEGORY_CONFIGS[categorySlug] || CATEGORY_CONFIGS.seo;
 
   const [activeReport, setActiveReport] = useState<UniversalAuditReport | null>(null);
+
+  if (categorySlug === 'backlinks') {
+    return (
+      <div className="pt-24 pb-20">
+        <DezoSection spacing="compact" className="bg-dezo-surface/30">
+          <DezoContainer size="wide">
+            <div className="mb-6">
+              <Link
+                href="/tools"
+                className="inline-flex items-center gap-2 text-xs font-semibold text-dezo-text-muted hover:text-dezo-accent transition-colors"
+              >
+                <ArrowLeft size={14} />
+                <span>Back to All DEZO Tools</span>
+              </Link>
+            </div>
+            <DezoBacklinksGenerator />
+          </DezoContainer>
+        </DezoSection>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-24 pb-20">
@@ -214,7 +248,7 @@ export default function CategoryToolPage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* ── WHAT THIS ENGINE MEASURES ── */}
+      {/* ΓöÇΓöÇ WHAT THIS ENGINE MEASURES ΓöÇΓöÇ */}
       <DezoSection spacing="normal" borderTop>
         <DezoContainer size="default">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
@@ -243,7 +277,7 @@ export default function CategoryToolPage() {
                 Telemetry & Score Weighting
               </h3>
               <p className="text-xs sm:text-sm text-dezo-text-secondary leading-relaxed">
-                Our engine uses strict deterministic DOM and network benchmarks. We do not provide arbitrary scoring — every metric reflects verifiable impact on search impressions and conversion rates.
+                Our engine uses strict deterministic DOM and network benchmarks. We do not provide arbitrary scoring ΓÇö every metric reflects verifiable impact on search impressions and conversion rates.
               </p>
               <div className="flex flex-wrap gap-2 pt-2">
                 {config.metricsMeasured.map((m, i) => (

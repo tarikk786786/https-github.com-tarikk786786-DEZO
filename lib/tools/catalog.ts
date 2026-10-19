@@ -1,5 +1,5 @@
-/**
- * DEZO Tools Lab — tool catalog & availability
+﻿/**
+ * DEZO Tools Lab ΓÇö tool catalog & availability
  */
 
 import type { ToolCategory } from './types';
@@ -79,7 +79,7 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
     availability: 'live',
     tagline: 'India intent clustering',
     description:
-      'Client-side commercial intent, modifiers, and long-tail opportunity scoring — no paid keyword API.',
+      'Client-side commercial intent, modifiers, and long-tail opportunity scoring ΓÇö no paid keyword API.',
     badge: 'Live',
   },
   {
@@ -119,6 +119,16 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
     description:
       'Listing completeness & F-Assured readiness checklist. Not connected to Flipkart seller APIs.',
     badge: 'Demo',
+  },
+  {
+    slug: 'backlinks',
+    name: 'Backlinks Generator',
+    phase: 1,
+    availability: 'live',
+    tagline: '150+ High-DA Backlinks & Indexing Submissions',
+    description:
+      'Instantly generate 150+ authoritative directory listings, SEO audit profiles, WHOIS anchors, and web archive submissions with live ping verification and CSV export.',
+    badge: 'New & Live',
   },
 ];
 

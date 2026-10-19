@@ -1,72 +1,87 @@
-# DEZO — Web Development & Digital Marketing Agency
+# DEZO — Digital Infrastructure for Ambitious Businesses
 
-Premium agency website with AWWWARDS-style 3D animated background built with React, Three.js, GSAP, and Framer Motion.
+> **BUILD. MARKET. GROW.**  
+> Digital commerce, brand, marketplace, and growth company.  
+> Founding studio: Bhubaneswar, Odisha · Delivery across India · [https://dezo.in](https://dezo.in)
 
-## 🚀 Live Deployment on Render
+---
 
-### One-Click Deploy
-1. Go to [Render Dashboard](https://dashboard.render.com)
-2. Click **New → Web Service**
-3. Connect this GitHub repository
-4. Render auto-detects `render.yaml` — just confirm:
-   - **Build Command:** `npm install && npm run build`
-   - **Start Command:** `npm start`
-   - **Environment Variable:** `NODE_ENV = production`
-5. Click **Deploy**
+## 🏗 Architecture & Stack
 
-### Manual Settings (if needed)
-| Setting | Value |
-|---------|-------|
-| Runtime | Node |
-| Build Command | `npm install && npm run build` |
-| Start Command | `npm start` |
-| Health Check | `/api/health` |
-| Node Version | `>=18` |
+DEZO's public platform is built with **Next.js 16 (App Router)** and **React 19**, engineered for speed, search visibility, rich micro-interactions, and high-conversion qualification.
 
-## 🛠 Tech Stack
+- **Framework:** Next.js 16.3.8 (App Router, Webpack builder, SSG + Server Functions)
+- **UI & Typography:** React 19, Tailwind CSS 3, Instrument Serif, DM Sans, JetBrains Mono
+- **Motion & 3D:** Motion 12, GSAP with ScrollTrigger, Lenis smooth scrolling, Three.js / React Three Fiber
+- **Validation & Forms:** React Hook Form, Zod
+- **SEO & Structured Data:** Dynamic JSON-LD (Organization, ProfessionalService, LocalBusiness, FAQPage, BreadcrumbList)
+- **Deployment Platform:** Vercel (Production: `dezo.in` / `dezo-updated.vercel.app`)
+- **Compatibility:** Render (`render.yaml`) & Netlify (`netlify.toml`) deployment blueprints preserved
 
-- **Frontend:** React 19, TypeScript, Tailwind CSS 3
-- **3D Background:** Three.js, React Three Fiber, drei, GSAP
-- **Animations:** Framer Motion, GSAP with ScrollTrigger
-- **Server:** Express (SPA with API routes)
-- **Build:** Vite 6 with code-splitting
+---
 
-## 📦 Bundle Architecture
+## 📦 Project Routes & Capabilities
 
-| Chunk | Size (gzip) | Loading |
-|-------|------------|---------|
-| `vendor` (React, Router) | ~103 KB | Immediate |
-| `three-vendor` (Three.js, R3F, GSAP) | ~270 KB | Lazy |
-| `index` (App code) | ~24 KB | Immediate |
-| `AwwwardsBackground` | ~2 KB | Lazy |
-| `route-pages` | ~10 KB | Lazy |
+```
+app/
+├── (core)
+│   ├── page.tsx                    # Premium cinema hero, 181-site showcase, capability map
+│   ├── about/                      # Studio leadership (Tarik Islam, Founder & CEO), philosophy
+│   ├── work/                       # 181 live website public archive with category filter
+│   ├── pricing/                    # Engagement tiers (START, GROW, SCALE, CUSTOM)
+│   ├── contact/                    # Direct executive WhatsApp & email routing
+│   ├── book-strategy-call/         # Qualification funnel & strategic diagnostic
+│   ├── start-a-project/            # Project scoping & intake journey
+│   ├── promise/                    # Client accountability & delivery guarantee system
+│   └── results/                    # Evidence-based case studies & metrics
+├── services/
+│   ├── page.tsx                    # Five-pillar touchpoint directory
+│   └── [slug]/page.tsx             # Programmatic service hubs (web-development, seo, amazon, etc.)
+├── solutions/
+│   ├── page.tsx                    # Integrated business solutions
+│   └── [slug]/page.tsx             # Commercial solutions (build, brand, marketplace, scale)
+├── industries/
+│   ├── page.tsx                    # Sector-specific playbooks
+│   └── [slug]/page.tsx             # Programmatic industry hubs (d2c, ecommerce, local, b2b)
+├── locations/
+│   ├── bhubaneswar/page.tsx        # Bhubaneswar studio & local commerce authority hub
+│   └── odisha/page.tsx             # Regional Odisha manufacturing & business expansion hub
+├── tools/ & growth-lab/            # Public diagnostics, keyword explorer, e-commerce simulators
+└── api/
+    ├── health/route.ts             # Health check endpoint
+    └── tools/                      # Real-time probe and SEO diagnostic APIs
+```
+
+---
 
 ## 🖥 Local Development
 
 ```bash
+# Install dependencies
 npm install
-npm run dev      # → http://localhost:3000
+
+# Start local Next.js development server
+npm run dev
+# → http://localhost:3000
+
+# Production build
+npm run build
+
+# Start production server
+npm start
+
+# Run linter
+npm run lint
 ```
 
-## 🏗 Production Build
+---
 
-```bash
-npm run build    # Outputs to dist/
-npm start        # Serves at PORT (default 3000)
-```
+## 🛡 Brand Source of Truth
 
-## 📁 Project Structure
-
-```
-├── src/
-│   ├── App.tsx                 # Main app with routing
-│   ├── AwwwardsBackground.tsx  # 3D animated hero background
-│   ├── components1-3.tsx       # UI components
-│   ├── pages.tsx               # Service pages
-│   ├── data.ts                 # Portfolio & content data
-│   └── index.css               # Tailwind + custom styles
-├── server.ts                   # Express production server
-├── render.yaml                 # Render deployment blueprint
-├── vite.config.ts              # Vite build configuration
-└── index.html                  # Entry point with SEO
-```
+- **Brand:** DEZO
+- **Domain:** `https://dezo.in`
+- **Founder & CEO:** Tarik Islam ([tarikislam.in](https://tarikislam.in) / `princetarikislam@gmail.com`)
+- **Inquiries:** `contact@dezo.in`
+- **Support:** `support@dezo.in`
+- **Phone:** +91 9114411026 / +91 77870 63088
+- **Address:** Phase 2, Patia, Bhubaneswar, Odisha 751024, India

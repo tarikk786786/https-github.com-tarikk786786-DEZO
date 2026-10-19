@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import { Search, Loader2, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
@@ -41,19 +41,19 @@ const CATEGORY_META: Record<
     name: 'Keyword Opportunity',
     placeholder: 'Enter a seed keyword (e.g. sambalpuri saree online)',
     example: 'sambalpuri saree online',
-    description: 'India-intent clusters from your keyword — not Google Planner volumes.',
+    description: 'India-intent clusters from your keyword ΓÇö not Google Planner volumes.',
   },
   amazon: {
     name: 'Amazon Listing',
     placeholder: 'Amazon product URL or ASIN',
     example: 'https://www.amazon.in/dp/B0EXAMPLE01',
-    description: 'Demo checklist from the listing URL — not connected to Amazon APIs.',
+    description: 'Demo checklist from the listing URL ΓÇö not connected to Amazon APIs.',
   },
   flipkart: {
     name: 'Flipkart Catalog',
     placeholder: 'Flipkart product URL',
     example: 'https://www.flipkart.com',
-    description: 'Demo checklist from the product URL — not connected to Flipkart APIs.',
+    description: 'Demo checklist from the product URL ΓÇö not connected to Flipkart APIs.',
   },
   cro: {
     name: 'CRO Checklist',
@@ -65,7 +65,7 @@ const CATEGORY_META: Record<
     name: 'Security & Headers',
     placeholder: 'Enter domain or URL',
     example: 'https://dezo.in',
-    description: 'HTTPS and public security header checks — safe and anonymous.',
+    description: 'HTTPS and public security header checks ΓÇö safe and anonymous.',
   },
   accessibility: {
     name: 'Accessibility',
@@ -84,6 +84,12 @@ const CATEGORY_META: Record<
     placeholder: 'Brand name or domain',
     example: 'dezo.in',
     description: 'Naming consistency and channel presence checks.',
+  },
+  backlinks: {
+    name: 'Backlinks Generator',
+    placeholder: 'Enter website domain or page URL',
+    example: 'dezo.in',
+    description: '150+ high-authority directory profiles, SEO audit anchors, and indexing submissions.',
   },
 };
 
@@ -112,12 +118,12 @@ export function DezoToolScanner({
     setErrorMessage(null);
 
     const steps = [
-      'Checking your input…',
+      'Checking your inputΓÇª',
       availability === 'demo'
-        ? 'Running marketplace demo checklist…'
-        : 'Reading public page signals…',
-      'Scoring findings…',
-      'Ranking what to fix first…',
+        ? 'Running marketplace demo checklistΓÇª'
+        : 'Reading public page signalsΓÇª',
+      'Scoring findingsΓÇª',
+      'Ranking what to fix firstΓÇª',
     ];
 
     try {
@@ -197,7 +203,7 @@ export function DezoToolScanner({
             </span>
             <div className="flex items-center gap-1.5">
               <ShieldCheck size={13} className="text-dezo-primary" />
-              <span>Safe public scan · no login</span>
+              <span>Safe public scan ┬╖ no login</span>
             </div>
           </div>
 
@@ -226,7 +232,7 @@ export function DezoToolScanner({
               {status === 'scanning' ? (
                 <>
                   <Loader2 size={16} className="animate-spin text-white" />
-                  <span>Analyzing…</span>
+                  <span>AnalyzingΓÇª</span>
                 </>
               ) : (
                 <>
@@ -244,7 +250,7 @@ export function DezoToolScanner({
               onClick={() => setInputVal(currentMeta.example)}
               className="text-[11px] font-medium text-dezo-primary hover:underline flex items-center gap-1 shrink-0 cursor-pointer text-left"
             >
-              <span>Try example →</span>
+              <span>Try example ΓåÆ</span>
             </button>
           </div>
         </div>

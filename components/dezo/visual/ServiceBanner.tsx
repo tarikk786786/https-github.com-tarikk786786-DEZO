@@ -41,23 +41,28 @@ export function ServiceBanner({
       )}
       <DezoContainer size="wide" className="relative z-10 pt-28 pb-14 sm:pb-18">
         <DezoHeroMotion>
-          <div className="max-w-3xl">
+          <div className="max-w-4xl">
             {data.eyebrow && (
-              <p
-                data-hero-item
-                className="text-[11px] font-semibold uppercase tracking-[0.18em] text-dezo-primary mb-4"
-              >
-                {data.eyebrow}
-              </p>
+              <div data-hero-item className="flex items-center gap-2.5 mb-4">
+                <span className="w-2 h-2 bg-dezo-primary shrink-0" />
+                <p className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.25em] text-dezo-primary">
+                  {data.eyebrow}
+                </p>
+              </div>
             )}
             <h1
               data-hero-item
-              className={`font-display text-3xl sm:text-5xl lg:text-[3.25rem] tracking-tight leading-[1.08] mb-5 ${tone.title}`}
+              className={`font-display text-4xl sm:text-6xl lg:text-[4rem] font-black tracking-tightest leading-[1.04] uppercase mb-5 ${tone.title}`}
             >
               {data.title}
             </h1>
+            <div
+              data-hero-item
+              className="w-16 h-[3px] bg-dezo-primary mb-6"
+              aria-hidden
+            />
             {data.body && (
-              <p data-hero-item className={`text-base sm:text-lg leading-relaxed max-w-xl mb-8 ${tone.body}`}>
+              <p data-hero-item className={`text-base sm:text-lg leading-relaxed max-w-2xl mb-8 border-l-2 border-dezo-primary pl-4 ${tone.body}`}>
                 {data.body}
               </p>
             )}

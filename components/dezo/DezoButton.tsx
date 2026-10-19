@@ -27,23 +27,23 @@ export function DezoButton({
   ...props
 }: DezoButtonProps) {
   const baseStyles =
-    'inline-flex items-center justify-center font-medium transition-colors duration-200 select-none cursor-pointer active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none';
+    'inline-flex items-center justify-center font-bold uppercase tracking-wider transition-all duration-150 select-none cursor-pointer rounded-none active:translate-x-[1px] active:translate-y-[1px] disabled:opacity-50 disabled:pointer-events-none';
 
   const sizeStyles = {
-    sm: 'text-xs px-4 py-2 gap-1.5',
-    md: 'text-sm px-5 py-2.5 gap-2',
-    lg: 'text-[15px] px-6 py-3.5 gap-2 tracking-tight',
+    sm: 'font-mono text-xs px-3.5 py-2 gap-1.5',
+    md: 'font-mono text-xs sm:text-sm px-5 py-2.5 gap-2',
+    lg: 'font-mono text-sm sm:text-base px-6 py-3.5 gap-2.5 tracking-wide',
   };
 
   const variantStyles = {
     primary:
-      'bg-dezo-ink hover:bg-dezo-secondary text-dezo-text-inverse border border-dezo-ink',
+      'bg-dezo-ink hover:bg-dezo-primary text-white hover:text-dezo-ink border-2 border-dezo-ink hover:border-dezo-primary shadow-[3px_3px_0_0_#B08D57] hover:shadow-[4px_4px_0_0_#0B0B0A] hover:-translate-x-0.5 hover:-translate-y-0.5',
     secondary:
-      'bg-dezo-surface hover:bg-dezo-surface-hover text-dezo-text-primary border border-dezo-border-strong',
+      'bg-white hover:bg-dezo-bg-warm text-dezo-ink border-2 border-dezo-ink shadow-[3px_3px_0_0_#0B0B0A] hover:shadow-[4px_4px_0_0_#B08D57] hover:-translate-x-0.5 hover:-translate-y-0.5',
     outline:
-      'bg-transparent hover:bg-dezo-bg-warm text-dezo-text-primary border border-dezo-border-strong',
+      'bg-transparent hover:bg-dezo-ink text-dezo-ink hover:text-white border-2 border-dezo-ink hover:shadow-[3px_3px_0_0_#B08D57]',
     ghost:
-      'bg-transparent hover:bg-black/[0.04] text-dezo-text-secondary hover:text-dezo-text-primary',
+      'bg-transparent hover:bg-black/[0.05] text-dezo-text-secondary hover:text-dezo-text-primary border-b-2 border-transparent hover:border-dezo-ink',
   };
 
   const content = (

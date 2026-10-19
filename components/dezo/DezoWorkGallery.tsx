@@ -55,15 +55,15 @@ export function DezoWorkGallery({
         <div className="relative max-w-md w-full mx-auto sm:mx-0">
           <Search
             size={16}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-dezo-text-muted"
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-dezo-ink"
           />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search by client or keyword..."
+            placeholder="Search 181+ verified production sites..."
             aria-label="Search projects"
-            className="w-full bg-dezo-surface border border-dezo-border focus:border-dezo-primary rounded-dezo-md pl-11 pr-5 py-3 text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none transition-colors"
+            className="w-full bg-white border-2 border-dezo-ink focus:border-dezo-ink rounded-none pl-11 pr-5 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none shadow-[3px_3px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all"
           />
         </div>
 
@@ -78,10 +78,10 @@ export function DezoWorkGallery({
                   setActiveCategory(category);
                   setDisplayCount(showAll ? Number.MAX_SAFE_INTEGER : initialLimit);
                 }}
-                className={`shrink-0 px-3.5 py-2 rounded-dezo-md text-xs font-semibold uppercase tracking-wider transition-colors duration-200 cursor-pointer ${
+                className={`shrink-0 px-3.5 py-2 rounded-none font-mono text-xs font-bold uppercase tracking-wider transition-all duration-150 cursor-pointer border-2 border-dezo-ink ${
                   isSelected
-                    ? 'bg-dezo-primary text-white'
-                    : 'bg-dezo-surface hover:bg-dezo-surface-hover text-dezo-text-secondary hover:text-dezo-text-primary border border-dezo-border'
+                    ? 'bg-dezo-ink text-white shadow-[3px_3px_0_0_#B08D57] -translate-x-0.5 -translate-y-0.5'
+                    : 'bg-white hover:bg-dezo-bg-warm text-dezo-ink shadow-[2px_2px_0_0_#0B0B0A] hover:shadow-[3px_3px_0_0_#B08D57]'
                 }`}
               >
                 {category}

@@ -137,7 +137,7 @@ export default function HomePage() {
                   href={heroBanner.primaryCta?.href ?? '/start-a-project'}
                   size="lg"
                   magnetic
-                  className="w-full sm:w-auto justify-center !bg-dezo-primary !border-dezo-primary !text-dezo-ink hover:!bg-dezo-primary-hover"
+                  className="w-full sm:w-auto justify-center !bg-dezo-primary !border-2 !border-dezo-primary !text-dezo-ink hover:!bg-white hover:!border-white hover:!text-dezo-ink !shadow-[4px_4px_0_0_#FFFFFF] hover:!shadow-[4px_4px_0_0_#B08D57] font-mono font-bold tracking-wider uppercase transition-all"
                   icon={<ArrowUpRight size={16} className="dezo-cta-arrow" />}
                 >
                   {heroBanner.primaryCta?.label ?? 'Start a Project'}
@@ -149,7 +149,7 @@ export default function HomePage() {
                   variant="outline"
                   size="lg"
                   magnetic
-                  className="w-full sm:w-auto justify-center !border-white/45 !text-dezo-text-inverse hover:!bg-white/10 hover:!border-white/70"
+                  className="w-full sm:w-auto justify-center !bg-transparent !border-2 !border-white/80 !text-white hover:!bg-white hover:!text-dezo-ink !shadow-[4px_4px_0_0_rgba(255,255,255,0.25)] hover:!shadow-[4px_4px_0_0_#B08D57] font-mono font-bold tracking-wider uppercase transition-all"
                 >
                   {heroBanner.secondaryCta?.label ?? 'View Our Work'}
                 </DezoButton>
@@ -169,23 +169,26 @@ export default function HomePage() {
       </section>
 
       {/* 03 Trust — animated host strip (proof after trailer) */}
-      <DezoSection spacing="compact" className="border-y border-dezo-border bg-dezo-surface overflow-hidden">
+      <DezoSection spacing="compact" className="border-y-2 border-dezo-ink bg-white overflow-hidden py-4 shadow-[0_4px_0_0_rgba(11,11,10,0.06)]">
         <DezoContainer size="wide">
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-text-muted">
-                Live proof · selected production sites
-              </p>
-              <p className="text-[11px] text-dezo-text-muted tracking-wide">{brand.launchLine}</p>
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-dezo-ink/10 pb-2">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 bg-dezo-primary shrink-0" />
+                <p className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-dezo-ink">
+                  [LIVE PROOF] · 181+ VERIFIED PRODUCTION SITES
+                </p>
+              </div>
+              <p className="font-mono text-[10px] sm:text-[11px] text-dezo-text-muted uppercase tracking-wider">{brand.launchLine}</p>
             </div>
-            <div className="relative overflow-hidden">
+            <div className="relative overflow-hidden py-1">
               <div className="dezo-trust-marquee" aria-hidden>
                 {trustLoop.map((host, i) => (
                   <span
                     key={`${host}-${i}`}
-                    className="font-mono text-xs sm:text-sm text-dezo-text-secondary tracking-wide whitespace-nowrap"
+                    className="font-mono text-xs sm:text-sm font-bold text-dezo-ink tracking-wider whitespace-nowrap hover:text-dezo-primary transition-colors"
                   >
-                    {host}
+                    {host} //
                   </span>
                 ))}
               </div>
@@ -210,17 +213,20 @@ export default function HomePage() {
               What DEZO operates
             </DezoHeading>
           </DezoReveal>
-          <DezoStagger className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-0" stagger={0.05}>
-            {touchpointPillars.map((pillar) => (
+          <DezoStagger className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-0 border-2 border-dezo-ink bg-white shadow-[6px_6px_0_0_#0B0B0A]" stagger={0.05}>
+            {touchpointPillars.map((pillar, i) => (
               <DezoStaggerItem key={pillar.name}>
                 <Link
                   href={pillar.href}
-                  className="block border-t border-dezo-border pt-5 pr-4 h-full group"
+                  className="block border-b sm:border-b-0 sm:border-r-2 border-dezo-ink p-6 h-full group hover:bg-dezo-bg-warm transition-colors last:border-b-0 sm:last:border-r-0"
                 >
-                  <h3 className="font-sans text-sm font-semibold uppercase tracking-[0.12em] text-dezo-text-primary mb-2 group-hover:text-dezo-primary transition-colors">
+                  <span className="font-mono text-[10px] font-bold text-dezo-primary block mb-3">
+                    [0{i + 1}]
+                  </span>
+                  <h3 className="font-display text-lg font-bold uppercase tracking-tight text-dezo-text-primary mb-2 group-hover:text-dezo-primary transition-colors">
                     {pillar.name}
                   </h3>
-                  <p className="text-sm text-dezo-text-secondary leading-relaxed">
+                  <p className="text-xs sm:text-sm text-dezo-text-secondary leading-relaxed">
                     {pillar.summary}
                   </p>
                 </Link>
@@ -253,20 +259,20 @@ export default function HomePage() {
               How you can work with us
             </DezoHeading>
           </DezoReveal>
-          <div className="mt-12 divide-y divide-dezo-border border-y border-dezo-border">
+          <div className="mt-12 divide-y-2 divide-dezo-ink border-y-2 border-dezo-ink bg-white shadow-[6px_6px_0_0_#0B0B0A]">
             {serviceRows.map((row) => (
               <Link
                 key={row.num}
                 href={row.href}
-                className="dezo-service-row group grid grid-cols-12 gap-4 py-7 sm:py-8 items-start -mx-2 px-2"
+                className="dezo-service-row group grid grid-cols-12 gap-4 p-6 sm:p-7 items-start hover:bg-dezo-bg-warm transition-all"
                 onMouseEnter={() => setHoveredService(row.num)}
                 onMouseLeave={() => setHoveredService(null)}
               >
-                <span className="col-span-2 sm:col-span-1 font-mono text-xs text-dezo-text-muted pt-1">
-                  {row.num}
+                <span className="col-span-2 sm:col-span-1 font-mono text-xs font-bold text-dezo-primary pt-1">
+                  [{row.num}]
                 </span>
                 <div className="col-span-10 sm:col-span-4">
-                  <h3 className="font-display text-xl sm:text-2xl text-dezo-text-primary group-hover:text-dezo-primary transition-colors">
+                  <h3 className="font-display text-xl sm:text-2xl font-bold text-dezo-text-primary group-hover:text-dezo-primary transition-colors">
                     {row.name}
                   </h3>
                 </div>
@@ -281,8 +287,8 @@ export default function HomePage() {
                     {row.summary}
                   </p>
                 </div>
-                <span className="hidden lg:flex col-span-1 justify-end items-center text-dezo-text-muted group-hover:text-dezo-primary transition-colors">
-                  <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+                <span className="hidden lg:flex col-span-1 justify-end items-center text-dezo-ink group-hover:text-dezo-primary transition-colors">
+                  <ArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
                 </span>
               </Link>
             ))}
@@ -319,7 +325,7 @@ export default function HomePage() {
                     className="group block"
                   >
                     <div
-                      className={`relative w-full overflow-hidden border border-dezo-border bg-dezo-bg mb-8 lg:mb-10 ${
+                      className={`relative w-full overflow-hidden border-2 border-dezo-ink bg-white mb-8 lg:mb-10 shadow-[6px_6px_0_0_#0B0B0A] group-hover:shadow-[8px_8px_0_0_#B08D57] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-all ${
                         i === 0
                           ? 'aspect-[16/10] sm:aspect-[21/9]'
                           : 'aspect-[16/9] sm:aspect-[21/10]'
@@ -333,17 +339,21 @@ export default function HomePage() {
                       />
                     </div>
                     <div
-                      className={`grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 ${
+                      className={`grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 border-2 border-dezo-ink bg-white p-6 sm:p-8 shadow-[4px_4px_0_0_#0B0B0A] ${
                         reverse ? 'lg:[direction:rtl]' : ''
                       }`}
                     >
                       <div className={`lg:col-span-5 ${reverse ? 'lg:[direction:ltr]' : ''}`}>
-                        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary mb-3">
-                          {study.industry}
-                          {study.stack?.length ? ` · ${study.stack.slice(0, 3).join(' · ')}` : ''}
-                        </p>
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white bg-dezo-ink px-2 py-0.5 shadow-[2px_2px_0_0_#B08D57]">
+                            CASE // 0{i + 1}
+                          </span>
+                          <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-dezo-primary">
+                            {study.industry}
+                          </span>
+                        </div>
                         <h3
-                          className={`font-display tracking-tight text-dezo-text-primary group-hover:text-dezo-primary transition-colors duration-300 ${
+                          className={`font-display font-black tracking-tight text-dezo-text-primary group-hover:text-dezo-primary transition-colors duration-300 ${
                             i === 0
                               ? 'text-3xl sm:text-5xl lg:text-[3.25rem]'
                               : 'text-3xl sm:text-4xl lg:text-[2.75rem]'
@@ -351,27 +361,27 @@ export default function HomePage() {
                         >
                           {study.title}
                         </h3>
-                        <p className="font-mono text-xs text-dezo-text-muted mt-3">
+                        <p className="font-mono text-xs font-bold text-dezo-text-muted mt-3">
                           {cleanHost(study.url)}
                         </p>
                       </div>
                       <div
                         className={`lg:col-span-7 space-y-4 ${reverse ? 'lg:[direction:ltr]' : ''}`}
                       >
-                        <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed">
-                          <span className="font-semibold text-dezo-text-primary">Challenge. </span>
+                        <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed border-l-2 border-dezo-ink/10 pl-3">
+                          <span className="font-mono text-xs uppercase font-bold text-dezo-ink block mb-1">Challenge //</span>
                           {study.challenge}
                         </p>
-                        <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed">
-                          <span className="font-semibold text-dezo-text-primary">What we did. </span>
+                        <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed border-l-2 border-dezo-primary pl-3">
+                          <span className="font-mono text-xs uppercase font-bold text-dezo-primary block mb-1">Architecture &amp; Growth //</span>
                           {study.execution}
                         </p>
-                        <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed">
-                          <span className="font-semibold text-dezo-text-primary">Result. </span>
+                        <p className="text-sm sm:text-base text-dezo-text-secondary leading-relaxed bg-dezo-bg-warm p-3 border border-dezo-border">
+                          <span className="font-mono text-xs uppercase font-bold text-dezo-ink block mb-1">Measured Outcome //</span>
                           {study.result}
                         </p>
-                        <span className="inline-flex items-center gap-1.5 text-sm font-medium text-dezo-text-primary border-b border-dezo-ink pb-0.5 mt-2 group-hover:border-dezo-primary group-hover:text-dezo-primary transition-colors">
-                          Visit live site{' '}
+                        <span className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink group-hover:text-dezo-primary transition-colors">
+                          Visit Production System{' '}
                           <ArrowUpRight size={14} className="dezo-cta-arrow" />
                         </span>
                       </div>
@@ -420,37 +430,41 @@ export default function HomePage() {
               What are you trying to grow?
             </DezoHeading>
           </DezoReveal>
-          <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-10">
-            <ul className="lg:col-span-5 flex flex-col border-y border-dezo-border divide-y divide-dezo-border">
+          <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 border-2 border-dezo-ink bg-white p-6 sm:p-8 shadow-[6px_6px_0_0_#0B0B0A]">
+            <ul className="lg:col-span-5 flex flex-col border-b lg:border-b-0 lg:border-r-2 border-dezo-ink divide-y-2 divide-dezo-ink/10 lg:pr-8">
               {goals.map((g, i) => (
                 <li key={g.label}>
                   <button
                     type="button"
                     onClick={() => setActiveGoal(i)}
-                    className={`w-full text-left py-4 text-sm sm:text-base transition-colors ${
+                    className={`w-full text-left py-3.5 px-3 font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all cursor-pointer ${
                       activeGoal === i
-                        ? 'text-dezo-text-primary font-medium'
-                        : 'text-dezo-text-secondary hover:text-dezo-text-primary'
+                        ? 'bg-dezo-ink text-white shadow-[3px_3px_0_0_#B08D57] -translate-x-0.5'
+                        : 'text-dezo-text-secondary hover:text-dezo-text-primary hover:bg-dezo-bg-warm'
                     }`}
                   >
-                    {g.label}
+                    [{String(i + 1).padStart(2, '0')}] {g.label}
                   </button>
                 </li>
               ))}
             </ul>
-            <div className="lg:col-span-7 border-t border-dezo-border pt-6 sm:pt-2 lg:border-t-0 lg:border-l lg:pl-10">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary mb-3">
-                Recommended stack
-              </p>
-              <h3 className="font-display text-2xl sm:text-3xl text-dezo-text-primary mb-5">
+            <div className="lg:col-span-7 flex flex-col justify-center">
+              <span className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white bg-dezo-primary px-2.5 py-1 w-max mb-3 shadow-[2px_2px_0_0_#0B0B0A]">
+                RECOMMENDED ARCHITECTURE
+              </span>
+              <h3 className="font-display text-2xl sm:text-4xl font-black text-dezo-text-primary mb-4">
                 {goals[activeGoal].label}
               </h3>
-              <p className="font-mono text-sm text-dezo-text-secondary leading-relaxed mb-8">
-                {goals[activeGoal].stack.join('  →  ')}
-              </p>
-              <DezoButton href={goals[activeGoal].href} size="sm" icon={<ArrowUpRight size={14} />}>
-                Build my growth plan
-              </DezoButton>
+              <div className="bg-dezo-bg-warm border-2 border-dezo-ink p-4 mb-6 shadow-[3px_3px_0_0_#0B0B0A]">
+                <p className="font-mono text-xs sm:text-sm font-bold text-dezo-ink leading-relaxed">
+                  {goals[activeGoal].stack.join('  //  ')}
+                </p>
+              </div>
+              <div>
+                <DezoButton href={goals[activeGoal].href} size="sm" icon={<ArrowUpRight size={14} />}>
+                  Build My Growth Plan
+                </DezoButton>
+              </div>
             </div>
           </div>
         </DezoContainer>
@@ -503,14 +517,24 @@ export default function HomePage() {
             </DezoButton>
           </div>
           <DezoStagger
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-dezo-border border border-dezo-border"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border-2 border-dezo-ink bg-white shadow-[6px_6px_0_0_#0B0B0A]"
             stagger={0.05}
           >
-            {engagementPlans.map((plan) => (
+            {engagementPlans.map((plan, i) => (
               <DezoStaggerItem key={plan.name}>
-                <div className="h-full p-6 sm:p-8 bg-dezo-surface">
-                  <p className="font-display text-2xl text-dezo-text-primary mb-3">{plan.name}</p>
-                  <p className="text-sm text-dezo-text-secondary leading-relaxed">{plan.blurb}</p>
+                <div className="h-full p-6 sm:p-8 bg-white border-b sm:border-b-0 sm:border-r-2 border-dezo-ink last:border-b-0 sm:last:border-r-0 hover:bg-dezo-bg-warm transition-colors flex flex-col justify-between">
+                  <div>
+                    <span className="font-mono text-[11px] font-bold text-dezo-primary block mb-3">
+                      PLAN // 0{i + 1}
+                    </span>
+                    <p className="font-display text-2xl font-black text-dezo-text-primary mb-3">{plan.name}</p>
+                    <p className="text-xs sm:text-sm text-dezo-text-secondary leading-relaxed">{plan.blurb}</p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t-2 border-dezo-ink/10">
+                    <DezoButton href="/pricing" variant="outline" size="sm" className="w-full">
+                      Details //
+                    </DezoButton>
+                  </div>
                 </div>
               </DezoStaggerItem>
             ))}

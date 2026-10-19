@@ -78,25 +78,28 @@ export function DezoNavigation() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         scrolled
-          ? 'bg-dezo-bg/95 backdrop-blur-md border-b border-dezo-border py-3 shadow-xs'
+          ? 'bg-dezo-bg/95 backdrop-blur-md border-b-2 border-dezo-ink py-3 shadow-[0_4px_0_0_rgba(11,11,10,0.15)]'
           : isHome
-          ? 'bg-transparent py-5 border-b border-white/[0.08]'
-          : 'bg-dezo-bg-warm/95 backdrop-blur-sm py-5 border-b border-transparent'
+          ? 'bg-transparent py-5 border-b border-white/[0.12]'
+          : 'bg-dezo-bg-warm py-5 border-b-2 border-dezo-ink'
       }`}
     >
       <DezoContainer size="wide">
         <div className="flex items-center justify-between">
-          <Link href="/" aria-label="DEZO homepage" className="group">
+          <Link href="/" aria-label="DEZO homepage" className="group flex items-baseline gap-2.5">
             <span
-              className={`font-display text-2xl tracking-tight transition-colors ${
+              className={`font-display text-2xl sm:text-3xl font-black tracking-tightest uppercase transition-colors ${
                 isTransparent
                   ? 'text-white group-hover:text-dezo-primary'
-                  : 'text-dezo-text-primary group-hover:text-dezo-primary'
+                  : 'text-dezo-ink group-hover:text-dezo-primary'
               }`}
             >
               DEZO
+            </span>
+            <span className="hidden sm:inline-block font-mono text-[9px] uppercase tracking-widest text-dezo-primary font-semibold">
+              [EST. 2026]
             </span>
           </Link>
 

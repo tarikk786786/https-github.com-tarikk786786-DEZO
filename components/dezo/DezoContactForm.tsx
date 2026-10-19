@@ -60,39 +60,39 @@ export function DezoContactForm() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {/* Name */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="name" className="text-xs font-bold uppercase tracking-wider text-dezo-text-secondary">
-              Name <span className="text-red-400">*</span>
+            <label htmlFor="name" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
+              Name <span className="text-red-500">*</span>
             </label>
             <input
               id="name"
               type="text"
               placeholder="e.g. Tarik Islam"
               {...register('name')}
-              className={`w-full bg-dezo-surface-elevated border ${
-                errors.name ? 'border-red-500' : 'border-dezo-border focus:border-dezo-primary'
-              } rounded-dezo-md px-4 py-3 text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none transition-colors`}
+              className={`w-full bg-white border-2 ${
+                errors.name ? 'border-red-500' : 'border-dezo-ink'
+              } rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all`}
             />
             {errors.name && (
-              <span className="text-xs text-red-400 font-medium">{errors.name.message}</span>
+              <span className="font-mono text-xs text-red-500 font-bold">{errors.name.message}</span>
             )}
           </div>
 
           {/* Email */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="email" className="text-xs font-bold uppercase tracking-wider text-dezo-text-secondary">
-              Email <span className="text-red-400">*</span>
+            <label htmlFor="email" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
+              Email <span className="text-red-500">*</span>
             </label>
             <input
               id="email"
               type="email"
               placeholder="name@company.com"
               {...register('email')}
-              className={`w-full bg-dezo-surface-elevated border ${
-                errors.email ? 'border-red-500' : 'border-dezo-border focus:border-dezo-primary'
-              } rounded-dezo-md px-4 py-3 text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none transition-colors`}
+              className={`w-full bg-white border-2 ${
+                errors.email ? 'border-red-500' : 'border-dezo-ink'
+              } rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all`}
             />
             {errors.email && (
-              <span className="text-xs text-red-400 font-medium">{errors.email.message}</span>
+              <span className="font-mono text-xs text-red-500 font-bold">{errors.email.message}</span>
             )}
           </div>
         </div>
@@ -100,26 +100,26 @@ export function DezoContactForm() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {/* Phone */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="phone" className="text-xs font-bold uppercase tracking-wider text-dezo-text-secondary">
-              Phone Number <span className="text-red-400">*</span>
+            <label htmlFor="phone" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
+              Phone Number <span className="text-red-500">*</span>
             </label>
             <input
               id="phone"
               type="tel"
               placeholder="+91 91144 11026"
               {...register('phone')}
-              className={`w-full bg-dezo-surface-elevated border ${
-                errors.phone ? 'border-red-500' : 'border-dezo-border focus:border-dezo-primary'
-              } rounded-dezo-md px-4 py-3 text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none transition-colors`}
+              className={`w-full bg-white border-2 ${
+                errors.phone ? 'border-red-500' : 'border-dezo-ink'
+              } rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all`}
             />
             {errors.phone && (
-              <span className="text-xs text-red-400 font-medium">{errors.phone.message}</span>
+              <span className="font-mono text-xs text-red-500 font-bold">{errors.phone.message}</span>
             )}
           </div>
 
           {/* Business Name */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="businessName" className="text-xs font-bold uppercase tracking-wider text-dezo-text-secondary">
+            <label htmlFor="businessName" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
               Business / Brand (Optional)
             </label>
             <input
@@ -127,7 +127,7 @@ export function DezoContactForm() {
               type="text"
               placeholder="Your Brand Name"
               {...register('businessName')}
-              className="w-full bg-dezo-surface-elevated border border-dezo-border focus:border-dezo-primary rounded-dezo-md px-4 py-3 text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none transition-colors"
+              className="w-full bg-white border-2 border-dezo-ink rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all"
             />
           </div>
         </div>
@@ -135,15 +135,15 @@ export function DezoContactForm() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {/* Service Needed */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="service" className="text-xs font-bold uppercase tracking-wider text-dezo-text-secondary">
-              Service Required <span className="text-red-400">*</span>
+            <label htmlFor="service" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
+              Service Required <span className="text-red-500">*</span>
             </label>
             <select
               id="service"
               {...register('service')}
-              className={`w-full bg-dezo-surface-elevated border ${
-                errors.service ? 'border-red-500' : 'border-dezo-border focus:border-dezo-primary'
-              } rounded-dezo-md px-4 py-3 text-sm text-dezo-text-primary focus:outline-none transition-colors cursor-pointer`}
+              className={`w-full bg-white border-2 ${
+                errors.service ? 'border-red-500' : 'border-dezo-ink'
+              } rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all cursor-pointer`}
             >
               <option value="">Select Service</option>
               <option value="Website Development">Website Development (Next.js / Custom)</option>
@@ -154,19 +154,19 @@ export function DezoContactForm() {
               <option value="Bespoke Engineering">Bespoke Engineering</option>
             </select>
             {errors.service && (
-              <span className="text-xs text-red-400 font-medium">{errors.service.message}</span>
+              <span className="font-mono text-xs text-red-500 font-bold">{errors.service.message}</span>
             )}
           </div>
 
           {/* Budget */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="budget" className="text-xs font-bold uppercase tracking-wider text-dezo-text-secondary">
+            <label htmlFor="budget" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
               Estimated Budget
             </label>
             <select
               id="budget"
               {...register('budget')}
-              className="w-full bg-dezo-surface-elevated border border-dezo-border focus:border-dezo-primary rounded-dezo-md px-4 py-3 text-sm text-dezo-text-primary focus:outline-none transition-colors cursor-pointer"
+              className="w-full bg-white border-2 border-dezo-ink rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all cursor-pointer"
             >
               <option value="Undisclosed">Select Budget (Optional)</option>
               <option value="Under ₹50,000">Under ₹50,000</option>
@@ -179,20 +179,20 @@ export function DezoContactForm() {
 
         {/* Message */}
         <div className="flex flex-col gap-2">
-          <label htmlFor="message" className="text-xs font-bold uppercase tracking-wider text-dezo-text-secondary">
-            Project Overview <span className="text-red-400">*</span>
+          <label htmlFor="message" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
+            Project Overview <span className="text-red-500">*</span>
           </label>
           <textarea
             id="message"
             rows={4}
             placeholder="Tell us about your brand, current challenges, and goals..."
             {...register('message')}
-            className={`w-full bg-dezo-surface-elevated border ${
-              errors.message ? 'border-red-500' : 'border-dezo-border focus:border-dezo-primary'
-            } rounded-dezo-md px-4 py-3 text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none transition-colors resize-vertical`}
+            className={`w-full bg-white border-2 ${
+              errors.message ? 'border-red-500' : 'border-dezo-ink'
+            } rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all resize-vertical`}
           />
           {errors.message && (
-            <span className="text-xs text-red-400 font-medium">{errors.message.message}</span>
+            <span className="font-mono text-xs text-red-500 font-bold">{errors.message.message}</span>
           )}
         </div>
 
@@ -205,7 +205,7 @@ export function DezoContactForm() {
             icon={<Send size={16} />}
             className="w-full sm:w-auto"
           >
-            {isSubmitting ? 'Routing Request...' : 'Send Inquiry via WhatsApp'}
+            {isSubmitting ? 'Routing Request...' : 'Send Inquiry via WhatsApp //'}
           </DezoButton>
         </div>
       </form>

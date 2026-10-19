@@ -97,14 +97,14 @@ export function DezoQualificationFunnel() {
   };
 
   return (
-    <div className="w-full rounded-dezo-xl bg-dezo-surface border border-dezo-border p-6 sm:p-10 shadow-dezo-card">
+    <div className="w-full rounded-none bg-white border-2 border-dezo-ink p-6 sm:p-10 shadow-[6px_6px_0_0_#0B0B0A]">
       {/* Progress Bar */}
       <div className="mb-8">
-        <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-dezo-text-muted mb-2">
-          <span>Project Diagnostic: Step {step} of 4</span>
-          <span>{step === 1 ? 'Business Identity' : step === 2 ? 'Channels & Needs' : step === 3 ? 'Scale & Budget' : 'Direct Contacts'}</span>
+        <div className="flex items-center justify-between text-xs font-mono font-bold uppercase tracking-widest text-dezo-ink mb-2.5">
+          <span>[DIAGNOSTIC] // STEP {step} OF 4</span>
+          <span className="text-dezo-primary">{step === 1 ? 'Business Identity' : step === 2 ? 'Channels & Needs' : step === 3 ? 'Scale & Budget' : 'Direct Contacts'}</span>
         </div>
-        <div className="w-full h-1.5 bg-dezo-surface-elevated rounded-full overflow-hidden">
+        <div className="w-full h-2 bg-dezo-bg border border-dezo-ink rounded-none overflow-hidden">
           <div
             className="h-full bg-dezo-primary transition-all duration-300"
             style={{ width: `${(step / 4) * 100}%` }}
@@ -114,32 +114,32 @@ export function DezoQualificationFunnel() {
 
       {result ? (
         <div className="py-8 flex flex-col items-center text-center gap-6 animate-fade-in">
-          <div className="w-16 h-16 rounded-full bg-dezo-success/10 border border-dezo-success/30 flex items-center justify-center text-dezo-success">
+          <div className="w-16 h-16 rounded-none bg-dezo-ink border-2 border-dezo-primary flex items-center justify-center text-dezo-primary shadow-[4px_4px_0_0_#B08D57]">
             <CheckCircle2 size={32} />
           </div>
 
           <div>
-            <span className="text-xs font-mono uppercase tracking-widest text-dezo-accent">
-              Diagnostic Complete · Score: {result.leadScore}/100
+            <span className="font-mono text-xs font-bold uppercase tracking-widest text-white bg-dezo-ink px-2.5 py-1 shadow-[2px_2px_0_0_#B08D57]">
+              DIAGNOSTIC COMPLETE // SCORE: {result.leadScore}/100
             </span>
-            <h3 className="text-2xl font-black text-dezo-text-primary mt-1 mb-2">
+            <h3 className="font-display text-3xl font-black text-dezo-text-primary mt-3 mb-2">
               {result.classification}
             </h3>
-            <p className="text-sm text-dezo-text-secondary max-w-md mx-auto">
+            <p className="text-sm text-dezo-text-secondary max-w-md mx-auto border-l-2 border-dezo-primary pl-3">
               {result.recommendedNextAction}
             </p>
           </div>
 
-          <div className="p-4 rounded-dezo-md bg-dezo-surface-elevated border border-dezo-border max-w-md w-full text-xs text-left flex flex-col gap-1.5 text-dezo-text-muted">
-            <div className="text-dezo-text-primary font-bold mb-1">Scoring Breakdown:</div>
+          <div className="p-5 rounded-none bg-dezo-bg-warm border-2 border-dezo-ink max-w-md w-full font-mono text-xs text-left flex flex-col gap-2 shadow-[3px_3px_0_0_#0B0B0A]">
+            <div className="text-dezo-ink font-bold uppercase tracking-wider border-b border-dezo-ink/10 pb-1">Scoring Telemetry:</div>
             <div>Commercial Intent: {result.scoringBreakdown.intent}/30</div>
             <div>Budget Alignment: {result.scoringBreakdown.budgetFit}/30</div>
             <div>Channel Maturity: {result.scoringBreakdown.channelMaturity}/20</div>
             <div>Timeline Urgency: {result.scoringBreakdown.timelineUrgency}/20</div>
           </div>
 
-          <p className="text-xs text-dezo-success font-semibold">
-            Opening WhatsApp with your qualified intake summary...
+          <p className="font-mono text-xs text-dezo-primary font-bold uppercase tracking-wider">
+            Routing to WhatsApp with your strategic intake summary...
           </p>
         </div>
       ) : (
@@ -170,10 +170,10 @@ export function DezoQualificationFunnel() {
                     key={type}
                     type="button"
                     onClick={() => setBusinessType(type)}
-                    className={`p-4 rounded-dezo-md text-left text-xs font-semibold border transition-all cursor-pointer ${
+                    className={`p-4 rounded-none text-left font-mono font-bold text-xs uppercase tracking-wider border-2 border-dezo-ink transition-all cursor-pointer ${
                       businessType === type
-                        ? 'bg-dezo-primary/10 border-dezo-primary text-dezo-text-primary'
-                        : 'bg-dezo-surface-elevated border-dezo-border text-dezo-text-secondary hover:text-dezo-text-primary'
+                        ? 'bg-dezo-ink text-white shadow-[3px_3px_0_0_#B08D57] -translate-x-0.5 -translate-y-0.5'
+                        : 'bg-white hover:bg-dezo-bg-warm text-dezo-ink shadow-[2px_2px_0_0_#0B0B0A] hover:shadow-[3px_3px_0_0_#B08D57]'
                     }`}
                   >
                     {type}
@@ -187,7 +187,7 @@ export function DezoQualificationFunnel() {
                   onClick={handleNext}
                   icon={<ArrowRight size={14} />}
                 >
-                  Continue
+                  Continue //
                 </DezoButton>
               </div>
             </div>
@@ -197,7 +197,7 @@ export function DezoQualificationFunnel() {
           {step === 2 && (
             <div className="flex flex-col gap-6">
               <div>
-                <h3 className="text-xl font-bold text-dezo-text-primary mb-1">
+                <h3 className="font-display text-2xl font-bold text-dezo-text-primary mb-1">
                   Where do you sell, and what do you need?
                 </h3>
                 <p className="text-xs text-dezo-text-secondary">
@@ -206,7 +206,7 @@ export function DezoQualificationFunnel() {
               </div>
 
               <div>
-                <label className="text-xs font-bold uppercase tracking-wider text-dezo-text-muted block mb-2">
+                <label className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink block mb-2">
                   Active Selling Channels:
                 </label>
                 <div className="flex flex-wrap gap-2">
@@ -215,10 +215,10 @@ export function DezoQualificationFunnel() {
                       key={ch}
                       type="button"
                       onClick={() => toggleItem(channelsActive, setChannelsActive, ch)}
-                      className={`px-3 py-1.5 rounded-full text-xs font-semibold border cursor-pointer transition-all ${
+                      className={`px-3.5 py-2 rounded-none font-mono text-xs font-bold uppercase tracking-wider border-2 border-dezo-ink cursor-pointer transition-all ${
                         channelsActive.includes(ch)
-                          ? 'bg-dezo-accent/10 border-dezo-accent text-dezo-accent'
-                          : 'bg-dezo-surface-elevated border-dezo-border text-dezo-text-secondary'
+                          ? 'bg-dezo-ink text-white shadow-[2px_2px_0_0_#B08D57]'
+                          : 'bg-white hover:bg-dezo-bg-warm text-dezo-ink'
                       }`}
                     >
                       {ch}
@@ -228,10 +228,10 @@ export function DezoQualificationFunnel() {
               </div>
 
               <div>
-                <label className="text-xs font-bold uppercase tracking-wider text-dezo-text-muted block mb-2">
+                <label className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink block mb-2">
                   Pillars Required:
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {[
                     'BUILD: High-Speed Website or Custom Ecommerce',
                     'BRAND: Brand Identity, Packaging & A+ Content',
@@ -244,10 +244,10 @@ export function DezoQualificationFunnel() {
                       key={pil}
                       type="button"
                       onClick={() => toggleItem(pillarsNeeded, setPillarsNeeded, pil)}
-                      className={`p-3 rounded-dezo-md text-left text-xs font-medium border cursor-pointer transition-all ${
+                      className={`p-3.5 rounded-none text-left font-mono text-xs font-bold uppercase tracking-wider border-2 border-dezo-ink cursor-pointer transition-all ${
                         pillarsNeeded.includes(pil)
-                          ? 'bg-dezo-primary/10 border-dezo-primary text-dezo-text-primary font-bold'
-                          : 'bg-dezo-surface-elevated border-dezo-border text-dezo-text-secondary'
+                          ? 'bg-dezo-ink text-white shadow-[3px_3px_0_0_#B08D57] -translate-x-0.5'
+                          : 'bg-white hover:bg-dezo-bg-warm text-dezo-ink shadow-[2px_2px_0_0_#0B0B0A]'
                       }`}
                     >
                       {pil}
@@ -275,7 +275,7 @@ export function DezoQualificationFunnel() {
           {step === 3 && (
             <div className="flex flex-col gap-6">
               <div>
-                <h3 className="text-xl font-bold text-dezo-text-primary mb-1">
+                <h3 className="font-display text-2xl font-bold text-dezo-text-primary mb-1">
                   Scale, Timeline & Commercial Scope
                 </h3>
                 <p className="text-xs text-dezo-text-secondary">
@@ -285,13 +285,13 @@ export function DezoQualificationFunnel() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold uppercase tracking-wider text-dezo-text-muted">
+                  <label className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
                     Monthly Revenue Scale:
                   </label>
                   <select
                     value={currentTurnover}
                     onChange={(e) => setCurrentTurnover(e.target.value as any)}
-                    className="w-full bg-dezo-surface-elevated border border-dezo-border rounded-dezo-md p-3 text-xs text-dezo-text-primary focus:outline-none"
+                    className="w-full bg-white border-2 border-dezo-ink rounded-none p-3 font-mono text-xs text-dezo-text-primary focus:outline-none shadow-[2px_2px_0_0_#0B0B0A]"
                   >
                     <option value="Pre-revenue">Pre-revenue / Planning Phase</option>
                     <option value="Under ₹5L/mo">Under ₹5 Lakhs / month</option>
@@ -302,13 +302,13 @@ export function DezoQualificationFunnel() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold uppercase tracking-wider text-dezo-text-muted">
+                  <label className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
                     Execution Timeline:
                   </label>
                   <select
                     value={timeline}
                     onChange={(e) => setTimeline(e.target.value as any)}
-                    className="w-full bg-dezo-surface-elevated border border-dezo-border rounded-dezo-md p-3 text-xs text-dezo-text-primary focus:outline-none"
+                    className="w-full bg-white border-2 border-dezo-ink rounded-none p-3 font-mono text-xs text-dezo-text-primary focus:outline-none shadow-[2px_2px_0_0_#0B0B0A]"
                   >
                     <option value="Immediate (1-2 weeks)">Immediate (1-2 weeks)</option>
                     <option value="Within 1 month">Within 1 month</option>
@@ -319,7 +319,7 @@ export function DezoQualificationFunnel() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-dezo-text-muted">
+                <label className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
                   Allocated Project Budget:
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -328,10 +328,10 @@ export function DezoQualificationFunnel() {
                       key={b}
                       type="button"
                       onClick={() => setBudgetTier(b as any)}
-                      className={`p-3 rounded-dezo-md text-xs font-semibold border cursor-pointer transition-all ${
+                      className={`p-3 rounded-none text-left font-mono font-bold text-xs uppercase tracking-wider border-2 border-dezo-ink cursor-pointer transition-all ${
                         budgetTier === b
-                          ? 'bg-dezo-primary/10 border-dezo-primary text-dezo-text-primary'
-                          : 'bg-dezo-surface-elevated border-dezo-border text-dezo-text-secondary'
+                          ? 'bg-dezo-ink text-white shadow-[3px_3px_0_0_#B08D57] -translate-x-0.5'
+                          : 'bg-white hover:bg-dezo-bg-warm text-dezo-ink shadow-[2px_2px_0_0_#0B0B0A]'
                       }`}
                     >
                       {b}
@@ -345,7 +345,7 @@ export function DezoQualificationFunnel() {
                   Back
                 </DezoButton>
                 <DezoButton onClick={handleNext} icon={<ArrowRight size={14} />}>
-                  Final Step
+                  Final Step //
                 </DezoButton>
               </div>
             </div>
@@ -355,11 +355,11 @@ export function DezoQualificationFunnel() {
           {step === 4 && (
             <form onSubmit={handleFinish} className="flex flex-col gap-5">
               <div>
-                <h3 className="text-xl font-bold text-dezo-text-primary mb-1">
+                <h3 className="font-display text-2xl font-bold text-dezo-text-primary mb-1">
                   Where should we send your strategic audit?
                 </h3>
                 <p className="text-xs text-dezo-text-secondary">
-                  Direct connection with Founder & CEO Tarik Islam.
+                  Direct connection with Founder &amp; CEO Tarik Islam.
                 </p>
               </div>
 
@@ -370,7 +370,7 @@ export function DezoQualificationFunnel() {
                   placeholder="Your Name *"
                   value={contactData.name}
                   onChange={(e) => setContactData({ ...contactData, name: e.target.value })}
-                  className="bg-dezo-surface-elevated border border-dezo-border rounded-dezo-md p-3 text-xs text-dezo-text-primary focus:border-dezo-primary focus:outline-none"
+                  className="bg-white border-2 border-dezo-ink rounded-none p-3 font-mono text-xs text-dezo-text-primary focus:border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] focus:outline-none transition-all"
                 />
                 <input
                   type="tel"
@@ -378,7 +378,7 @@ export function DezoQualificationFunnel() {
                   placeholder="Phone / WhatsApp Number *"
                   value={contactData.phone}
                   onChange={(e) => setContactData({ ...contactData, phone: e.target.value })}
-                  className="bg-dezo-surface-elevated border border-dezo-border rounded-dezo-md p-3 text-xs text-dezo-text-primary focus:border-dezo-primary focus:outline-none"
+                  className="bg-white border-2 border-dezo-ink rounded-none p-3 font-mono text-xs text-dezo-text-primary focus:border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] focus:outline-none transition-all"
                 />
               </div>
 
@@ -389,14 +389,14 @@ export function DezoQualificationFunnel() {
                   placeholder="Official Email *"
                   value={contactData.email}
                   onChange={(e) => setContactData({ ...contactData, email: e.target.value })}
-                  className="bg-dezo-surface-elevated border border-dezo-border rounded-dezo-md p-3 text-xs text-dezo-text-primary focus:border-dezo-primary focus:outline-none"
+                  className="bg-white border-2 border-dezo-ink rounded-none p-3 font-mono text-xs text-dezo-text-primary focus:border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] focus:outline-none transition-all"
                 />
                 <input
                   type="text"
                   placeholder="Business / Brand Name"
                   value={contactData.businessName}
                   onChange={(e) => setContactData({ ...contactData, businessName: e.target.value })}
-                  className="bg-dezo-surface-elevated border border-dezo-border rounded-dezo-md p-3 text-xs text-dezo-text-primary focus:border-dezo-primary focus:outline-none"
+                  className="bg-white border-2 border-dezo-ink rounded-none p-3 font-mono text-xs text-dezo-text-primary focus:border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] focus:outline-none transition-all"
                 />
               </div>
 
@@ -406,7 +406,7 @@ export function DezoQualificationFunnel() {
                 placeholder="Briefly describe your current primary business bottleneck or milestone goal *"
                 value={contactData.projectGoals}
                 onChange={(e) => setContactData({ ...contactData, projectGoals: e.target.value })}
-                className="bg-dezo-surface-elevated border border-dezo-border rounded-dezo-md p-3 text-xs text-dezo-text-primary focus:border-dezo-primary focus:outline-none resize-none"
+                className="bg-white border-2 border-dezo-ink rounded-none p-3 font-mono text-xs text-dezo-text-primary focus:border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] focus:outline-none resize-none transition-all"
               />
 
               <div className="flex justify-between pt-4">
@@ -414,7 +414,7 @@ export function DezoQualificationFunnel() {
                   Back
                 </DezoButton>
                 <DezoButton type="submit" size="md" icon={<Send size={14} />}>
-                  Run Diagnostic & Connect
+                  Run Diagnostic &amp; Connect //
                 </DezoButton>
               </div>
             </form>

@@ -49,44 +49,54 @@ export default function PricingPage() {
       <DezoSection spacing="normal">
         <DezoContainer size="wide">
           <DezoStagger
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-dezo-border border border-dezo-border"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border-2 border-dezo-ink bg-white shadow-[6px_6px_0_0_#0B0B0A]"
             stagger={0.06}
           >
-            {engagementPlans.map((plan) => (
+            {engagementPlans.map((plan, i) => (
               <DezoStaggerItem key={plan.name}>
-                <div className="h-full p-6 sm:p-8 bg-dezo-surface flex flex-col">
-                  <p className="font-display text-2xl sm:text-3xl text-dezo-text-primary mb-4">
-                    {plan.name}
-                  </p>
-                  <p className="text-sm text-dezo-text-secondary leading-relaxed flex-1">
-                    {plan.blurb}
-                  </p>
-                  <DezoButton href="/start-a-project" size="sm" className="mt-8 w-fit">
-                    Choose {plan.name}
-                  </DezoButton>
+                <div className="h-full p-6 sm:p-8 bg-white border-b sm:border-b-0 sm:border-r-2 border-dezo-ink last:border-b-0 sm:last:border-r-0 flex flex-col justify-between hover:bg-dezo-bg-warm transition-colors">
+                  <div>
+                    <span className="font-mono text-[11px] font-bold text-dezo-primary block mb-3">
+                      PLAN // 0{i + 1}
+                    </span>
+                    <p className="font-display text-2xl sm:text-3xl font-black text-dezo-text-primary mb-4">
+                      {plan.name}
+                    </p>
+                    <p className="text-sm text-dezo-text-secondary leading-relaxed">
+                      {plan.blurb}
+                    </p>
+                  </div>
+                  <div className="mt-8 pt-4 border-t-2 border-dezo-ink/10">
+                    <DezoButton href="/start-a-project" size="sm" className="w-full">
+                      Choose {plan.name} //
+                    </DezoButton>
+                  </div>
                 </div>
               </DezoStaggerItem>
             ))}
           </DezoStagger>
 
           <DezoReveal delay={0.1}>
-            <div className="mt-14 max-w-2xl">
+            <div className="mt-14 max-w-2xl border-2 border-dezo-ink bg-white p-8 shadow-[4px_4px_0_0_#0B0B0A]">
               <DezoHeading
-                badge="How pricing works"
+                badge="OPERATING PROTOCOL"
                 as="h2"
                 subtitle="We scope after understanding your business—not before."
               >
                 Diagnostic first
               </DezoHeading>
-              <ul className="mt-8 space-y-3 text-sm text-dezo-text-secondary">
-                <li className="border-t border-dezo-border pt-3">
-                  01 — Share your goals and current stack
+              <ul className="mt-8 space-y-3 font-mono text-xs sm:text-sm text-dezo-text-secondary">
+                <li className="border-t-2 border-dezo-ink/10 pt-3 flex items-start gap-3">
+                  <span className="text-dezo-primary font-bold">[01]</span>
+                  <span>Share your goals, market bottlenecks, and current stack</span>
                 </li>
-                <li className="border-t border-dezo-border pt-3">
-                  02 — We propose START / GROW / SCALE / CUSTOM
+                <li className="border-t-2 border-dezo-ink/10 pt-3 flex items-start gap-3">
+                  <span className="text-dezo-primary font-bold">[02]</span>
+                  <span>We assemble the stack: START / GROW / SCALE / CUSTOM</span>
                 </li>
-                <li className="border-t border-dezo-border pt-3">
-                  03 — Fixed or monthly scope with clear deliverables
+                <li className="border-t-2 border-dezo-ink/10 pt-3 flex items-start gap-3">
+                  <span className="text-dezo-primary font-bold">[03]</span>
+                  <span>Fixed or monthly scope with clear deliverables and KPIs</span>
                 </li>
               </ul>
               <div className="mt-8 flex flex-wrap gap-3">

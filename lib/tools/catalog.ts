@@ -1,5 +1,5 @@
-﻿/**
- * DEZO Tools Lab ΓÇö tool catalog & availability
+/**
+ * DEZO Tools Lab — tool catalog & availability
  */
 
 import type { ToolCategory } from './types';
@@ -79,7 +79,7 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
     availability: 'live',
     tagline: 'India intent clustering',
     description:
-      'Client-side commercial intent, modifiers, and long-tail opportunity scoring ΓÇö no paid keyword API.',
+      'Client-side commercial intent, modifiers, and long-tail opportunity scoring — no paid keyword API.',
     badge: 'Live',
   },
   {

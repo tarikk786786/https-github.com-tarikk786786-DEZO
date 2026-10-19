@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import { useParams } from 'next/navigation';
@@ -243,7 +243,7 @@ export default function CategoryToolPage() {
                 Telemetry & Score Weighting
               </h3>
               <p className="text-xs sm:text-sm text-dezo-text-secondary leading-relaxed">
-                Our engine uses strict deterministic DOM and network benchmarks. We do not provide arbitrary scoring ΓÇö every metric reflects verifiable impact on search impressions and conversion rates.
+                Our engine uses strict deterministic DOM and network benchmarks. We do not provide arbitrary scoring — every metric reflects verifiable impact on search impressions and conversion rates.
               </p>
               <div className="flex flex-wrap gap-2 pt-2">
                 {config.metricsMeasured.map((m, i) => (

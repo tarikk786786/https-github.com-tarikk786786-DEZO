@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import { Search, Loader2, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
@@ -41,19 +41,19 @@ const CATEGORY_META: Record<
     name: 'Keyword Opportunity',
     placeholder: 'Enter a seed keyword (e.g. sambalpuri saree online)',
     example: 'sambalpuri saree online',
-    description: 'India-intent clusters from your keyword ΓÇö not Google Planner volumes.',
+    description: 'India-intent clusters from your keyword — not Google Planner volumes.',
   },
   amazon: {
     name: 'Amazon Listing',
     placeholder: 'Amazon product URL or ASIN',
     example: 'https://www.amazon.in/dp/B0EXAMPLE01',
-    description: 'Demo checklist from the listing URL ΓÇö not connected to Amazon APIs.',
+    description: 'Demo checklist from the listing URL — not connected to Amazon APIs.',
   },
   flipkart: {
     name: 'Flipkart Catalog',
     placeholder: 'Flipkart product URL',
     example: 'https://www.flipkart.com',
-    description: 'Demo checklist from the product URL ΓÇö not connected to Flipkart APIs.',
+    description: 'Demo checklist from the product URL — not connected to Flipkart APIs.',
   },
   cro: {
     name: 'CRO Checklist',
@@ -65,7 +65,7 @@ const CATEGORY_META: Record<
     name: 'Security & Headers',
     placeholder: 'Enter domain or URL',
     example: 'https://dezo.in',
-    description: 'HTTPS and public security header checks ΓÇö safe and anonymous.',
+    description: 'HTTPS and public security header checks — safe and anonymous.',
   },
   accessibility: {
     name: 'Accessibility',
@@ -112,12 +112,12 @@ export function DezoToolScanner({
     setErrorMessage(null);
 
     const steps = [
-      'Checking your inputΓÇª',
+      'Checking your input...',
       availability === 'demo'
-        ? 'Running marketplace demo checklistΓÇª'
-        : 'Reading public page signalsΓÇª',
-      'Scoring findingsΓÇª',
-      'Ranking what to fix firstΓÇª',
+        ? 'Running marketplace demo checklist...'
+        : 'Reading public page signals...',
+      'Scoring findings...',
+      'Ranking what to fix first...',
     ];
 
     try {
@@ -197,7 +197,7 @@ export function DezoToolScanner({
             </span>
             <div className="flex items-center gap-1.5">
               <ShieldCheck size={13} className="text-dezo-primary" />
-              <span>Safe public scan ┬╖ no login</span>
+              <span>Safe public scan · no login</span>
             </div>
           </div>
 
@@ -213,7 +213,7 @@ export function DezoToolScanner({
                 onChange={(e) => setInputVal(e.target.value)}
                 placeholder={currentMeta.placeholder}
                 disabled={status === 'scanning'}
-                className="w-full pl-10 pr-4 py-3.5 text-sm rounded-dezo-md bg-dezo-bg border border-dezo-border text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none focus:border-dezo-primary focus:ring-1 focus:ring-dezo-primary transition-all disabled:opacity-60"
+                className="w-full pl-10 pr-4 py-3.5 font-mono text-xs sm:text-sm rounded-none bg-white border-2 border-dezo-ink text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none focus:border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all disabled:opacity-60"
               />
             </div>
 
@@ -221,16 +221,16 @@ export function DezoToolScanner({
               type="submit"
               disabled={status === 'scanning' || !inputVal.trim()}
               whileTap={reduced ? undefined : { scale: 0.98 }}
-              className="px-6 py-3.5 rounded-dezo-md bg-dezo-primary hover:bg-dezo-primary-hover text-white font-semibold text-sm tracking-wide transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
+              className="px-6 py-3.5 rounded-none bg-dezo-ink hover:bg-dezo-primary text-white hover:text-dezo-ink border-2 border-dezo-ink font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-[3px_3px_0_0_#B08D57] hover:shadow-[4px_4px_0_0_#0B0B0A] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
             >
               {status === 'scanning' ? (
                 <>
                   <Loader2 size={16} className="animate-spin text-white" />
-                  <span>AnalyzingΓÇª</span>
+                  <span>Analyzing...</span>
                 </>
               ) : (
                 <>
-                  <span>Analyze</span>
+                  <span>Run Diagnostic //</span>
                   <ArrowRight size={15} />
                 </>
               )}

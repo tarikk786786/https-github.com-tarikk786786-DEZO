@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -57,7 +57,7 @@ export default function DezoLabPage() {
               <DezoHeading
                 badge="DEZO LAB"
                 as="h1"
-                subtitle="Free public checks for your website and storefront. Marketplace tools stay labeled Demo ΓÇö we never invent seller metrics."
+                subtitle="Free public diagnostics for your website and storefront. Marketplace tools stay labeled Demo — we never invent seller metrics."
               >
                 Check your site in minutes
               </DezoHeading>
@@ -66,7 +66,7 @@ export default function DezoLabPage() {
 
           {!activeReport ? (
             <DezoReveal delay={0.06}>
-              <div className="border border-dezo-border bg-dezo-surface p-4 sm:p-6">
+              <div className="border-2 border-dezo-ink bg-white p-6 sm:p-8 shadow-[6px_6px_0_0_#0B0B0A]">
                 <DezoToolScanner
                   onAuditComplete={(rep) => {
                     setActiveReport(rep);
@@ -163,23 +163,23 @@ export default function DezoLabPage() {
 
             {demoTools.length > 0 && (
               <div className="mt-14">
-                <h2 className="font-display text-xl text-dezo-text-primary mb-2">
-                  Marketplace ┬╖ demo
+                <h2 className="font-display text-2xl font-bold text-dezo-text-primary mb-2">
+                  Marketplace · Demo Diagnostics
                 </h2>
                 <p className="text-sm text-dezo-text-secondary mb-6 max-w-2xl">
-                  Listing checklists from the public URL only ΓÇö not connected to seller accounts.
+                  Listing checklists from the public URL only — not connected to seller accounts.
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-dezo-border">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {demoTools.map((cat) => (
                     <Link
                       key={cat.slug}
                       href={`/tools/${cat.slug}`}
-                      className="p-6 border-b md:border-r border-dezo-border last:border-r-0 hover:bg-dezo-bg transition-colors"
+                      className="p-6 border-2 border-dezo-ink bg-white shadow-[4px_4px_0_0_#0B0B0A] hover:shadow-[6px_6px_0_0_#B08D57] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all"
                     >
                       <div className="flex items-center justify-between gap-3">
-                        <h3 className="font-sans font-semibold text-dezo-text-primary">{cat.name}</h3>
-                        <span className="text-[10px] uppercase tracking-wider text-dezo-primary">
-                          Demo
+                        <h3 className="font-display text-lg font-bold text-dezo-text-primary">{cat.name}</h3>
+                        <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-dezo-ink bg-dezo-primary/20 border border-dezo-primary px-2 py-0.5">
+                          DEMO //
                         </span>
                       </div>
                       <p className="text-sm text-dezo-text-secondary mt-2 leading-relaxed">

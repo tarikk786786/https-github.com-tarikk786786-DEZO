@@ -1,4 +1,4 @@
-﻿import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { generateBacklinksForDomain, cleanDomainInput, BACKLINK_PLATFORMS } from '@/lib/tools/backlinksData';
 
 export async function GET(req: NextRequest) {

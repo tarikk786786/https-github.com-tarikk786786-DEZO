@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Backlinks Generator Data & Directory Profiles
  * Merging authoritative high-DA submission targets from WebDigitalMantra and OVDSS
  * Generates 150+ high-DA backlinks across SEO Indexers, Business Directories, Valuation Tools,
@@ -102,7 +102,7 @@ export const BACKLINK_PLATFORMS: BacklinkPlatform[] = [
   { id: 75, name: 'Telegram Web Share', category: 'Archives & Social', estimatedDA: 93, urlTemplate: 'https://t.me/share/url?url={url}&text={host}', dofollow: true, description: 'Instant messaging channel share link anchor' },
 
   // 76-110: Indian B2B, Regional & Commerce Directories
-  { id: 76, name: 'IndiaMART Directory Hub', category: 'Indian B2B', estimatedDA: 91, urlTemplate: 'https://dir.indiamart.com/search.mp?ss={host}', dofollow: true, description: 'IndiaΓÇÖs largest online B2B marketplace and supplier index' },
+  { id: 76, name: 'IndiaMART Directory Hub', category: 'Indian B2B', estimatedDA: 91, urlTemplate: 'https://dir.indiamart.com/search.mp?ss={host}', dofollow: true, description: 'India’s largest online B2B marketplace and supplier index' },
   { id: 77, name: 'Justdial Business Search', category: 'Indian B2B', estimatedDA: 88, urlTemplate: 'https://www.justdial.com/All-Cities/{host}', dofollow: true, description: 'Local search engine for Indian services, products and stores' },
   { id: 78, name: 'TradeIndia Exporters Hub', category: 'Indian B2B', estimatedDA: 86, urlTemplate: 'https://www.tradeindia.com/search.html?keyword={host}', dofollow: true, description: 'Indian and global manufacturers, suppliers and buyers directory' },
   { id: 79, name: 'Zauba Corp MCA Directory', category: 'Indian B2B', estimatedDA: 83, urlTemplate: 'https://www.zaubacorp.com/companysearchresults/{host}', dofollow: true, description: 'Ministry of Corporate Affairs company registration and CIN lookups' },
@@ -131,8 +131,8 @@ export const BACKLINK_PLATFORMS: BacklinkPlatform[] = [
   { id: 100, name: 'Censys Attack Surface', category: 'WHOIS & DNS', estimatedDA: 89, urlTemplate: 'https://search.censys.io/hosts?q={host}', dofollow: true, description: 'Public cloud certificate and network perimeter discovery' },
   { id: 101, name: 'Brave Search Engine', category: 'SEO Analyzers', estimatedDA: 92, urlTemplate: 'https://search.brave.com/search?q=site%3A{host}', dofollow: true, description: 'Independent privacy-focused web index' },
   { id: 102, name: 'Startpage Private Search', category: 'SEO Analyzers', estimatedDA: 89, urlTemplate: 'https://www.startpage.com/sp/search?query=site%3A{host}', dofollow: true, description: 'Enhanced Google results with complete privacy protection' },
-  { id: 103, name: 'Baidu Chinese Search', category: 'SEO Analyzers', estimatedDA: 96, urlTemplate: 'https://www.baidu.com/s?wd=site%3A{host}', dofollow: true, description: 'ChinaΓÇÖs primary search engine index query' },
-  { id: 104, name: 'Naver Korean Search', category: 'SEO Analyzers', estimatedDA: 94, urlTemplate: 'https://search.naver.com/search.naver?query=site%3A{host}', dofollow: true, description: 'South KoreaΓÇÖs leading web portal and search engine' },
+  { id: 103, name: 'Baidu Chinese Search', category: 'SEO Analyzers', estimatedDA: 96, urlTemplate: 'https://www.baidu.com/s?wd=site%3A{host}', dofollow: true, description: 'China’s primary search engine index query' },
+  { id: 104, name: 'Naver Korean Search', category: 'SEO Analyzers', estimatedDA: 94, urlTemplate: 'https://search.naver.com/search.naver?query=site%3A{host}', dofollow: true, description: 'South Korea’s leading web portal and search engine' },
   { id: 105, name: 'Yahoo Web Search', category: 'SEO Analyzers', estimatedDA: 97, urlTemplate: 'https://search.yahoo.com/search?p=site%3A{host}', dofollow: true, description: 'Yahoo directory and search index record' },
   { id: 106, name: 'Ask.com Search Registry', category: 'Directories', estimatedDA: 91, urlTemplate: 'https://www.ask.com/web?q=site%3A{host}', dofollow: true, description: 'Q&A knowledge base and legacy search engine' },
   { id: 107, name: 'AOL Search Hub', category: 'Directories', estimatedDA: 93, urlTemplate: 'https://search.aol.com/aol/search?q=site%3A{host}', dofollow: true, description: 'Global web index and news directory portal' },
@@ -160,7 +160,7 @@ export const BACKLINK_PLATFORMS: BacklinkPlatform[] = [
   { id: 129, name: 'Capterra Vendor Discovery', category: 'Indian B2B', estimatedDA: 92, urlTemplate: 'https://www.capterra.com/search/?query={host}', dofollow: true, description: 'Buyer reviews, product features and verified vendor profiles' },
   { id: 130, name: 'Trustpilot Business Review', category: 'Indian B2B', estimatedDA: 94, urlTemplate: 'https://www.trustpilot.com/search?query={host}', dofollow: true, description: 'Global consumer feedback, TrustScore and transparency badges' },
   { id: 131, name: 'Sitejabber Consumer Reviews', category: 'Indian B2B', estimatedDA: 86, urlTemplate: 'https://www.sitejabber.com/search?q={host}', dofollow: true, description: 'Customer ratings and business legitimacy assessment' },
-  { id: 132, name: 'MouthShut Indian Review Hub', category: 'Indian B2B', estimatedDA: 82, urlTemplate: 'https://www.mouthshut.com/search/prods.php?type=common&s={host}', dofollow: true, description: 'IndiaΓÇÖs most prominent consumer review and ratings platform' },
+  { id: 132, name: 'MouthShut Indian Review Hub', category: 'Indian B2B', estimatedDA: 82, urlTemplate: 'https://www.mouthshut.com/search/prods.php?type=common&s={host}', dofollow: true, description: 'India’s most prominent consumer review and ratings platform' },
   { id: 133, name: 'ProductHunt Tech Launch', category: 'Archives & Social', estimatedDA: 92, urlTemplate: 'https://www.producthunt.com/search?q={host}', dofollow: true, description: 'Product launchpad for technology startups and digital creators' },
   { id: 134, name: 'Crunchbase Enterprise Profile', category: 'Archives & Social', estimatedDA: 93, urlTemplate: 'https://www.crunchbase.com/textsearch?q={host}', dofollow: true, description: 'Funding rounds, founders, leadership and corporate intelligence' },
   { id: 135, name: 'PitchBook Private Capital', category: 'Archives & Social', estimatedDA: 89, urlTemplate: 'https://pitchbook.com/profiles/search?q={host}', dofollow: true, description: 'Private market, venture capital and M&A data profile' },
@@ -177,7 +177,7 @@ export const BACKLINK_PLATFORMS: BacklinkPlatform[] = [
   { id: 146, name: 'Scribd Document Library', category: 'Archives & Social', estimatedDA: 95, urlTemplate: 'https://www.scribd.com/search?query={host}', dofollow: true, description: 'Whitepapers, case studies, corporate reports and books' },
   { id: 147, name: 'Issuu Digital Publishing', category: 'Archives & Social', estimatedDA: 93, urlTemplate: 'https://issuu.com/search?q={host}', dofollow: true, description: 'Digital magazines, lookbooks, portfolios and brochures' },
   { id: 148, name: 'Vimeo Video Showcase', category: 'Archives & Social', estimatedDA: 97, urlTemplate: 'https://vimeo.com/search?q={host}', dofollow: true, description: 'High-definition video production and brand commercials' },
-  { id: 149, name: 'YouTube Channel Search', category: 'Archives & Social', estimatedDA: 99, urlTemplate: 'https://www.youtube.com/results?search_query={host}', dofollow: true, description: 'WorldΓÇÖs video platform and creator video backlinks' },
+  { id: 149, name: 'YouTube Channel Search', category: 'Archives & Social', estimatedDA: 99, urlTemplate: 'https://www.youtube.com/results?search_query={host}', dofollow: true, description: 'World’s video platform and creator video backlinks' },
   { id: 150, name: 'DailyMotion Video Search', category: 'Archives & Social', estimatedDA: 94, urlTemplate: 'https://www.dailymotion.com/search/{host}', dofollow: true, description: 'Global video streaming and news media network' },
   { id: 151, name: 'SoundCloud Audio Stream', category: 'Archives & Social', estimatedDA: 95, urlTemplate: 'https://soundcloud.com/search?q={host}', dofollow: true, description: 'Podcasts, brand audio tracks and sonic branding profiles' },
   { id: 152, name: 'Spotify Podcasts Index', category: 'Archives & Social', estimatedDA: 98, urlTemplate: 'https://open.spotify.com/search/{host}', dofollow: true, description: 'Audio shows, episodes and brand podcast channels' },

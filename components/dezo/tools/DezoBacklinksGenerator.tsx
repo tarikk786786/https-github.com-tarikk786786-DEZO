@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useMemo } from 'react';
 import {
@@ -494,7 +494,7 @@ export function DezoBacklinksGenerator() {
             <p className="text-xs text-[#0B0B0A]/70 leading-relaxed">
               Establishing a healthy brand anchor profile (naked URLs and brand name variations) protects your domain
               against over-optimization penalties. These foundational profiles provide the baseline anchor distribution
-              demanded by GoogleΓÇÖs Helpful Content and PageRank algorithms.
+              demanded by Google’s Helpful Content and PageRank algorithms.
             </p>
           </div>
         </div>
@@ -513,7 +513,7 @@ export function DezoBacklinksGenerator() {
               <strong>Download & Track:</strong> Use the "Download CSV" feature to log your submission records and monitor index status in Google Search Console.
             </li>
             <li>
-              <strong>Pair with Strategic SEO:</strong> Directory links provide indexing velocity; pair them with DEZOΓÇÖs content architecture, technical schema, and digital PR for maximum organic rankings.
+              <strong>Pair with Strategic SEO:</strong> Directory links provide indexing velocity; pair them with DEZO’s content architecture, technical schema, and digital PR for maximum organic rankings.
             </li>
           </ul>
         </div>

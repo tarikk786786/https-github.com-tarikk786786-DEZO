@@ -56,4 +56,6 @@ export type ToolCategory =
   | 'security'
   | 'accessibility'
   | 'local-seo'
-  | 'brand';
+  | 'brand'
+  | 'backlinks';
+

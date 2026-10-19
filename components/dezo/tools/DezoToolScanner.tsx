@@ -85,6 +85,12 @@ const CATEGORY_META: Record<
     example: 'dezo.in',
     description: 'Naming consistency and channel presence checks.',
   },
+  backlinks: {
+    name: 'Backlinks Generator',
+    placeholder: 'Enter website domain or page URL',
+    example: 'dezo.in',
+    description: '150+ high-authority directory profiles, SEO audit anchors, and indexing submissions.',
+  },
 };
 
 export function DezoToolScanner({

@@ -21,11 +21,11 @@ export const metadata: Metadata = constructMetadata({
 export default function WorkPage() {
   const featuredPriority = [
     'yasanabeautyrituals.in',
-    'sonvicasarees.com',
     'thepaanluxe.com',
     'shreeayurved.com',
     'nilkanthpaints.com',
     'greatindiapublicschool.org',
+    'sonvicasarees.com',
   ];
   const featured = portfolioData
     .filter((p) => p.featured && p.isLive)

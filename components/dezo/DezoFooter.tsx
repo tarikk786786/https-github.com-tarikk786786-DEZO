@@ -8,24 +8,25 @@ export function DezoFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-dezo-ink text-dezo-text-inverse pt-20 sm:pt-24 pb-12">
+    <footer className="w-full bg-dezo-ink text-dezo-text-inverse pt-20 sm:pt-24 pb-12 border-t-4 border-dezo-primary">
       <DezoContainer size="wide">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 border-b border-white/10">
           <div className="lg:col-span-4 flex flex-col gap-4">
-            <Link href="/">
-              <span className="font-display text-3xl tracking-tight text-white">DEZO</span>
+            <Link href="/" className="flex items-baseline gap-2.5">
+              <span className="font-display text-3xl sm:text-4xl font-black uppercase tracking-tightest text-white">DEZO</span>
+              <span className="font-mono text-[9px] uppercase tracking-widest text-dezo-primary font-bold">[EST. 2026]</span>
             </Link>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary">
+            <p className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-dezo-primary">
               {brand.companyLabel}
             </p>
             <p className="text-sm text-white/60 leading-relaxed max-w-sm">
               {brand.launchLine} {brand.supporting}
             </p>
-            <p className="text-xs text-white/40">{brand.geo}</p>
-            <div className="text-xs pt-2">
-              <p className="text-white/35 uppercase tracking-widest mb-1">Founder</p>
-              <p className="text-white/80 font-medium">
-                {leadership.primary.name} — {leadership.primary.role}
+            <p className="font-mono text-xs text-white/40">{brand.geo}</p>
+            <div className="text-xs pt-2 border-t border-white/10">
+              <p className="font-mono text-[10px] text-dezo-primary uppercase tracking-widest mb-1">FOUNDER &amp; CEO</p>
+              <p className="text-white font-bold">
+                {leadership.primary.name}
               </p>
             </div>
           </div>
@@ -83,6 +84,11 @@ export function DezoFooter() {
               <li>
                 <Link href="/contact" className="hover:text-white">
                   Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/admin/seo" className="hover:text-white flex items-center gap-1 font-mono text-xs text-dezo-primary">
+                  SEO Command Center →
                 </Link>
               </li>
               <li>

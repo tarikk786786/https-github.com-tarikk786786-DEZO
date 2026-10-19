@@ -95,12 +95,13 @@ body {
 }
 
 .dezo-img-zoom {
-  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, filter;
 }
 .group:hover .dezo-img-zoom,
 .dezo-img-zoom:hover {
-  transform: scale(1.045);
+  transform: scale(1.06) translateY(-1%);
+  filter: brightness(1.04) contrast(1.02);
 }
 
 /*
@@ -207,19 +208,26 @@ body {
 */
 .dezo-hero-film {
   background:
-    linear-gradient(
-      180deg,
-      rgba(11, 11, 10, 0.55) 0%,
-      rgba(11, 11, 10, 0.2) 38%,
-      rgba(11, 11, 10, 0.55) 68%,
-      rgba(11, 11, 10, 0.88) 100%
+    radial-gradient(
+      ellipse 80% 60% at 20% 40%,
+      rgba(11, 11, 10, 0.72) 0%,
+      rgba(11, 11, 10, 0.45) 55%,
+      rgba(11, 11, 10, 0.25) 100%
     ),
     linear-gradient(
-      105deg,
-      rgba(11, 11, 10, 0.72) 0%,
-      rgba(11, 11, 10, 0.35) 42%,
-      rgba(11, 11, 10, 0.15) 70%,
-      transparent 100%
+      180deg,
+      rgba(11, 11, 10, 0.85) 0%,
+      rgba(11, 11, 10, 0.45) 15%,
+      rgba(11, 11, 10, 0.2) 42%,
+      rgba(11, 11, 10, 0.6) 72%,
+      rgba(11, 11, 10, 0.95) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(11, 11, 10, 0.85) 0%,
+      rgba(11, 11, 10, 0.55) 35%,
+      rgba(11, 11, 10, 0.2) 65%,
+      rgba(11, 11, 10, 0.35) 100%
     );
 }
 

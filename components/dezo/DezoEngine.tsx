@@ -91,46 +91,44 @@ export function DezoEngine() {
       </DezoStagger>
 
       {/* Mobile / tablet: vertical cascade */}
-      <DezoStagger className="relative max-w-xl mx-auto lg:hidden" stagger={0.07}>
-        <ol>
-          {NODES.map((node, i) => {
-            const isActive = active === node.label;
-            return (
-              <DezoStaggerItem key={node.label}>
-                <li className="relative flex flex-col items-stretch">
-                  <Link
-                    href={node.href}
-                    onMouseEnter={() => setActive(node.label)}
-                    onMouseLeave={() => setActive(NODES[0].label)}
-                    onFocus={() => setActive(node.label)}
-                    onBlur={() => setActive(NODES[0].label)}
-                    data-active={isActive ? 'true' : 'false'}
-                    className={`dezo-engine-node group flex items-center justify-between gap-4 border border-dezo-border bg-dezo-surface px-5 py-4 ${
-                      isActive ? 'bg-dezo-bg' : ''
+      <ol className="relative max-w-xl mx-auto lg:hidden space-y-0">
+        {NODES.map((node, i) => {
+          const isActive = active === node.label;
+          return (
+            <li key={node.label} className="relative flex flex-col items-stretch">
+              <DezoStaggerItem>
+                <Link
+                  href={node.href}
+                  onMouseEnter={() => setActive(node.label)}
+                  onMouseLeave={() => setActive(NODES[0].label)}
+                  onFocus={() => setActive(node.label)}
+                  onBlur={() => setActive(NODES[0].label)}
+                  data-active={isActive ? 'true' : 'false'}
+                  className={`dezo-engine-node group flex items-center justify-between gap-4 border border-dezo-border bg-dezo-surface px-5 py-4 ${
+                    isActive ? 'bg-dezo-bg' : ''
+                  }`}
+                >
+                  <span className="font-display text-lg sm:text-xl text-dezo-text-primary tracking-tight">
+                    {node.label}
+                  </span>
+                  <span
+                    className={`text-xs text-dezo-text-muted transition-opacity duration-300 ${
+                      isActive ? 'opacity-100' : 'opacity-0 sm:opacity-55'
                     }`}
                   >
-                    <span className="font-display text-lg sm:text-xl text-dezo-text-primary tracking-tight">
-                      {node.label}
-                    </span>
-                    <span
-                      className={`text-xs text-dezo-text-muted transition-opacity duration-300 ${
-                        isActive ? 'opacity-100' : 'opacity-0 sm:opacity-55'
-                      }`}
-                    >
-                      {node.note}
-                    </span>
-                  </Link>
-                  {i < NODES.length - 1 && (
-                    <div className="flex justify-center py-1.5" aria-hidden>
-                      <span className="font-mono text-dezo-text-muted text-xs">↓</span>
-                    </div>
-                  )}
-                </li>
+                    {node.note}
+                  </span>
+                </Link>
+                {i < NODES.length - 1 && (
+                  <div className="flex justify-center py-1.5" aria-hidden>
+                    <span className="font-mono text-dezo-text-muted text-xs">↓</span>
+                  </div>
+                )}
               </DezoStaggerItem>
-            );
-          })}
-        </ol>
-      </DezoStagger>
+            </li>
+          );
+        })}
+      </ol>
     </div>
   );
 }

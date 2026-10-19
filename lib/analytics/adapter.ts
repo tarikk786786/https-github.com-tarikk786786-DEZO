@@ -23,18 +23,24 @@ export function trackEvent(event: DezoAnalyticsEvent, data?: Record<string, stri
   if (typeof window === 'undefined') return;
 
   // Umami custom event tracking
-  const windowWithUmami = window as unknown as {
+  const windowWithAnalytics = window as unknown as {
     umami?: {
       track: (eventName: string, eventData?: Record<string, string | number | boolean>) => void;
     };
+    gtag?: (command: string, action: string, params?: Record<string, unknown>) => void;
   };
 
-  if (windowWithUmami.umami && typeof windowWithUmami.umami.track === 'function') {
-    windowWithUmami.umami.track(event, data);
-  } else {
-    // Console telemetry in dev mode
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`[DEZO Telemetry] ${event}`, data);
-    }
+  if (windowWithAnalytics.umami && typeof windowWithAnalytics.umami.track === 'function') {
+    windowWithAnalytics.umami.track(event, data);
+  }
+
+  // Google Analytics 4 event tracking (if GA4 is loaded)
+  if (typeof windowWithAnalytics.gtag === 'function') {
+    windowWithAnalytics.gtag('event', event, data);
+  }
+
+  // Console telemetry in dev mode
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[DEZO Telemetry] ${event}`, data);
   }
 }

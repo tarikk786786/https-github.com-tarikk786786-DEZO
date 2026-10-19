@@ -31,9 +31,9 @@ export function DezoFooter() {
           </div>
 
           <div className="lg:col-span-3">
-            <h4 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40 mb-4">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40 mb-4">
               Product
-            </h4>
+            </h3>
             <ul className="flex flex-col gap-2.5 text-sm text-white/60">
               {serviceRows.map((s) => (
                 <li key={s.href}>
@@ -56,9 +56,9 @@ export function DezoFooter() {
           </div>
 
           <div className="lg:col-span-2">
-            <h4 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40 mb-4">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40 mb-4">
               Company
-            </h4>
+            </h3>
             <ul className="flex flex-col gap-2.5 text-sm text-white/60">
               <li>
                 <Link href="/work" className="hover:text-white">
@@ -94,33 +94,33 @@ export function DezoFooter() {
           </div>
 
           <div className="lg:col-span-3">
-            <h4 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40 mb-4">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40 mb-4">
               Studio
-            </h4>
-            <div className="flex flex-col gap-3 text-sm text-white/60">
+            </h3>
+            <div className="flex flex-col gap-2.5 text-sm text-white/60">
               <a
                 href={`tel:${contact.phone}`}
-                className="flex items-center gap-2 hover:text-white font-medium"
+                className="inline-flex items-center gap-2 hover:text-white font-medium py-1.5"
               >
-                <Phone size={13} className="text-dezo-primary shrink-0" />
+                <Phone size={14} className="text-dezo-primary shrink-0" />
                 {contact.phoneFormatted}
               </a>
               <a
                 href={`mailto:${contact.email}`}
-                className="flex items-center gap-2 hover:text-white"
+                className="inline-flex items-center gap-2 hover:text-white py-1.5"
               >
-                <Mail size={13} className="text-dezo-primary shrink-0" />
+                <Mail size={14} className="text-dezo-primary shrink-0" />
                 {contact.email}
               </a>
               <a
                 href={`mailto:${contact.supportEmail}`}
-                className="flex items-center gap-2 hover:text-white"
+                className="inline-flex items-center gap-2 hover:text-white py-1.5"
               >
-                <Mail size={13} className="text-dezo-primary shrink-0" />
+                <Mail size={14} className="text-dezo-primary shrink-0" />
                 {contact.supportEmail}
               </a>
-              <div className="flex items-start gap-2 text-white/45">
-                <MapPin size={13} className="text-dezo-primary shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2 text-white/45 pt-1">
+                <MapPin size={14} className="text-dezo-primary shrink-0 mt-0.5" />
                 <span>
                   {contact.address.street}, {contact.address.city}, {contact.address.region}{' '}
                   {contact.address.postalCode}

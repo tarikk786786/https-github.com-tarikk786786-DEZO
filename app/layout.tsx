@@ -7,6 +7,7 @@ import { SmoothScrollProvider } from '@/lib/motion/SmoothScrollProvider';
 import { DezoNavigation } from '@/components/dezo/DezoNavigation';
 import { DezoFooter } from '@/components/dezo/DezoFooter';
 import { DezoPageShell } from '@/components/dezo/DezoPageShell';
+import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
 
 const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
@@ -57,6 +58,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-dezo-bg text-dezo-text-primary antialiased selection:bg-dezo-primary selection:text-white flex flex-col justify-between font-sans">
+        <GoogleAnalytics />
         <SmoothScrollProvider>
           <DezoNavigation />
           <main className="flex-1 w-full">

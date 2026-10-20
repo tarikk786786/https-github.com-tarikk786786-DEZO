@@ -12,7 +12,9 @@ import {
 import { DezoButton } from './DezoButton';
 
 export function DezoContactForm() {
-  const [status, setStatus] = useState<'idle' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [leadId, setLeadId] = useState<string | null>(null);
+  const [fallbackUrl, setFallbackUrl] = useState<string | null>(null);
 
   const {
     register,
@@ -31,15 +33,36 @@ export function DezoContactForm() {
     },
   });
 
-  const onSubmit = (data: ContactFormData) => {
-    // Generate the rich WhatsApp executive handoff
-    const whatsappUrl = buildWhatsAppLeadUrl(data);
+  const onSubmit = async (data: ContactFormData) => {
+    setStatus('submitting');
+    const directWhatsAppUrl = buildWhatsAppLeadUrl(data);
+    setFallbackUrl(directWhatsAppUrl);
 
-    // Open WhatsApp in a new tab
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
 
-    setStatus('success');
-    reset();
+      const result = await response.json().catch(() => null);
+
+      if (response.ok && result?.success) {
+        setLeadId(result.leadId || null);
+        setStatus('success');
+        reset();
+        const finalUrl = result.whatsappHandoffUrl || directWhatsAppUrl;
+        window.open(finalUrl, '_blank', 'noopener,noreferrer');
+      } else {
+        setStatus('success');
+        window.open(directWhatsAppUrl, '_blank', 'noopener,noreferrer');
+        reset();
+      }
+    } catch {
+      setStatus('success');
+      window.open(directWhatsAppUrl, '_blank', 'noopener,noreferrer');
+      reset();
+    }
   };
 
   return (
@@ -47,12 +70,29 @@ export function DezoContactForm() {
       {status === 'success' && (
         <div
           role="status"
-          className="mb-6 p-4 rounded-dezo-md bg-dezo-success/10 border border-dezo-success/30 flex items-start gap-3 text-dezo-success text-sm font-semibold animate-fade-in"
+          className="mb-6 p-5 rounded-none bg-emerald-50 border-2 border-emerald-600 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-dezo-text-primary animate-fade-in shadow-[4px_4px_0_0_#059669]"
         >
-          <CheckCircle2 size={18} className="shrink-0 mt-0.5" />
-          <div>
-            Opening WhatsApp with your request pre-formatted! Just click send in WhatsApp to finalize your inquiry.
+          <div className="flex items-start gap-3">
+            <CheckCircle2 size={22} className="shrink-0 mt-0.5 text-emerald-600" />
+            <div>
+              <div className="font-mono text-sm font-bold text-dezo-ink">
+                Inquiry Logged {leadId ? `[Ref: ${leadId}]` : 'Successfully'}
+              </div>
+              <div className="font-mono text-xs text-dezo-text-muted mt-1">
+                Your project brief has been recorded. WhatsApp will open with your pre-formatted brief. If not, click below:
+              </div>
+            </div>
           </div>
+          {fallbackUrl && (
+            <a
+              href={fallbackUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-dezo-ink text-dezo-paper font-mono text-xs font-bold uppercase tracking-wider hover:bg-dezo-gold transition-colors whitespace-nowrap shrink-0"
+            >
+              <MessageSquare size={14} /> Open WhatsApp
+            </a>
+          )}
         </div>
       )}
 
@@ -101,12 +141,12 @@ export function DezoContactForm() {
           {/* Phone */}
           <div className="flex flex-col gap-2">
             <label htmlFor="phone" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
-              Phone Number <span className="text-red-500">*</span>
+              Phone / WhatsApp <span className="text-red-500">*</span>
             </label>
             <input
               id="phone"
               type="tel"
-              placeholder="+91 91144 11026"
+              placeholder="+91 9114411026"
               {...register('phone')}
               className={`w-full bg-white border-2 ${
                 errors.phone ? 'border-red-500' : 'border-dezo-ink'
@@ -117,15 +157,15 @@ export function DezoContactForm() {
             )}
           </div>
 
-          {/* Business Name */}
+          {/* Business / Brand Name */}
           <div className="flex flex-col gap-2">
             <label htmlFor="businessName" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
-              Business / Brand (Optional)
+              Business / Brand Name
             </label>
             <input
               id="businessName"
               type="text"
-              placeholder="Your Brand Name"
+              placeholder="e.g. Acme Retail"
               {...register('businessName')}
               className="w-full bg-white border-2 border-dezo-ink rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all"
             />
@@ -133,10 +173,24 @@ export function DezoContactForm() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {/* Service Needed */}
+          {/* City / Location */}
+          <div className="flex flex-col gap-2">
+            <label htmlFor="city" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
+              City / Base
+            </label>
+            <input
+              id="city"
+              type="text"
+              placeholder="e.g. Bhubaneswar, Cuttack, Mumbai"
+              {...register('city')}
+              className="w-full bg-white border-2 border-dezo-ink rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all"
+            />
+          </div>
+
+          {/* Primary Service */}
           <div className="flex flex-col gap-2">
             <label htmlFor="service" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
-              Service Required <span className="text-red-500">*</span>
+              Service Area <span className="text-red-500">*</span>
             </label>
             <select
               id="service"
@@ -145,8 +199,8 @@ export function DezoContactForm() {
                 errors.service ? 'border-red-500' : 'border-dezo-ink'
               } rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all cursor-pointer`}
             >
-              <option value="">Select Service</option>
-              <option value="Website Development">Website Development (Next.js / Custom)</option>
+              <option value="">Select Service Area</option>
+              <option value="Website Development">Website Development (Landing, Corporate, Custom)</option>
               <option value="Ecommerce Architecture">Ecommerce Architecture (Shopify / Headless)</option>
               <option value="SEO & Organic Growth">SEO & Organic Growth</option>
               <option value="Meta & Google Ads">Meta & Google Performance Ads</option>

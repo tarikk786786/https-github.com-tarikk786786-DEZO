@@ -17,6 +17,7 @@ import {
   CAREER_TRACKS,
   CAREERS_FAQS,
   HIRING_PROCESS_STEPS,
+  CAREERS_CONFIG,
 } from '../content/careers';
 
 import {
@@ -113,6 +114,8 @@ describe('DEZO Master Content & Catalog Integrity', () => {
     it('outlines clear 5-step hiring pathway without false promises', () => {
       assert.equal(HIRING_PROCESS_STEPS.length, 5);
       assert.ok(CAREERS_FAQS.length >= 10, 'Must have at least 10 transparent FAQs');
+      assert.equal(CAREERS_CONFIG.eligibility.ageRange, '23–30 years (configurable per role)');
+      assert.ok(!CAREERS_CONFIG.eligibility.ageRange.includes('38'), 'Age range upper bound must be 30, not 38');
     });
   });
 

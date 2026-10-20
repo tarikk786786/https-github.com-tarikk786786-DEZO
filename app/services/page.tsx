@@ -1,78 +1,100 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import {
-  ChapterBanner,
-  CTASection,
-  ServiceBanner,
-} from '@/components/dezo/visual';
 import { DezoContainer } from '@/components/dezo/DezoContainer';
-import { DezoHeading } from '@/components/dezo/DezoHeading';
 import { DezoSection } from '@/components/dezo/DezoSection';
-import { DezoReveal } from '@/lib/motion/MotionAdapter';
-import { chapterBanners, finalCtaBanner, servicesIndexBanner } from '@/content/banners';
-import { serviceRows } from '@/content/site';
+import { DezoServiceDirectory } from '@/components/dezo/services/DezoServiceDirectory';
 import { constructMetadata } from '@/lib/seo/metadata';
+import { generateBreadcrumbSchema } from '@/lib/seo/jsonld';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles, ShieldCheck } from 'lucide-react';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Services — Digital Growth Capabilities',
+  title: 'Services Directory — Digital Growth, SEO, Web & Marketplaces | DEZO',
   description:
-    'Web development, performance marketing, marketplace growth, SEO, and brand & creative — one commercial system.',
+    'Searchable directory of DEZO digital growth services across 12 primary departments: Web Development, SEO, Paid Ads, Social, Branding, Amazon, Lead Generation, WhatsApp CRM, and Analytics.',
   canonicalUrl: 'https://dezo.in/services',
 });
 
 export default function ServicesPage() {
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+  ]);
+
   return (
     <>
-      <ServiceBanner data={servicesIndexBanner} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
 
-      {chapterBanners.map((chapter, i) => (
-        <ChapterBanner key={chapter.id} data={chapter} reverse={i % 2 === 1} />
-      ))}
-
-      <DezoSection spacing="normal" className="bg-dezo-surface border-y border-dezo-border">
+      {/* Hero Header Banner */}
+      <section className="bg-dezo-bg-warm border-b-2 border-dezo-ink pt-32 pb-16">
         <DezoContainer size="wide">
-          <DezoReveal>
-            <DezoHeading
-              badge="Index"
-              as="h2"
-              subtitle="Jump straight to the capability you need."
-            >
-              All services
-            </DezoHeading>
-          </DezoReveal>
-          <div className="mt-10 divide-y divide-dezo-border border-y border-dezo-border">
-            {serviceRows.map((row) => (
-              <Link
-                key={row.num}
-                href={row.href}
-                className="dezo-service-row group grid grid-cols-12 gap-4 py-7 items-start -mx-2 px-2"
-              >
-                <span className="col-span-2 sm:col-span-1 font-mono text-xs text-dezo-text-muted pt-1">
-                  {row.num}
-                </span>
-                <div className="col-span-10 sm:col-span-4">
-                  <h3 className="font-display text-xl sm:text-2xl text-dezo-text-primary group-hover:text-dezo-primary transition-colors">
-                    {row.name}
-                  </h3>
-                </div>
-                <div className="col-span-12 sm:col-span-6 sm:col-start-7">
-                  <p className="text-sm text-dezo-text-secondary leading-relaxed">{row.summary}</p>
-                </div>
-                <span className="hidden lg:flex col-span-1 justify-end items-center text-dezo-text-muted group-hover:text-dezo-primary transition-colors">
-                  <ArrowRight
-                    size={16}
-                    className="transition-transform duration-300 group-hover:translate-x-1"
-                  />
-                </span>
-              </Link>
-            ))}
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-dezo-primary/20 border border-dezo-ink text-xs font-mono uppercase tracking-wider text-dezo-ink mb-6">
+              <span className="w-2 h-2 bg-dezo-primary rounded-full animate-pulse" />
+              <span>Full Service Catalog · 12 Departments (A - L)</span>
+            </div>
+            <h1 className="font-display text-4xl sm:text-6xl font-black text-dezo-ink tracking-tight uppercase leading-[0.95]">
+              Commercial Services. <br />
+              <span className="text-dezo-primary">Engineered for Growth.</span>
+            </h1>
+            <p className="mt-6 text-base sm:text-lg text-dezo-text-secondary leading-relaxed max-w-2xl">
+              We do not believe in fragmented vendor churn. Explore our searchable catalog of website development,
+              organic search, paid advertising, marketplace operations, and business automation — delivered under one
+              accountable operating cadence.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-4 text-xs font-mono text-dezo-text-muted">
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck size={14} className="text-dezo-primary" /> Transparent Scope
+              </span>
+              <span>·</span>
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck size={14} className="text-dezo-primary" /> Zero Fabricated Claims
+              </span>
+              <span>·</span>
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck size={14} className="text-dezo-primary" /> Bhubaneswar Studio + India Delivery
+              </span>
+            </div>
           </div>
+        </DezoContainer>
+      </section>
+
+      {/* Searchable Service Directory Section */}
+      <DezoSection spacing="normal" className="bg-dezo-bg">
+        <DezoContainer size="wide">
+          <DezoServiceDirectory />
         </DezoContainer>
       </DezoSection>
 
-      <CTASection data={finalCtaBanner} />
+      {/* Need custom recommendation banner */}
+      <section className="bg-dezo-ink text-dezo-bg border-t-2 border-dezo-ink py-16">
+        <DezoContainer size="wide">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+            <div className="max-w-2xl">
+              <span className="font-mono text-xs uppercase tracking-wider text-dezo-primary block mb-2">
+                Unsure which services fit your growth stage?
+              </span>
+              <h2 className="font-display text-2xl sm:text-4xl font-bold uppercase text-white leading-tight">
+                Use our Interactive Growth Plan Builder
+              </h2>
+              <p className="mt-3 text-sm text-gray-300 leading-relaxed font-mono">
+                Select your business type, primary objective, and location to receive a transparent, rules-based
+                recommendation of the exact services, deliverables, and timeline your business needs.
+              </p>
+            </div>
+            <Link
+              href="/start-a-project"
+              className="px-8 py-4 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold border-2 border-white hover:bg-white transition-all shadow-[4px_4px_0_0_#FFFFFF] inline-flex items-center gap-2"
+            >
+              Build My Growth Plan <ArrowRight size={16} />
+            </Link>
+          </div>
+        </DezoContainer>
+      </section>
     </>
   );
 }

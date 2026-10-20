@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, ArrowRight } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, Building2, MapPin, Building, ShieldCheck } from 'lucide-react';
 import { DezoContainer } from '@/components/dezo/DezoContainer';
 import { DezoHeading } from '@/components/dezo/DezoHeading';
 import { DezoButton } from '@/components/dezo/DezoButton';
@@ -293,6 +293,102 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+
+          {/* Quick link to 12 departments */}
+          <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 bg-dezo-bg-warm border-2 border-dezo-ink shadow-[4px_4px_0_0_#0B0B0A]">
+            <span className="font-mono text-xs text-dezo-text-secondary">
+              Looking for a specific service? Browse all 12 primary departments from Web Development to AI Automation.
+            </span>
+            <Link
+              href="/services"
+              className="px-5 py-2.5 bg-dezo-ink text-dezo-bg text-xs font-mono uppercase tracking-wider font-bold hover:bg-dezo-primary hover:text-dezo-ink transition-all shadow-[2px_2px_0_0_#B08D57] shrink-0 inline-flex items-center gap-1.5"
+            >
+              Search Full Directory <ArrowRight size={14} />
+            </Link>
+          </div>
+        </DezoContainer>
+      </DezoSection>
+
+      {/* Industry Solutions Showcase */}
+      <DezoSection spacing="normal" id="industries" className="bg-dezo-surface border-y-2 border-dezo-ink">
+        <DezoContainer size="wide">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+            <DezoReveal>
+              <DezoHeading
+                badge="Sectors"
+                as="h2"
+                subtitle="Customized digital growth architectures for Odisha’s key economic sectors."
+              >
+                Industry solutions
+              </DezoHeading>
+            </DezoReveal>
+            <DezoButton href="/industries" variant="outline" size="sm">
+              All 16 industries //
+            </DezoButton>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                title: 'Local Retailers & Stores',
+                tag: 'Google Maps 3-Pack & Walk-ins',
+                desc: 'Dominate neighborhood searches in Bhubaneswar and Cuttack, capture nearby footfall, and enable instant WhatsApp reordering.',
+                href: '/industries/local-business',
+              },
+              {
+                title: 'Real Estate & Construction',
+                tag: 'High-Ticket Property Leads',
+                desc: 'Pre-qualified buyer inquiry funnels, 3D floor plan showcases, and site visit booking calendars for builders and brokers.',
+                href: '/industries/real-estate',
+              },
+              {
+                title: 'Hospitals & Healthcare',
+                tag: 'Patient Trust & Consultations',
+                desc: 'Doctor directories, OPD schedule booking, medical local SEO, and ethical patient review collection systems.',
+                href: '/industries/healthcare',
+              },
+              {
+                title: 'Schools & Coaching Academies',
+                tag: 'Student Admissions Growth',
+                desc: 'Seasonal entrance exam admission campaigns, digital prospectus downloads, and counselor WhatsApp alerts.',
+                href: '/industries/education',
+              },
+              {
+                title: 'Handloom & Artisanal D2C',
+                tag: 'Direct-to-Consumer Craft',
+                desc: 'High-speed Shopify storefronts, craft heritage storytelling, and global diaspora Meta ad campaigns.',
+                href: '/industries/handloom-textiles',
+              },
+              {
+                title: 'Manufacturing & Industrial',
+                tag: 'B2B Procurement Catalogs',
+                desc: 'Corporate technical specifications, ISO credential compliance, and Request for Quote (RFQ) lead funnels.',
+                href: '/industries/manufacturing',
+              },
+            ].map((ind, idx) => (
+              <Link
+                key={idx}
+                href={ind.href}
+                className="group bg-dezo-bg border-2 border-dezo-ink p-6 shadow-[4px_4px_0_0_#0B0B0A] hover:shadow-[6px_6px_0_0_#B08D57] transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-dezo-primary block mb-2">
+                    {ind.tag}
+                  </span>
+                  <h3 className="font-display text-xl font-bold text-dezo-ink group-hover:text-dezo-primary transition-colors">
+                    {ind.title}
+                  </h3>
+                  <p className="mt-3 text-xs text-dezo-text-secondary leading-relaxed line-clamp-3">
+                    {ind.desc}
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-dezo-border flex items-center justify-between text-xs font-mono font-bold text-dezo-ink group-hover:text-dezo-primary">
+                  <span>Explore Blueprint</span>
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </div>
         </DezoContainer>
       </DezoSection>
 
@@ -390,6 +486,87 @@ export default function HomePage() {
                 </DezoReveal>
               );
             })}
+          </div>
+        </DezoContainer>
+      </DezoSection>
+
+      {/* Odisha Regional Delivery Network */}
+      <DezoSection spacing="normal" id="locations" className="bg-dezo-bg border-y-2 border-dezo-ink">
+        <DezoContainer size="wide">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+            <DezoReveal>
+              <DezoHeading
+                badge="Odisha Delivery"
+                as="h2"
+                subtitle="Central studio in Patia, Bhubaneswar — engineering growth statewide across 25 commercial districts."
+              >
+                Regional delivery hubs
+              </DezoHeading>
+            </DezoReveal>
+            <DezoButton href="/locations" variant="outline" size="sm">
+              All 25 districts //
+            </DezoButton>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                city: 'Bhubaneswar',
+                dist: 'Khordha',
+                role: 'Founding Studio & Tech Hub',
+                desc: 'Infocity tech corridor, healthcare centers, real estate, and education.',
+                href: '/locations/bhubaneswar',
+              },
+              {
+                city: 'Cuttack',
+                dist: 'Cuttack',
+                role: 'Trade & Judicial Hub',
+                desc: 'Wholesale markets, legal services, SCB medical, and silver filigree.',
+                href: '/locations/cuttack',
+              },
+              {
+                city: 'Puri',
+                dist: 'Puri',
+                role: 'Tourism & Coastal Heritage',
+                desc: 'Direct hotel booking engines, beach resorts, and pilgrimage crafts.',
+                href: '/locations/puri',
+              },
+              {
+                city: 'Rourkela',
+                dist: 'Sundargarh',
+                role: 'Steel & Engineering Hub',
+                desc: 'SAIL suppliers, heavy fabrication units, and technical institutions.',
+                href: '/locations/rourkela',
+              },
+            ].map((loc, idx) => (
+              <Link
+                key={idx}
+                href={loc.href}
+                className="group bg-dezo-bg-warm border-2 border-dezo-ink p-6 shadow-[3px_3px_0_0_#0B0B0A] hover:shadow-[5px_5px_0_0_#B08D57] transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-2 pb-1 border-b border-dezo-border">
+                    <span className="font-mono text-[10px] uppercase font-bold text-dezo-primary">
+                      {loc.role}
+                    </span>
+                    <MapPin size={12} className="text-dezo-text-muted" />
+                  </div>
+                  <h3 className="font-display text-xl font-bold text-dezo-ink group-hover:text-dezo-primary transition-colors">
+                    {loc.city}
+                  </h3>
+                  <span className="font-mono text-[11px] text-dezo-text-muted block mt-0.5">
+                    District: {loc.dist}
+                  </span>
+                  <p className="mt-3 text-xs text-dezo-text-secondary leading-relaxed">
+                    {loc.desc}
+                  </p>
+                </div>
+                <div className="mt-5 pt-3 border-t border-dezo-border flex items-center justify-between text-xs font-mono font-bold text-dezo-ink group-hover:text-dezo-primary">
+                  <span>View Hub Scope</span>
+                  <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            ))}
           </div>
         </DezoContainer>
       </DezoSection>

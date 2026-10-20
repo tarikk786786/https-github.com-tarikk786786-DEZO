@@ -1,15 +1,7 @@
 import { MetadataRoute } from 'next';
-
-const SERVICE_SLUGS = [
-  'web-development',
-  'seo',
-  'amazon',
-  'flipkart',
-  'paid-ads',
-  'social',
-  'branding',
-  'growth-systems',
-] as const;
+import { getAllServiceSlugs } from '@/content/services-catalog';
+import { getAllIndustrySlugs } from '@/content/industries-catalog';
+import { getAllLocationSlugs } from '@/content/locations-catalog';
 
 const TOOL_SLUGS = [
   'seo',
@@ -32,9 +24,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const core: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: now, changeFrequency: 'daily', priority: 1 },
     { url: `${baseUrl}/services`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${baseUrl}/industries`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${baseUrl}/locations`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/work`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
-    { url: `${baseUrl}/locations/bhubaneswar`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
-    { url: `${baseUrl}/locations/odisha`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${baseUrl}/growth-lab`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/tools`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/marketplace`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
@@ -45,20 +37,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/pricing`, lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
     { url: `${baseUrl}/resources`, lastModified: now, changeFrequency: 'weekly', priority: 0.75 },
-    { url: `${baseUrl}/industries`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${baseUrl}/solutions`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
     { url: `${baseUrl}/book-strategy-call`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${baseUrl}/lab`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.2 },
     { url: `${baseUrl}/terms`, lastModified: now, changeFrequency: 'yearly', priority: 0.2 },
     { url: `${baseUrl}/disclaimer`, lastModified: now, changeFrequency: 'yearly', priority: 0.2 },
   ];
 
-  const services = SERVICE_SLUGS.map((slug) => ({
+  const services = getAllServiceSlugs().map((slug) => ({
     url: `${baseUrl}/services/${slug}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,
     priority: 0.9,
+  }));
+
+  const industries = getAllIndustrySlugs().map((slug) => ({
+    url: `${baseUrl}/industries/${slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.88,
+  }));
+
+  const locations = getAllLocationSlugs().map((slug) => ({
+    url: `${baseUrl}/locations/${slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.88,
   }));
 
   const tools = [
@@ -76,21 +80,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const industryUrls = [
-    'd2c',
-    'ecommerce',
-    'local',
-    'startups',
-    'manufacturers',
-    'service',
-    'personal-brands',
-  ].map((slug) => ({
-    url: `${baseUrl}/industries/${slug}`,
-    lastModified: now,
-    changeFrequency: 'weekly' as const,
-    priority: 0.85,
-  }));
-
   const solutions = ['build', 'brand', 'marketplace', 'growth', 'intelligence'].map((slug) => ({
     url: `${baseUrl}/solutions/${slug}`,
     lastModified: now,
@@ -98,5 +87,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  return [...core, ...services, ...tools, ...industryUrls, ...solutions];
+  return [...core, ...services, ...industries, ...locations, ...tools, ...solutions];
 }

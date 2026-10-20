@@ -27,3 +27,5 @@ coverage/
 *.tsbuildinfo
 
 K.reg
+
+scripts/

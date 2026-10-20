@@ -161,7 +161,7 @@ export default function HomePage() {
                 </motion.div>
 
                 <motion.p
-                  className="mt-8 sm:mt-10 max-w-md text-[11px] sm:text-xs tracking-wide text-white/55 font-mono"
+                  className="mt-8 sm:mt-10 max-w-md text-[11px] sm:text-xs tracking-wide text-white/75 font-mono"
                   initial={reducedMotion ? false : { opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 1.05 }}

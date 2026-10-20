@@ -39,7 +39,7 @@ export const heroBanner: BannerBase = {
   id: 'hero-home',
   eyebrow: 'Introducing DEZO',
   title: 'BUILD. MARKET. GROW.',
-  body: 'One commercial system for websites, marketplaces, advertising, SEO and brand—built for businesses ready to scale.',
+  body: 'One connected growth partner for your website, search visibility, advertising, marketplaces and brand.',
   tone: 'warm',
   media: {
     kind: 'video',
@@ -48,8 +48,8 @@ export const heroBanner: BannerBase = {
     alt: 'DEZO site trailer — Build, Market, Grow chapters with live project proof',
   },
   primaryCta: { label: 'Start a Project', href: '/start-a-project', variant: 'primary' },
-  secondaryCta: { label: 'View Our Work', href: '/work', variant: 'outline' },
-  meta: 'Founding studio · Bhubaneswar, Odisha · Delivery across India',
+  secondaryCta: { label: 'Explore Our Work', href: '/work', variant: 'outline' },
+  meta: 'Patia, Bhubaneswar, Odisha · Connected growth execution across India & international clients',
 };
 
 export const servicesIndexBanner: BannerBase = {

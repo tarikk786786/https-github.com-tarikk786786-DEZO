@@ -421,7 +421,7 @@ export function DezoNavigation() {
 
           <div className="pt-3 space-y-3">
             <Link href="/work" className="font-display text-lg uppercase font-bold text-dezo-ink block">
-              Live Work Archive (70+ Projects)
+              Live Work Archive (181+ Projects)
             </Link>
             <Link href="/growth-lab" className="font-display text-lg uppercase font-bold text-dezo-ink block">
               DEZO LAB Diagnostics

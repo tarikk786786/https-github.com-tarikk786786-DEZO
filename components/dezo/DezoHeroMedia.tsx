@@ -49,17 +49,17 @@ export function DezoHeroMedia() {
         }}
       />
 
-      {/* Subtle floating architectural coordinates (stark, technical, high-fashion agency feel) */}
-      <div className="absolute top-28 right-12 hidden lg:flex flex-col items-end gap-1 font-mono text-[10px] text-white/30 tracking-widest select-none">
-        <span className="text-dezo-primary font-bold">[NODE // 20.2961° N, 85.8245° E]</span>
-        <span>ENGINEERING · COMMERCE · IDENTITY</span>
-        <span>DEPLOYMENT STATUS: VERIFIED</span>
+      {/* Verified studio and delivery credentials */}
+      <div className="absolute top-28 right-12 hidden lg:flex flex-col items-end gap-1.5 font-mono text-[11px] text-white/70 tracking-widest select-none">
+        <span className="text-dezo-primary font-bold">[STUDIO // PATIA, BHUBANESWAR 751024]</span>
+        <span className="text-white/80">DELIVERY: ALL-INDIA &amp; INTERNATIONAL</span>
+        <span className="text-emerald-400 font-semibold">[CONSULTATIONS: OPEN]</span>
       </div>
 
-      <div className="absolute bottom-12 left-12 hidden lg:flex flex-col gap-1 font-mono text-[10px] text-white/30 tracking-widest select-none">
-        <span>SYS.SPEC: NEXT.JS 16 ARCHITECTURE</span>
-        <span>INDEXED REFERRING NETWORKS: 181+</span>
-        <span className="text-dezo-primary font-bold">[GROWTH PLATFORM ACTIVE]</span>
+      <div className="absolute bottom-12 left-12 hidden lg:flex flex-col gap-1.5 font-mono text-[11px] text-white/70 tracking-widest select-none">
+        <span className="text-white/80">STACK: NEXT.JS 16 · REACT 19 · SHOPIFY · SP-API</span>
+        <span className="text-white/80">VERIFIED ARCHIVE: 181+ PRODUCTION SITES</span>
+        <span className="text-dezo-primary font-bold">[STARTING FROM ₹1,999 · ₹0 LIFELONG HOSTING]</span>
       </div>
 
       {/* Corner crosshair accents */}

@@ -6,16 +6,13 @@ import {
   Zap,
   ShoppingBag,
   MapPin,
-  MessageSquare,
   CheckCircle2,
   ArrowRight,
-  TrendingUp,
   ShieldCheck,
-  Sparkles,
-  ExternalLink,
   PhoneCall,
-  Clock,
+  Globe,
   Layers,
+  ExternalLink,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useReducedMotion } from '@/lib/motion/useReducedMotion';
@@ -38,38 +35,57 @@ interface ConsoleTab {
 
 const TABS: ConsoleTab[] = [
   {
+    id: 'proof',
+    tabLabel: '01 LIVE PROOF',
+    badge: '181+ SITES',
+    category: 'AUTHENTIC PORTFOLIO',
+    title: 'Real Production Client Deployments',
+    icon: Globe,
+    metricValue: '181+',
+    metricLabel: 'Live Client Deployments',
+    highlightPill: '100% Production URLs · Zero Mockups or Fake Demos',
+    deliverables: [
+      'Yasana Beauty Rituals: D2C commerce storefront with brand storytelling',
+      'Great India Public School: Admissions portal with inquiry routing',
+      'Sonvica Sarees & Nilkanth Paints: Direct-order catalog & dealer navigation',
+    ],
+    pricingTag: 'Student from ₹1,999 · Dukaan from ₹2,999 · Scoped Custom',
+    ctaLabel: 'Inspect Live Work',
+    ctaHref: '/work',
+  },
+  {
     id: 'web',
-    tabLabel: '01 WEB & SPEED',
+    tabLabel: '02 WEB & SPEED',
     badge: 'SUB-SECOND LCP',
     category: 'COMMERCE & APPS',
     title: 'High-Speed Next.js 16 Storefronts',
     icon: Zap,
-    metricValue: '99/100',
-    metricLabel: 'Core Web Vitals PageSpeed',
+    metricValue: '< 1.0s',
+    metricLabel: 'Mobile Core Web Vitals LCP',
     highlightPill: '₹0 Lifelong Cloud Hosting (Zero Server Renewal Fees)',
     deliverables: [
-      'Sub-second mobile loading (0.8s LCP on Indian 4G/5G)',
-      'Direct WhatsApp checkout & UPI 1-click integration',
-      'Full source-code handover & 30-day bugfix warranty',
+      'Sub-second mobile loading (0.8s LCP on Indian 4G/5G networks)',
+      'Direct WhatsApp checkout & UPI 1-click mobile order buttons',
+      'Full source-code handover & 30-day bugfix warranty in writing',
     ],
-    pricingTag: 'From ₹1,999 (Student) · ₹2,999 (Local Dukaan) · ₹4,999 (Business)',
+    pricingTag: 'From ₹1,999 (Student) · ₹2,999 (Local Dukaan) · ₹4,999 (Launch)',
     ctaLabel: 'Calculate Your Build Cost',
     ctaHref: '/pricing#calculator',
   },
   {
     id: 'marketplace',
-    tabLabel: '02 AMAZON & FLIPKART',
+    tabLabel: '03 AMAZON & FLIPKART',
     badge: 'SP-API AUTOMATION',
-    category: 'MARKETPLACE GROWTH',
-    title: 'Algorithmic Catalog & Sponsored Ads',
+    category: 'MARKETPLACE OPERATIONS',
+    title: 'Disciplined Catalog & Ad Management',
     icon: ShoppingBag,
-    metricValue: '78.4%',
-    metricLabel: 'Buy Box Win Rate Average',
+    metricValue: 'SP-API',
+    metricLabel: 'Direct Catalog Sync',
     highlightPill: 'Amazon Brand Registry + Flipkart F-Assured Setup',
     deliverables: [
-      'Search Query Performance keyword harvesting',
+      'Search Query Performance keyword harvesting & indexing',
       'Modular 7-image A+ Brand Story conversion cards',
-      'Disciplined target TACoS ad spend governance',
+      'Disciplined target TACoS ad spend governance to protect margin',
     ],
     pricingTag: 'Marketplace Operations from ₹6,999 / month',
     ctaLabel: 'Explore Marketplace System',
@@ -77,41 +93,41 @@ const TABS: ConsoleTab[] = [
   },
   {
     id: 'local',
-    tabLabel: '03 ODISHA & GOOGLE MAPS',
+    tabLabel: '04 ODISHA & MAPS',
     badge: 'GOOGLE 3-PACK',
     category: 'LOCAL ACQUISITION',
     title: 'Dominating Local Search & Footfall',
     icon: MapPin,
-    metricValue: '#1 Rank',
-    metricLabel: 'Local Bhubaneswar & Odisha Search',
-    highlightPill: 'Free Counter QR Code Sticker Included',
+    metricValue: 'TOP 3',
+    metricLabel: 'Local Pack Target Goal',
+    highlightPill: 'Counter QR Standee & Direct WhatsApp Menu Included',
     deliverables: [
-      'Google Business Profile category & citation optimization',
-      'Automated 5-star customer review collection flow',
-      '+340% increase in click-to-call and map direction inquiries',
+      'Google Business Profile category & citation synchronization',
+      'Instant WhatsApp click-to-chat and map direction routes',
+      'Counter QR code sticker setup for neighborhood walk-in reordering',
     ],
     pricingTag: 'Local Dukaan Setup from ₹2,999 one-time',
     ctaLabel: 'Dominate Local Footfall',
     ctaHref: '/services/local-seo',
   },
   {
-    id: 'whatsapp',
-    tabLabel: '04 WHATSAPP AUTOMATION',
-    badge: '<15s RESPONSE',
-    category: 'CRM & WORKFLOWS',
-    title: 'Instant Order & Lead Routing Bot',
-    icon: MessageSquare,
-    metricValue: '< 15s',
-    metricLabel: 'Average Lead Response Latency',
-    highlightPill: 'Pre-formatted Catalog Ordering & Instant Inquiries',
+    id: 'connected',
+    tabLabel: '05 CONNECTED STACK',
+    badge: '5-IN-1 PARTNER',
+    category: 'GROWTH ARCHITECTURE',
+    title: 'One Unified Operating System',
+    icon: Layers,
+    metricValue: '1 Team',
+    metricLabel: 'Zero Vendor Fragmentation',
+    highlightPill: 'Web + SEO + Ads + Marketplace + Brand as One Partner',
     deliverables: [
-      'Direct WhatsApp Business catalog & menu ordering',
-      'Instant lead notification webhook to sales team phone',
-      'Automated greeting bot with price quotations',
+      'Synchronized web, marketplace, search, and paid advertising',
+      'Dedicated delivery studio in Patia, Bhubaneswar, Odisha',
+      '50-50 milestone payments with defined contractual deliverables',
     ],
-    pricingTag: 'WhatsApp Business API Setup from ₹3,499',
-    ctaLabel: 'Chat on WhatsApp Now',
-    ctaHref: 'https://wa.me/919114411026?text=Hello%20DEZO%20Team!%20I%20would%20like%20to%20discuss%20a%20project.',
+    pricingTag: 'Transparent Tiers · 30-Day Defect Warranty',
+    ctaLabel: 'Build Growth Plan',
+    ctaHref: '/start-a-project',
   },
 ];
 
@@ -154,21 +170,21 @@ export function DezoHeroGrowthConsole() {
             <span className="w-2.5 h-2.5 bg-white/20 rounded-none inline-block" />
           </div>
           <span className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-white/90">
-            DEZO LAB // LIVE GROWTH TELEMETRY
+            DEZO LAB // GROWTH CAPABILITY CONSOLE
           </span>
         </div>
 
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 bg-emerald-400 rounded-none animate-ping" />
           <span className="font-mono text-[9px] sm:text-[10px] font-bold text-emerald-400 uppercase tracking-widest">
-            181+ SITES LIVE
+            181+ PRODUCTION SITES
           </span>
         </div>
       </div>
 
       {/* Interactive Tabs Header */}
       <div
-        className="grid grid-cols-2 sm:grid-cols-4 border-b-2 border-dezo-ink/80 bg-[#121211] divide-x-2 divide-dezo-ink/80"
+        className="grid grid-cols-2 sm:grid-cols-5 border-b-2 border-dezo-ink/80 bg-[#121211] divide-x-2 divide-dezo-ink/80"
         role="tablist"
         aria-label="DEZO Capabilities"
       >
@@ -183,13 +199,13 @@ export function DezoHeroGrowthConsole() {
                 setActiveTab(idx);
                 setIsPaused(true);
               }}
-              className={`py-2.5 px-2 sm:px-3 text-left transition-all relative ${
+              className={`py-2 px-1.5 sm:px-2 text-left transition-all relative cursor-pointer ${
                 isActive
                   ? 'bg-dezo-primary text-dezo-ink font-bold'
                   : 'bg-transparent text-white/70 hover:bg-white/5 hover:text-white'
               }`}
             >
-              <span className="block font-mono text-[9px] sm:text-[10px] tracking-wider uppercase leading-tight font-bold">
+              <span className="block font-mono text-[8px] sm:text-[9px] tracking-wider uppercase leading-tight font-bold">
                 {tab.tabLabel}
               </span>
               {isActive && !isPaused && !reducedMotion && (
@@ -301,7 +317,7 @@ export function DezoHeroGrowthConsole() {
       <div className="px-4 py-2.5 bg-[#141413] border-t-2 border-dezo-ink/80 flex flex-wrap items-center justify-between gap-2 text-[10px] font-mono text-white/50">
         <div className="flex items-center gap-2">
           <ShieldCheck size={12} className="text-dezo-primary" />
-          <span>Written 30-Day Warranty · 100% Code Handover</span>
+          <span>Written 30-Day Defect Warranty · 100% Code Handover</span>
         </div>
         <a
           href="https://wa.me/919114411026"

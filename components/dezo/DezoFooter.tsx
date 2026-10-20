@@ -178,6 +178,9 @@ export function DezoFooter() {
               <Link href="/promise" className="text-xs font-mono text-white/70 hover:text-white">
                 DEZO Standard Guarantee
               </Link>
+              <Link href="/careers" className="text-xs font-mono text-dezo-primary font-bold hover:text-white flex items-center gap-1">
+                Careers (Always Hiring) →
+              </Link>
             </div>
           </div>
         </div>

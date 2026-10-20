@@ -786,7 +786,50 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* 18 FAQ — one system */}
+            {/* Careers Promotion — PRD Section 14 */}
+      <DezoSection spacing="compact" className="border-t border-dezo-border bg-dezo-surface/50">
+        <DezoContainer size="wide">
+          <div className="p-8 sm:p-10 border border-dezo-border bg-dezo-surface rounded-2xl relative overflow-hidden">
+            <div className="absolute -right-16 -top-16 w-64 h-64 bg-dezo-primary/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+              <div className="max-w-2xl">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 font-mono text-[11px] tracking-wide uppercase mb-4">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Always Hiring · Guided Training Pathway
+                </div>
+                <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl text-dezo-text-primary tracking-tight">
+                  Your Skills Can Start Here.
+                </h3>
+                <p className="text-dezo-text-secondary text-sm sm:text-base mt-3 leading-relaxed">
+                  We're always interested in motivated people who want to learn, contribute and grow in digital marketing. Join our guided training pathway and discover where your abilities can take you.
+                </p>
+                <div className="flex flex-wrap gap-2 pt-4 text-[11px] font-mono text-dezo-text-muted">
+                  <span className="px-2.5 py-1 bg-dezo-bg border border-dezo-border rounded-md">Remote-First</span>
+                  <span className="px-2.5 py-1 bg-dezo-bg border border-dezo-border rounded-md">1-Month Training</span>
+                  <span className="px-2.5 py-1 bg-dezo-bg border border-dezo-border rounded-md">Class 12+</span>
+                  <span className="px-2.5 py-1 bg-dezo-bg border border-dezo-border rounded-md">Laptop & Internet</span>
+                  <span className="px-2.5 py-1 bg-dezo-bg border border-dezo-border rounded-md">Free Practical Training</span>
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
+                <DezoButton href="/careers" variant="primary" size="md">
+                  Explore Careers at DEZO →
+                </DezoButton>
+                <a
+                  href="https://wa.me/919114411026?text=Hi%20DEZO%20Careers%20Team%2C%20I%20saw%20your%20guided%20internship%20and%20training%20opportunity%20on%20dezo.in%20and%20would%20like%20to%20apply."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-dezo-border bg-dezo-bg hover:border-dezo-text-muted text-xs font-mono text-dezo-text-secondary transition-all text-center"
+                >
+                  Apply via WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+        </DezoContainer>
+      </DezoSection>
+
+{/* 18 FAQ — one system */}
       <DezoSection spacing="normal" className="bg-dezo-surface border-y border-dezo-border">
         <DezoContainer size="wide">
           <DezoHeading badge="FAQ" as="h2">

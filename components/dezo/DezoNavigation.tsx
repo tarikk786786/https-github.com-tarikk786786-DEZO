@@ -283,6 +283,9 @@ export function DezoNavigation() {
             <Link href="/growth-lab" className={linkClass('/growth-lab')}>
               DEZO LAB
             </Link>
+            <Link href="/careers" className={linkClass('/careers')}>
+              Careers
+            </Link>
             <Link href="/pricing" className={linkClass('/pricing')}>
               Pricing
             </Link>
@@ -407,6 +410,10 @@ export function DezoNavigation() {
             </Link>
             <Link href="/growth-lab" className="font-display text-lg uppercase font-bold text-dezo-ink block">
               DEZO LAB Diagnostics
+            </Link>
+            <Link href="/careers" className="font-display text-lg uppercase font-bold text-dezo-ink flex items-center justify-between">
+              <span>Careers &amp; Internship</span>
+              <span className="text-[10px] font-mono text-dezo-primary font-bold uppercase border border-dezo-primary px-1.5 py-0.5">Always Hiring</span>
             </Link>
             <Link href="/pricing" className="font-display text-lg uppercase font-bold text-dezo-ink block">
               Engagement Models & Pricing

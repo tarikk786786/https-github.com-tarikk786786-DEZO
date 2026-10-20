@@ -31,6 +31,12 @@ import {
   Clock,
   Sparkles,
 } from 'lucide-react';
+import { SalesGrowthProcess } from '@/components/dezo/ecommerce/SalesGrowthProcess';
+import { MarketplaceMetricsExplainer } from '@/components/dezo/ecommerce/MarketplaceMetricsExplainer';
+import { OmnichannelComparison } from '@/components/dezo/ecommerce/OmnichannelComparison';
+import { MarketplaceIndustrySolutions } from '@/components/dezo/ecommerce/MarketplaceIndustrySolutions';
+import { MarketplaceEngagementModels } from '@/components/dezo/ecommerce/MarketplaceEngagementModels';
+import { EcommerceServiceSelector } from '@/components/dezo/ecommerce/EcommerceServiceSelector';
 
 export function generateStaticParams() {
   return getAllServiceSlugs().map((slug) => ({ slug }));
@@ -80,6 +86,14 @@ export default async function ServiceDetailPage({
   const relatedServices = service.relatedServiceSlugs
     .map((rSlug) => getServiceBySlug(rSlug))
     .filter((s): s is ServiceItem => Boolean(s));
+
+  const isEcommerceOrMarketplace = [
+    'amazon',
+    'flipkart',
+    'ecommerce-growth',
+    'marketplace-growth',
+    'shopify-development',
+  ].includes(service.slug);
 
   return (
     <>
@@ -276,6 +290,59 @@ export default async function ServiceDetailPage({
           </div>
         </DezoContainer>
       </DezoSection>
+
+      {/* Dedicated eCommerce & Marketplace Growth Modules */}
+      {isEcommerceOrMarketplace && (
+        <>
+          {/* Omnichannel Comparison for Marketplace Hub & eCommerce Pages */}
+          {['marketplace-growth', 'ecommerce-growth', 'shopify-development'].includes(service.slug) && (
+            <DezoSection spacing="compact" className="bg-dezo-bg">
+              <DezoContainer size="wide">
+                <OmnichannelComparison />
+              </DezoContainer>
+            </DezoSection>
+          )}
+
+          {/* 6-Stage Sales Growth Framework */}
+          {['amazon', 'flipkart', 'marketplace-growth', 'ecommerce-growth'].includes(service.slug) && (
+            <DezoSection spacing="compact" className="bg-dezo-bg">
+              <DezoContainer size="wide">
+                <SalesGrowthProcess />
+              </DezoContainer>
+            </DezoSection>
+          )}
+
+          {/* Marketplace Metrics & Profitability Reality */}
+          {['amazon', 'marketplace-growth', 'flipkart'].includes(service.slug) && (
+            <DezoSection spacing="compact" className="bg-dezo-bg">
+              <DezoContainer size="wide">
+                <MarketplaceMetricsExplainer />
+              </DezoContainer>
+            </DezoSection>
+          )}
+
+          {/* Industry Solutions Matrix */}
+          <DezoSection spacing="compact" className="bg-dezo-bg">
+            <DezoContainer size="wide">
+              <MarketplaceIndustrySolutions />
+            </DezoContainer>
+          </DezoSection>
+
+          {/* Engagement Tiers & Scope Models */}
+          <DezoSection spacing="compact" className="bg-dezo-bg">
+            <DezoContainer size="wide">
+              <MarketplaceEngagementModels />
+            </DezoContainer>
+          </DezoSection>
+
+          {/* Interactive Growth Plan & Service Selector */}
+          <DezoSection spacing="compact" className="bg-dezo-bg">
+            <DezoContainer size="wide">
+              <EcommerceServiceSelector />
+            </DezoContainer>
+          </DezoSection>
+        </>
+      )}
 
       {/* Frequently Asked Questions */}
       {service.faqs.length > 0 && (

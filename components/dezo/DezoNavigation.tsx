@@ -13,6 +13,7 @@ const SERVICE_GROUPS = [
     items: [
       { name: 'Custom Web & Next.js', href: '/services/web-development' },
       { name: 'Shopify & D2C Stores', href: '/services/shopify-development' },
+      { name: 'eCommerce Growth', href: '/services/ecommerce-growth' },
       { name: 'Landing Pages & CRO', href: '/services/landing-pages-cro' },
     ],
   },
@@ -37,6 +38,7 @@ const SERVICE_GROUPS = [
     items: [
       { name: 'Amazon India Operations', href: '/services/amazon' },
       { name: 'Flipkart Seller Operations', href: '/services/flipkart' },
+      { name: 'Marketplace Growth Hub', href: '/services/marketplace-growth' },
       { name: 'WhatsApp API & CRM', href: '/services/whatsapp-crm-automation' },
       { name: 'Full Growth Systems', href: '/services/growth-systems' },
     ],

@@ -49,23 +49,23 @@ export function DezoFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/services/seo" className="hover:text-dezo-primary transition-colors">
-                  SEO &amp; Organic Search
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/local-seo" className="hover:text-dezo-primary transition-colors">
-                  Local Google Maps SEO
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/paid-ads" className="hover:text-dezo-primary transition-colors">
-                  Google &amp; Meta Ads
+                <Link href="/services/ecommerce-growth" className="hover:text-dezo-primary transition-colors">
+                  eCommerce Growth &amp; Store Setup
                 </Link>
               </li>
               <li>
                 <Link href="/services/amazon" className="hover:text-dezo-primary transition-colors">
-                  Amazon &amp; Flipkart Growth
+                  Amazon India Operations
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/flipkart" className="hover:text-dezo-primary transition-colors">
+                  Flipkart Seller Hub &amp; PLA
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/marketplace-growth" className="hover:text-dezo-primary transition-colors">
+                  Marketplace Growth Hub
                 </Link>
               </li>
               <li>

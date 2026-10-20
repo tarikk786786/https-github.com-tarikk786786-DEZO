@@ -477,87 +477,274 @@ export const MASTER_SERVICES_CATALOG: ServiceItem[] = [
   },
 
   // --- DEPARTMENT F: eCommerce & Marketplace Growth ---
+    {
+    id: 'srv-ecommerce-growth',
+    slug: 'ecommerce-growth',
+    departmentCode: 'F',
+    departmentName: 'eCommerce & Marketplace Growth',
+    name: 'Independent eCommerce Growth & Store Development',
+    tagline: 'Turnkey Shopify & Next.js storefronts, India payment gateways, UPI checkout, and retention marketing',
+    shortDescription: 'Launch and scale your independent online store: custom Shopify/Next.js engineering, frictionless UPI/Razorpay checkout, Shiprocket logistics sync, and high-converting paid acquisition.',
+    fullDescription: 'An independent eCommerce store grants your business what marketplaces never will: 100% customer data ownership, zero referral commissions, and complete brand equity. DEZO builds high-speed, conversion-engineered direct-to-consumer (D2C) online storefronts. From custom Shopify 2.0 or Next.js development to Razorpay/Cashfree payment integrations, automated COD fraud prevention, Shiprocket shipping workflows, and Google Shopping & Meta Ads scaling, we build stores that turn first-time visitors into repeat buyers.',
+    targetIndustries: [
+      'eCommerce & D2C Brands',
+      'Handloom & Ethnic Textiles',
+      'Beauty, Skincare & Cosmetics',
+      'Packaged Foods & Groceries',
+      'Fashion & Apparel',
+      'Consumer Goods & Lifestyle',
+      'Wholesale & B2B Portals',
+    ],
+    deliverables: [
+      'Comprehensive eCommerce business model planning, competitor benchmarking, and launch roadmap',
+      'Custom Shopify 2.0 or headless Next.js storefront engineering optimized for sub-second mobile loading',
+      'India payment gateway integration: Razorpay, Cashfree, PhonePe, and instant 1-click UPI checkout',
+      'Cash on Delivery (COD) configuration with OTP verification and automated RTO fraud reduction workflows',
+      'Logistics and shipping provider sync with Shiprocket, Delhivery, or automated tracking webhooks',
+      'Product catalog structuring, variant matrices, high-resolution imagery, and collection tagging',
+      'Technical eCommerce SEO: Product schema markup, category content, buying guides, and clean sitemaps',
+      'Conversion Rate Optimization (CRO): Cart abandonment email/WhatsApp recovery and trust badges',
+      'Analytics setup: GA4 eCommerce event tracking, Meta Pixel, Conversions API (CAPI), and Looker Studio dashboard',
+    ],
+    process: [
+      { step: '01. Architecture & Model Planning', description: 'Catalog taxonomy, payment/logistics selection, target customer journey, and UX wireframing.' },
+      { step: '02. Storefront Engineering', description: 'Custom theme build, mobile-first responsiveness, sub-second speed optimization, and cart UX.' },
+      { step: '03. Integrations & Checkouts', description: 'Payment gateway approvals, shipping zone rules, tax compliance, and automated tracking setup.' },
+      { step: '04. QA & End-to-End Test Orders', description: 'Live payment simulation, refund workflows, COD OTP checks, and mobile checkout friction tests.' },
+      { step: '05. Growth Launch & Retention Marketing', description: 'Google Shopping ads, Meta product ads, and automated WhatsApp abandoned cart recovery flows.' },
+    ],
+    relevantTools: ['Shopify Plus', 'Next.js', 'Razorpay', 'Cashfree', 'Shiprocket', 'Klaviyo', 'WhatsApp API', 'Google Analytics 4'],
+    relatedServiceSlugs: ['shopify-development', 'web-development', 'marketplace-growth', 'amazon', 'flipkart', 'paid-ads'],
+    faqs: [
+      {
+        q: 'Should I choose Shopify or custom Next.js for my online store?',
+        a: 'For most D2C brands, Shopify 2.0 provides the best balance of speed, stability, India app ecosystem, and easy inventory management. For businesses requiring custom product configurators, complex B2B rules, or extreme sub-second edge rendering, a custom Next.js storefront is the superior choice.',
+      },
+      {
+        q: 'How do you handle Cash on Delivery (COD) risks in India?',
+        a: 'We implement multi-layered RTO defense: OTP verification at checkout, automated WhatsApp order confirmation prompts, address validation, and instant prepayment discount incentives (e.g., 5% off on prepaid UPI).',
+      },
+      {
+        q: 'Do you charge a percentage of store revenue?',
+        a: 'No. DEZO operates strictly on transparent fixed-scope development milestones or monthly management retainers. We never take a percentage of your online store revenue.',
+      },
+      {
+        q: 'Can you migrate our existing store from WooCommerce or Magento?',
+        a: 'Yes. We handle complete catalog, customer data, historical order data, and 301 URL redirect migration to preserve your existing SEO rankings without downtime.',
+      },
+      {
+        q: 'What payment gateways do you integrate?',
+        a: 'We integrate all leading Indian payment gateways including Razorpay, Cashfree, PhonePe Payment Gateway, and PayU, supporting UPI, credit/debit cards, net banking, and EMI options.',
+      },
+    ],
+    seoTitle: 'eCommerce Website Development & D2C Growth Agency in India | DEZO',
+    seoDescription: 'Custom Shopify and Next.js eCommerce website development in India. Sub-second speed, seamless UPI/Razorpay checkout, and D2C marketing by DEZO in Bhubaneswar, Odisha.',
+    popular: true,
+    featured: true,
+    tier: 'GROW',
+  },
+
   {
     id: 'srv-amazon',
     slug: 'amazon',
     departmentCode: 'F',
     departmentName: 'eCommerce & Marketplace Growth',
-    name: 'Amazon India Marketplace Growth',
-    tagline: 'End-to-end Amazon seller operations: SEO listings, A+ content, PPC, and catalog health',
-    shortDescription: 'Comprehensive Amazon India growth management: keyword-rich product titles, bullet points, premium A+ content, Brand Store setup, and Sponsored Ads.',
-    fullDescription: 'Winning on Amazon India requires both organic search rank and aggressive ad efficiency. DEZO manages your entire Amazon Seller Central ecosystem. We optimize listings with high-volume buyer keywords, build high-converting A+ content modules, configure Sponsored Products/Brands campaigns with strict target ACoS, and maintain account health.',
-    targetIndustries: ['eCommerce & D2C Brands', 'Handloom & Textiles', 'Beauty & Fashion', 'Food Processing & Snacks', 'Manufacturing'],
+    name: 'Amazon India Marketplace Growth & PPC Management',
+    tagline: 'Seller Central onboarding, search-indexed listings, A+ Content, Brand Stores, and Sponsored Ads optimization',
+    shortDescription: 'Comprehensive Amazon India seller management: catalog cleanup, high-volume buyer keywords, A+ content modules, Brand Store creation, and Sponsored Ads managed with strict target ACoS.',
+    fullDescription: 'Winning on Amazon India requires both high organic search rank and rigorous ad spend discipline. DEZO manages your entire Amazon Seller Central ecosystem. From seller onboarding, document verification, and Brand Registry enrollment to keyword-dense listing copy, high-converting A+ modules, Sponsored Products/Brands campaigns, inventory aging alerts, and account health maintenance, we treat your catalog as an active revenue engine. We operate on authorized child-account permissions, track true contribution margins, and never make fabricated Buy Box or ranking claims.',
+    targetIndustries: [
+      'eCommerce & D2C Brands',
+      'Handloom & Ethnic Textiles',
+      'Beauty, Skincare & Cosmetics',
+      'Packaged Foods & Spices',
+      'Consumer Electronics & Appliances',
+      'Ayurveda & Herbal Wellness',
+      'Home & Kitchen',
+      'B2B & Industrial Manufacturing',
+    ],
     deliverables: [
-      'Keyword-indexed product title, bullet points, and backend search terms',
-      'High-converting A+ (Enhanced Brand Content) module design and copywriting',
-      'Amazon Brand Store multi-page design and navigation setup',
-      'Sponsored Products, Sponsored Brands, and Sponsored Display campaign management',
-      'Bid optimization and negative keyword harvesting to minimize ACoS',
-      'Catalog error remediation, stranded inventory fixes, and account health monitoring',
+      'Seller Central readiness assessment, document verification checklist, and secure child account setup',
+      'Amazon Brand Registry enrollment submission guidance and GTIN exemption support',
+      'Keyword-indexed product titles, 5 benefit-driven bullet points, and compliant backend search terms (250 bytes)',
+      'Custom modular A+ Content (Enhanced Brand Content) design, copywriting, comparison tables, and submission',
+      'Multi-page Amazon Brand Store architecture with category navigation and curated product showcases',
+      'Sponsored Products, Sponsored Brands (Video), and Sponsored Display campaign creation and bid management',
+      'Daily bid adjustments and weekly negative search-term harvesting to minimize wasted ad spend and lower ACoS',
+      'Catalog suppression triage, stranded inventory fixes, and Account Health Rating (ODR/LDR) monitoring',
+      'Bi-weekly performance reporting tracking unit sales, organic vs. ad revenue, TACoS, and net contribution margins',
     ],
     process: [
-      { step: '01. Listing Audit', description: 'Inspect search suppression, keyword coverage, and image quality.' },
-      { step: '02. Keyword Optimization', description: 'Inject high-volume customer search terms into indexable listing fields.' },
-      { step: '03. A+ Creative Build', description: 'Design modular visual storytelling graphics and comparative product tables.' },
-      { step: '04. PPC Architecture', description: 'Launch auto and manual campaigns with disciplined target ACoS thresholds.' },
-      { step: '05. Weekly Management', description: 'Prune bleeding ad keywords, adjust bids, and report net marketplace margins.' },
+      { step: '01. Forensic Account & Catalog Audit', description: 'Inspect listing suppression, keyword coverage, ad waste, review profiles, and competitor pricing baselines.' },
+      { step: '02. Keyword Architecture & Optimization', description: 'Inject high-volume customer search terms into indexable titles, bullet points, and backend search fields.' },
+      { step: '03. Visual Persuasion & A+ Production', description: 'Design conversion-focused infographics, size guides, comparison tables, and Brand Store layout.' },
+      { step: '04. Segmented PPC Campaign Architecture', description: 'Deploy Auto, Exact, Phrase, and Product Defense ad structures with disciplined target ACoS caps.' },
+      { step: '05. Weekly Management & Margin Telemetry', description: 'Prune bleeding search terms, monitor FBA/EasyShip fee slabs, and report true net contribution margin.' },
     ],
-    relevantTools: ['Amazon Seller Central', 'Amazon Ads Console', 'Helium 10', 'Figma'],
-    relatedServiceSlugs: ['flipkart', 'shopify-development', 'paid-ads', 'branding'],
+    relevantTools: ['Amazon Seller Central', 'Amazon Ads Console', 'Helium 10', 'Jungle Scout', 'Figma', 'Excel Bulk Feeds'],
+    relatedServiceSlugs: ['flipkart', 'ecommerce-growth', 'marketplace-growth', 'shopify-development', 'paid-ads', 'branding'],
     faqs: [
       {
         q: 'Do you need our Amazon master account credentials?',
-        a: 'No. You should never share your master password. Amazon provides child account permissions (User Permissions) where you safely grant us access strictly to Catalog, Advertising, and Orders.',
+        a: 'No, absolutely not. You should never share your master account password. Amazon provides a secure User Permissions (child account) feature where you grant DEZO secondary access restricted specifically to Catalog, Advertising, and Performance reports.',
       },
       {
-        q: 'Can you help with Amazon Brand Registry?',
-        a: 'Yes. We guide you through the trademark submission and Brand Registry enrollment process to unlock A+ content and Brand Stores.',
+        q: 'Can you help our brand enroll in Amazon Brand Registry?',
+        a: 'Yes. We guide you through the trademark application verification, documentation submission, and Brand Registry approval workflow to unlock A+ content, Brand Stores, Sponsored Brands video ads, and brand protection tools.',
+      },
+      {
+        q: 'Is third-party advertising spend included in your management fee?',
+        a: 'No. Advertising spend is paid directly by you to Amazon Advertising through your own credit card or billing account. DEZO charges a transparent service management fee with zero ad arbitrage or hidden markups.',
+      },
+      {
+        q: 'Do you guarantee Buy Box placement or specific keyword rankings?',
+        a: 'No ethical agency can guarantee specific algorithmic rankings or 100% Buy Box share, as Amazon’s algorithm evaluates dynamic seller factors including inventory proximity, fulfillment speed, seller rating, and real-time price. We optimize every controllable element to maximize your competitive win probability.',
+      },
+      {
+        q: 'Does DEZO physically handle warehousing, packaging, or parcel dispatch?',
+        a: 'No. DEZO manages digital operations, catalog data, listings, creative production, and advertising. Physical storage and order fulfillment are handled by your warehouse team or through Amazon FBA / Easy Ship fulfillment networks.',
+      },
+      {
+        q: 'Can you assist manufacturers and brands located in Odisha?',
+        a: 'Yes. DEZO is headquartered in Patia, Bhubaneswar, Odisha. We work closely with regional handloom weavers, food processors, spice manufacturers, and artisans across Odisha, as well as brands nationwide across India.',
+      },
+      {
+        q: 'What is TACoS and why do you prioritize it over ROAS alone?',
+        a: 'TACoS (Total Advertising Cost of Sales) measures ad spend against your TOTAL marketplace revenue (both organic and paid). A campaign with 4x ROAS is meaningless if your total ad spend eats 40% of your gross margin. We optimize for healthy TACoS (typically 8%–15%) to ensure real commercial net profit.',
+      },
+      {
+        q: 'How do you handle suppressed listings and stranded inventory?',
+        a: 'We conduct regular catalog audits to catch missing attributes, image compliance flags, and category mapping errors. We open structured case tickets with Amazon Seller Support and track resolutions until products are active and buyable.',
       },
     ],
-    seoTitle: 'Amazon Marketplace Management & PPC Agency in India | DEZO',
-    seoDescription: 'Amazon India seller management, listing optimization, A+ content design, and PPC advertising by DEZO.',
+    seoTitle: 'Amazon India Seller Account Management & PPC Agency | DEZO',
+    seoDescription: 'End-to-end Amazon India seller management: listing optimization, A+ content, Brand Stores, and Sponsored Ads managed with strict ACoS accountability by DEZO in Bhubaneswar, Odisha.',
     popular: true,
     featured: true,
     tier: 'GROW',
   },
+
   {
     id: 'srv-flipkart',
     slug: 'flipkart',
     departmentCode: 'F',
     departmentName: 'eCommerce & Marketplace Growth',
     name: 'Flipkart Seller Growth & Catalog Operations',
-    tagline: 'Listing optimization, Flipkart PLA ads, festival promotions, and catalog scaling',
+    tagline: 'Seller Hub onboarding, Listing Quality Score (LQS) optimization, PLA advertising, and festive sale scaling',
     shortDescription: 'Full Flipkart seller management: catalog creation, search keyword enrichment, Product Listing Ads (PLA), smart promotions, and account health maintenance.',
-    fullDescription: 'Flipkart reaches deep into Tier 2, Tier 3, and rural Indian markets. DEZO optimizes your Flipkart presence to capture this demand. We manage catalog uploads, ensure high listing quality scores, run Flipkart Product Listing Ads (PLA) and Product Contextual Ads (PCA), participate in Big Billion Days promotions, and safeguard dispatch metrics.',
-    targetIndustries: ['eCommerce & D2C Brands', 'Handloom & Textiles', 'Manufacturing', 'Food & Grocery'],
+    fullDescription: 'Flipkart reaches deep into Tier 2, Tier 3, and rural Indian retail markets. DEZO optimizes your Flipkart Seller Hub operations to capture this high-volume consumer demand. We manage single and bulk catalog uploads, maximize Listing Quality Scores (LQS > 80), structure Product Listing Ads (PLA) and Product Contextual Ads (PCA), participate strategically in Big Billion Days promotions, and safeguard dispatch metrics to maintain your seller tier.',
+    targetIndustries: [
+      'eCommerce & D2C Brands',
+      'Handloom & Ethnic Textiles',
+      'Fashion, Apparel & Footwear',
+      'Consumer Electronics & Mobile Accessories',
+      'Packaged Foods & Groceries',
+      'Manufacturing & Wholesale',
+    ],
     deliverables: [
-      'Flipkart single and bulk catalog upload and categorization',
-      'Listing Quality Score (LQS) optimization with comprehensive attributes',
-      'Flipkart PLA and PCA campaign setup and ROI-focused bid management',
-      'Participation planning for Flipkart sale events and flash promotions',
-      'Fulfillment and cancellation tracking to prevent seller tier downgrades',
-      'Monthly sales volume, ad spend, and marketplace settlement reporting',
+      'Flipkart Seller Hub registration checklist, GSTIN verification, and category approval support',
+      'Bulk Excel catalog preparation, attribute mapping, and variant structure configuration',
+      'Listing Quality Score (LQS) optimization focusing on complete technical attributes and size guides',
+      'Product Listing Ads (PLA) and Smart ROI campaign setup and ROI-focused bid management',
+      'Promotional calendar planning for Flipkart Big Billion Days, festive sale events, and deal enrollment',
+      'Fulfillment, dispatch latency, and cancellation tracking to prevent seller tier downgrades',
+      'Listing error investigation, catalog dispute resolution, and brand approval escalation guidance',
+      'Monthly sales volume, ad spend, returns (RTO) diagnostic, and marketplace settlement reporting',
     ],
     process: [
-      { step: '01. Catalog Audit', description: 'Evaluate current listings against Flipkart listing quality benchmarks.' },
-      { step: '02. Attribute Enrichment', description: 'Fill every key attribute, size chart, and search tag to maximize search filters.' },
-      { step: '03. Advertising Setup', description: 'Deploy CPC campaigns targeting high-converting search keywords.' },
-      { step: '04. Promotion Calibration', description: 'Enroll eligible products into platform promotions without eroding margins.' },
+      { step: '01. Catalog & Health Diagnostic', description: 'Evaluate current listings against Flipkart listing quality benchmarks (LQS) and inspect account standing.' },
+      { step: '02. Attribute & Keyword Enrichment', description: 'Fill every key attribute, search filter tag, material specification, and size chart to maximize search reach.' },
+      { step: '03. Performance Advertising Setup', description: 'Deploy CPC and Smart ROI campaigns targeting high-converting buyer search queries and category filters.' },
+      { step: '04. Promotional Calibration & Scaling', description: 'Enroll eligible hero products into platform promotions and flash deals without eroding gross margins.' },
+      { step: '05. Weekly Operations & SLA Safeguarding', description: 'Monitor order processing speed, dispatch latency, and return patterns to protect seller tier status.' },
     ],
-    relevantTools: ['Flipkart Seller Hub', 'Flipkart Ads Manager', 'Excel Catalog Templates'],
-    relatedServiceSlugs: ['amazon', 'shopify-development', 'paid-ads'],
+    relevantTools: ['Flipkart Seller Hub', 'Flipkart Ads Manager', 'Excel Catalog Templates', 'Figma'],
+    relatedServiceSlugs: ['amazon', 'ecommerce-growth', 'marketplace-growth', 'shopify-development', 'paid-ads'],
     faqs: [
       {
         q: 'What is Listing Quality Score (LQS) on Flipkart and why does it matter?',
-        a: 'Flipkart scores listings from 0 to 100 based on title length, image count, attribute completeness, and descriptions. A score above 80 is required for high organic visibility in Flipkart search results.',
+        a: 'Flipkart assigns every listing a score from 0 to 100 based on title length, image count, attribute completeness, and descriptions. A score above 80 is required for high organic visibility in Flipkart search results and filter navigation.',
+      },
+      {
+        q: 'What types of ads are available on Flipkart Ads Manager?',
+        a: 'Flipkart offers Product Listing Ads (PLA) which appear in search results, browse pages, and product detail pages, as well as Product Contextual Ads (PCA). We manage both CPC campaigns and automated Smart ROI campaigns depending on your catalog scale.',
+      },
+      {
+        q: 'How do you prepare clients for Flipkart Big Billion Days (BBD)?',
+        a: 'We begin preparation 6 to 8 weeks prior: auditing inventory availability, optimizing catalog LQS scores, submitting products to eligible BBD promotion tiers, and structuring ad budgets to capture the surge in festive traffic without running out of stock.',
+      },
+      {
+        q: 'How do you help manage high return rates (RTO) on Flipkart?',
+        a: 'We analyze customer return reasons in Seller Hub. For fashion and handloom, we introduce detailed Indian size charts and fabric drape images. For electronics, we add clear compatibility infographics and setup instructions to prevent user-error returns.',
+      },
+      {
+        q: 'Can DEZO manage both Amazon India and Flipkart together?',
+        a: 'Yes. Most successful brands run dual-channel strategies. DEZO operates as your single point of contact, synchronizing catalog data, pricing policies, and promotional calendars across both platforms.',
       },
     ],
     seoTitle: 'Flipkart Seller Management & Ads Agency in India | DEZO',
-    seoDescription: 'Flipkart listing optimization, catalog management, and PLA ads for Indian sellers by DEZO.',
+    seoDescription: 'Flipkart listing optimization, catalog creation, Listing Quality Score enhancement, and PLA ads for Indian sellers by DEZO in Bhubaneswar, Odisha.',
     popular: false,
     featured: false,
     tier: 'GROW',
   },
+
+  {
+    id: 'srv-marketplace-growth',
+    slug: 'marketplace-growth',
+    departmentCode: 'F',
+    departmentName: 'eCommerce & Marketplace Growth',
+    name: 'Integrated Marketplace Growth & Omnichannel Strategy',
+    tagline: 'Synchronizing your independent storefront, Amazon, and Flipkart into one unified sales machine',
+    shortDescription: 'Unified commerce management: catalog synchronization, channel-specific listing content, balanced ad spend allocation, and cross-channel profitability telemetry.',
+    fullDescription: 'Operating in silos burns resources. If your website, Amazon account, and Flipkart store are run by different teams without alignment, pricing disputes, stockouts, and margin leakage are inevitable. DEZO coordinates your entire digital retail ecosystem as one unified engine. We tailor product copy for marketplace search algorithms while preserving brand storytelling on your website, optimize total ad budgets across Google, Meta, Amazon, and Flipkart, and report true contribution margins.',
+    targetIndustries: [
+      'eCommerce & D2C Brands',
+      'Handloom & Ethnic Textiles',
+      'Beauty, Skincare & Cosmetics',
+      'Packaged Foods & Spices',
+      'Consumer Electronics & Mobile Accessories',
+      'Manufacturing & Wholesale',
+    ],
+    deliverables: [
+      'Cross-channel marketplace and D2C launch strategy blueprint and channel fit assessment',
+      'Unified product catalog data management and channel-specific listing content adaptation',
+      'Channel-level budget allocation across Amazon Sponsored Ads, Flipkart PLA, Meta, and Google Shopping',
+      'Centralized inventory replenishment forecasting to prevent costly out-of-stock rank penalties',
+      'Consolidated monthly profitability dashboard tracking sales, TACoS, and net margins across all channels',
+      'Bi-weekly strategic operating cadence with single-point accountability and dedicated growth leadership',
+    ],
+    process: [
+      { step: '01. Cross-Channel Diagnostic', description: 'Audit listings, brand consistency, pricing alignment, and margin leaks across all active channels.' },
+      { step: '02. Unified Catalog & Positioning', description: 'Adapt product titles and creative assets to match each channel’s unique buyer search algorithms.' },
+      { step: '03. Disciplined Media Allocation', description: 'Direct ad spend toward high-margin channels while maintaining defensive rank on marketplaces.' },
+      { step: '04. Inventory & Operations Sync', description: 'Implement replenishment schedules and multi-channel safety stock buffers to prevent stockouts.' },
+      { step: '05. Scaled Omnichannel Reporting', description: 'Measure blended customer acquisition cost (blended CAC) and net commercial profit.' },
+    ],
+    relevantTools: ['Amazon Seller Central', 'Flipkart Seller Hub', 'Shopify', 'Google Ads', 'Meta Ads', 'Looker Studio'],
+    relatedServiceSlugs: ['amazon', 'flipkart', 'ecommerce-growth', 'shopify-development', 'paid-ads'],
+    faqs: [
+      {
+        q: 'Why should a brand sell on both Amazon and an independent website?',
+        a: 'Marketplaces like Amazon and Flipkart provide immediate, high-intent buyer traffic from day one. Your independent website provides 100% customer data ownership, higher margins, and long-term brand equity. Running both creates a self-reinforcing flywheel where marketplace discovery fuels direct brand search.',
+      },
+      {
+        q: 'How do you prevent price conflicts between our website and marketplaces?',
+        a: 'We help you maintain price parity while creating channel-specific value. For example, offering exclusive bundles, starter kits, or personalized engraving on your own website, while maintaining standardized single-unit SKUs on marketplaces.',
+      },
+      {
+        q: 'How does DEZO coordinate multiple channels without confusion?',
+        a: 'You have a single accountable DEZO Growth Lead in Bhubaneswar who coordinates all channel sprints, creative production, ad budgets, and weekly performance reviews under one unified operating cadence.',
+      },
+    ],
+    seoTitle: 'Marketplace Management & Omnichannel Growth Agency India | DEZO',
+    seoDescription: 'Unify your Amazon India, Flipkart, and D2C website operations. Catalog synchronization, PPC management, and cross-channel profit reporting by DEZO.',
+    popular: true,
+    featured: true,
+    tier: 'SCALE',
+  },
+
+
 
   // --- DEPARTMENT G: Lead Generation & Conversion (CRO) ---
   {
@@ -840,6 +1027,12 @@ export const MASTER_SERVICES_CATALOG: ServiceItem[] = [
 ];
 
 export function getServiceBySlug(slug: string): ServiceItem | undefined {
+  if (slug === 'performance-marketing') {
+    return MASTER_SERVICES_CATALOG.find((s) => s.slug === 'paid-ads') || MASTER_SERVICES_CATALOG.find((s) => s.slug === slug);
+  }
+  if (slug === 'brand-creative') {
+    return MASTER_SERVICES_CATALOG.find((s) => s.slug === 'branding') || MASTER_SERVICES_CATALOG.find((s) => s.slug === slug);
+  }
   return MASTER_SERVICES_CATALOG.find((s) => s.slug === slug);
 }
 
@@ -848,5 +1041,5 @@ export function getServicesByDepartment(code: ServiceDepartmentCode): ServiceIte
 }
 
 export function getAllServiceSlugs(): string[] {
-  return MASTER_SERVICES_CATALOG.map((s) => s.slug);
+  return [...MASTER_SERVICES_CATALOG.map((s) => s.slug), 'performance-marketing', 'brand-creative'];
 }

@@ -63,7 +63,7 @@ export function DezoMarketplaceDashboard() {
           <div className="flex items-center gap-2 mb-1">
             <span className="w-2.5 h-2.5 rounded-full bg-dezo-success animate-pulse" />
             <span className="text-xs font-mono uppercase tracking-widest text-dezo-text-muted">
-              DEZO Growth OS · Seller Intelligence Engine
+              DEZO Growth OS · Seller Intelligence Engine (Sample Telemetry Model · Zero Private Data)
             </span>
           </div>
           <h3 className="text-xl font-bold text-dezo-text-primary">

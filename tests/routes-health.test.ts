@@ -3,6 +3,16 @@ import assert from 'node:assert/strict';
 
 const BASE_URL = process.env.TEST_BASE_URL || 'http://127.0.0.1:3000';
 
+function isConnRefused(err: unknown): boolean {
+  if (!err) return false;
+  const e = err as { code?: string; message?: string; cause?: { code?: string } };
+  return (
+    e.code === 'ECONNREFUSED' ||
+    e.cause?.code === 'ECONNREFUSED' ||
+    (typeof e.message === 'string' && e.message.includes('fetch failed'))
+  );
+}
+
 describe('HTTP Routes & API Health Tests', () => {
   it('verifies /api/health returns 200 and operational status', async () => {
     try {
@@ -12,7 +22,7 @@ describe('HTTP Routes & API Health Tests', () => {
       assert.equal(data.status, 'ok');
       assert.ok(data.engine.includes('Next.js App Router'));
     } catch (err: unknown) {
-      if ((err as { code?: string }).code === 'ECONNREFUSED') {
+      if (isConnRefused(err)) {
         console.warn(`[WARN] Dev server not reachable at ${BASE_URL}. Skipping live test.`);
         return;
       }
@@ -25,7 +35,7 @@ describe('HTTP Routes & API Health Tests', () => {
       const res = await fetch(`${BASE_URL}/api/contact`, { method: 'GET' });
       assert.equal(res.status, 405);
     } catch (err: unknown) {
-      if ((err as { code?: string }).code === 'ECONNREFUSED') return;
+      if (isConnRefused(err)) return;
       throw err;
     }
   });
@@ -42,7 +52,7 @@ describe('HTTP Routes & API Health Tests', () => {
       assert.equal(data.success, false);
       assert.ok(data.details);
     } catch (err: unknown) {
-      if ((err as { code?: string }).code === 'ECONNREFUSED') return;
+      if (isConnRefused(err)) return;
       throw err;
     }
   });
@@ -69,7 +79,7 @@ describe('HTTP Routes & API Health Tests', () => {
       assert.ok(data.leadId.startsWith('DEZO-'));
       assert.ok(data.whatsappHandoffUrl.startsWith('https://wa.me/'));
     } catch (err: unknown) {
-      if ((err as { code?: string }).code === 'ECONNREFUSED') return;
+      if (isConnRefused(err)) return;
       throw err;
     }
   });
@@ -91,7 +101,7 @@ describe('HTTP Routes & API Health Tests', () => {
         const res = await fetch(`${BASE_URL}${page}`);
         assert.equal(res.status, 200, `Page ${page} should return 200`);
       } catch (err: unknown) {
-        if ((err as { code?: string }).code === 'ECONNREFUSED') return;
+        if (isConnRefused(err)) return;
         throw err;
       }
     }

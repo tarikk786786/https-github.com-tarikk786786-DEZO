@@ -119,7 +119,8 @@ export default function HomePage() {
           aria-hidden
         />
 
-        <div className="relative z-10 flex min-h-[100svh] flex-col justify-center py-24 sm:py-32">
+        {/* Responsive Hero Container — justify-start on mobile prevents flex-center scroll clipping */}
+        <div className="relative z-10 flex min-h-[100svh] flex-col justify-start lg:justify-center pt-24 pb-16 sm:pt-28 sm:pb-20 lg:py-32">
           <DezoContainer size="wide" className="w-full">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-center">
               {/* Left Column: Brand & Manifesto */}
@@ -155,7 +156,7 @@ export default function HomePage() {
                       magnetic
                       className="w-full sm:w-auto justify-center !bg-transparent !border-2 !border-white/80 !text-white hover:!bg-white hover:!text-dezo-ink !shadow-[4px_4px_0_0_rgba(255,255,255,0.25)] hover:!shadow-[4px_4px_0_0_#B08D57] font-mono font-bold tracking-wider uppercase transition-all"
                     >
-                      {heroBanner.secondaryCta?.label ?? 'View Our Work'}
+                      {heroBanner.secondaryCta?.label ?? 'Explore Our Work'}
                     </DezoButton>
                   </DezoMagnetic>
                 </motion.div>

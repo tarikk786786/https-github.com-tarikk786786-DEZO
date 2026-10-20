@@ -12,7 +12,7 @@ import {
   PhoneCall,
   Globe,
   Layers,
-  ExternalLink,
+  Sparkles,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useReducedMotion } from '@/lib/motion/useReducedMotion';
@@ -20,6 +20,7 @@ import { useReducedMotion } from '@/lib/motion/useReducedMotion';
 interface ConsoleTab {
   id: string;
   tabLabel: string;
+  shortLabel: string;
   badge: string;
   title: string;
   category: string;
@@ -37,12 +38,13 @@ const TABS: ConsoleTab[] = [
   {
     id: 'proof',
     tabLabel: '01 LIVE PROOF',
+    shortLabel: '01 PROOF',
     badge: '181+ SITES',
     category: 'AUTHENTIC PORTFOLIO',
     title: 'Real Production Client Deployments',
     icon: Globe,
     metricValue: '181+',
-    metricLabel: 'Live Client Deployments',
+    metricLabel: 'Verified Deployments',
     highlightPill: '100% Production URLs · Zero Mockups or Fake Demos',
     deliverables: [
       'Yasana Beauty Rituals: D2C commerce storefront with brand storytelling',
@@ -56,6 +58,7 @@ const TABS: ConsoleTab[] = [
   {
     id: 'web',
     tabLabel: '02 WEB & SPEED',
+    shortLabel: '02 WEB',
     badge: 'SUB-SECOND LCP',
     category: 'COMMERCE & APPS',
     title: 'High-Speed Next.js 16 Storefronts',
@@ -75,6 +78,7 @@ const TABS: ConsoleTab[] = [
   {
     id: 'marketplace',
     tabLabel: '03 AMAZON & FLIPKART',
+    shortLabel: '03 MARKET',
     badge: 'SP-API AUTOMATION',
     category: 'MARKETPLACE OPERATIONS',
     title: 'Disciplined Catalog & Ad Management',
@@ -94,6 +98,7 @@ const TABS: ConsoleTab[] = [
   {
     id: 'local',
     tabLabel: '04 ODISHA & MAPS',
+    shortLabel: '04 LOCAL',
     badge: 'GOOGLE 3-PACK',
     category: 'LOCAL ACQUISITION',
     title: 'Dominating Local Search & Footfall',
@@ -113,6 +118,7 @@ const TABS: ConsoleTab[] = [
   {
     id: 'connected',
     tabLabel: '05 CONNECTED STACK',
+    shortLabel: '05 STACK',
     badge: '5-IN-1 PARTNER',
     category: 'GROWTH ARCHITECTURE',
     title: 'One Unified Operating System',
@@ -155,36 +161,36 @@ export function DezoHeroGrowthConsole() {
 
   return (
     <div
-      className="w-full max-w-xl bg-[#0E0E0D] border-2 border-dezo-primary/60 text-white rounded-none shadow-[8px_8px_0_0_#B08D57] transition-all relative overflow-hidden"
+      className="w-full max-w-xl bg-[#0E0E0D] border-2 border-dezo-primary/80 text-white rounded-none shadow-[6px_6px_0_0_#B08D57] sm:shadow-[8px_8px_0_0_#B08D57] transition-all relative overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       role="region"
       aria-label="DEZO Interactive Growth Console"
     >
       {/* Top Telemetry Header Bar */}
-      <div className="px-4 sm:px-5 py-3 border-b-2 border-dezo-ink/80 bg-[#161615] flex items-center justify-between">
+      <div className="px-3.5 sm:px-5 py-2.5 sm:py-3 border-b-2 border-dezo-ink/80 bg-[#161615] flex items-center justify-between">
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="flex items-center gap-1.5" aria-hidden="true">
-            <span className="w-2.5 h-2.5 bg-dezo-primary rounded-none inline-block" />
-            <span className="w-2.5 h-2.5 bg-white/40 rounded-none inline-block" />
-            <span className="w-2.5 h-2.5 bg-white/20 rounded-none inline-block" />
+            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-dezo-primary rounded-none inline-block" />
+            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/40 rounded-none inline-block" />
+            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/20 rounded-none inline-block" />
           </div>
-          <span className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-white/90">
+          <span className="font-mono text-[9px] sm:text-[11px] font-bold uppercase tracking-wider text-white/90">
             DEZO LAB // GROWTH CAPABILITY CONSOLE
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <span className="w-2 h-2 bg-emerald-400 rounded-none animate-ping" />
-          <span className="font-mono text-[9px] sm:text-[10px] font-bold text-emerald-400 uppercase tracking-widest">
-            181+ PRODUCTION SITES
+          <span className="font-mono text-[8px] sm:text-[10px] font-bold text-emerald-400 uppercase tracking-widest">
+            181+ SITES LIVE
           </span>
         </div>
       </div>
 
-      {/* Interactive Tabs Header */}
+      {/* Interactive Tabs Header — Horizontal scrollable on mobile, 5-col grid on desktop */}
       <div
-        className="grid grid-cols-2 sm:grid-cols-5 border-b-2 border-dezo-ink/80 bg-[#121211] divide-x-2 divide-dezo-ink/80"
+        className="flex overflow-x-auto sm:grid sm:grid-cols-5 border-b-2 border-dezo-ink/80 bg-[#121211] sm:divide-x-2 sm:divide-dezo-ink/80 scrollbar-none"
         role="tablist"
         aria-label="DEZO Capabilities"
       >
@@ -199,14 +205,17 @@ export function DezoHeroGrowthConsole() {
                 setActiveTab(idx);
                 setIsPaused(true);
               }}
-              className={`py-2 px-1.5 sm:px-2 text-left transition-all relative cursor-pointer ${
+              className={`shrink-0 py-2.5 px-3 sm:px-2 text-center transition-all relative cursor-pointer border-r border-dezo-ink/40 sm:border-r-0 ${
                 isActive
                   ? 'bg-dezo-primary text-dezo-ink font-bold'
                   : 'bg-transparent text-white/70 hover:bg-white/5 hover:text-white'
               }`}
             >
-              <span className="block font-mono text-[8px] sm:text-[9px] tracking-wider uppercase leading-tight font-bold">
+              <span className="hidden sm:block font-mono text-[9px] tracking-wider uppercase leading-tight font-bold">
                 {tab.tabLabel}
+              </span>
+              <span className="sm:hidden font-mono text-[10px] tracking-wider uppercase leading-tight font-bold whitespace-nowrap">
+                {tab.shortLabel}
               </span>
               {isActive && !isPaused && !reducedMotion && (
                 <motion.div
@@ -223,62 +232,62 @@ export function DezoHeroGrowthConsole() {
       </div>
 
       {/* Main Interactive Stage */}
-      <div className="p-5 sm:p-6 min-h-[360px] sm:min-h-[380px] flex flex-col justify-between">
+      <div className="p-4 sm:p-6 min-h-[320px] sm:min-h-[360px] flex flex-col justify-between">
         <AnimatePresence mode="wait">
           <motion.div
             key={current.id}
-            initial={reducedMotion ? undefined : { opacity: 0, y: 10 }}
+            initial={reducedMotion ? undefined : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={reducedMotion ? undefined : { opacity: 0, y: -10 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            exit={reducedMotion ? undefined : { opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="flex-1 flex flex-col justify-between"
           >
             <div>
               {/* Category Eyebrow & Live Metric Badge */}
-              <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                <span className="font-mono text-[10px] uppercase tracking-widest text-dezo-primary font-bold flex items-center gap-1.5">
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5 sm:mb-3">
+                <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-widest text-dezo-primary font-bold flex items-center gap-1.5">
                   <Icon size={12} className="text-dezo-primary" />
                   {current.category}
                 </span>
-                <span className="font-mono text-[9px] uppercase tracking-widest px-2 py-0.5 bg-white/10 text-white border border-white/20 font-bold">
+                <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest px-2 py-0.5 bg-white/10 text-white border border-white/20 font-bold">
                   {current.badge}
                 </span>
               </div>
 
               {/* Title & Speed Gauge Card */}
-              <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center pb-4 border-b border-white/10">
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 sm:gap-4 items-center pb-3.5 sm:pb-4 border-b border-white/10">
                 <div className="sm:col-span-8">
-                  <h3 className="font-display text-xl sm:text-2xl font-bold uppercase text-white tracking-tight leading-tight">
+                  <h3 className="font-display text-lg sm:text-2xl font-bold uppercase text-white tracking-tight leading-snug">
                     {current.title}
                   </h3>
-                  <p className="font-mono text-xs text-dezo-primary mt-1 font-bold">
+                  <p className="font-mono text-[11px] sm:text-xs text-dezo-primary mt-1 font-bold">
                     {current.highlightPill}
                   </p>
                 </div>
 
-                <div className="sm:col-span-4 bg-[#181816] border-2 border-dezo-primary/40 p-3 text-center sm:text-right shadow-[2px_2px_0_0_#B08D57]">
-                  <span className="block font-mono text-[9px] uppercase text-white/50 tracking-wider">
+                <div className="sm:col-span-4 bg-[#181816] border-2 border-dezo-primary/40 p-2 sm:p-3 text-left sm:text-right shadow-[2px_2px_0_0_#B08D57]">
+                  <span className="block font-mono text-[8px] sm:text-[9px] uppercase text-white/50 tracking-wider">
                     {current.metricLabel}
                   </span>
-                  <span className="font-mono text-2xl sm:text-3xl font-black text-dezo-primary tracking-tight">
+                  <span className="font-mono text-xl sm:text-3xl font-black text-dezo-primary tracking-tight">
                     {current.metricValue}
                   </span>
                 </div>
               </div>
 
               {/* Deliverables List */}
-              <div className="mt-4 space-y-2">
-                <span className="font-mono text-[10px] uppercase text-white/50 tracking-wider block">
+              <div className="mt-3 sm:mt-4 space-y-1.5 sm:space-y-2">
+                <span className="font-mono text-[9px] sm:text-[10px] uppercase text-white/50 tracking-wider block">
                   Engineered Deliverables:
                 </span>
-                <ul className="space-y-1.5">
+                <ul className="space-y-1 sm:space-y-1.5">
                   {current.deliverables.map((item, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-2 font-mono text-xs text-white/85 leading-snug"
+                      className="flex items-start gap-2 font-mono text-[11px] sm:text-xs text-white/85 leading-snug"
                     >
                       <CheckCircle2
-                        size={13}
+                        size={12}
                         className="text-dezo-primary shrink-0 mt-0.5"
                       />
                       <span>{item}</span>
@@ -289,10 +298,10 @@ export function DezoHeroGrowthConsole() {
             </div>
 
             {/* Bottom Pricing & Direct Action */}
-            <div className="mt-6 pt-4 border-t-2 border-white/10">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t-2 border-white/10">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
                 <div>
-                  <span className="font-mono text-[9px] uppercase tracking-wider text-white/50 block">
+                  <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-wider text-white/50 block">
                     Transparent Starting Price
                   </span>
                   <span className="font-mono text-xs sm:text-sm font-bold text-white">
@@ -302,10 +311,10 @@ export function DezoHeroGrowthConsole() {
 
                 <Link
                   href={current.ctaHref}
-                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold hover:bg-white transition-colors border border-dezo-primary shadow-[2px_2px_0_0_#FFFFFF] active:translate-x-[1px] active:translate-y-[1px]"
+                  className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:px-4 sm:py-2.5 bg-dezo-primary text-dezo-ink font-mono text-[11px] sm:text-xs uppercase tracking-wider font-bold hover:bg-white transition-colors border border-dezo-primary shadow-[2px_2px_0_0_#FFFFFF] active:translate-x-[1px] active:translate-y-[1px]"
                 >
                   <span>{current.ctaLabel}</span>
-                  <ArrowRight size={13} />
+                  <ArrowRight size={12} />
                 </Link>
               </div>
             </div>
@@ -314,9 +323,9 @@ export function DezoHeroGrowthConsole() {
       </div>
 
       {/* Bottom Live System Strip */}
-      <div className="px-4 py-2.5 bg-[#141413] border-t-2 border-dezo-ink/80 flex flex-wrap items-center justify-between gap-2 text-[10px] font-mono text-white/50">
-        <div className="flex items-center gap-2">
-          <ShieldCheck size={12} className="text-dezo-primary" />
+      <div className="px-3 sm:px-4 py-2 sm:py-2.5 bg-[#141413] border-t-2 border-dezo-ink/80 flex flex-wrap items-center justify-between gap-1.5 text-[9px] sm:text-[10px] font-mono text-white/50">
+        <div className="flex items-center gap-1.5">
+          <ShieldCheck size={11} className="text-dezo-primary shrink-0" />
           <span>Written 30-Day Defect Warranty · 100% Code Handover</span>
         </div>
         <a
@@ -325,7 +334,7 @@ export function DezoHeroGrowthConsole() {
           rel="noopener noreferrer"
           className="text-dezo-primary hover:text-white font-bold transition-colors inline-flex items-center gap-1"
         >
-          <PhoneCall size={10} /> +91 9114411026
+          <PhoneCall size={9} /> +91 9114411026
         </a>
       </div>
     </div>

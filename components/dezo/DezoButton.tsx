@@ -9,6 +9,7 @@ interface DezoButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
   size?: 'sm' | 'md' | 'lg';
   href?: string;
   magnetic?: boolean;
+  isLoading?: boolean;
   children: React.ReactNode;
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
@@ -20,14 +21,16 @@ export function DezoButton({
   size = 'md',
   href,
   magnetic = false,
+  isLoading = false,
   children,
   icon,
   iconPosition = 'right',
   className = '',
+  disabled,
   ...props
 }: DezoButtonProps) {
   const baseStyles =
-    'inline-flex items-center justify-center font-bold uppercase tracking-wider transition-all duration-150 select-none cursor-pointer rounded-none active:translate-x-[1px] active:translate-y-[1px] disabled:opacity-50 disabled:pointer-events-none';
+    'inline-flex items-center justify-center font-bold uppercase tracking-wider transition-all duration-150 select-none cursor-pointer rounded-none active:translate-x-[1px] active:translate-y-[1px] focus-visible:ring-2 focus-visible:ring-dezo-primary focus-visible:ring-offset-2 focus-visible:outline-none disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none';
 
   const sizeStyles = {
     sm: 'font-mono text-xs px-3.5 py-2 gap-1.5',
@@ -48,20 +51,59 @@ export function DezoButton({
 
   const content = (
     <>
-      {icon && iconPosition === 'left' && <span className="shrink-0">{icon}</span>}
-      <span>{children}</span>
-      {icon && iconPosition === 'right' && <span className="shrink-0">{icon}</span>}
+      {isLoading ? (
+        <span className="inline-flex items-center gap-2">
+          <svg
+            className="animate-spin h-3.5 w-3.5 text-current"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            />
+          </svg>
+          <span>Processing...</span>
+        </span>
+      ) : (
+        <>
+          {icon && iconPosition === 'left' && <span className="shrink-0">{icon}</span>}
+          <span>{children}</span>
+          {icon && iconPosition === 'right' && <span className="shrink-0">{icon}</span>}
+        </>
+      )}
     </>
   );
 
   const combinedClasses = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;
 
   const buttonElement = href ? (
-    <Link href={href} className={combinedClasses}>
+    <Link
+      href={href}
+      className={combinedClasses}
+      aria-busy={isLoading ? 'true' : undefined}
+      aria-disabled={disabled ? 'true' : undefined}
+    >
       {content}
     </Link>
   ) : (
-    <button className={combinedClasses} {...props}>
+    <button
+      className={combinedClasses}
+      disabled={disabled || isLoading}
+      aria-busy={isLoading ? 'true' : undefined}
+      {...props}
+    >
       {content}
     </button>
   );

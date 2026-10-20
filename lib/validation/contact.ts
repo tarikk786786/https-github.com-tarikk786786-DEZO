@@ -9,6 +9,7 @@ export const contactFormSchema = z.object({
   service: z.enum([
     'Website Development',
     'Ecommerce Architecture',
+    'Amazon & Flipkart Growth',
     'SEO & Organic Growth',
     'Meta & Google Ads',
     'AI & Automation',
@@ -17,6 +18,8 @@ export const contactFormSchema = z.object({
     message: 'Please select a service.',
   }),
   budget: z.enum([
+    'Under ₹5,000 (Student / Dukaan)',
+    '₹5,000 - ₹15,000 (Local Business)',
     'Under ₹50,000',
     '₹50,000 - ₹1,00,000',
     '₹1,00,000 - ₹2,50,000',

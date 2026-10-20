@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Send, CheckCircle2, MessageSquare } from 'lucide-react';
+import { Send, CheckCircle2, MessageSquare, AlertCircle } from 'lucide-react';
 import {
   contactFormSchema,
   ContactFormData,
@@ -12,9 +12,10 @@ import {
 import { DezoButton } from './DezoButton';
 
 export function DezoContactForm() {
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [leadId, setLeadId] = useState<string | null>(null);
   const [fallbackUrl, setFallbackUrl] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const {
     register,
@@ -35,6 +36,7 @@ export function DezoContactForm() {
 
   const onSubmit = async (data: ContactFormData) => {
     setStatus('submitting');
+    setErrorMessage(null);
     const directWhatsAppUrl = buildWhatsAppLeadUrl(data);
     setFallbackUrl(directWhatsAppUrl);
 
@@ -65,6 +67,9 @@ export function DezoContactForm() {
     }
   };
 
+  const inputBase =
+    'w-full bg-white border-2 border-dezo-ink rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none focus:border-dezo-primary focus:ring-2 focus:ring-dezo-primary/20 shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all';
+
   return (
     <div className="w-full">
       {status === 'success' && (
@@ -88,11 +93,21 @@ export function DezoContactForm() {
               href={fallbackUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-dezo-ink text-dezo-paper font-mono text-xs font-bold uppercase tracking-wider hover:bg-dezo-gold transition-colors whitespace-nowrap shrink-0"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-dezo-ink text-white font-mono text-xs font-bold uppercase tracking-wider hover:bg-dezo-primary hover:text-dezo-ink transition-colors whitespace-nowrap shrink-0 border border-dezo-ink shadow-[2px_2px_0_0_#B08D57]"
             >
               <MessageSquare size={14} /> Open WhatsApp
             </a>
           )}
+        </div>
+      )}
+
+      {status === 'error' && (
+        <div
+          role="alert"
+          className="mb-6 p-4 rounded-none bg-red-50 border-2 border-red-600 flex items-center gap-3 text-red-900 shadow-[4px_4px_0_0_#DC2626]"
+        >
+          <AlertCircle size={20} className="shrink-0 text-red-600" />
+          <p className="font-mono text-xs font-bold">{errorMessage || 'Something went wrong. Please try again or message directly via WhatsApp.'}</p>
         </div>
       )}
 
@@ -108,9 +123,8 @@ export function DezoContactForm() {
               type="text"
               placeholder="e.g. Tarik Islam"
               {...register('name')}
-              className={`w-full bg-white border-2 ${
-                errors.name ? 'border-red-500' : 'border-dezo-ink'
-              } rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all`}
+              aria-invalid={!!errors.name}
+              className={`${inputBase} ${errors.name ? 'border-red-500' : 'border-dezo-ink'}`}
             />
             {errors.name && (
               <span className="font-mono text-xs text-red-500 font-bold">{errors.name.message}</span>
@@ -127,9 +141,8 @@ export function DezoContactForm() {
               type="email"
               placeholder="name@company.com"
               {...register('email')}
-              className={`w-full bg-white border-2 ${
-                errors.email ? 'border-red-500' : 'border-dezo-ink'
-              } rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all`}
+              aria-invalid={!!errors.email}
+              className={`${inputBase} ${errors.email ? 'border-red-500' : 'border-dezo-ink'}`}
             />
             {errors.email && (
               <span className="font-mono text-xs text-red-500 font-bold">{errors.email.message}</span>
@@ -148,9 +161,8 @@ export function DezoContactForm() {
               type="tel"
               placeholder="+91 9114411026"
               {...register('phone')}
-              className={`w-full bg-white border-2 ${
-                errors.phone ? 'border-red-500' : 'border-dezo-ink'
-              } rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all`}
+              aria-invalid={!!errors.phone}
+              className={`${inputBase} ${errors.phone ? 'border-red-500' : 'border-dezo-ink'}`}
             />
             {errors.phone && (
               <span className="font-mono text-xs text-red-500 font-bold">{errors.phone.message}</span>
@@ -160,14 +172,14 @@ export function DezoContactForm() {
           {/* Business / Brand Name */}
           <div className="flex flex-col gap-2">
             <label htmlFor="businessName" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
-              Business / Brand Name
+              Business / Shop / Brand Name
             </label>
             <input
               id="businessName"
               type="text"
-              placeholder="e.g. Acme Retail"
+              placeholder="e.g. Maa Tarini Store, Patia"
               {...register('businessName')}
-              className="w-full bg-white border-2 border-dezo-ink rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all"
+              className={inputBase}
             />
           </div>
         </div>
@@ -176,14 +188,14 @@ export function DezoContactForm() {
           {/* City / Location */}
           <div className="flex flex-col gap-2">
             <label htmlFor="city" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
-              City / Base
+              City / Location
             </label>
             <input
               id="city"
               type="text"
-              placeholder="e.g. Bhubaneswar, Cuttack, Mumbai"
+              placeholder="e.g. Bhubaneswar, Cuttack, Puri"
               {...register('city')}
-              className="w-full bg-white border-2 border-dezo-ink rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all"
+              className={inputBase}
             />
           </div>
 
@@ -195,16 +207,16 @@ export function DezoContactForm() {
             <select
               id="service"
               {...register('service')}
-              className={`w-full bg-white border-2 ${
-                errors.service ? 'border-red-500' : 'border-dezo-ink'
-              } rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all cursor-pointer`}
+              aria-invalid={!!errors.service}
+              className={`${inputBase} ${errors.service ? 'border-red-500' : 'border-dezo-ink'} cursor-pointer`}
             >
               <option value="">Select Service Area</option>
-              <option value="Website Development">Website Development (Landing, Corporate, Custom)</option>
-              <option value="Ecommerce Architecture">Ecommerce Architecture (Shopify / Headless)</option>
-              <option value="SEO & Organic Growth">SEO & Organic Growth</option>
+              <option value="Website Development">Website Development (Student, Dukaan, Corporate, Custom)</option>
+              <option value="Ecommerce Architecture">Ecommerce Architecture (Shopify / Headless Store)</option>
+              <option value="Amazon & Flipkart Growth">Amazon & Flipkart Marketplace Management</option>
+              <option value="SEO & Organic Growth">SEO & Local Google Maps Visibility</option>
               <option value="Meta & Google Ads">Meta & Google Performance Ads</option>
-              <option value="AI & Automation">AI & Workflow Automation</option>
+              <option value="AI & Automation">AI & Workflow Automation (WhatsApp Bot)</option>
               <option value="Bespoke Engineering">Bespoke Engineering</option>
             </select>
             {errors.service && (
@@ -220,13 +232,15 @@ export function DezoContactForm() {
             <select
               id="budget"
               {...register('budget')}
-              className="w-full bg-white border-2 border-dezo-ink rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all cursor-pointer"
+              className={`${inputBase} cursor-pointer`}
             >
-              <option value="Undisclosed">Select Budget (Optional)</option>
-              <option value="Under ₹50,000">Under ₹50,000</option>
-              <option value="₹50,000 - ₹1,00,000">₹50,000 - ₹1,00,000</option>
+              <option value="Undisclosed">Select Budget Range (Optional)</option>
+              <option value="Under ₹5,000 (Student / Dukaan)">Under ₹5,000 (Student / Local Dukaan Card)</option>
+              <option value="₹5,000 - ₹15,000 (Local Business)">₹5,000 - ₹15,000 (Local Business Website)</option>
+              <option value="Under ₹50,000">₹15,000 - ₹50,000 (Growth Brand / Store)</option>
+              <option value="₹50,000 - ₹1,00,000">₹50,000 - ₹1,00,000 (Scale)</option>
               <option value="₹1,00,000 - ₹2,50,000">₹1,00,000 - ₹2,50,000</option>
-              <option value="₹2,50,000+">₹2,50,000+</option>
+              <option value="₹2,50,000+">₹2,50,000+ (Enterprise System)</option>
             </select>
           </div>
         </div>
@@ -234,16 +248,15 @@ export function DezoContactForm() {
         {/* Message */}
         <div className="flex flex-col gap-2">
           <label htmlFor="message" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink">
-            Project Overview <span className="text-red-500">*</span>
+            Project Overview & Goals <span className="text-red-500">*</span>
           </label>
           <textarea
             id="message"
             rows={4}
-            placeholder="Tell us about your brand, current challenges, and goals..."
+            placeholder="Tell us about your project, current bottlenecks, and target launch timeline..."
             {...register('message')}
-            className={`w-full bg-white border-2 ${
-              errors.message ? 'border-red-500' : 'border-dezo-ink'
-            } rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all resize-vertical`}
+            aria-invalid={!!errors.message}
+            className={`${inputBase} ${errors.message ? 'border-red-500' : 'border-dezo-ink'} resize-vertical`}
           />
           {errors.message && (
             <span className="font-mono text-xs text-red-500 font-bold">{errors.message.message}</span>
@@ -255,11 +268,12 @@ export function DezoContactForm() {
           <DezoButton
             type="submit"
             size="lg"
-            disabled={isSubmitting}
+            disabled={isSubmitting || status === 'submitting'}
+            isLoading={status === 'submitting' || isSubmitting}
             icon={<Send size={16} />}
             className="w-full sm:w-auto"
           >
-            {isSubmitting ? 'Routing Request...' : 'Send Inquiry via WhatsApp //'}
+            Send Inquiry via WhatsApp //
           </DezoButton>
         </div>
       </form>

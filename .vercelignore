@@ -1,0 +1,9 @@
+.git
+.next
+node_modules
+*.zip
+*.tsbuildinfo
+K.reg
+tests
+coverage
+.env*

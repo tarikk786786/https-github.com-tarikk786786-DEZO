@@ -21,6 +21,7 @@ import { DezoHeading } from '@/components/dezo/DezoHeading';
 import { DezoButton } from '@/components/dezo/DezoButton';
 import { DezoToolScanner } from '@/components/dezo/tools/DezoToolScanner';
 import { DezoAuditReportView } from '@/components/dezo/tools/DezoAuditReportView';
+import { DezoAIGrowthAdvisor } from '@/components/dezo/ai/DezoAIGrowthAdvisor';
 import { UniversalAuditReport, ToolCategory } from '@/lib/tools/types';
 import { TOOL_CATALOG } from '@/lib/tools/catalog';
 import { DezoReveal, DezoStagger, DezoStaggerItem } from '@/lib/motion/MotionAdapter';
@@ -57,24 +58,40 @@ export default function DezoLabPage() {
               <DezoHeading
                 badge="DEZO LAB"
                 as="h1"
-                subtitle="Free public diagnostics for your website and storefront. Marketplace tools stay labeled Demo — we never invent seller metrics."
+                subtitle="Free public diagnostics, multi-provider AI strategy advisor, and website audit tools. Marketplace tools stay labeled Demo — we never invent seller metrics."
               >
-                Check your site in minutes
+                DEZO Growth Lab & AI Intelligence
               </DezoHeading>
             </div>
           </DezoReveal>
 
           {!activeReport ? (
-            <DezoReveal delay={0.06}>
-              <div className="border-2 border-dezo-ink bg-white p-6 sm:p-8 shadow-[6px_6px_0_0_#0B0B0A]">
-                <DezoToolScanner
-                  onAuditComplete={(rep) => {
-                    setActiveReport(rep);
-                    window.scrollTo({ top: 180, behavior: 'smooth' });
-                  }}
-                />
-              </div>
-            </DezoReveal>
+            <div className="space-y-12">
+              {/* 1. DEZO AI Growth Advisor */}
+              <DezoReveal delay={0.04}>
+                <DezoAIGrowthAdvisor />
+              </DezoReveal>
+
+              {/* 2. URL Technical Deep-Scan Engine */}
+              <DezoReveal delay={0.08}>
+                <div className="border-2 border-dezo-ink bg-white p-6 sm:p-8 shadow-[6px_6px_0_0_#0B0B0A]">
+                  <div className="mb-5 pb-4 border-b border-dezo-border">
+                    <span className="font-mono text-xs uppercase tracking-wider text-dezo-gold font-bold">
+                      Technical Deep-Scan Engine
+                    </span>
+                    <h2 className="font-mono text-lg font-bold text-dezo-ink mt-0.5">
+                      Live URL Diagnostics: SEO, Speed, Security & CRO Audit
+                    </h2>
+                  </div>
+                  <DezoToolScanner
+                    onAuditComplete={(rep) => {
+                      setActiveReport(rep);
+                      window.scrollTo({ top: 180, behavior: 'smooth' });
+                    }}
+                  />
+                </div>
+              </DezoReveal>
+            </div>
           ) : (
             <div className="space-y-6">
               {opportunityHint !== null && (
@@ -83,40 +100,61 @@ export default function DezoLabPage() {
                     <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary mb-1">
                       Your results
                     </p>
-                    <p className="font-display text-2xl sm:text-3xl text-dezo-text-primary">
-                      Score {Math.round(activeReport.overallScore)}
-                      <span className="text-dezo-text-muted text-lg"> / 100</span>
-                    </p>
-                    <p className="text-sm text-dezo-text-secondary mt-1">
-                      About {opportunityHint} improvement areas to review below
+                    <p className="font-display text-xl sm:text-2xl font-bold text-dezo-text-primary tracking-tight">
+                      We spotted ~{opportunityHint} practical opportunities for this URL.
                     </p>
                   </div>
+                  <DezoButton
+                    onClick={() => {
+                      setActiveReport(null);
+                      window.scrollTo({ top: 180, behavior: 'smooth' });
+                    }}
+                    variant="outline"
+                    size="sm"
+                  >
+                    Run another check
+                  </DezoButton>
+                </div>
+              )}
+
+              <DezoAuditReportView report={activeReport} />
+
+              <div className="border border-dezo-border bg-dezo-bg-warm p-6 sm:p-8 mt-10">
+                <div className="max-w-2xl">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary block mb-2">
+                    Turn findings into action
+                  </span>
+                  <h3 className="font-display text-2xl font-bold text-dezo-text-primary mb-3">
+                    Want the DEZO engineering team to fix these issues?
+                  </h3>
+                  <p className="text-sm text-dezo-text-secondary leading-relaxed mb-6">
+                    Our developers and SEO specialists resolve crawl bottlenecks, image weight, mobile layout shifts, and tracking gaps within tight, fixed-scope sprints.
+                  </p>
                   <div className="flex flex-wrap gap-3">
-                    <DezoButton href="/start-a-project" size="sm">
-                      Fix this with DEZO
+                    <DezoButton href="/start-a-project">
+                      Discuss this audit on WhatsApp
                     </DezoButton>
-                    <DezoButton href="/contact" variant="outline" size="sm">
-                      Talk to us
+                    <DezoButton
+                      onClick={() => setActiveReport(null)}
+                      variant="outline"
+                    >
+                      Audit another URL
                     </DezoButton>
                   </div>
                 </div>
-              )}
-              <DezoAuditReportView
-                report={activeReport}
-                onReset={() => setActiveReport(null)}
-              />
+              </div>
             </div>
           )}
         </DezoContainer>
       </DezoSection>
 
       {!activeReport && (
-        <DezoSection spacing="normal" className="bg-dezo-surface border-y border-dezo-border">
+        <DezoSection spacing="compact" className="border-t border-dezo-border mt-16 pt-16">
           <DezoContainer size="wide">
             <DezoReveal>
-              <div className="mb-10">
+              <div className="max-w-2xl mb-8">
                 <DezoHeading
-                  badge="All tools"
+                  badge="DIAGNOSTIC SUITE"
                   as="h2"
                   subtitle="Prefer a dedicated page? Open any diagnostic below."
                 >
@@ -167,24 +205,27 @@ export default function DezoLabPage() {
                   Marketplace · Demo Diagnostics
                 </h2>
                 <p className="text-sm text-dezo-text-secondary mb-6 max-w-2xl">
-                  Listing checklists from the public URL only — not connected to seller accounts.
+                  Listing checklists from the public URL only — not connected to seller accounts. We evaluate visible listing signals to flag obvious conversion gaps.
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {demoTools.map((cat) => (
                     <Link
                       key={cat.slug}
                       href={`/tools/${cat.slug}`}
-                      className="p-6 border-2 border-dezo-ink bg-white shadow-[4px_4px_0_0_#0B0B0A] hover:shadow-[6px_6px_0_0_#B08D57] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all"
+                      className="p-5 border border-dezo-border bg-dezo-bg hover:border-dezo-primary transition-colors flex items-start justify-between"
                     >
-                      <div className="flex items-center justify-between gap-3">
-                        <h3 className="font-display text-lg font-bold text-dezo-text-primary">{cat.name}</h3>
-                        <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-dezo-ink bg-dezo-primary/20 border border-dezo-primary px-2 py-0.5">
-                          DEMO //
+                      <div>
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-dezo-primary font-bold block mb-1">
+                          Demo mode
                         </span>
+                        <h3 className="font-display text-base font-semibold text-dezo-text-primary">
+                          {cat.name}
+                        </h3>
+                        <p className="text-xs text-dezo-text-secondary mt-1">
+                          {cat.description}
+                        </p>
                       </div>
-                      <p className="text-sm text-dezo-text-secondary mt-2 leading-relaxed">
-                        {cat.description}
-                      </p>
+                      <ArrowRight size={16} className="text-dezo-text-muted mt-1 shrink-0" />
                     </Link>
                   ))}
                 </div>

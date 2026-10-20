@@ -21,6 +21,7 @@ import { PromiseHomeTeaser } from '@/components/promise/PromiseGuaranteeSystem';
 import { CTASection, StatementBanner } from '@/components/dezo/visual';
 import { DezoHeroMedia } from '@/components/dezo/DezoHeroMedia';
 import { DezoHeroText } from '@/components/dezo/DezoHeroText';
+import { DezoHeroGrowthConsole } from '@/components/dezo/DezoHeroGrowthConsole';
 import { finalCtaBanner, heroBanner, statementBanners } from '@/content/banners';
 import { motion } from 'motion/react';
 import { useReducedMotion } from '@/lib/motion/useReducedMotion';
@@ -118,52 +119,67 @@ export default function HomePage() {
           aria-hidden
         />
 
-        <div className="relative z-10 flex min-h-[100svh] flex-col justify-end pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-28 sm:justify-center sm:pb-20 sm:pt-32">
+        <div className="relative z-10 flex min-h-[100svh] flex-col justify-center py-24 sm:py-32">
           <DezoContainer size="wide" className="w-full">
-            <DezoHeroText
-              brandName={brand.name}
-              eyebrow={heroBanner.eyebrow ?? brand.companyLabel}
-              body={heroBanner.body ?? brand.supporting}
-            />
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-center">
+              {/* Left Column: Brand & Manifesto */}
+              <div className="lg:col-span-7 xl:col-span-6 flex flex-col justify-center">
+                <DezoHeroText
+                  brandName={brand.name}
+                  eyebrow={heroBanner.eyebrow ?? brand.companyLabel}
+                  body={heroBanner.body ?? brand.supporting}
+                />
 
-            <motion.div
-              className="mt-7 sm:mt-9 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3"
-              initial={reducedMotion ? false : { opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <DezoMagnetic>
-                <DezoButton
-                  href={heroBanner.primaryCta?.href ?? '/start-a-project'}
-                  size="lg"
-                  magnetic
-                  className="w-full sm:w-auto justify-center !bg-dezo-primary !border-2 !border-dezo-primary !text-dezo-ink hover:!bg-white hover:!border-white hover:!text-dezo-ink !shadow-[4px_4px_0_0_#FFFFFF] hover:!shadow-[4px_4px_0_0_#B08D57] font-mono font-bold tracking-wider uppercase transition-all"
-                  icon={<ArrowUpRight size={16} className="dezo-cta-arrow" />}
+                <motion.div
+                  className="mt-7 sm:mt-9 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3"
+                  initial={reducedMotion ? false : { opacity: 0, y: 28 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  {heroBanner.primaryCta?.label ?? 'Start a Project'}
-                </DezoButton>
-              </DezoMagnetic>
-              <DezoMagnetic strength={0.14}>
-                <DezoButton
-                  href={heroBanner.secondaryCta?.href ?? '/work'}
-                  variant="outline"
-                  size="lg"
-                  magnetic
-                  className="w-full sm:w-auto justify-center !bg-transparent !border-2 !border-white/80 !text-white hover:!bg-white hover:!text-dezo-ink !shadow-[4px_4px_0_0_rgba(255,255,255,0.25)] hover:!shadow-[4px_4px_0_0_#B08D57] font-mono font-bold tracking-wider uppercase transition-all"
-                >
-                  {heroBanner.secondaryCta?.label ?? 'View Our Work'}
-                </DezoButton>
-              </DezoMagnetic>
-            </motion.div>
+                  <DezoMagnetic>
+                    <DezoButton
+                      href={heroBanner.primaryCta?.href ?? '/start-a-project'}
+                      size="lg"
+                      magnetic
+                      className="w-full sm:w-auto justify-center !bg-dezo-primary !border-2 !border-dezo-primary !text-dezo-ink hover:!bg-white hover:!border-white hover:!text-dezo-ink !shadow-[4px_4px_0_0_#FFFFFF] hover:!shadow-[4px_4px_0_0_#B08D57] font-mono font-bold tracking-wider uppercase transition-all"
+                      icon={<ArrowUpRight size={16} className="dezo-cta-arrow" />}
+                    >
+                      {heroBanner.primaryCta?.label ?? 'Start a Project'}
+                    </DezoButton>
+                  </DezoMagnetic>
+                  <DezoMagnetic strength={0.14}>
+                    <DezoButton
+                      href={heroBanner.secondaryCta?.href ?? '/work'}
+                      variant="outline"
+                      size="lg"
+                      magnetic
+                      className="w-full sm:w-auto justify-center !bg-transparent !border-2 !border-white/80 !text-white hover:!bg-white hover:!text-dezo-ink !shadow-[4px_4px_0_0_rgba(255,255,255,0.25)] hover:!shadow-[4px_4px_0_0_#B08D57] font-mono font-bold tracking-wider uppercase transition-all"
+                    >
+                      {heroBanner.secondaryCta?.label ?? 'View Our Work'}
+                    </DezoButton>
+                  </DezoMagnetic>
+                </motion.div>
 
-            <motion.p
-              className="mt-8 sm:mt-10 max-w-md text-[11px] sm:text-xs tracking-wide text-white/55"
-              initial={reducedMotion ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.05 }}
-            >
-              {heroBanner.meta ?? brand.studioLine}
-            </motion.p>
+                <motion.p
+                  className="mt-8 sm:mt-10 max-w-md text-[11px] sm:text-xs tracking-wide text-white/55 font-mono"
+                  initial={reducedMotion ? false : { opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 1.05 }}
+                >
+                  {heroBanner.meta ?? brand.studioLine}
+                </motion.p>
+              </div>
+
+              {/* Right Column: Animated, Informative Marketing Showcase */}
+              <motion.div
+                className="lg:col-span-5 xl:col-span-6 w-full flex justify-center lg:justify-end"
+                initial={reducedMotion ? false : { opacity: 0, x: 28, scale: 0.98 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ duration: 0.65, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <DezoHeroGrowthConsole />
+              </motion.div>
+            </div>
           </DezoContainer>
         </div>
       </section>

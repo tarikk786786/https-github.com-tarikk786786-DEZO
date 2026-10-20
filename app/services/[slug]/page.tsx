@@ -37,6 +37,10 @@ import { OmnichannelComparison } from '@/components/dezo/ecommerce/OmnichannelCo
 import { MarketplaceIndustrySolutions } from '@/components/dezo/ecommerce/MarketplaceIndustrySolutions';
 import { MarketplaceEngagementModels } from '@/components/dezo/ecommerce/MarketplaceEngagementModels';
 import { EcommerceServiceSelector } from '@/components/dezo/ecommerce/EcommerceServiceSelector';
+import { WebsiteCatalogBrowser } from '@/components/dezo/pricing/WebsiteCatalogBrowser';
+import { WebsiteProjectEstimator } from '@/components/dezo/pricing/WebsiteProjectEstimator';
+import { CustomBudgetSelector } from '@/components/dezo/pricing/CustomBudgetSelector';
+import { WebsiteConfidencePromise } from '@/components/dezo/pricing/WebsiteConfidencePromise';
 
 export function generateStaticParams() {
   return getAllServiceSlugs().map((slug) => ({ slug }));
@@ -94,6 +98,8 @@ export default async function ServiceDetailPage({
     'marketplace-growth',
     'shopify-development',
   ].includes(service.slug);
+
+  const isWebDevelopment = ['web-development', 'landing-pages-cro'].includes(service.slug);
 
   return (
     <>
@@ -339,6 +345,35 @@ export default async function ServiceDetailPage({
           <DezoSection spacing="compact" className="bg-dezo-bg">
             <DezoContainer size="wide">
               <EcommerceServiceSelector />
+            </DezoContainer>
+          </DezoSection>
+        </>
+      )}
+
+      {/* Dedicated Web Development & Transparent Pricing Modules */}
+      {isWebDevelopment && (
+        <>
+          <DezoSection spacing="compact" className="bg-dezo-bg">
+            <DezoContainer size="wide">
+              <WebsiteCatalogBrowser />
+            </DezoContainer>
+          </DezoSection>
+
+          <DezoSection spacing="compact" className="bg-dezo-bg">
+            <DezoContainer size="wide">
+              <WebsiteProjectEstimator />
+            </DezoContainer>
+          </DezoSection>
+
+          <DezoSection spacing="compact" className="bg-dezo-bg">
+            <DezoContainer size="wide">
+              <CustomBudgetSelector />
+            </DezoContainer>
+          </DezoSection>
+
+          <DezoSection spacing="compact" className="bg-dezo-bg">
+            <DezoContainer size="wide">
+              <WebsiteConfidencePromise />
             </DezoContainer>
           </DezoSection>
         </>

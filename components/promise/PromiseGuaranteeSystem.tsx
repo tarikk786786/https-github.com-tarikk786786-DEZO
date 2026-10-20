@@ -14,6 +14,7 @@ import { AccountabilityPreview } from './AccountabilityPreview';
 import { TrustEvidence } from './TrustEvidence';
 import { PromiseCTA } from './PromiseCTA';
 import { servicePromises } from '@/content/service-promises';
+import { WebsiteConfidencePromise } from '@/components/dezo/pricing/WebsiteConfidencePromise';
 
 /** Full Promise & Guarantee experience for /promise */
 export function PromiseGuaranteeSystem() {
@@ -72,6 +73,7 @@ export function PromiseGuaranteeSystem() {
       </DezoSection>
 
       <DezoStandard />
+      <DezoSection spacing="compact" className="bg-dezo-bg"><DezoContainer size="wide"><WebsiteConfidencePromise /></DezoContainer></DezoSection>
       <AccountabilityPreview />
       <TrustEvidence />
       <PromiseCTA />

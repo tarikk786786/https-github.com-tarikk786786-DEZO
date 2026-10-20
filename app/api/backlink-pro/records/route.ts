@@ -76,6 +76,25 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    // 3. Import Catalog Action
+    if (action === 'import_catalog') {
+      const res = backlinkStore.importFromCatalog();
+      return NextResponse.json({
+        success: true,
+        added: res.added,
+        duplicates: res.duplicates,
+        campaign: backlinkStore.getCampaign(),
+      });
+    }
+
+    // 4. Get Catalog
+    if (action === 'get_catalog') {
+      return NextResponse.json({
+        success: true,
+        catalog: backlinkStore.getCatalog(),
+      });
+    }
+
     return NextResponse.json({ error: 'Unknown action' }, { status: 400 });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);

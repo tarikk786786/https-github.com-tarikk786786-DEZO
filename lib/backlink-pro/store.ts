@@ -4,6 +4,7 @@
  */
 
 import { BacklinkRecord, BacklinkCampaign, OpportunityCategory, BacklinkStatus } from './types';
+import { HIGH_AUTHORITY_CATALOG, BacklinkCatalogItem } from './catalog';
 
 // Curated baseline opportunities for DEZO (Digital Commerce, Agency, SEO, Tech, Directories)
 export const INITIAL_DEZO_BACKLINK_RECORDS: BacklinkRecord[] = [
@@ -187,6 +188,33 @@ export const INITIAL_DEZO_BACKLINK_RECORDS: BacklinkRecord[] = [
   },
 ];
 
+export function catalogItemToRecord(item: BacklinkCatalogItem): Omit<BacklinkRecord, 'id' | 'firstDetectedAt'> {
+  let cat: OpportunityCategory = 'business_directory';
+  if (item.category === 'developer_ecosystem') cat = 'partner_ecosystem';
+  else if (item.category === 'content_publishing') cat = 'editorial';
+  else if (item.category === 'social_authority') cat = 'community_profile';
+  else if (item.category === 'agency_marketplaces') cat = 'industry_publication';
+
+  return {
+    campaignId: 'camp-dezo-master',
+    sourceUrl: item.submissionUrl,
+    referringDomain: item.targetDomain,
+    destinationUrl: item.targetDezoUrl,
+    anchorText: item.recommendedAnchor,
+    targetAnchorType: 'branded',
+    rel: item.linkType === 'Dofollow' ? 'follow' : 'nofollow',
+    category: cat,
+    niche: item.name,
+    status: 'discovered',
+    httpStatus: null,
+    linkFoundInHtml: false,
+    discoverySource: `DEZO Authority Catalog (${item.category})`,
+    domainAuthority: item.domainAuthority,
+    spamScore: 1,
+    notes: `${item.instructions} [Difficulty: ${item.difficulty}]`,
+  };
+}
+
 class BacklinkStore {
   private records: Map<string, BacklinkRecord> = new Map();
   private campaign: BacklinkCampaign = {
@@ -214,7 +242,18 @@ class BacklinkStore {
 
   constructor() {
     INITIAL_DEZO_BACKLINK_RECORDS.forEach((r) => this.records.set(r.id, r));
+    // Seed high authority catalog items
+    this.importFromCatalog();
     this.recomputeStats();
+  }
+
+  public getCatalog(): BacklinkCatalogItem[] {
+    return HIGH_AUTHORITY_CATALOG;
+  }
+
+  public importFromCatalog(): { added: number; duplicates: number } {
+    const recordsToAdd = HIGH_AUTHORITY_CATALOG.map(catalogItemToRecord);
+    return this.addRecords(recordsToAdd);
   }
 
   public getCampaign(): BacklinkCampaign {

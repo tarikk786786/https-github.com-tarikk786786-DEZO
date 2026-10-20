@@ -28,11 +28,14 @@ import {
   Sliders,
   Check,
   Building,
+  Copy,
+  BookOpen,
 } from 'lucide-react';
 import { BacklinkRecord, BacklinkCampaign, BacklinkStatus, OpportunityCategory } from '@/lib/backlink-pro/types';
+import { HIGH_AUTHORITY_CATALOG, BacklinkCatalogItem } from '@/lib/backlink-pro/catalog';
 
 export function DezoSeoAdminDashboard() {
-  const [activeTab, setActiveTab] = useState<'campaigns' | 'records' | 'verify' | 'import' | 'outreach' | 'technical'>('campaigns');
+  const [activeTab, setActiveTab] = useState<'campaigns' | 'records' | 'catalog' | 'outreach' | 'technical'>('campaigns');
   const [campaign, setCampaign] = useState<BacklinkCampaign | null>(null);
   const [records, setRecords] = useState<BacklinkRecord[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,6 +43,22 @@ export function DezoSeoAdminDashboard() {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [verifyingId, setVerifyingId] = useState<string | null>(null);
+
+  // Catalog tab state
+  const [catalogSearch, setCatalogSearch] = useState('');
+  const [catalogCategory, setCatalogCategory] = useState<string>('all');
+  const [catalogDaMin, setCatalogDaMin] = useState<number>(0);
+  const [importingCatalog, setImportingCatalog] = useState(false);
+
+  // AI Outreach Pitch Generator state
+  const [pitchProspectDomain, setPitchProspectDomain] = useState('techcrunch.com');
+  const [pitchPublisherName, setPitchPublisherName] = useState('Tech Editor');
+  const [pitchTopic, setPitchTopic] = useState('Tier-2 India Digital Infrastructure & Next.js Ecommerce');
+  const [pitchTargetUrl, setPitchTargetUrl] = useState('https://dezo.in');
+  const [pitchAnchorText, setPitchAnchorText] = useState('DEZO growth systems');
+  const [pitchLoading, setPitchLoading] = useState(false);
+  const [generatedPitch, setGeneratedPitch] = useState<{ subject: string; body: string } | null>(null);
+  const [pitchCopied, setPitchCopied] = useState(false);
 
   // Import Modal state
   const [importModalOpen, setImportModalOpen] = useState(false);
@@ -145,6 +164,64 @@ export function DezoSeoAdminDashboard() {
     }
   };
 
+  const handleImportCatalog = async () => {
+    setImportingCatalog(true);
+    try {
+      const res = await fetch('/api/backlink-pro/records', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'import_catalog' }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        await fetchRecords();
+      }
+    } catch (e) {
+      console.error('Failed to import catalog', e);
+    } finally {
+      setImportingCatalog(false);
+    }
+  };
+
+  const handleGeneratePitch = async () => {
+    setPitchLoading(true);
+    try {
+      const res = await fetch('/api/backlink-pro/pitch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prospectDomain: pitchProspectDomain,
+          publisherName: pitchPublisherName,
+          articleTopic: pitchTopic,
+          targetDezoUrl: pitchTargetUrl,
+          anchorText: pitchAnchorText,
+        }),
+      });
+      const data = await res.json();
+      if (data.success && data.pitch) {
+        setGeneratedPitch(data.pitch);
+      }
+    } catch (e) {
+      console.error('Failed to generate pitch', e);
+    } finally {
+      setPitchLoading(false);
+    }
+  };
+
+  const filteredCatalog = useMemo(() => {
+    return HIGH_AUTHORITY_CATALOG.filter((item) => {
+      const matchSearch =
+        catalogSearch === '' ||
+        item.name.toLowerCase().includes(catalogSearch.toLowerCase()) ||
+        item.targetDomain.toLowerCase().includes(catalogSearch.toLowerCase()) ||
+        item.recommendedAnchor.toLowerCase().includes(catalogSearch.toLowerCase()) ||
+        item.instructions.toLowerCase().includes(catalogSearch.toLowerCase());
+      const matchCategory = catalogCategory === 'all' || item.category === catalogCategory;
+      const matchDa = item.domainAuthority >= catalogDaMin;
+      return matchSearch && matchCategory && matchDa;
+    });
+  }, [catalogSearch, catalogCategory, catalogDaMin]);
+
   const filteredRecords = useMemo(() => {
     return records.filter((r) => {
       const matchSearch =
@@ -193,6 +270,13 @@ export function DezoSeoAdminDashboard() {
         </div>
 
         <div className="flex items-center gap-3">
+          <Link
+            href="/badges"
+            target="_blank"
+            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold bg-dezo-surface border border-dezo-border text-dezo-text-primary hover:border-dezo-primary transition-colors"
+          >
+            <ShieldCheck size={14} className="text-dezo-primary" /> Badge Engine
+          </Link>
           <button
             onClick={() => setImportModalOpen(true)}
             className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold uppercase tracking-wider bg-dezo-primary text-white hover:bg-dezo-primary-hover transition-colors shadow-sm"
@@ -276,7 +360,8 @@ export function DezoSeoAdminDashboard() {
         {[
           { id: 'campaigns', label: 'Campaign Overview' },
           { id: 'records', label: `Backlink Ledger (${records.length})` },
-          { id: 'outreach', label: 'Outreach CRM' },
+          { id: 'catalog', label: `High-DA Directory Vault (${HIGH_AUTHORITY_CATALOG.length}+)` },
+          { id: 'outreach', label: 'AI Outreach CRM' },
           { id: 'technical', label: 'Technical SEO & Sitemaps' },
         ].map((tab) => (
           <button
@@ -537,18 +622,151 @@ export function DezoSeoAdminDashboard() {
         </div>
       )}
 
+      {/* TAB: HIGH-DA DIRECTORY VAULT */}
+      {activeTab === 'catalog' && (
+        <div className="mt-8 space-y-6">
+          <div className="p-6 bg-dezo-surface border border-dezo-border">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
+              <div>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-dezo-primary font-bold">
+                  Curated Link Equity Engine
+                </span>
+                <h3 className="font-display text-xl font-bold text-dezo-text-primary mt-1">
+                  High-DA Directory &amp; Citation Vault ({HIGH_AUTHORITY_CATALOG.length} Verified Platforms)
+                </h3>
+                <p className="text-xs text-dezo-text-secondary mt-1 max-w-2xl leading-relaxed">
+                  Genuine, legitimate, free backlink submission sources across global web infrastructure, developer ecosystems, startup registries, and Indian/Odisha B2B platforms.
+                </p>
+              </div>
+
+              <button
+                onClick={handleImportCatalog}
+                disabled={importingCatalog}
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold uppercase tracking-wider bg-dezo-primary text-white hover:bg-dezo-primary-hover transition-colors shadow-sm self-start lg:self-auto"
+              >
+                <Plus size={14} />
+                {importingCatalog ? 'Syncing...' : 'Sync Vault to Active Ledger'}
+              </button>
+            </div>
+
+            {/* Filter Bar */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 bg-dezo-bg border border-dezo-border mb-6">
+              <div className="relative">
+                <Search size={14} className="absolute left-3 top-3 text-dezo-text-muted" />
+                <input
+                  type="text"
+                  placeholder="Search platform, domain, anchor..."
+                  value={catalogSearch}
+                  onChange={(e) => setCatalogSearch(e.target.value)}
+                  className="w-full bg-dezo-surface border border-dezo-border pl-9 pr-3 py-2 text-xs font-mono text-dezo-text-primary focus:outline-hidden focus:border-dezo-primary"
+                />
+              </div>
+
+              <select
+                value={catalogCategory}
+                onChange={(e) => setCatalogCategory(e.target.value)}
+                className="w-full bg-dezo-surface border border-dezo-border px-3 py-2 text-xs font-mono text-dezo-text-primary focus:outline-hidden focus:border-dezo-primary"
+              >
+                <option value="all">All Categories ({HIGH_AUTHORITY_CATALOG.length})</option>
+                <option value="web_infrastructure">Web Infrastructure &amp; DNS</option>
+                <option value="developer_ecosystem">Developer Ecosystem &amp; Code</option>
+                <option value="startup_directories">Startup &amp; Tech Directories</option>
+                <option value="indian_b2b_directories">Indian B2B &amp; Odisha Citations</option>
+                <option value="content_publishing">Content &amp; Editorial Platforms</option>
+                <option value="social_authority">Social Authority &amp; Brand</option>
+                <option value="agency_marketplaces">Agency Marketplaces</option>
+              </select>
+
+              <select
+                value={catalogDaMin}
+                onChange={(e) => setCatalogDaMin(Number(e.target.value))}
+                className="w-full bg-dezo-surface border border-dezo-border px-3 py-2 text-xs font-mono text-dezo-text-primary focus:outline-hidden focus:border-dezo-primary"
+              >
+                <option value={0}>All Authority (DA 50–99)</option>
+                <option value={80}>High Authority (DA 80+)</option>
+                <option value={90}>Ultra Authority (DA 90+)</option>
+              </select>
+            </div>
+
+            {/* Catalog Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredCatalog.map((item) => (
+                <div
+                  key={item.id}
+                  className="p-5 bg-dezo-bg border border-dezo-border flex flex-col justify-between hover:border-dezo-border-hover transition-colors"
+                >
+                  <div>
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-dezo-text-muted">
+                        {item.category.replace('_', ' ')}
+                      </span>
+                      <span
+                        className={`px-2 py-0.5 text-[10px] font-mono font-bold rounded-xs ${
+                          item.domainAuthority >= 90
+                            ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20'
+                            : item.domainAuthority >= 80
+                            ? 'bg-blue-500/10 text-blue-500 border border-blue-500/20'
+                            : 'bg-amber-500/10 text-amber-500 border border-amber-500/20'
+                        }`}
+                      >
+                        DA {item.domainAuthority}
+                      </span>
+                    </div>
+
+                    <h4 className="font-display text-base font-bold text-dezo-text-primary mb-1">
+                      {item.name}
+                    </h4>
+                    <p className="text-xs font-mono text-dezo-primary mb-3 truncate">
+                      {item.targetDomain}
+                    </p>
+
+                    <p className="text-xs text-dezo-text-secondary leading-relaxed mb-4">
+                      {item.instructions}
+                    </p>
+
+                    <div className="space-y-1.5 text-[11px] font-mono bg-dezo-surface p-2.5 border border-dezo-border mb-4">
+                      <div className="flex justify-between">
+                        <span className="text-dezo-text-muted">Traffic:</span>
+                        <span className="text-dezo-text-primary font-bold">{item.estimatedMonthlyTraffic}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-dezo-text-muted">Link Type:</span>
+                        <span className="text-emerald-500 font-bold">{item.linkType}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-dezo-text-muted">Anchor:</span>
+                        <span className="text-dezo-text-primary truncate max-w-[140px]">&quot;{item.recommendedAnchor}&quot;</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <a
+                    href={item.submissionUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 text-xs font-mono font-semibold uppercase bg-dezo-surface border border-dezo-border hover:border-dezo-primary text-dezo-text-primary hover:text-dezo-primary transition-colors text-center"
+                  >
+                    Open Submission / Profile <ExternalLink size={12} />
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* TAB 3: OUTREACH CRM */}
       {activeTab === 'outreach' && (
         <div className="mt-8 space-y-6">
           <div className="p-6 bg-dezo-surface border border-dezo-border">
             <h3 className="font-display text-lg font-bold text-dezo-text-primary mb-2">
-              Editorial Outreach & Publisher Pipeline
+              Editorial Outreach &amp; Publisher Pipeline
             </h3>
             <p className="text-xs text-dezo-text-secondary mb-6 leading-relaxed max-w-3xl">
               Authentic link building requires genuine editorial relationship management. This CRM organizes guest articles, resource page requests, and publisher partnerships with human approval safeguards.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
               <div className="p-4 bg-dezo-bg border border-dezo-border">
                 <div className="flex items-center justify-between text-xs font-mono font-semibold uppercase text-blue-600 mb-2">
                   <span>Queued Pitches</span>
@@ -575,6 +793,116 @@ export function DezoSeoAdminDashboard() {
                 <p className="text-sm font-semibold">YourStory D2C Ecosystem</p>
                 <p className="text-xs text-dezo-text-muted mt-1">Confirmed company profile inclusion with brand citation</p>
               </div>
+            </div>
+
+            {/* AI Outreach Pitch Generator */}
+            <div className="p-6 bg-dezo-bg border border-dezo-border space-y-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Sparkles size={16} className="text-dezo-primary" />
+                <h4 className="font-display text-base font-bold text-dezo-text-primary">
+                  AI Editorial Pitch Generator (Google Gemini 2.5 Flash / Groq)
+                </h4>
+              </div>
+              <p className="text-xs text-dezo-text-secondary">
+                Generate tailored, high-converting outreach pitches for tech publications, bloggers, and resource curators with zero spam markers.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div>
+                  <label className="block text-[11px] font-mono text-dezo-text-muted uppercase mb-1">
+                    Prospect Domain
+                  </label>
+                  <input
+                    type="text"
+                    value={pitchProspectDomain}
+                    onChange={(e) => setPitchProspectDomain(e.target.value)}
+                    className="w-full bg-dezo-surface border border-dezo-border px-3 py-2 text-xs font-mono text-dezo-text-primary focus:outline-hidden focus:border-dezo-primary"
+                    placeholder="e.g. yourstory.com"
+                  />
+                  <div className="flex flex-wrap gap-1.5 mt-1.5">
+                    {['techcrunch.com', 'yourstory.com', 'inc42.com', 'dev.to'].map((d) => (
+                      <button
+                        key={d}
+                        type="button"
+                        onClick={() => setPitchProspectDomain(d)}
+                        className="text-[10px] font-mono text-dezo-primary hover:underline"
+                      >
+                        {d}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-mono text-dezo-text-muted uppercase mb-1">
+                    Publisher / Editor Name
+                  </label>
+                  <input
+                    type="text"
+                    value={pitchPublisherName}
+                    onChange={(e) => setPitchPublisherName(e.target.value)}
+                    className="w-full bg-dezo-surface border border-dezo-border px-3 py-2 text-xs font-mono text-dezo-text-primary focus:outline-hidden focus:border-dezo-primary"
+                    placeholder="e.g. Editorial Desk"
+                  />
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label className="block text-[11px] font-mono text-dezo-text-muted uppercase mb-1">
+                    Article Pitch Topic
+                  </label>
+                  <input
+                    type="text"
+                    value={pitchTopic}
+                    onChange={(e) => setPitchTopic(e.target.value)}
+                    className="w-full bg-dezo-surface border border-dezo-border px-3 py-2 text-xs font-mono text-dezo-text-primary focus:outline-hidden focus:border-dezo-primary"
+                    placeholder="e.g. Tier-2 India Digital Infrastructure & Next.js Ecommerce"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-end pt-2">
+                <button
+                  type="button"
+                  onClick={handleGeneratePitch}
+                  disabled={pitchLoading}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold uppercase tracking-wider bg-dezo-primary text-white hover:bg-dezo-primary-hover transition-colors"
+                >
+                  <Sparkles size={14} className={pitchLoading ? 'animate-spin' : ''} />
+                  {pitchLoading ? 'Generating Pitch with AI...' : 'Generate Editorial Pitch'}
+                </button>
+              </div>
+
+              {generatedPitch && (
+                <div className="mt-4 p-4 bg-dezo-surface border border-dezo-border space-y-3">
+                  <div className="flex items-center justify-between border-b border-dezo-border pb-2">
+                    <span className="text-xs font-mono font-bold text-dezo-primary uppercase">
+                      Generated Pitch Result
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(`Subject: ${generatedPitch.subject}\n\n${generatedPitch.body}`);
+                        setPitchCopied(true);
+                        setTimeout(() => setPitchCopied(false), 2000);
+                      }}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-mono uppercase bg-dezo-primary text-white hover:bg-dezo-primary-hover"
+                    >
+                      {pitchCopied ? <Check size={12} /> : <Copy size={12} />}
+                      {pitchCopied ? 'Copied!' : 'Copy Pitch'}
+                    </button>
+                  </div>
+                  <div>
+                    <p className="text-xs font-mono text-dezo-text-muted">Subject:</p>
+                    <p className="text-xs font-semibold text-dezo-text-primary">{generatedPitch.subject}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-mono text-dezo-text-muted">Body:</p>
+                    <pre className="text-xs font-mono text-dezo-text-secondary whitespace-pre-wrap leading-relaxed mt-1">
+                      {generatedPitch.body}
+                    </pre>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

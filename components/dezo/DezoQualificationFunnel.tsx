@@ -22,9 +22,9 @@ export function DezoQualificationFunnel() {
   const [productType, setProductType] = useState('');
   const [channelsActive, setChannelsActive] = useState<string[]>([]);
   const [pillarsNeeded, setPillarsNeeded] = useState<string[]>([]);
-  const [currentTurnover, setCurrentTurnover] = useState<any>('Under ₹5L/mo');
+  const [currentTurnover, setCurrentTurnover] = useState<any>('Under ₹1L/mo');
   const [timeline, setTimeline] = useState<any>('Within 1 month');
-  const [budgetTier, setBudgetTier] = useState<any>('₹50k - ₹1L');
+  const [budgetTier, setBudgetTier] = useState<any>('₹5k - ₹15k');
   const [contactData, setContactData] = useState({
     name: '',
     phone: '',
@@ -293,11 +293,11 @@ export function DezoQualificationFunnel() {
                     onChange={(e) => setCurrentTurnover(e.target.value as any)}
                     className="w-full bg-white border-2 border-dezo-ink rounded-none p-3 font-mono text-xs text-dezo-text-primary focus:outline-none shadow-[2px_2px_0_0_#0B0B0A]"
                   >
-                    <option value="Pre-revenue">Pre-revenue / Planning Phase</option>
-                    <option value="Under ₹5L/mo">Under ₹5 Lakhs / month</option>
+                    <option value="Student / Pre-revenue">Student / Pre-revenue / Side Hustle</option>
+                    <option value="Under ₹1L/mo">Under ₹1 Lakh / month (Local Shop / Small Business)</option>
+                    <option value="₹1L - ₹5L/mo">₹1 Lakh – ₹5 Lakhs / month</option>
                     <option value="₹5L - ₹25L/mo">₹5 Lakhs – ₹25 Lakhs / month</option>
-                    <option value="₹25L - ₹1Cr/mo">₹25 Lakhs – ₹1 Crore / month</option>
-                    <option value="₹1Cr+/mo">₹1 Crore+ / month (Enterprise)</option>
+                    <option value="₹25L+/mo">₹25 Lakhs+ / month (Enterprise)</option>
                   </select>
                 </div>
 
@@ -323,7 +323,7 @@ export function DezoQualificationFunnel() {
                   Allocated Project Budget:
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {['Under ₹50k', '₹50k - ₹1L', '₹1L - ₹2.5L', '₹2.5L - ₹5L', '₹5L+'].map((b) => (
+                  {['Under ₹5k', '₹5k - ₹15k', '₹15k - ₹35k', '₹35k - ₹75k', '₹75k+'].map((b) => (
                     <button
                       key={b}
                       type="button"

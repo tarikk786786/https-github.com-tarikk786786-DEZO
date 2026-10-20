@@ -20,7 +20,7 @@ import Link from 'next/link';
 export const metadata: Metadata = constructMetadata({
   title: 'Website Development Pricing in India — Clear Prices & Quality Guarantee | DEZO',
   description:
-    'Transparent website development packages starting from ₹7,999. Compare landing pages, business websites, Shopify stores, and custom web applications with written quality guarantees and 30-day warranty.',
+    'Transparent website development packages starting from ₹1,999 for students and ₹2,999 for local shops. Compare dukaan sites, business websites, Shopify stores, and custom web applications with written quality guarantees and 30-day warranty.',
   canonicalUrl: 'https://dezo.in/pricing',
 });
 
@@ -35,7 +35,7 @@ const PRICING_FAQS = [
   },
   {
     q: 'Are domain registration and cloud hosting costs included in the package price?',
-    a: 'No. To ensure 100% client ownership and transparency, domain registration ($12–$15/year) and cloud hosting ($5–$25/month) are registered directly under your business name. We assist with configuration and DNS cutover at zero extra markup.',
+    a: 'For Student Portfolio and Local Dukaan sites, we deploy on enterprise-grade cloud platforms (Vercel/Netlify) with ₹0 lifelong hosting fees so you never pay recurring cPanel server charges. For custom domain names (₹800–₹1,200/yr) or specialized cloud databases/Shopify tiers, assets are registered directly under your business name for 100% ownership.',
   },
   {
     q: 'What does the 30-Day Covered-Defect Warranty include?',
@@ -47,7 +47,7 @@ const PRICING_FAQS = [
   },
   {
     q: 'What payment milestone schedule do you follow?',
-    a: 'Standard website projects follow a transparent milestone structure: 40% initial deposit at Scope Lock kickoff, 30% upon approval of the interactive staging preview, and the final 30% upon live launch and code handover.',
+    a: 'To make hiring DEZO completely accessible and risk-free for students and local businesses, micro and starter packages follow a friendly 50% kickoff deposit and 50% balance upon staging approval and launch. Larger custom projects follow 40% kickoff, 30% preview, and 30% live launch.',
   },
   {
     q: 'Can you work with businesses located outside of Bhubaneswar or Odisha?',

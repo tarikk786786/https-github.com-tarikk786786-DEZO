@@ -83,74 +83,80 @@ export function WebsiteProjectEstimator() {
 
     // Base price by website type
     switch (websiteType) {
-      case 'landing-page':
-        base = 7999;
+      case 'student-dukaan':
+        base = 2499;
         pkg = 'LAUNCH';
-        timelineWeeks = desiredTimeline === 'urgent' ? '2 to 3 days' : '3 to 5 business days';
+        timelineWeeks = desiredTimeline === 'urgent' ? '24 to 48 hours' : '2 to 4 business days';
+        scopeNotes.push('Subsidized Student Portfolio or Local Shop Digital Storefront with WhatsApp actions');
+        break;
+      case 'landing-page':
+        base = 2999;
+        pkg = 'LAUNCH';
+        timelineWeeks = desiredTimeline === 'urgent' ? '24 to 48 hours' : '2 to 4 business days';
         scopeNotes.push('Single focused high-converting landing page');
         break;
       case 'simple-business':
-        base = 14999;
+        base = 4999;
         pkg = 'BUSINESS';
-        timelineWeeks = desiredTimeline === 'urgent' ? '5 to 7 days' : '7 to 10 business days';
+        timelineWeeks = desiredTimeline === 'urgent' ? '3 to 5 days' : '5 to 7 business days';
         scopeNotes.push('Up to 5 custom-designed business pages');
         break;
       case 'corporate':
-        base = 29999;
+        base = 17999;
         pkg = 'GROW';
-        timelineWeeks = desiredTimeline === 'urgent' ? '10 to 12 days' : '2 to 3 weeks';
+        timelineWeeks = desiredTimeline === 'urgent' ? '7 to 10 days' : '2 to 3 weeks';
         scopeNotes.push('Up to 10-12 structured corporate pages with CMS');
         break;
       case 'shopify-store':
-        base = 29999;
+        base = 11999;
         pkg = 'COMMERCE';
-        timelineWeeks = desiredTimeline === 'urgent' ? '7 to 10 days' : '10 to 14 business days';
+        timelineWeeks = desiredTimeline === 'urgent' ? '5 to 7 days' : '7 to 10 business days';
         scopeNotes.push('Complete Shopify 2.0 store with Indian payment gateway & COD');
         break;
       case 'woocommerce':
-        base = 34999;
+        base = 13999;
         pkg = 'COMMERCE';
-        timelineWeeks = desiredTimeline === 'urgent' ? '10 to 14 days' : '2 to 3 weeks';
+        timelineWeeks = desiredTimeline === 'urgent' ? '7 to 10 days' : '10 to 14 business days';
         scopeNotes.push('WooCommerce online store with custom checkout & UPI payment');
         break;
       case 'booking-site':
-        base = 29999;
+        base = 11999;
         pkg = 'GROW';
-        timelineWeeks = '2 to 3 weeks';
+        timelineWeeks = '7 to 10 business days';
         scopeNotes.push('Interactive time-slot booking engine with doctor/staff schedules');
         break;
       case 'real-estate':
-        base = 39999;
+        base = 24999;
         pkg = 'GROW';
         timelineWeeks = '2 to 3 weeks';
         scopeNotes.push('Property project showcase with floor plans & brochure gates');
         break;
       case 'lms-platform':
-        base = 59999;
+        base = 39999;
         pkg = 'CUSTOM';
         timelineWeeks = '3 to 5 weeks';
         scopeNotes.push('Video lesson player, student login, quizzes, and certificates');
         break;
       case 'marketplace':
-        base = 149999;
+        base = 69999;
         pkg = 'CUSTOM';
-        timelineWeeks = '6 to 10 weeks';
+        timelineWeeks = '4 to 6 weeks';
         scopeNotes.push('Multi-vendor initial MVP: vendor dashboards & split checkouts');
         break;
       case 'custom-saas':
-        base = 149999;
+        base = 69999;
         pkg = 'CUSTOM';
-        timelineWeeks = '6 to 8 weeks';
+        timelineWeeks = '4 to 6 weeks';
         scopeNotes.push('Full-stack Next.js App Router MVP with Supabase auth & billing');
         break;
       case 'speed-optimization':
-        base = 4999;
+        base = 1499;
         pkg = 'LAUNCH';
-        timelineWeeks = '3 to 5 business days';
+        timelineWeeks = '2 to 3 business days';
         scopeNotes.push('Core Web Vitals performance remediation and script optimization');
         break;
       default:
-        base = 14999;
+        base = 4999;
         pkg = 'BUSINESS';
         break;
     }
@@ -350,17 +356,18 @@ export function WebsiteProjectEstimator() {
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {[
-                { id: 'simple-business', name: 'Simple Business Website', starting: '₹14,999', desc: 'Up to 5 pages for local services & SMBs' },
-                { id: 'landing-page', name: 'Campaign Landing Page', starting: '₹7,999', desc: 'Single high-converting page for paid ads' },
-                { id: 'corporate', name: 'Corporate Multi-Page Site', starting: '₹29,999', desc: '10-12 pages for mid-sized & industrial firms' },
-                { id: 'shopify-store', name: 'Shopify Starter D2C Store', starting: '₹29,999', desc: 'eCommerce with UPI checkout & Shiprocket' },
-                { id: 'woocommerce', name: 'WooCommerce Online Store', starting: '₹34,999', desc: 'Self-hosted WordPress store with 0% platform fee' },
-                { id: 'booking-site', name: 'Appointment & Booking Site', starting: '₹29,999', desc: 'Interactive slots for clinics, salons & consultants' },
-                { id: 'real-estate', name: 'Real Estate Project Site', starting: '₹39,999', desc: 'Floor plans, brochure gates & site visit leads' },
-                { id: 'lms-platform', name: 'LMS / Online Course Portal', starting: '₹59,999', desc: 'Student login, video lessons & certificates' },
-                { id: 'marketplace', name: 'Multi-Vendor Marketplace MVP', starting: '₹1,49,999', desc: 'Vendor dashboards & split commission cart' },
-                { id: 'custom-saas', name: 'Custom SaaS MVP / Web App', starting: '₹1,49,999', desc: 'Next.js App Router, Supabase auth & billing' },
-                { id: 'speed-optimization', name: 'Speed & Core Web Vitals', starting: '₹4,999', desc: 'Remediate slow WordPress/Shopify pages' },
+                { id: 'student-dukaan', name: 'Student Resume / Local Dukaan Store', starting: '₹2,499', desc: '1-page mobile site with WhatsApp orders/CV and free lifelong hosting' },
+                { id: 'simple-business', name: 'Simple Business Website', starting: '₹4,999', desc: 'Up to 5 pages for local shops, clinics & SMBs' },
+                { id: 'landing-page', name: 'Campaign Landing Page', starting: '₹2,999', desc: 'Single high-converting page for paid ads & offers' },
+                { id: 'shopify-store', name: 'Shopify Starter D2C Store', starting: '₹11,999', desc: 'eCommerce with UPI checkout & Shiprocket' },
+                { id: 'woocommerce', name: 'WooCommerce Online Store', starting: '₹13,999', desc: 'Self-hosted WordPress store with 0% platform fee' },
+                { id: 'booking-site', name: 'Appointment & Booking Site', starting: '₹11,999', desc: 'Interactive slots for clinics, salons & consultants' },
+                { id: 'corporate', name: 'Corporate Multi-Page Site', starting: '₹17,999', desc: '10-12 pages for mid-sized & industrial firms' },
+                { id: 'real-estate', name: 'Real Estate Project Site', starting: '₹24,999', desc: 'Floor plans, brochure gates & site visit leads' },
+                { id: 'lms-platform', name: 'LMS / Online Course Portal', starting: '₹39,999', desc: 'Student login, video lessons & certificates' },
+                { id: 'marketplace', name: 'Multi-Vendor Marketplace MVP', starting: '₹69,999', desc: 'Vendor dashboards & split commission cart' },
+                { id: 'custom-saas', name: 'Custom SaaS MVP / Web App', starting: '₹69,999', desc: 'Next.js App Router, Supabase auth & billing' },
+                { id: 'speed-optimization', name: 'Speed & Core Web Vitals', starting: '₹1,499', desc: 'Remediate slow WordPress/Shopify pages' },
               ].map((opt) => (
                 <button
                   key={opt.id}
@@ -585,7 +592,7 @@ export function WebsiteProjectEstimator() {
               <div className="grid grid-cols-2 gap-3">
                 {[
                   { id: 'handover', label: 'Full Handover (Zero Retainer)', desc: '100% self-managed' },
-                  { id: 'monthly-retainer', label: 'Monthly Retainer (₹2,999/mo)', desc: 'Backups, updates & edits' },
+                  { id: 'monthly-retainer', label: 'Monthly Retainer (₹699/mo)', desc: 'Backups, updates & edits' },
                 ].map((m) => (
                   <button
                     key={m.id}

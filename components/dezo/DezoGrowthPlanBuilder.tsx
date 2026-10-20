@@ -68,7 +68,7 @@ export function DezoGrowthPlanBuilder() {
   const [location, setLocation] = useState('Bhubaneswar');
   const [websiteUrl, setWebsiteUrl] = useState('');
   const [primaryGoal, setPrimaryGoal] = useState<GrowthGoal>('local-customers');
-  const [budgetRange, setBudgetRange] = useState('₹30,000 - ₹75,000 / month');
+  const [budgetRange, setBudgetRange] = useState('₹5,000 - ₹15,000 / month (Local Shop Foundation)');
   const [timeline, setTimeline] = useState('Within 2 to 4 weeks');
   const [preferredContact, setPreferredContact] = useState<'WhatsApp' | 'Phone' | 'Email'>('WhatsApp');
   const [contactInfo, setContactInfo] = useState('');
@@ -104,8 +104,8 @@ export function DezoGrowthPlanBuilder() {
               keyDeliverable: 'Automated greeting bot, QR table cards, and review request flow.',
             },
           ],
-          timeline: '3 to 5 weeks to full deployment',
-          estimatedBudget: '₹25,000 - ₹45,000 one-time setup + optional monthly management',
+          timeline: '1 to 3 weeks to full deployment',
+          estimatedBudget: 'Starting ₹2,999 one-time setup + optional ₹699/mo local care',
         };
 
       case 'ecommerce-sales':
@@ -197,15 +197,15 @@ export function DezoGrowthPlanBuilder() {
 
       case 'build-website':
         return {
-          title: 'High-Performance Next.js Web Application',
+          title: 'High-Performance Modern Web Presence',
           planTier: 'START',
-          summary: `Engineered for ${businessType} to deliver sub-second load times, mobile perfection, and authoritative commercial credibility.`,
+          summary: `Engineered for ${businessType} to deliver sub-second load times, mobile perfection, zero hosting fees, and authoritative credibility.`,
           recommendedServices: [
             {
               name: 'Custom Next.js & TypeScript Web Development',
               slug: 'web-development',
-              why: 'Fast, secure, and modern web presence with zero template bloat.',
-              keyDeliverable: 'Full custom responsive website with Core Web Vitals optimization.',
+              why: 'Fast, secure, and modern web presence with zero template bloat and free lifelong cloud hosting.',
+              keyDeliverable: 'Full custom responsive website with Core Web Vitals score 90+.',
             },
             {
               name: 'On-Page SEO & Schema Architecture',
@@ -216,12 +216,12 @@ export function DezoGrowthPlanBuilder() {
             {
               name: 'Conversion Funnel & Contact Forms',
               slug: 'lead-generation',
-              why: 'Captures inquiries seamlessly with Zod validation and instant notification delivery.',
+              why: 'Captures inquiries seamlessly with direct WhatsApp delivery and instant lead alerts.',
               keyDeliverable: 'Multi-step inquiry forms connected to WhatsApp and company email.',
             },
           ],
-          timeline: '3 to 4 weeks from design sign-off to launch',
-          estimatedBudget: '₹40,000 - ₹85,000 one-time build',
+          timeline: '1 to 2 weeks from design sign-off to launch',
+          estimatedBudget: 'Starting ₹1,999 (Student) / ₹2,999 (Local Shop) / ₹4,999 (Business)',
         };
 
       case 'complete-system':
@@ -466,10 +466,11 @@ export function DezoGrowthPlanBuilder() {
                 onChange={(e) => setBudgetRange(e.target.value)}
                 className="w-full px-4 py-3 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
               >
-                <option value="Under ₹30,000 / month">Under ₹30,000 / month</option>
-                <option value="₹30,000 - ₹75,000 / month">₹30,000 - ₹75,000 / month (Standard)</option>
-                <option value="₹75,000 - ₹1,50,000 / month">₹75,000 - ₹1,50,000 / month (Growth)</option>
-                <option value="₹1,50,000+ / month">₹1,50,000+ / month (Enterprise Scale)</option>
+                <option value="Under ₹5,000 / month (Student & Local Dukaan)">Under ₹5,000 / month (Student & Local Dukaan)</option>
+                <option value="₹5,000 - ₹15,000 / month (Local Shop Foundation)">₹5,000 - ₹15,000 / month (Local Shop Foundation)</option>
+                <option value="₹15,000 - ₹35,000 / month (Growing Business)">₹15,000 - ₹35,000 / month (Growing Business)</option>
+                <option value="₹35,000 - ₹75,000 / month (Scale)">₹35,000 - ₹75,000 / month (Scale)</option>
+                <option value="₹75,000+ / month (Enterprise)">₹75,000+ / month (Enterprise)</option>
               </select>
             </div>
 

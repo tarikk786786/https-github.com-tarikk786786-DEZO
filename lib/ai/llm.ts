@@ -332,11 +332,12 @@ export async function generateGrowthAdvisory(params: {
 }> {
   const systemPrompt = `You are the Principal Solutions Architect at DEZO (dezo.in), a premier digital growth agency in Bhubaneswar, Odisha, India.
 Your positioning is BUILD. MARKET. GROW.
-You give honest, transparent, commercially sound recommendations.
-Reference DEZO's real services:
-- Website Development: LAUNCH (₹7,999+), BUSINESS (₹14,999+), ECOMMERCE (₹24,999+), PERFORMANCE (₹39,999+), SCALE/CUSTOM (₹79,999+)
-- 30-Day Covered-Defect Warranty, 100% Code Handover, Scope Lock Promise
-- Marketplace Systems: Amazon & Flipkart Catalog, Ungating, Brand Registry, SP-API Ad Management (from ₹9,999)
+You give honest, transparent, commercially sound recommendations designed to be accessible to college students, local dukaans, middle-class shopkeepers, and growing brands alike.
+Reference DEZO's real super-affordable services:
+- Website Development Packages: STUDENT & DUKAAN (from ₹2,499), LAUNCH (from ₹4,999), BUSINESS (from ₹8,999), COMMERCE (from ₹14,999), GROW & CUSTOM (from ₹24,999)
+- Individual micro-solutions: Student Portfolio & Resume Site (₹1,999), Local Dukaan & WhatsApp QR Site (₹2,999), Tutor/Coaching Single-Page (₹3,499), Website Speed Optimization (₹1,499), Monthly Site Maintenance (₹699/mo)
+- Every website includes ₹0 Lifelong Cloud Hosting (Vercel/Netlify - no yearly cPanel hosting bills), 30-Day Covered-Defect Warranty, 100% Code Handover, and 50-50 milestone payments.
+- Marketplace Systems: Amazon & Flipkart Catalog, Ungating, Brand Registry, SP-API Ad Management (from ₹6,999)
 - SEO & Organic Growth: Local Google Maps dominance in Odisha and national organic rankings.
 Never promise unrealistic overnight riches or fabricated metrics.`;
 
@@ -374,9 +375,29 @@ Provide your advice strictly in JSON format with these exact keys:
   }
 
   // Deterministic fallback matching PRD catalog
+  const isStudentOrShop =
+    /student|college|fresher|portfolio|resume|dukaan|shop|kirana|salon|boutique|clinic|tutor/i.test(
+      `${params.businessType} ${params.primaryGoal} ${params.currentBudget}`
+    );
+
+  if (isStudentOrShop) {
+    return {
+      recommendedPackage: 'STUDENT & DUKAAN Digital Presence',
+      estimatedStartingPrice: 'Starting from ₹1,999 (Student) / ₹2,999 (Local Dukaan)',
+      rationale: `For ${params.businessType} in ${params.location || 'India'}, an instant-loading mobile web card with WhatsApp ordering and ₹0 lifelong hosting provides the highest return without recurring server expenses.`,
+      keyActionPlan: [
+        'Deploy lightning-fast responsive website on Vercel with ₹0 lifelong cloud hosting',
+        'Integrate direct WhatsApp ordering / contact button with pre-filled customer messages',
+        'Add Google Maps location embed, catalog showcase, and printable counter QR sticker',
+        'Deliver complete source code + 30-day bug fix warranty with 50-50 milestone payments',
+      ],
+      suggestedServices: ['Local Dukaan WhatsApp Site', 'Google Business Profile Setup', 'Website Maintenance'],
+    };
+  }
+
   return {
-    recommendedPackage: 'BUSINESS Website & Local Growth Foundation',
-    estimatedStartingPrice: 'Starting from ₹14,999',
+    recommendedPackage: 'LAUNCH / BUSINESS Digital Growth Foundation',
+    estimatedStartingPrice: 'Starting from ₹4,999 (LAUNCH) / ₹8,999 (BUSINESS)',
     rationale: `For ${params.businessType} in ${params.location || 'India'}, establishing an authoritative mobile-responsive website with local SEO is the highest-ROI first move.`,
     keyActionPlan: [
       'Deploy modern Next.js/Tailwind business website with sub-second load times',

@@ -28,7 +28,7 @@ export function DezoFeaturedWork({
             <div className="lg:col-span-7 relative bg-[#FAF8F5] overflow-hidden min-h-[300px] border-b-2 lg:border-b-0 lg:border-r-2 border-dezo-ink">
               <WorkSitePreview url={lead.url} title={lead.title} eager pan="none" />
               <div className="absolute top-10 left-3 z-20 inline-flex items-center gap-1.5 font-mono text-[9px] font-bold uppercase tracking-widest bg-emerald-600 text-white px-2.5 py-1 shadow-[2px_2px_0_0_#0B0B0A]">
-                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                <span className="w-1.5 h-1.5 bg-white shrink-0 animate-pulse" />
                 VERIFIED PRODUCTION STOREFRONT
               </div>
             </div>

@@ -803,29 +803,27 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-            {/* Careers Promotion — PRD Section 14 */}
-      <DezoSection spacing="compact" className="border-t border-dezo-border bg-dezo-surface/50">
+      {/* Careers Promotion — Guided Training & Internship Pathway */}
+      <DezoSection spacing="compact" className="border-t-2 border-dezo-ink bg-dezo-bg">
         <DezoContainer size="wide">
-          <div className="p-8 sm:p-10 border border-dezo-border bg-dezo-surface rounded-2xl relative overflow-hidden">
-            <div className="absolute -right-16 -top-16 w-64 h-64 bg-dezo-primary/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="p-8 sm:p-10 border-2 border-dezo-ink bg-white shadow-[6px_6px_0_0_#0B0B0A] relative">
             <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
               <div className="max-w-2xl">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 font-mono text-[11px] tracking-wide uppercase mb-4">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <div className="inline-flex items-center gap-2 px-3 py-1 border border-emerald-700 bg-emerald-100 text-emerald-950 font-mono text-[11px] font-bold uppercase tracking-wider mb-4">
+                  <span className="w-2 h-2 bg-emerald-600 animate-pulse" />
                   Always Hiring · Guided Training Pathway
                 </div>
-                <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl text-dezo-text-primary tracking-tight">
-                  Your Skills Can Start Here.
+                <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-black text-dezo-ink tracking-tight uppercase">
+                  Your Digital Career Starts Here.
                 </h3>
-                <p className="text-dezo-text-secondary text-sm sm:text-base mt-3 leading-relaxed">
-                  We're always interested in motivated people who want to learn, contribute and grow in digital marketing. Join our guided training pathway and discover where your abilities can take you.
+                <p className="text-dezo-text-secondary font-mono text-xs sm:text-sm mt-3 leading-relaxed">
+                  We are always recruiting motivated talent who want to learn, build, and deploy production digital platforms. Join our structured 1-month practical training program with real client projects.
                 </p>
-                <div className="flex flex-wrap gap-2 pt-4 text-[11px] font-mono text-dezo-text-muted">
-                  <span className="px-2.5 py-1 bg-dezo-bg border border-dezo-border rounded-md">Remote-First</span>
-                  <span className="px-2.5 py-1 bg-dezo-bg border border-dezo-border rounded-md">1-Month Training</span>
-                  <span className="px-2.5 py-1 bg-dezo-bg border border-dezo-border rounded-md">Class 12+</span>
-                  <span className="px-2.5 py-1 bg-dezo-bg border border-dezo-border rounded-md">Laptop & Internet</span>
-                  <span className="px-2.5 py-1 bg-dezo-bg border border-dezo-border rounded-md">Free Practical Training</span>
+                <div className="flex flex-wrap gap-2 pt-4 text-xs font-mono text-dezo-ink">
+                  <span className="px-3 py-1 bg-dezo-bg-warm border border-dezo-ink font-bold shadow-[2px_2px_0_0_#0B0B0A]">Remote-First</span>
+                  <span className="px-3 py-1 bg-dezo-bg-warm border border-dezo-ink font-bold shadow-[2px_2px_0_0_#0B0B0A]">1-Month Intensive</span>
+                  <span className="px-3 py-1 bg-dezo-bg-warm border border-dezo-ink font-bold shadow-[2px_2px_0_0_#0B0B0A]">Students & Freshers</span>
+                  <span className="px-3 py-1 bg-dezo-bg-warm border border-dezo-ink font-bold shadow-[2px_2px_0_0_#0B0B0A]">₹0 Practical Training</span>
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
@@ -836,7 +834,7 @@ export default function HomePage() {
                   href="https://wa.me/919114411026?text=Hi%20DEZO%20Careers%20Team%2C%20I%20saw%20your%20guided%20internship%20and%20training%20opportunity%20on%20dezo.in%20and%20would%20like%20to%20apply."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-dezo-border bg-dezo-bg hover:border-dezo-text-muted text-xs font-mono text-dezo-text-secondary transition-all text-center"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 border-2 border-dezo-ink bg-[#25D366] text-black text-xs font-mono uppercase tracking-wider font-bold hover:bg-white transition-all text-center shadow-[3px_3px_0_0_#0B0B0A]"
                 >
                   Apply via WhatsApp
                 </a>

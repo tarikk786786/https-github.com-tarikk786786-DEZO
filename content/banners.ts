@@ -73,7 +73,7 @@ export const workIndexBanner: BannerBase = {
   id: 'banner-work-index',
   eyebrow: 'Selected work',
   title: 'Live websites. Real proof.',
-  body: 'Every listed project is a production URL — image-led stories first, then the complete archive.',
+  body: '181+ verified production websites across 14 commercial industries. Image-led featured stories first, then the complete searchable archive.',
   tone: 'warm',
   media: {
     kind: 'image',

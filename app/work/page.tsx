@@ -12,9 +12,9 @@ import { constructMetadata } from '@/lib/seo/metadata';
 import { portfolioData } from '@/content/projects';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Work — Live Client Websites',
+  title: 'Work — 181+ Live Verified Client Websites | DEZO',
   description:
-    'Browse DEZO live client websites — real production URLs with previews. Every listed project is shown.',
+    'Browse DEZO’s portfolio of 181+ live verified client websites across D2C commerce, schools, healthcare, real estate, and local businesses in Odisha and India.',
   canonicalUrl: 'https://dezo.in/work',
 });
 

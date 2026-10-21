@@ -33,7 +33,7 @@ export default function ServicesPage() {
         <DezoContainer size="wide">
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-dezo-primary/20 border border-dezo-ink text-xs font-mono uppercase tracking-wider text-dezo-ink mb-6">
-              <span className="w-2 h-2 bg-dezo-primary rounded-full animate-pulse" />
+              <span className="w-2 h-2 bg-dezo-primary shrink-0 animate-pulse" />
               <span>Full Service Catalog · 12 Departments (A - L)</span>
             </div>
             <h1 className="font-display text-4xl sm:text-6xl font-black text-dezo-ink tracking-tight uppercase leading-[0.95]">

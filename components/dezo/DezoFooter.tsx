@@ -167,7 +167,7 @@ export function DezoFooter() {
 
             <div className="mt-6 pt-4 border-t border-white/10 flex flex-col gap-2">
               <Link href="/work" className="text-xs font-mono text-white/70 hover:text-white">
-                Live Portfolio (70+ Sites)
+                Live Portfolio (181+ Sites)
               </Link>
               <Link href="/growth-lab" className="text-xs font-mono text-white/70 hover:text-white">
                 DEZO LAB Diagnostics

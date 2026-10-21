@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { DezoContainer } from '@/components/dezo/DezoContainer';
 import { DezoSection } from '@/components/dezo/DezoSection';
 import { DezoHeading } from '@/components/dezo/DezoHeading';
@@ -73,7 +74,11 @@ export function PromiseGuaranteeSystem() {
       </DezoSection>
 
       <DezoStandard />
-      <DezoSection spacing="compact" className="bg-dezo-bg"><DezoContainer size="wide"><WebsiteConfidencePromise /></DezoContainer></DezoSection>
+      <DezoSection spacing="compact" className="bg-dezo-bg">
+        <DezoContainer size="wide">
+          <WebsiteConfidencePromise />
+        </DezoContainer>
+      </DezoSection>
       <AccountabilityPreview />
       <TrustEvidence />
       <PromiseCTA />
@@ -84,29 +89,27 @@ export function PromiseGuaranteeSystem() {
 /** Compact homepage teaser for The DEZO Standard */
 export function PromiseHomeTeaser() {
   return (
-    <DezoSection spacing="normal" className="bg-dezo-ink text-dezo-text-inverse">
+    <DezoSection spacing="normal" className="bg-dezo-ink text-white border-y-2 border-dezo-ink">
       <DezoContainer size="wide">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-7">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-dezo-primary mb-4">
-              The DEZO Standard
-            </p>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] tracking-tight leading-[1.12] text-white">
+            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-dezo-primary px-2.5 py-1 bg-white/10 border border-dezo-primary inline-block mb-4">
+              The DEZO Standard · 10 Written Commitments
+            </span>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.05] text-white uppercase">
               We guarantee what we control.
             </h2>
-            <p className="mt-5 text-base text-white/60 leading-relaxed max-w-xl">
-              Defined scope, documented deliverables, quality assurance, transparent reporting,
-              implementation accountability and clear communication. We do not guarantee outcomes
-              controlled by algorithms, auctions, marketplaces or market conditions.
+            <p className="mt-4 text-xs sm:text-sm font-mono text-gray-300 leading-relaxed max-w-xl">
+              Defined Scope Lock, working staging preview, 10-point Quality Assurance, transparent reporting, full Git source-code handover, and a written 30-day post-launch warranty.
             </p>
           </div>
           <div className="lg:col-span-5 flex lg:justify-end">
-            <a
+            <Link
               href="/promise"
-              className="inline-flex items-center gap-2 text-sm font-medium text-white border-b border-white/40 pb-0.5 hover:border-dezo-primary hover:text-dezo-primary transition-colors"
+              className="px-6 py-3 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold hover:bg-white transition-all shadow-[4px_4px_0_0_#FFFFFF] border border-dezo-primary inline-block text-center"
             >
-              Read the full promise system →
-            </a>
+              Read Full Guarantee &amp; Warranties &rarr;
+            </Link>
           </div>
         </div>
       </DezoContainer>

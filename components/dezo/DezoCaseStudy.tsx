@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, CheckCircle2 } from 'lucide-react';
 import { ProjectItem } from '@/content/projects';
 import { DezoHoverLift } from '@/lib/motion/MotionAdapter';
 import { cleanHost } from './LiveSitePreview';
@@ -14,20 +14,24 @@ interface DezoCaseStudyProps {
 
 export function DezoCaseStudy({ project, className = '' }: DezoCaseStudyProps) {
   const isClickable = project.url && project.url !== '#';
+  const host = cleanHost(project.url);
 
   return (
     <DezoHoverLift className={className}>
-      <article className="group relative flex flex-col justify-between h-full rounded-none bg-white border-2 border-dezo-ink p-5 sm:p-6 shadow-[4px_4px_0_0_#0B0B0A] hover:shadow-[6px_6px_0_0_#B08D57] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all">
+      <article className="group relative flex flex-col justify-between h-full rounded-none bg-white border-2 border-dezo-ink p-5 sm:p-6 shadow-[4px_4px_0_0_#0B0B0A] hover:shadow-[7px_7px_0_0_#B08D57] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all">
         <div>
-          <div className="relative w-full h-44 sm:h-52 mb-5 rounded-none overflow-hidden bg-dezo-bg-warm border-2 border-dezo-ink">
-            <WorkSitePreview url={project.url} title={project.title} pan="auto" />
+          {/* Browser frame preview container */}
+          <div className="relative w-full h-48 sm:h-56 mb-5 rounded-none overflow-hidden bg-white border-2 border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A]">
+            <WorkSitePreview url={project.url} title={project.title} pan="none" />
             {project.isLive && (
-              <span className="absolute top-2 left-2 z-20 text-[9px] font-mono font-bold uppercase tracking-widest bg-dezo-ink text-white px-2 py-0.5 rounded-none border border-white/20">
-                LIVE
+              <span className="absolute top-9 left-2 z-20 inline-flex items-center gap-1 text-[9px] font-mono font-bold uppercase tracking-widest bg-emerald-600 text-white px-2 py-0.5 rounded-none shadow-[2px_2px_0_0_#0B0B0A]">
+                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                VERIFIED LIVE
               </span>
             )}
           </div>
 
+          {/* Category Tag & Result Metric */}
           <div className="flex items-center justify-between gap-2 mb-3">
             <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-dezo-ink bg-dezo-primary/20 border border-dezo-primary/60 px-2 py-0.5 rounded-none">
               {project.category}
@@ -39,18 +43,28 @@ export function DezoCaseStudy({ project, className = '' }: DezoCaseStudyProps) {
             )}
           </div>
 
-          <h3 className="font-display text-xl font-bold tracking-tight text-dezo-text-primary group-hover:text-dezo-primary transition-colors line-clamp-1">
+          {/* Project Title */}
+          <h3 className="font-display text-xl sm:text-2xl font-bold tracking-tight text-dezo-text-primary group-hover:text-dezo-primary transition-colors line-clamp-1">
             {project.title}
           </h3>
 
+          {/* Clean Domain Anchor */}
           <p className="text-xs font-mono text-dezo-text-muted mt-1.5 truncate">
-            {cleanHost(project.url)}
+            https://{host}
           </p>
+
+          {/* Optional Short Description */}
+          {project.description && (
+            <p className="text-xs text-dezo-text-secondary mt-2.5 line-clamp-2 leading-relaxed border-l-2 border-dezo-ink/20 pl-2.5">
+              {project.description}
+            </p>
+          )}
         </div>
 
+        {/* Card Footer with Direct External Link */}
         <div className="mt-5 pt-4 border-t-2 border-dezo-ink/10 flex items-center justify-between">
           <span className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink group-hover:text-dezo-primary transition-colors">
-            View Live //
+            Visit Production //
           </span>
           {isClickable ? (
             <a
@@ -58,7 +72,7 @@ export function DezoCaseStudy({ project, className = '' }: DezoCaseStudyProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Visit live site of ${project.title}`}
-              className="w-8 h-8 rounded-none bg-white border-2 border-dezo-ink flex items-center justify-center text-dezo-ink group-hover:text-white group-hover:bg-dezo-primary group-hover:border-dezo-primary shadow-[2px_2px_0_0_#0B0B0A] transition-all"
+              className="inline-flex items-center justify-center w-8 h-8 rounded-none bg-white border-2 border-dezo-ink text-dezo-ink group-hover:text-white group-hover:bg-dezo-primary group-hover:border-dezo-primary shadow-[2px_2px_0_0_#0B0B0A] transition-all"
             >
               <ExternalLink size={14} />
             </a>

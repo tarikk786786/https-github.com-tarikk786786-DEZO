@@ -719,9 +719,9 @@ export const WEBSITE_PACKAGES: WebsitePackage[] = [
   {
     id: 'pkg-student-dukaan',
     name: 'STUDENT & DUKAAN',
-    badge: 'Super Affordable / Starter',
-    startingPrice: 'From ₹2,499',
-    startingPriceNumeric: 2499,
+    badge: 'Micro Starter · Subsidized',
+    startingPrice: 'From ₹1,999 (Student) / ₹2,999 (Dukaan)',
+    startingPriceNumeric: 1999,
     bestFor: 'College students, freshers, kirana shops, neighborhood retailers, home bakeries, salons, and freelance creators needing an immediate, credible web presence.',
     includedScope: 'Mobile-first fast digital storefront or personal resume portfolio with direct WhatsApp action and free lifelong cloud hosting.',
     keyFeatures: [
@@ -730,7 +730,7 @@ export const WEBSITE_PACKAGES: WebsitePackage[] = [
       'Google Maps driving directions embed and click-to-call mobile button',
       'Printable high-resolution QR Code sticker design for your shop counter or resume',
       '100% free lifelong cloud hosting on Vercel/Netlify with free automated SSL certificate',
-      'Special student discount eligibility (flat ₹500 off with valid student ID)',
+      'Subsidized student tier (flat ₹1,999 with valid student ID; ₹2,999 for local shops)',
     ],
     revisions: '2 structured feedback rounds before launch',
     warranty: '30-day post-launch covered-defect fix warranty',

@@ -84,10 +84,10 @@ export function WebsiteProjectEstimator() {
     // Base price by website type
     switch (websiteType) {
       case 'student-dukaan':
-        base = 2499;
+        base = 1999;
         pkg = 'LAUNCH';
         timelineWeeks = desiredTimeline === 'urgent' ? '24 to 48 hours' : '2 to 4 business days';
-        scopeNotes.push('Subsidized Student Portfolio or Local Shop Digital Storefront with WhatsApp actions');
+        scopeNotes.push('Subsidized Student Portfolio (₹1,999) or Local Shop Digital Storefront (₹2,999) with WhatsApp actions');
         break;
       case 'landing-page':
         base = 2999;
@@ -356,7 +356,7 @@ export function WebsiteProjectEstimator() {
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {[
-                { id: 'student-dukaan', name: 'Student Resume / Local Dukaan Store', starting: '₹2,499', desc: '1-page mobile site with WhatsApp orders/CV and free lifelong hosting' },
+                { id: 'student-dukaan', name: 'Student Resume / Local Dukaan Store', starting: 'From ₹1,999', desc: '1-page mobile site with WhatsApp orders/CV and free lifelong hosting' },
                 { id: 'simple-business', name: 'Simple Business Website', starting: '₹4,999', desc: 'Up to 5 pages for local shops, clinics & SMBs' },
                 { id: 'landing-page', name: 'Campaign Landing Page', starting: '₹2,999', desc: 'Single high-converting page for paid ads & offers' },
                 { id: 'shopify-store', name: 'Shopify Starter D2C Store', starting: '₹11,999', desc: 'eCommerce with UPI checkout & Shiprocket' },

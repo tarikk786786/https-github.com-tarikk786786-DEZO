@@ -60,7 +60,7 @@ export function ChapterBanner({
             </span>
           </div>
           <div className={`lg:col-span-7 ${reverse ? 'lg:[direction:ltr]' : ''}`}>
-            <DezoImageReveal className="relative aspect-[16/10] sm:aspect-[21/12] w-full overflow-hidden border border-dezo-border bg-dezo-bg-warm">
+            <DezoImageReveal className="relative aspect-[16/10] sm:aspect-[21/12] w-full overflow-hidden border border-dezo-border bg-dezo-bg-warm rounded-dezo-lg shadow-dezo-card">
               <BannerMedia media={data.media} className="dezo-img-zoom" />
             </DezoImageReveal>
           </div>

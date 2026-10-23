@@ -6,7 +6,7 @@ import { useReducedMotion } from '@/lib/motion/useReducedMotion';
 import { LiveSitePreview } from '@/components/dezo/LiveSitePreview';
 
 /**
- * Work website preview — refined browser frame with soft luxury chrome.
+ * Work website preview — soft luxury browser chrome + browse-pan animation.
  */
 export function WorkSitePreview({
   url,
@@ -19,10 +19,15 @@ export function WorkSitePreview({
   title: string;
   eager?: boolean;
   className?: string;
-  /** Kept for backwards compatibility */
   pan?: 'hover' | 'auto' | 'none';
 }) {
   const reduced = useReducedMotion();
+  const panClass =
+    reduced || pan === 'none'
+      ? ''
+      : pan === 'auto'
+        ? 'dezo-work-site-pan dezo-work-site-pan-auto'
+        : 'dezo-work-site-pan';
 
   return (
     <motion.div
@@ -50,12 +55,14 @@ export function WorkSitePreview({
       </div>
 
       <div className="absolute inset-0 pt-7 sm:pt-8 overflow-hidden bg-dezo-bg-warm">
-        <LiveSitePreview
-          url={url}
-          title={title}
-          eager={eager}
-          className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-        />
+        <div className={`h-full w-full ${panClass}`}>
+          <LiveSitePreview
+            url={url}
+            title={title}
+            eager={eager}
+            className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+          />
+        </div>
       </div>
     </motion.div>
   );

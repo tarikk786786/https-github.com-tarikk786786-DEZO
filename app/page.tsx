@@ -18,10 +18,21 @@ import {
   DezoMagnetic,
 } from '@/lib/motion/MotionAdapter';
 import { PromiseHomeTeaser } from '@/components/promise/PromiseGuaranteeSystem';
-import { CTASection, StatementBanner } from '@/components/dezo/visual';
+import {
+  CTASection,
+  StatementBanner,
+  ChapterBanner,
+  ProjectMosaic,
+} from '@/components/dezo/visual';
 import { DezoHeroMedia } from '@/components/dezo/DezoHeroMedia';
 import { DezoHeroText } from '@/components/dezo/DezoHeroText';
-import { finalCtaBanner, heroBanner, statementBanners } from '@/content/banners';
+import {
+  finalCtaBanner,
+  heroBanner,
+  statementBanners,
+  chapterBanners,
+  marketplaceBanner,
+} from '@/content/banners';
 import { motion } from 'motion/react';
 import { useReducedMotion } from '@/lib/motion/useReducedMotion';
 import {
@@ -241,6 +252,15 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
+      {/* Chapter banners — Build / Grow / Sell / Advertise / Brand with cinematic media */}
+      {chapterBanners.map((chapter, i) => (
+        <ChapterBanner key={chapter.id} data={chapter} reverse={i % 2 === 1} />
+      ))}
+
+      <ProjectMosaic />
+
+      <StatementBanner data={statementBanners[2]} />
+
       {/* Capabilities — editorial rows */}
       <DezoSection spacing="normal" id="services">
         <DezoContainer size="wide">
@@ -286,6 +306,33 @@ export default function HomePage() {
                 </span>
               </Link>
             ))}
+          </div>
+        </DezoContainer>
+      </DezoSection>
+
+      {/* Marketplace dual statement */}
+      <DezoSection spacing="normal" className="bg-dezo-bg-warm border-y border-dezo-border">
+        <DezoContainer size="wide">
+          <DezoReveal>
+            <DezoHeading
+              badge={marketplaceBanner.eyebrow}
+              as="h2"
+              subtitle={marketplaceBanner.body}
+            >
+              {marketplaceBanner.title}
+            </DezoHeading>
+          </DezoReveal>
+          <div className="mt-10 flex flex-wrap gap-3">
+            {marketplaceBanner.primaryCta && (
+              <DezoButton href={marketplaceBanner.primaryCta.href} variant="outline" size="sm">
+                {marketplaceBanner.primaryCta.label}
+              </DezoButton>
+            )}
+            {marketplaceBanner.secondaryCta && (
+              <DezoButton href={marketplaceBanner.secondaryCta.href} variant="outline" size="sm">
+                {marketplaceBanner.secondaryCta.label}
+              </DezoButton>
+            )}
           </div>
         </DezoContainer>
       </DezoSection>
@@ -526,7 +573,8 @@ export default function HomePage() {
         </DezoContainer>
       </DezoSection>
 
-      {/* DEZO Standard */}
+      {/* DEZO Standard — cinematic ink statement + promise teaser */}
+      <StatementBanner data={statementBanners[3]} />
       <PromiseHomeTeaser />
 
       {/* Founding team */}

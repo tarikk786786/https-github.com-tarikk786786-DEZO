@@ -5,7 +5,7 @@ import { motion } from 'motion/react';
 import { useReducedMotion } from '@/lib/motion/useReducedMotion';
 
 /** Cache-bust so apex + www edges pick up the showcase reel */
-const ASSET_V = 'v8';
+const ASSET_V = 'v9';
 const POSTER = `/hero/dezo-hero-poster.jpg?${ASSET_V}`;
 const POSTER_MOBILE = `/hero/dezo-hero-poster-mobile.jpg?${ASSET_V}`;
 const LOOP_WEBM = `/hero/dezo-hero-loop.webm?${ASSET_V}`;
@@ -13,8 +13,7 @@ const LOOP_MP4 = `/hero/dezo-hero-loop.mp4?${ASSET_V}`;
 const LOOP_MOBILE = `/hero/dezo-hero-loop-mobile.mp4?${ASSET_V}`;
 
 /**
- * Full-bleed site-showcase plane — shoots in with a hard zoom settle.
- * Self-contained (no chapter ticker / showcase context).
+ * Full-bleed cinema plane — hard shoot-in zoom settle + live reel.
  */
 export function DezoHeroMedia() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -70,9 +69,9 @@ export function DezoHeroMedia() {
       className="absolute inset-0 overflow-hidden dezo-hero-media-stage"
       aria-hidden
       data-hero-media
-      initial={reduced ? false : { scale: 1.22, opacity: 0.35 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 1.35, ease: [0.16, 1, 0.3, 1] }}
+      initial={reduced ? false : { scale: 1.48, opacity: 0.15, filter: 'blur(10px)' }}
+      animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
+      transition={{ duration: 1.45, ease: [0.16, 1, 0.3, 1] }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -108,6 +107,17 @@ export function DezoHeroMedia() {
           {!isNarrow && <source src={LOOP_WEBM} type="video/webm" />}
           <source src={isNarrow ? LOOP_MOBILE : LOOP_MP4} type="video/mp4" />
         </video>
+      )}
+
+      {/* Shoot flash — one-shot cinema open */}
+      {!reduced && (
+        <motion.div
+          className="pointer-events-none absolute inset-0 bg-white"
+          initial={{ opacity: 0.55 }}
+          animate={{ opacity: 0 }}
+          transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+          aria-hidden
+        />
       )}
     </motion.div>
   );

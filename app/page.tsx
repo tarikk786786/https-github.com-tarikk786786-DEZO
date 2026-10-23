@@ -139,9 +139,9 @@ export default function HomePage() {
 
             <motion.div
               className="mt-7 sm:mt-9 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3"
-              initial={reducedMotion ? false : { opacity: 0, y: 28 }}
+              initial={reducedMotion ? false : { opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
             >
               <DezoMagnetic>
                 <DezoButton

@@ -84,24 +84,24 @@ export default function AboutPage() {
             </aside>
           </div>
 
-          <div className="border-2 border-dezo-ink bg-white p-8 mb-16 max-w-2xl shadow-[6px_6px_0_0_#0B0B0A]">
-            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white bg-dezo-ink px-2.5 py-1 w-max mb-3 shadow-[2px_2px_0_0_#B08D57]">
-              LEADERSHIP // {leadership.primary.role}
+          <div className="border border-dezo-border bg-dezo-surface p-8 mb-16 max-w-2xl">
+            <p className="text-[11px] uppercase tracking-[0.14em] text-dezo-primary mb-2">
+              {leadership.primary.role}
             </p>
-            <h3 className="font-display text-3xl font-black mb-3 text-dezo-text-primary">{leadership.primary.name}</h3>
-            <p className="text-sm text-dezo-text-secondary leading-relaxed mb-6 border-l-2 border-dezo-primary pl-3.5">{leadership.primary.bio}</p>
+            <h3 className="font-display text-2xl mb-3">{leadership.primary.name}</h3>
+            <p className="text-sm text-dezo-text-secondary mb-6">{leadership.primary.bio}</p>
             <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
               <a
                 href={leadership.primary.profile}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink hover:text-dezo-primary"
+                className="inline-flex items-center gap-1 text-sm font-semibold text-dezo-primary"
               >
                 tarikislam.in <ArrowUpRight size={14} />
               </a>
               <a
                 href={`mailto:${contact.supportEmail}`}
-                className="font-mono text-xs text-dezo-text-muted hover:text-dezo-primary"
+                className="font-mono text-sm text-dezo-text-muted hover:text-dezo-primary"
               >
                 {contact.supportEmail}
               </a>

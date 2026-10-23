@@ -22,39 +22,36 @@ export function DezoHeroText({
   const reduced = useReducedMotion();
 
   return (
-    <div className="w-full max-w-4xl text-dezo-text-inverse">
-      <div className="flex items-center gap-3 mb-4 sm:mb-5">
-        <span className="inline-block w-2 h-2 bg-dezo-primary rounded-none" />
-        <motion.p
-          className="font-mono text-[11px] sm:text-[12px] font-bold uppercase tracking-[0.25em] text-dezo-primary"
-          initial={reduced ? false : { opacity: 0, x: -16 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {eyebrow} // ARCHITECTURE & GROWTH
-        </motion.p>
-      </div>
+    <div className="w-full max-w-3xl text-dezo-text-inverse">
+      <motion.p
+        className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.22em] text-dezo-primary mb-4 sm:mb-5"
+        initial={reduced ? false : { opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {eyebrow}
+      </motion.p>
 
-      {/* Brand slam — oversized, bold brutalist sans/serif hybrid */}
+      {/* Brand slam — oversized, clip-rise with overshoot settle */}
       <div className="overflow-hidden">
         <motion.p
-          className="font-display text-[4.5rem] leading-[0.82] tracking-tightest text-white sm:text-8xl md:text-9xl lg:text-[9.5rem] font-black uppercase"
-          initial={reduced ? false : { y: '120%' }}
-          animate={{ y: '0%' }}
-          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+          className="font-display text-[4.25rem] leading-[0.86] tracking-tightest text-dezo-text-inverse sm:text-7xl md:text-8xl lg:text-[7.5rem]"
+          initial={reduced ? false : { y: '120%', scale: 1.08 }}
+          animate={{ y: '0%', scale: 1 }}
+          transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
         >
           {brandName}
         </motion.p>
       </div>
 
-      {/* Industrial stark border bar */}
+      {/* Accent shoot-line */}
       <motion.div
-        className="mt-5 sm:mt-6 h-[3px] origin-left bg-dezo-primary"
+        className="mt-5 sm:mt-6 h-[2px] origin-left bg-dezo-primary"
         aria-hidden
         initial={reduced ? false : { scaleX: 0 }}
         animate={{ scaleX: 1 }}
-        transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-        style={{ width: 'min(16rem, 50%)' }}
+        transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        style={{ width: 'min(12rem, 40%)' }}
       />
 
       <h1 className="mt-6 sm:mt-8">
@@ -66,21 +63,21 @@ export function DezoHeroText({
           {WORDS.map((word, i) => (
             <span key={word} className="overflow-hidden inline-block">
               <motion.span
-                className="inline-block font-display text-[1.85rem] sm:text-4xl lg:text-[3.25rem] tracking-tightest uppercase leading-none font-bold text-white hover:text-dezo-primary transition-colors"
+                className="inline-block font-display text-[1.65rem] sm:text-3xl lg:text-[2.75rem] tracking-tightest uppercase leading-none"
                 initial={
                   reduced
                     ? false
-                    : { y: '100%', opacity: 0 }
+                    : { x: -48, opacity: 0, filter: 'blur(8px)' }
                 }
-                animate={{ y: '0%', opacity: 1 }}
+                animate={{ x: 0, opacity: 1, filter: 'blur(0px)' }}
                 transition={{
-                  duration: 0.5,
-                  delay: 0.35 + i * 0.1,
+                  duration: 0.55,
+                  delay: 0.42 + i * 0.1,
                   ease: [0.16, 1, 0.3, 1],
                 }}
               >
                 {word}
-                <span className="text-dezo-primary font-mono ml-1 font-black">/</span>
+                <span className="text-dezo-primary">.</span>
               </motion.span>
             </span>
           ))}

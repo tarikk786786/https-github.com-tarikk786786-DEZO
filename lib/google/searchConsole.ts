@@ -10,8 +10,6 @@
  * - GOOGLE_SEARCH_CONSOLE_SITE_URL: Optional override (default: "sc-domain:dezo.in" or "https://dezo.in/")
  */
 
-import { google } from 'googleapis';
-
 export interface GscStatus {
   configured: boolean;
   siteUrl: string;
@@ -50,6 +48,15 @@ export async function createGscClient() {
   if (privateKey.includes('\\n')) {
     privateKey = privateKey.replace(/\\n/g, '\n');
   }
+
+  // Safe dynamic import without compile-time module dependency
+  const mod = 'googleapis';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const googleapis: any = await import(/* webpackIgnore: true */ mod).catch(() => null);
+  if (!googleapis || !googleapis.google) {
+    throw new Error('The googleapis module is not available in the current environment.');
+  }
+  const { google } = googleapis;
 
   const auth = new google.auth.JWT({
     email: clientEmail,
@@ -111,12 +118,12 @@ export async function getSearchPerformance(options: SearchAnalyticsQueryOptions 
       rows: response.data.rows || [],
     };
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : String(error);
+    const message = error instanceof Error ? error.message : 'Unknown error during GSC query';
     return {
       success: false,
       configured: true,
       error: message,
-      siteUrl: config.siteUrl,
+      data: null,
     };
   }
 }

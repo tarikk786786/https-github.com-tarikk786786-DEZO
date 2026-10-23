@@ -10,7 +10,7 @@ export function MarketplaceIndustrySolutions() {
   const current = INDUSTRY_MARKETPLACE_SOLUTIONS.find((s) => s.id === selectedIndustryId) || INDUSTRY_MARKETPLACE_SOLUTIONS[0];
 
   return (
-    <div className="w-full bg-dezo-bg border-2 border-dezo-ink p-6 sm:p-10 shadow-[4px_4px_0_0_#0B0B0A]">
+    <div className="w-full bg-dezo-bg border border-dezo-border p-6 sm:p-10 shadow-dezo-card">
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b-2 border-dezo-ink">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-dezo-primary/20 border border-dezo-ink text-xs font-mono uppercase tracking-wider text-dezo-ink mb-3 font-bold">
@@ -39,7 +39,7 @@ export function MarketplaceIndustrySolutions() {
               onClick={() => setSelectedIndustryId(ind.id)}
               className={`px-4 py-2 text-xs font-mono uppercase tracking-wider border-2 transition-all cursor-pointer ${
                 isSelected
-                  ? 'bg-dezo-ink text-dezo-bg border-dezo-ink font-bold shadow-[2px_2px_0_0_#B08D57]'
+                  ? 'bg-dezo-ink text-dezo-bg border-dezo-ink font-bold shadow-xs'
                   : 'bg-dezo-bg-warm text-dezo-ink border-dezo-ink/40 hover:border-dezo-ink hover:bg-white'
               }`}
             >
@@ -50,7 +50,7 @@ export function MarketplaceIndustrySolutions() {
       </div>
 
       {/* Active Industry Breakdown Card */}
-      <div className="bg-dezo-bg-warm border-2 border-dezo-ink p-6 sm:p-8 shadow-[3px_3px_0_0_#0B0B0A]">
+      <div className="bg-dezo-bg-warm border border-dezo-border p-6 sm:p-8 shadow-dezo-card">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-dezo-ink/15">
           <div>
             <span className="font-mono text-xs uppercase tracking-wider text-dezo-primary font-bold">
@@ -122,7 +122,7 @@ export function MarketplaceIndustrySolutions() {
               </ul>
             </div>
 
-            <div className="bg-dezo-ink text-dezo-bg p-5 border-2 border-dezo-ink">
+            <div className="bg-dezo-ink text-dezo-bg p-5 border border-dezo-border">
               <div className="flex items-center gap-1.5 mb-2 text-dezo-primary">
                 <ShieldCheck size={14} />
                 <span className="font-mono text-xs uppercase tracking-wider font-bold">

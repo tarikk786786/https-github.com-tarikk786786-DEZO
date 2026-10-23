@@ -97,14 +97,14 @@ export function DezoQualificationFunnel() {
   };
 
   return (
-    <div className="w-full rounded-none bg-white border-2 border-dezo-ink p-6 sm:p-10 shadow-[6px_6px_0_0_#0B0B0A]">
+    <div className="w-full rounded-dezo-md bg-white border border-dezo-border p-6 sm:p-10 shadow-dezo-soft">
       {/* Progress Bar */}
       <div className="mb-8">
         <div className="flex items-center justify-between text-xs font-mono font-bold uppercase tracking-widest text-dezo-ink mb-2.5">
           <span>[DIAGNOSTIC] // STEP {step} OF 4</span>
           <span className="text-dezo-primary">{step === 1 ? 'Business Identity' : step === 2 ? 'Channels & Needs' : step === 3 ? 'Scale & Budget' : 'Direct Contacts'}</span>
         </div>
-        <div className="w-full h-2 bg-dezo-bg border border-dezo-ink rounded-none overflow-hidden">
+        <div className="w-full h-2 bg-dezo-bg border border-dezo-ink rounded-dezo-md overflow-hidden">
           <div
             className="h-full bg-dezo-primary transition-all duration-300"
             style={{ width: `${(step / 4) * 100}%` }}
@@ -114,12 +114,12 @@ export function DezoQualificationFunnel() {
 
       {result ? (
         <div className="py-8 flex flex-col items-center text-center gap-6 animate-fade-in">
-          <div className="w-16 h-16 rounded-none bg-dezo-ink border-2 border-dezo-primary flex items-center justify-center text-dezo-primary shadow-[4px_4px_0_0_#B08D57]">
+          <div className="w-16 h-16 rounded-dezo-md bg-dezo-ink border border-dezo-primary flex items-center justify-center text-dezo-primary shadow-dezo-card">
             <CheckCircle2 size={32} />
           </div>
 
           <div>
-            <span className="font-mono text-xs font-bold uppercase tracking-widest text-white bg-dezo-ink px-2.5 py-1 shadow-[2px_2px_0_0_#B08D57]">
+            <span className="font-mono text-xs font-bold uppercase tracking-widest text-white bg-dezo-ink px-2.5 py-1 shadow-xs">
               DIAGNOSTIC COMPLETE // SCORE: {result.leadScore}/100
             </span>
             <h3 className="font-display text-3xl font-black text-dezo-text-primary mt-3 mb-2">
@@ -130,7 +130,7 @@ export function DezoQualificationFunnel() {
             </p>
           </div>
 
-          <div className="p-5 rounded-none bg-dezo-bg-warm border-2 border-dezo-ink max-w-md w-full font-mono text-xs text-left flex flex-col gap-2 shadow-[3px_3px_0_0_#0B0B0A]">
+          <div className="p-5 rounded-dezo-md bg-dezo-bg-warm border border-dezo-border max-w-md w-full font-mono text-xs text-left flex flex-col gap-2 shadow-dezo-card">
             <div className="text-dezo-ink font-bold uppercase tracking-wider border-b border-dezo-ink/10 pb-1">Scoring Telemetry:</div>
             <div>Commercial Intent: {result.scoringBreakdown.intent}/30</div>
             <div>Budget Alignment: {result.scoringBreakdown.budgetFit}/30</div>
@@ -170,10 +170,10 @@ export function DezoQualificationFunnel() {
                     key={type}
                     type="button"
                     onClick={() => setBusinessType(type)}
-                    className={`p-4 rounded-none text-left font-mono font-bold text-xs uppercase tracking-wider border-2 border-dezo-ink transition-all cursor-pointer ${
+                    className={`p-4 rounded-dezo-md text-left font-mono font-bold text-xs uppercase tracking-wider border border-dezo-border transition-all cursor-pointer ${
                       businessType === type
-                        ? 'bg-dezo-ink text-white shadow-[3px_3px_0_0_#B08D57] -translate-x-0.5 -translate-y-0.5'
-                        : 'bg-white hover:bg-dezo-bg-warm text-dezo-ink shadow-[2px_2px_0_0_#0B0B0A] hover:shadow-[3px_3px_0_0_#B08D57]'
+                        ? 'bg-dezo-ink text-white shadow-dezo-card -translate-y-0.5'
+                        : 'bg-white hover:bg-dezo-bg-warm text-dezo-ink shadow-xs hover:shadow-dezo-card'
                     }`}
                   >
                     {type}
@@ -215,9 +215,9 @@ export function DezoQualificationFunnel() {
                       key={ch}
                       type="button"
                       onClick={() => toggleItem(channelsActive, setChannelsActive, ch)}
-                      className={`px-3.5 py-2 rounded-none font-mono text-xs font-bold uppercase tracking-wider border-2 border-dezo-ink cursor-pointer transition-all ${
+                      className={`px-3.5 py-2 rounded-dezo-md font-mono text-xs font-bold uppercase tracking-wider border border-dezo-border cursor-pointer transition-all ${
                         channelsActive.includes(ch)
-                          ? 'bg-dezo-ink text-white shadow-[2px_2px_0_0_#B08D57]'
+                          ? 'bg-dezo-ink text-white shadow-xs'
                           : 'bg-white hover:bg-dezo-bg-warm text-dezo-ink'
                       }`}
                     >
@@ -244,10 +244,10 @@ export function DezoQualificationFunnel() {
                       key={pil}
                       type="button"
                       onClick={() => toggleItem(pillarsNeeded, setPillarsNeeded, pil)}
-                      className={`p-3.5 rounded-none text-left font-mono text-xs font-bold uppercase tracking-wider border-2 border-dezo-ink cursor-pointer transition-all ${
+                      className={`p-3.5 rounded-dezo-md text-left font-mono text-xs font-bold uppercase tracking-wider border border-dezo-border cursor-pointer transition-all ${
                         pillarsNeeded.includes(pil)
-                          ? 'bg-dezo-ink text-white shadow-[3px_3px_0_0_#B08D57] -translate-x-0.5'
-                          : 'bg-white hover:bg-dezo-bg-warm text-dezo-ink shadow-[2px_2px_0_0_#0B0B0A]'
+                          ? 'bg-dezo-ink text-white shadow-dezo-card -translate-x-0.5'
+                          : 'bg-white hover:bg-dezo-bg-warm text-dezo-ink shadow-xs'
                       }`}
                     >
                       {pil}
@@ -291,7 +291,7 @@ export function DezoQualificationFunnel() {
                   <select
                     value={currentTurnover}
                     onChange={(e) => setCurrentTurnover(e.target.value as any)}
-                    className="w-full bg-white border-2 border-dezo-ink rounded-none p-3 font-mono text-xs text-dezo-text-primary focus:outline-none shadow-[2px_2px_0_0_#0B0B0A]"
+                    className="w-full bg-white border border-dezo-border rounded-dezo-md p-3 font-mono text-xs text-dezo-text-primary focus:outline-none shadow-xs"
                   >
                     <option value="Student / Pre-revenue">Student / Pre-revenue / Side Hustle</option>
                     <option value="Under ₹1L/mo">Under ₹1 Lakh / month (Local Shop / Small Business)</option>
@@ -308,7 +308,7 @@ export function DezoQualificationFunnel() {
                   <select
                     value={timeline}
                     onChange={(e) => setTimeline(e.target.value as any)}
-                    className="w-full bg-white border-2 border-dezo-ink rounded-none p-3 font-mono text-xs text-dezo-text-primary focus:outline-none shadow-[2px_2px_0_0_#0B0B0A]"
+                    className="w-full bg-white border border-dezo-border rounded-dezo-md p-3 font-mono text-xs text-dezo-text-primary focus:outline-none shadow-xs"
                   >
                     <option value="Immediate (1-2 weeks)">Immediate (1-2 weeks)</option>
                     <option value="Within 1 month">Within 1 month</option>
@@ -328,10 +328,10 @@ export function DezoQualificationFunnel() {
                       key={b}
                       type="button"
                       onClick={() => setBudgetTier(b as any)}
-                      className={`p-3 rounded-none text-left font-mono font-bold text-xs uppercase tracking-wider border-2 border-dezo-ink cursor-pointer transition-all ${
+                      className={`p-3 rounded-dezo-md text-left font-mono font-bold text-xs uppercase tracking-wider border border-dezo-border cursor-pointer transition-all ${
                         budgetTier === b
-                          ? 'bg-dezo-ink text-white shadow-[3px_3px_0_0_#B08D57] -translate-x-0.5'
-                          : 'bg-white hover:bg-dezo-bg-warm text-dezo-ink shadow-[2px_2px_0_0_#0B0B0A]'
+                          ? 'bg-dezo-ink text-white shadow-dezo-card -translate-x-0.5'
+                          : 'bg-white hover:bg-dezo-bg-warm text-dezo-ink shadow-xs'
                       }`}
                     >
                       {b}
@@ -370,7 +370,7 @@ export function DezoQualificationFunnel() {
                   placeholder="Your Name *"
                   value={contactData.name}
                   onChange={(e) => setContactData({ ...contactData, name: e.target.value })}
-                  className="bg-white border-2 border-dezo-ink rounded-none p-3 font-mono text-xs text-dezo-text-primary focus:border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] focus:outline-none transition-all"
+                  className="bg-white border border-dezo-border rounded-dezo-md p-3 font-mono text-xs text-dezo-text-primary focus:border-dezo-ink shadow-xs focus:shadow-dezo-card focus:outline-none transition-all"
                 />
                 <input
                   type="tel"
@@ -378,7 +378,7 @@ export function DezoQualificationFunnel() {
                   placeholder="Phone / WhatsApp Number *"
                   value={contactData.phone}
                   onChange={(e) => setContactData({ ...contactData, phone: e.target.value })}
-                  className="bg-white border-2 border-dezo-ink rounded-none p-3 font-mono text-xs text-dezo-text-primary focus:border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] focus:outline-none transition-all"
+                  className="bg-white border border-dezo-border rounded-dezo-md p-3 font-mono text-xs text-dezo-text-primary focus:border-dezo-ink shadow-xs focus:shadow-dezo-card focus:outline-none transition-all"
                 />
               </div>
 
@@ -389,14 +389,14 @@ export function DezoQualificationFunnel() {
                   placeholder="Official Email *"
                   value={contactData.email}
                   onChange={(e) => setContactData({ ...contactData, email: e.target.value })}
-                  className="bg-white border-2 border-dezo-ink rounded-none p-3 font-mono text-xs text-dezo-text-primary focus:border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] focus:outline-none transition-all"
+                  className="bg-white border border-dezo-border rounded-dezo-md p-3 font-mono text-xs text-dezo-text-primary focus:border-dezo-ink shadow-xs focus:shadow-dezo-card focus:outline-none transition-all"
                 />
                 <input
                   type="text"
                   placeholder="Business / Brand Name"
                   value={contactData.businessName}
                   onChange={(e) => setContactData({ ...contactData, businessName: e.target.value })}
-                  className="bg-white border-2 border-dezo-ink rounded-none p-3 font-mono text-xs text-dezo-text-primary focus:border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] focus:outline-none transition-all"
+                  className="bg-white border border-dezo-border rounded-dezo-md p-3 font-mono text-xs text-dezo-text-primary focus:border-dezo-ink shadow-xs focus:shadow-dezo-card focus:outline-none transition-all"
                 />
               </div>
 
@@ -406,7 +406,7 @@ export function DezoQualificationFunnel() {
                 placeholder="Briefly describe your current primary business bottleneck or milestone goal *"
                 value={contactData.projectGoals}
                 onChange={(e) => setContactData({ ...contactData, projectGoals: e.target.value })}
-                className="bg-white border-2 border-dezo-ink rounded-none p-3 font-mono text-xs text-dezo-text-primary focus:border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] focus:outline-none resize-none transition-all"
+                className="bg-white border border-dezo-border rounded-dezo-md p-3 font-mono text-xs text-dezo-text-primary focus:border-dezo-ink shadow-xs focus:shadow-dezo-card focus:outline-none resize-none transition-all"
               />
 
               <div className="flex justify-between pt-4">

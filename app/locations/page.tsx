@@ -69,7 +69,7 @@ export default function LocationsIndexPage() {
             {ODISHA_LOCATIONS.map((loc) => (
               <div
                 key={loc.slug}
-                className="group relative flex flex-col justify-between bg-dezo-bg-warm border-2 border-dezo-ink p-7 shadow-[4px_4px_0_0_#0B0B0A] hover:shadow-[6px_6px_0_0_#B08D57] transition-all"
+                className="group relative flex flex-col justify-between bg-dezo-bg-warm border border-dezo-border p-7 shadow-dezo-card hover:shadow-dezo-soft transition-all"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3 pb-2 border-b border-dezo-border">
@@ -141,7 +141,7 @@ export default function LocationsIndexPage() {
             </div>
             <Link
               href="/start-a-project"
-              className="px-8 py-4 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold border-2 border-white hover:bg-white transition-all shadow-[4px_4px_0_0_#FFFFFF] inline-flex items-center gap-2"
+              className="px-8 py-4 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold border border-white/80 hover:bg-white transition-all shadow-dezo-soft inline-flex items-center gap-2"
             >
               Consult With Our Team <ArrowRight size={16} />
             </Link>

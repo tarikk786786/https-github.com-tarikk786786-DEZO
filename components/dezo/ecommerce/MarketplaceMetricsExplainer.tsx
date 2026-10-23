@@ -25,7 +25,7 @@ export function MarketplaceMetricsExplainer() {
   const calculatedROAS = (100 / adSpendPercent).toFixed(1);
 
   return (
-    <div className="w-full bg-dezo-bg border-2 border-dezo-ink p-6 sm:p-10 shadow-[4px_4px_0_0_#0B0B0A]">
+    <div className="w-full bg-dezo-bg border border-dezo-border p-6 sm:p-10 shadow-dezo-card">
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b-2 border-dezo-ink">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-dezo-primary/20 border border-dezo-ink text-xs font-mono uppercase tracking-wider text-dezo-ink mb-3 font-bold">
@@ -47,7 +47,7 @@ export function MarketplaceMetricsExplainer() {
 
       {/* Core Definitions Bar */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
-        <div className="bg-dezo-bg-warm border-2 border-dezo-ink p-5 shadow-[2px_2px_0_0_#0B0B0A]">
+        <div className="bg-dezo-bg-warm border border-dezo-border p-5 shadow-xs">
           <span className="font-mono text-xs font-bold text-dezo-primary block mb-1">
             ACoS (Advertising Cost of Sale)
           </span>
@@ -59,7 +59,7 @@ export function MarketplaceMetricsExplainer() {
           </p>
         </div>
 
-        <div className="bg-dezo-bg-warm border-2 border-dezo-ink p-5 shadow-[2px_2px_0_0_#0B0B0A]">
+        <div className="bg-dezo-bg-warm border border-dezo-border p-5 shadow-xs">
           <span className="font-mono text-xs font-bold text-dezo-primary block mb-1">
             ROAS (Return on Ad Spend)
           </span>
@@ -71,7 +71,7 @@ export function MarketplaceMetricsExplainer() {
           </p>
         </div>
 
-        <div className="bg-dezo-bg-warm border-2 border-dezo-ink p-5 shadow-[2px_2px_0_0_#0B0B0A]">
+        <div className="bg-dezo-bg-warm border border-dezo-border p-5 shadow-xs">
           <span className="font-mono text-xs font-bold text-dezo-primary block mb-1">
             TACoS (Total ACoS — The Real North Star)
           </span>
@@ -85,7 +85,7 @@ export function MarketplaceMetricsExplainer() {
       </div>
 
       {/* Interactive Unit Economics Calculator */}
-      <div className="bg-dezo-bg-warm border-2 border-dezo-ink p-6 sm:p-8 shadow-[3px_3px_0_0_#0B0B0A]">
+      <div className="bg-dezo-bg-warm border border-dezo-border p-6 sm:p-8 shadow-dezo-card">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-dezo-ink/15 mb-6">
           <h4 className="font-display text-xl sm:text-2xl font-bold uppercase text-dezo-ink">
             Interactive Unit Economics Simulator
@@ -192,7 +192,7 @@ export function MarketplaceMetricsExplainer() {
 
           {/* Real Margin Output Card */}
           <div className="lg:col-span-5">
-            <div className="bg-dezo-ink text-dezo-bg p-6 border-2 border-dezo-ink h-full flex flex-col justify-between">
+            <div className="bg-dezo-ink text-dezo-bg p-6 border border-dezo-border h-full flex flex-col justify-between">
               <div>
                 <span className="font-mono text-xs uppercase tracking-wider text-dezo-primary block mb-3 font-bold">
                   Unit Margin Breakdown

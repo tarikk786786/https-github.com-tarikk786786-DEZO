@@ -88,7 +88,7 @@ export default function ServicesPage() {
             </div>
             <Link
               href="/start-a-project"
-              className="px-8 py-4 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold border-2 border-white hover:bg-white transition-all shadow-[4px_4px_0_0_#FFFFFF] inline-flex items-center gap-2"
+              className="px-8 py-4 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold border border-white/80 hover:bg-white transition-all shadow-dezo-soft inline-flex items-center gap-2"
             >
               Build My Growth Plan <ArrowRight size={16} />
             </Link>

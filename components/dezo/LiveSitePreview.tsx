@@ -86,7 +86,7 @@ export function LiveSitePreview({
               <img
                 src={faviconUrl}
                 alt=""
-                className="w-5 h-5 object-contain rounded-none border border-dezo-ink/20"
+                className="w-5 h-5 object-contain rounded-dezo-md border border-dezo-ink/20"
                 onError={() => setFaviconFailed(true)}
               />
             ) : (
@@ -107,7 +107,7 @@ export function LiveSitePreview({
 
         {/* Center UI Showcase Mockup */}
         <div className="relative z-10 my-auto py-4 text-center flex flex-col items-center">
-          <div className="w-12 h-12 bg-white border-2 border-dezo-ink flex items-center justify-center mb-2.5 shadow-[3px_3px_0_0_#B08D57]">
+          <div className="w-12 h-12 bg-white border border-dezo-border flex items-center justify-center mb-2.5 shadow-dezo-card">
             {!faviconFailed ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img

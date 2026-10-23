@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 export function MarketplaceEngagementModels() {
   return (
-    <div className="w-full bg-dezo-bg-warm border-2 border-dezo-ink p-6 sm:p-10 shadow-[4px_4px_0_0_#0B0B0A]">
+    <div className="w-full bg-dezo-bg-warm border border-dezo-border p-6 sm:p-10 shadow-dezo-card">
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b-2 border-dezo-ink">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-dezo-primary/20 border border-dezo-ink text-xs font-mono uppercase tracking-wider text-dezo-ink mb-3 font-bold">
@@ -31,7 +31,7 @@ export function MarketplaceEngagementModels() {
         {MARKETPLACE_ENGAGEMENT_TIERS.map((tier) => (
           <div
             key={tier.id}
-            className="bg-dezo-bg border-2 border-dezo-ink p-6 shadow-[3px_3px_0_0_#0B0B0A] flex flex-col justify-between"
+            className="bg-dezo-bg border border-dezo-border p-6 shadow-dezo-card flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between gap-2 mb-3">
@@ -82,7 +82,7 @@ export function MarketplaceEngagementModels() {
       </div>
 
       {/* Commercial Accountability Footer */}
-      <div className="p-5 bg-dezo-ink text-dezo-bg border-2 border-dezo-ink flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="p-5 bg-dezo-ink text-dezo-bg border border-dezo-border flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-start gap-3">
           <FileText size={18} className="text-dezo-primary shrink-0 mt-0.5" />
           <p className="text-xs font-mono text-gray-300 leading-relaxed">

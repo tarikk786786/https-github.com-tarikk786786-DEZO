@@ -172,7 +172,7 @@ export function EcommerceServiceSelector() {
   ]);
 
   return (
-    <div className="w-full bg-dezo-bg border-2 border-dezo-ink p-6 sm:p-10 shadow-[4px_4px_0_0_#0B0B0A]" id="growth-selector">
+    <div className="w-full bg-dezo-bg border border-dezo-border p-6 sm:p-10 shadow-dezo-card" id="growth-selector">
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b-2 border-dezo-ink">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-dezo-primary/20 border border-dezo-ink text-xs font-mono uppercase tracking-wider text-dezo-ink mb-3 font-bold">
@@ -238,7 +238,7 @@ export function EcommerceServiceSelector() {
                   onClick={() => setSellingStatus(opt.id as any)}
                   className={`p-4 text-left border-2 transition-all cursor-pointer ${
                     sellingStatus === opt.id
-                      ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[2px_2px_0_0_#B08D57]'
+                      ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-xs'
                       : 'bg-dezo-bg-warm text-dezo-ink border-dezo-ink/40 hover:border-dezo-ink'
                   }`}
                 >
@@ -257,7 +257,7 @@ export function EcommerceServiceSelector() {
               <select
                 value={amazonStatus}
                 onChange={(e) => setAmazonStatus(e.target.value as any)}
-                className="w-full p-3 bg-dezo-bg-warm border-2 border-dezo-ink font-mono text-xs text-dezo-ink cursor-pointer"
+                className="w-full p-3 bg-dezo-bg-warm border border-dezo-border font-mono text-xs text-dezo-ink cursor-pointer"
               >
                 <option value="active">Active Seller (Have listings live)</option>
                 <option value="launch-soon">Planning to launch on Amazon soon</option>
@@ -272,7 +272,7 @@ export function EcommerceServiceSelector() {
               <select
                 value={flipkartStatus}
                 onChange={(e) => setFlipkartStatus(e.target.value as any)}
-                className="w-full p-3 bg-dezo-bg-warm border-2 border-dezo-ink font-mono text-xs text-dezo-ink cursor-pointer"
+                className="w-full p-3 bg-dezo-bg-warm border border-dezo-border font-mono text-xs text-dezo-ink cursor-pointer"
               >
                 <option value="launch-soon">Planning to onboard on Flipkart</option>
                 <option value="active">Active Seller on Flipkart Seller Hub</option>
@@ -298,7 +298,7 @@ export function EcommerceServiceSelector() {
                   onClick={() => setNeedWebsite(plat.id as any)}
                   className={`p-3 text-center border-2 transition-all cursor-pointer text-xs font-mono font-bold ${
                     needWebsite === plat.id
-                      ? 'bg-dezo-primary text-dezo-ink border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A]'
+                      ? 'bg-dezo-primary text-dezo-ink border-dezo-ink shadow-xs'
                       : 'bg-dezo-bg-warm text-dezo-text-secondary border-dezo-border hover:border-dezo-ink'
                   }`}
                 >
@@ -330,7 +330,7 @@ export function EcommerceServiceSelector() {
             <select
               value={productCategory}
               onChange={(e) => setProductCategory(e.target.value)}
-              className="w-full p-3 bg-dezo-bg-warm border-2 border-dezo-ink font-mono text-xs text-dezo-ink cursor-pointer"
+              className="w-full p-3 bg-dezo-bg-warm border border-dezo-border font-mono text-xs text-dezo-ink cursor-pointer"
             >
               <option value="Handloom, Sarees & Ethnic Textiles">Handloom, Sarees & Ethnic Textiles (Sambalpuri, Silk, Cotton)</option>
               <option value="Beauty, Personal Care & Cosmetics">Beauty, Personal Care & Cosmetics (Herbal, Skin, Hair)</option>
@@ -355,7 +355,7 @@ export function EcommerceServiceSelector() {
                   onClick={() => setSkuCount(sku)}
                   className={`p-3 text-center border-2 transition-all cursor-pointer text-xs font-mono font-bold ${
                     skuCount === sku
-                      ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[2px_2px_0_0_#B08D57]'
+                      ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-xs'
                       : 'bg-dezo-bg-warm text-dezo-text-secondary border-dezo-border hover:border-dezo-ink'
                   }`}
                 >
@@ -381,7 +381,7 @@ export function EcommerceServiceSelector() {
                   onClick={() => setAdsExperience(opt.id as any)}
                   className={`p-4 text-left border-2 transition-all cursor-pointer ${
                     adsExperience === opt.id
-                      ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[2px_2px_0_0_#B08D57]'
+                      ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-xs'
                       : 'bg-dezo-bg-warm text-dezo-ink border-dezo-ink/40 hover:border-dezo-ink'
                   }`}
                 >
@@ -432,7 +432,7 @@ export function EcommerceServiceSelector() {
                   onClick={() => setPrimaryGoal(g.id as any)}
                   className={`p-3.5 text-left border-2 transition-all cursor-pointer ${
                     primaryGoal === g.id
-                      ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[2px_2px_0_0_#B08D57]'
+                      ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-xs'
                       : 'bg-dezo-bg-warm text-dezo-ink border-dezo-ink/40 hover:border-dezo-ink'
                   }`}
                 >
@@ -450,7 +450,7 @@ export function EcommerceServiceSelector() {
             <select
               value={mainChallenge}
               onChange={(e) => setMainChallenge(e.target.value)}
-              className="w-full p-3 bg-dezo-bg-warm border-2 border-dezo-ink font-mono text-xs text-dezo-ink cursor-pointer"
+              className="w-full p-3 bg-dezo-bg-warm border border-dezo-border font-mono text-xs text-dezo-ink cursor-pointer"
             >
               <option value="High ACoS and bleeding advertising spend">High ACoS and bleeding advertising spend</option>
               <option value="Low search impressions and poor organic keyword rank">Low search impressions and poor organic keyword rank</option>
@@ -469,7 +469,7 @@ export function EcommerceServiceSelector() {
               <select
                 value={engagementType}
                 onChange={(e) => setEngagementType(e.target.value as any)}
-                className="w-full p-3 bg-dezo-bg-warm border-2 border-dezo-ink font-mono text-xs text-dezo-ink cursor-pointer"
+                className="w-full p-3 bg-dezo-bg-warm border border-dezo-border font-mono text-xs text-dezo-ink cursor-pointer"
               >
                 <option value="monthly-management">Monthly Ongoing Growth Retainer</option>
                 <option value="one-time-audit">One-Time Forensic Audit & Diagnostic</option>
@@ -485,7 +485,7 @@ export function EcommerceServiceSelector() {
               <select
                 value={approxBudget}
                 onChange={(e) => setApproxBudget(e.target.value)}
-                className="w-full p-3 bg-dezo-bg-warm border-2 border-dezo-ink font-mono text-xs text-dezo-ink cursor-pointer"
+                className="w-full p-3 bg-dezo-bg-warm border border-dezo-border font-mono text-xs text-dezo-ink cursor-pointer"
               >
                 <option value="₹25,000 - ₹50,000 / month">₹25,000 - ₹50,000 / month</option>
                 <option value="₹50,000 - ₹1,00,000 / month">₹50,000 - ₹1,00,000 / month</option>
@@ -506,7 +506,7 @@ export function EcommerceServiceSelector() {
             <button
               type="button"
               onClick={() => setStep(4)}
-              className="px-6 py-3 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold hover:bg-white transition-all flex items-center gap-2 border-2 border-dezo-ink cursor-pointer shadow-[3px_3px_0_0_#0B0B0A]"
+              className="px-6 py-3 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold hover:bg-white transition-all flex items-center gap-2 border border-dezo-border cursor-pointer shadow-dezo-card"
             >
               Generate Tailored Blueprint <Sparkles size={14} />
             </button>
@@ -517,7 +517,7 @@ export function EcommerceServiceSelector() {
       {/* STEP 4: Output Blueprint */}
       {step === 4 && (
         <div className="space-y-8 py-4">
-          <div className="bg-dezo-bg-warm border-2 border-dezo-ink p-6 sm:p-8 shadow-[3px_3px_0_0_#0B0B0A]">
+          <div className="bg-dezo-bg-warm border border-dezo-border p-6 sm:p-8 shadow-dezo-card">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-dezo-ink/15">
               <div>
                 <span className="px-2.5 py-0.5 bg-dezo-primary/20 border border-dezo-ink text-[11px] font-mono uppercase tracking-wider text-dezo-ink font-bold">
@@ -543,7 +543,7 @@ export function EcommerceServiceSelector() {
               </span>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {recommendation.recommendedServices.map((srv, idx) => (
-                  <div key={idx} className="bg-dezo-bg border-2 border-dezo-ink p-5 shadow-[2px_2px_0_0_#0B0B0A]">
+                  <div key={idx} className="bg-dezo-bg border border-dezo-border p-5 shadow-xs">
                     <h5 className="font-display text-lg font-bold uppercase text-dezo-ink mb-1">
                       {srv.name}
                     </h5>
@@ -575,7 +575,7 @@ export function EcommerceServiceSelector() {
           </div>
 
           {/* Action Box: Direct WhatsApp or Intake Submission */}
-          <div className="bg-dezo-ink text-dezo-bg border-2 border-dezo-ink p-6 sm:p-8 shadow-[4px_4px_0_0_#B08D57]">
+          <div className="bg-dezo-ink text-dezo-bg border border-dezo-border p-6 sm:p-8 shadow-dezo-card">
             <div className="max-w-2xl">
               <span className="font-mono text-xs uppercase tracking-wider text-dezo-primary block mb-2 font-bold">
                 Next Step: Lock in Your Scope
@@ -622,7 +622,7 @@ export function EcommerceServiceSelector() {
                   href={`https://wa.me/919114411026?text=${whatsappMessage}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 bg-[#25D366] text-black text-xs font-mono uppercase tracking-wider font-bold hover:bg-white transition-all flex items-center justify-center gap-2 border border-black shadow-[2px_2px_0_0_#FFFFFF]"
+                  className="px-6 py-3 bg-[#25D366] text-black text-xs font-mono uppercase tracking-wider font-bold hover:bg-white transition-all flex items-center justify-center gap-2 border border-black shadow-xs"
                 >
                   <MessageSquare size={14} /> Send Blueprint via WhatsApp →
                 </a>

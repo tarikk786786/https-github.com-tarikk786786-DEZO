@@ -36,7 +36,7 @@ export function CareerTrackExplorer() {
               onClick={() => setSelectedTrackId(track.id)}
               className={`px-3.5 py-2 text-xs font-mono transition-all border-2 flex items-center gap-1.5 ${
                 active
-                  ? 'bg-dezo-ink text-dezo-bg border-dezo-ink font-bold shadow-[3px_3px_0_0_#B08D57] -translate-y-0.5'
+                  ? 'bg-dezo-ink text-dezo-bg border-dezo-ink font-bold shadow-dezo-card -translate-y-0.5'
                   : 'bg-dezo-bg text-dezo-text-secondary border-dezo-border hover:border-dezo-ink'
               }`}
             >
@@ -58,7 +58,7 @@ export function CareerTrackExplorer() {
       </div>
 
       {/* Active Track Highlighted Card */}
-      <div className="bg-dezo-bg border-2 border-dezo-ink p-7 sm:p-10 shadow-[6px_6px_0_0_#0B0B0A]">
+      <div className="bg-dezo-bg border border-dezo-border p-7 sm:p-10 shadow-dezo-soft">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 mb-8 border-b-2 border-dezo-ink">
           <div>
             <div className="flex items-center gap-2 mb-2">
@@ -81,7 +81,7 @@ export function CareerTrackExplorer() {
             href={generateCareersWhatsAppUrl(selectedTrack.name)}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3.5 bg-emerald-600 text-white font-mono text-xs uppercase tracking-wider font-bold border-2 border-dezo-ink hover:bg-emerald-700 transition-all shadow-[4px_4px_0_0_#0B0B0A] inline-flex items-center gap-2 shrink-0 self-start lg:self-auto"
+            className="px-6 py-3.5 bg-emerald-600 text-white font-mono text-xs uppercase tracking-wider font-bold border border-dezo-border hover:bg-emerald-700 transition-all shadow-dezo-card inline-flex items-center gap-2 shrink-0 self-start lg:self-auto"
           >
             Apply for this Track on WhatsApp <ExternalLink size={14} />
           </a>
@@ -124,7 +124,7 @@ export function CareerTrackExplorer() {
 
           {/* Right 6 cols: Requirements, Tools & Progression */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="bg-dezo-bg-warm p-6 border-2 border-dezo-ink">
+            <div className="bg-dezo-bg-warm p-6 border border-dezo-border">
               <h4 className="font-mono text-xs uppercase tracking-wider text-dezo-primary font-bold mb-3">
                 Basic Requirements for this Track:
               </h4>

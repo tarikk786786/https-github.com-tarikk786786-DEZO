@@ -161,7 +161,7 @@ export function DezoHeroGrowthConsole() {
 
   return (
     <div
-      className="w-full max-w-xl bg-[#0E0E0D] border-2 border-dezo-primary/80 text-white rounded-none shadow-[6px_6px_0_0_#B08D57] sm:shadow-[8px_8px_0_0_#B08D57] transition-all relative overflow-hidden"
+      className="w-full max-w-xl bg-[#0E0E0D] border border-dezo-primary/80 text-white rounded-dezo-md shadow-dezo-soft sm:shadow-dezo-soft transition-all relative overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       role="region"
@@ -171,9 +171,9 @@ export function DezoHeroGrowthConsole() {
       <div className="px-3.5 sm:px-5 py-2.5 sm:py-3 border-b-2 border-dezo-ink/80 bg-[#161615] flex items-center justify-between">
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="flex items-center gap-1.5" aria-hidden="true">
-            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-dezo-primary rounded-none inline-block" />
-            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/40 rounded-none inline-block" />
-            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/20 rounded-none inline-block" />
+            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-dezo-primary rounded-dezo-md inline-block" />
+            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/40 rounded-dezo-md inline-block" />
+            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/20 rounded-dezo-md inline-block" />
           </div>
           <span className="font-mono text-[9px] sm:text-[11px] font-bold uppercase tracking-wider text-white/90">
             DEZO LAB // GROWTH CAPABILITY CONSOLE
@@ -181,7 +181,7 @@ export function DezoHeroGrowthConsole() {
         </div>
 
         <div className="flex items-center gap-1.5 sm:gap-2">
-          <span className="w-2 h-2 bg-emerald-400 rounded-none animate-ping" />
+          <span className="w-2 h-2 bg-emerald-400 rounded-dezo-md animate-ping" />
           <span className="font-mono text-[8px] sm:text-[10px] font-bold text-emerald-400 uppercase tracking-widest">
             181+ SITES LIVE
           </span>
@@ -265,7 +265,7 @@ export function DezoHeroGrowthConsole() {
                   </p>
                 </div>
 
-                <div className="sm:col-span-4 bg-[#181816] border-2 border-dezo-primary/40 p-2 sm:p-3 text-left sm:text-right shadow-[2px_2px_0_0_#B08D57]">
+                <div className="sm:col-span-4 bg-[#181816] border border-dezo-primary/40 p-2 sm:p-3 text-left sm:text-right shadow-xs">
                   <span className="block font-mono text-[8px] sm:text-[9px] uppercase text-white/50 tracking-wider">
                     {current.metricLabel}
                   </span>
@@ -311,7 +311,7 @@ export function DezoHeroGrowthConsole() {
 
                 <Link
                   href={current.ctaHref}
-                  className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:px-4 sm:py-2.5 bg-dezo-primary text-dezo-ink font-mono text-[11px] sm:text-xs uppercase tracking-wider font-bold hover:bg-white transition-colors border border-dezo-primary shadow-[2px_2px_0_0_#FFFFFF] active:translate-x-[1px] active:translate-y-[1px]"
+                  className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:px-4 sm:py-2.5 bg-dezo-primary text-dezo-ink font-mono text-[11px] sm:text-xs uppercase tracking-wider font-bold hover:bg-white transition-colors border border-dezo-primary shadow-xs active:scale-[0.99]"
                 >
                   <span>{current.ctaLabel}</span>
                   <ArrowRight size={12} />

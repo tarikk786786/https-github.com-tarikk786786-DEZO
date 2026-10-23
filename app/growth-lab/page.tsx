@@ -74,12 +74,12 @@ export default function DezoLabPage() {
 
               {/* 2. URL Technical Deep-Scan Engine */}
               <DezoReveal delay={0.08}>
-                <div className="border-2 border-dezo-ink bg-white p-6 sm:p-8 shadow-[6px_6px_0_0_#0B0B0A]">
+                <div className="border border-dezo-border bg-white rounded-dezo-lg p-6 sm:p-8 shadow-dezo-card">
                   <div className="mb-5 pb-4 border-b border-dezo-border">
-                    <span className="font-mono text-xs uppercase tracking-wider text-dezo-gold font-bold">
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary">
                       Technical Deep-Scan Engine
                     </span>
-                    <h2 className="font-mono text-lg font-bold text-dezo-ink mt-0.5">
+                    <h2 className="font-display text-xl sm:text-2xl text-dezo-ink mt-1">
                       Live URL Diagnostics: SEO, Speed, Security & CRO Audit
                     </h2>
                   </div>

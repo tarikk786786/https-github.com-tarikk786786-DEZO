@@ -10,7 +10,7 @@ export function CustomBudgetSelector() {
   const current = BUDGET_BANDS[selectedBandIndex];
 
   return (
-    <div className="w-full bg-dezo-bg border-2 border-dezo-ink p-6 sm:p-10 shadow-[6px_6px_0_0_#0B0B0A]" id="budget-bands">
+    <div className="w-full bg-dezo-bg border border-dezo-border p-6 sm:p-10 shadow-dezo-soft" id="budget-bands">
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b-2 border-dezo-ink">
         <div>
@@ -40,7 +40,7 @@ export function CustomBudgetSelector() {
               onClick={() => setSelectedBandIndex(idx)}
               className={`p-3.5 text-center border-2 transition-all cursor-pointer ${
                 isSelected
-                  ? 'bg-dezo-ink text-dezo-bg border-dezo-ink font-bold shadow-[3px_3px_0_0_#B08D57]'
+                  ? 'bg-dezo-ink text-dezo-bg border-dezo-ink font-bold shadow-dezo-card'
                   : 'bg-dezo-bg-warm text-dezo-ink border-dezo-border hover:border-dezo-ink hover:bg-white'
               }`}
             >
@@ -56,7 +56,7 @@ export function CustomBudgetSelector() {
       </div>
 
       {/* Selected Band Detail Card */}
-      <div className="bg-dezo-bg-warm border-2 border-dezo-ink p-6 sm:p-8 shadow-[4px_4px_0_0_#0B0B0A]">
+      <div className="bg-dezo-bg-warm border border-dezo-border p-6 sm:p-8 shadow-dezo-card">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-dezo-ink/15">
           <div>
             <span className="font-mono text-xs uppercase tracking-wider text-dezo-primary font-bold">
@@ -93,7 +93,7 @@ export function CustomBudgetSelector() {
 
           {/* Phased Roadmap & Action (Right 5) */}
           <div className="lg:col-span-5 flex flex-col justify-between">
-            <div className="bg-dezo-ink text-dezo-bg p-5 border-2 border-dezo-ink mb-4">
+            <div className="bg-dezo-ink text-dezo-bg p-5 border border-dezo-border mb-4">
               <span className="font-mono text-xs uppercase tracking-wider text-dezo-primary font-bold block mb-2">
                 Recommended Phased Roadmap:
               </span>
@@ -104,7 +104,7 @@ export function CustomBudgetSelector() {
 
             <Link
               href={`/start-a-project?budget=${encodeURIComponent(current.rangeLabel)}&build=${encodeURIComponent(current.recommendedBuild)}`}
-              className="w-full py-3 px-4 bg-dezo-primary text-dezo-ink text-xs font-mono uppercase tracking-wider font-bold hover:bg-white transition-colors flex items-center justify-center gap-2 border-2 border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A]"
+              className="w-full py-3 px-4 bg-dezo-primary text-dezo-ink text-xs font-mono uppercase tracking-wider font-bold hover:bg-white transition-colors flex items-center justify-center gap-2 border border-dezo-border shadow-xs"
             >
               Build in {current.rangeLabel} Scope <ArrowRight size={14} />
             </Link>

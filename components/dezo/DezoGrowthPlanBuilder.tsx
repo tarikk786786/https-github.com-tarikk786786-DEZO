@@ -297,7 +297,7 @@ export function DezoGrowthPlanBuilder() {
   };
 
   return (
-    <div className="w-full bg-dezo-bg-warm border-2 border-dezo-ink p-6 sm:p-10 shadow-[6px_6px_0_0_#0B0B0A]">
+    <div className="w-full bg-dezo-bg-warm border border-dezo-border p-6 sm:p-10 shadow-dezo-soft">
       {/* Top Stepper Indicator */}
       <div className="flex items-center justify-between pb-6 mb-8 border-b-2 border-dezo-ink">
         <div className="flex items-center gap-2">
@@ -334,7 +334,7 @@ export function DezoGrowthPlanBuilder() {
               <select
                 value={businessType}
                 onChange={(e) => setBusinessType(e.target.value)}
-                className="w-full px-4 py-3 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                className="w-full px-4 py-3 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
               >
                 <option value="Local Retailer / Store">Local Retailer / Physical Store</option>
                 <option value="eCommerce & D2C Brand">eCommerce & D2C Brand</option>
@@ -360,7 +360,7 @@ export function DezoGrowthPlanBuilder() {
               <select
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="w-full px-4 py-3 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                className="w-full px-4 py-3 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
               >
                 <option value="Bhubaneswar">Bhubaneswar, Odisha</option>
                 <option value="Cuttack">Cuttack, Odisha</option>
@@ -384,7 +384,7 @@ export function DezoGrowthPlanBuilder() {
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
                 placeholder="e.g., Acme Retail or Odisha Crafts"
-                className="w-full px-4 py-3 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                className="w-full px-4 py-3 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
               />
             </div>
 
@@ -397,7 +397,7 @@ export function DezoGrowthPlanBuilder() {
                 value={websiteUrl}
                 onChange={(e) => setWebsiteUrl(e.target.value)}
                 placeholder="https://example.com"
-                className="w-full px-4 py-3 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                className="w-full px-4 py-3 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
               />
             </div>
           </div>
@@ -406,7 +406,7 @@ export function DezoGrowthPlanBuilder() {
             <button
               type="button"
               onClick={() => setStep(2)}
-              className="px-8 py-3.5 bg-dezo-ink text-dezo-bg font-mono text-xs uppercase tracking-wider font-bold border-2 border-dezo-ink hover:bg-dezo-primary hover:text-dezo-ink transition-all shadow-[4px_4px_0_0_#B08D57] inline-flex items-center gap-2"
+              className="px-8 py-3.5 bg-dezo-ink text-dezo-bg font-mono text-xs uppercase tracking-wider font-bold border border-dezo-border hover:bg-dezo-primary hover:text-dezo-ink transition-all shadow-dezo-card inline-flex items-center gap-2"
             >
               Next: Select Primary Goal <ArrowRight size={14} />
             </button>
@@ -436,7 +436,7 @@ export function DezoGrowthPlanBuilder() {
                   onClick={() => setPrimaryGoal(g.id as GrowthGoal)}
                   className={`p-4 text-left border-2 transition-all flex flex-col justify-between ${
                     active
-                      ? 'bg-dezo-primary/20 border-dezo-ink shadow-[3px_3px_0_0_#0B0B0A]'
+                      ? 'bg-dezo-primary/20 border-dezo-ink shadow-dezo-card'
                       : 'bg-dezo-bg border-dezo-border hover:border-dezo-ink'
                   }`}
                 >
@@ -464,7 +464,7 @@ export function DezoGrowthPlanBuilder() {
               <select
                 value={budgetRange}
                 onChange={(e) => setBudgetRange(e.target.value)}
-                className="w-full px-4 py-3 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                className="w-full px-4 py-3 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
               >
                 <option value="Under ₹5,000 / month (Student & Local Dukaan)">Under ₹5,000 / month (Student & Local Dukaan)</option>
                 <option value="₹5,000 - ₹15,000 / month (Local Shop Foundation)">₹5,000 - ₹15,000 / month (Local Shop Foundation)</option>
@@ -481,7 +481,7 @@ export function DezoGrowthPlanBuilder() {
               <select
                 value={timeline}
                 onChange={(e) => setTimeline(e.target.value)}
-                className="w-full px-4 py-3 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                className="w-full px-4 py-3 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
               >
                 <option value="Immediate (Within 1 to 2 weeks)">Immediate (Within 1 to 2 weeks)</option>
                 <option value="Within 2 to 4 weeks">Within 2 to 4 weeks (Recommended)</option>
@@ -495,14 +495,14 @@ export function DezoGrowthPlanBuilder() {
             <button
               type="button"
               onClick={() => setStep(1)}
-              className="px-6 py-3 bg-dezo-bg text-dezo-ink font-mono text-xs uppercase tracking-wider border-2 border-dezo-ink hover:bg-dezo-bg-warm inline-flex items-center gap-1.5"
+              className="px-6 py-3 bg-dezo-bg text-dezo-ink font-mono text-xs uppercase tracking-wider border border-dezo-border hover:bg-dezo-bg-warm inline-flex items-center gap-1.5"
             >
               <ArrowLeft size={14} /> Back
             </button>
             <button
               type="button"
               onClick={() => setStep(3)}
-              className="px-8 py-3.5 bg-dezo-ink text-dezo-bg font-mono text-xs uppercase tracking-wider font-bold border-2 border-dezo-ink hover:bg-dezo-primary hover:text-dezo-ink transition-all shadow-[4px_4px_0_0_#B08D57] inline-flex items-center gap-2"
+              className="px-8 py-3.5 bg-dezo-ink text-dezo-bg font-mono text-xs uppercase tracking-wider font-bold border border-dezo-border hover:bg-dezo-primary hover:text-dezo-ink transition-all shadow-dezo-card inline-flex items-center gap-2"
             >
               Generate Recommendation <Sparkles size={14} />
             </button>
@@ -513,7 +513,7 @@ export function DezoGrowthPlanBuilder() {
       {/* STEP 3: Deterministic Recommendation View */}
       {step === 3 && (
         <div className="space-y-6">
-          <div className="bg-dezo-bg border-2 border-dezo-ink p-6 sm:p-8 shadow-[4px_4px_0_0_#0B0B0A]">
+          <div className="bg-dezo-bg border border-dezo-border p-6 sm:p-8 shadow-dezo-card">
             <div className="flex flex-wrap items-center justify-between gap-2 mb-3 pb-3 border-b border-dezo-border">
               <span className="font-mono text-xs font-bold text-dezo-primary uppercase tracking-wider">
                 Recommended Architecture: [{recommendation.planTier} TIER]
@@ -537,7 +537,7 @@ export function DezoGrowthPlanBuilder() {
               </span>
               <div className="space-y-4">
                 {recommendation.recommendedServices.map((srv, idx) => (
-                  <div key={idx} className="bg-dezo-bg-warm p-4 border-2 border-dezo-ink">
+                  <div key={idx} className="bg-dezo-bg-warm p-4 border border-dezo-border">
                     <div className="flex items-center justify-between mb-1.5">
                       <h4 className="font-display text-base font-bold text-dezo-ink">{srv.name}</h4>
                       <Link
@@ -580,14 +580,14 @@ export function DezoGrowthPlanBuilder() {
             <button
               type="button"
               onClick={() => setStep(2)}
-              className="px-6 py-3 bg-dezo-bg text-dezo-ink font-mono text-xs uppercase tracking-wider border-2 border-dezo-ink hover:bg-dezo-bg-warm inline-flex items-center gap-1.5"
+              className="px-6 py-3 bg-dezo-bg text-dezo-ink font-mono text-xs uppercase tracking-wider border border-dezo-border hover:bg-dezo-bg-warm inline-flex items-center gap-1.5"
             >
               <ArrowLeft size={14} /> Adjust Goals
             </button>
             <button
               type="button"
               onClick={() => setStep(4)}
-              className="px-8 py-3.5 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold border-2 border-dezo-ink hover:bg-white transition-all shadow-[4px_4px_0_0_#0B0B0A] inline-flex items-center gap-2"
+              className="px-8 py-3.5 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold border border-dezo-border hover:bg-white transition-all shadow-dezo-card inline-flex items-center gap-2"
             >
               Proceed to Scoped Quotation <ArrowRight size={14} />
             </button>
@@ -599,8 +599,8 @@ export function DezoGrowthPlanBuilder() {
       {step === 4 && (
         <div>
           {submitted ? (
-            <div className="bg-dezo-bg border-2 border-dezo-ink p-8 text-center shadow-[4px_4px_0_0_#0B0B0A]">
-              <div className="w-12 h-12 bg-dezo-primary text-dezo-ink border-2 border-dezo-ink rounded-none flex items-center justify-center mx-auto mb-4">
+            <div className="bg-dezo-bg border border-dezo-border p-8 text-center shadow-dezo-card">
+              <div className="w-12 h-12 bg-dezo-primary text-dezo-ink border border-dezo-border rounded-dezo-md flex items-center justify-center mx-auto mb-4">
                 <CheckCircle2 size={24} />
               </div>
               <h3 className="font-display text-2xl font-bold uppercase text-dezo-ink">
@@ -613,13 +613,13 @@ export function DezoGrowthPlanBuilder() {
               <div className="mt-6 flex justify-center gap-4">
                 <Link
                   href="/"
-                  className="px-6 py-2.5 bg-dezo-ink text-dezo-bg font-mono text-xs uppercase tracking-wider border-2 border-dezo-ink hover:bg-dezo-primary hover:text-dezo-ink"
+                  className="px-6 py-2.5 bg-dezo-ink text-dezo-bg font-mono text-xs uppercase tracking-wider border border-dezo-border hover:bg-dezo-primary hover:text-dezo-ink"
                 >
                   Return to Homepage
                 </Link>
                 <Link
                   href="/work"
-                  className="px-6 py-2.5 bg-dezo-bg text-dezo-ink font-mono text-xs uppercase tracking-wider border-2 border-dezo-ink hover:bg-dezo-bg-warm"
+                  className="px-6 py-2.5 bg-dezo-bg text-dezo-ink font-mono text-xs uppercase tracking-wider border border-dezo-border hover:bg-dezo-bg-warm"
                 >
                   Explore Live Portfolio
                 </Link>
@@ -647,7 +647,7 @@ export function DezoGrowthPlanBuilder() {
                     value={clientName}
                     onChange={(e) => setClientName(e.target.value)}
                     placeholder="e.g., Rajesh Mohanty"
-                    className="w-full px-4 py-3 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                    className="w-full px-4 py-3 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
                   />
                 </div>
 
@@ -663,7 +663,7 @@ export function DezoGrowthPlanBuilder() {
                         onClick={() => setPreferredContact(ch)}
                         className={`flex-1 py-3 text-xs font-mono uppercase border-2 transition-all ${
                           preferredContact === ch
-                            ? 'bg-dezo-primary text-dezo-ink border-dezo-ink font-bold shadow-[2px_2px_0_0_#0B0B0A]'
+                            ? 'bg-dezo-primary text-dezo-ink border-dezo-ink font-bold shadow-xs'
                             : 'bg-dezo-bg text-dezo-text-secondary border-dezo-border'
                         }`}
                       >
@@ -685,7 +685,7 @@ export function DezoGrowthPlanBuilder() {
                     placeholder={
                       preferredContact === 'Email' ? 'you@company.com' : '+91 91144 11026'
                     }
-                    className="w-full px-4 py-3 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                    className="w-full px-4 py-3 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
                   />
                 </div>
               </div>
@@ -702,14 +702,14 @@ export function DezoGrowthPlanBuilder() {
                 <button
                   type="button"
                   onClick={() => setStep(3)}
-                  className="px-6 py-3 bg-dezo-bg text-dezo-ink font-mono text-xs uppercase tracking-wider border-2 border-dezo-ink hover:bg-dezo-bg-warm inline-flex items-center gap-1.5"
+                  className="px-6 py-3 bg-dezo-bg text-dezo-ink font-mono text-xs uppercase tracking-wider border border-dezo-border hover:bg-dezo-bg-warm inline-flex items-center gap-1.5"
                 >
                   <ArrowLeft size={14} /> Back to Blueprint
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-8 py-3.5 bg-dezo-ink text-dezo-bg font-mono text-xs uppercase tracking-wider font-bold border-2 border-dezo-ink hover:bg-dezo-primary hover:text-dezo-ink transition-all shadow-[4px_4px_0_0_#B08D57] inline-flex items-center gap-2 disabled:opacity-50"
+                  className="px-8 py-3.5 bg-dezo-ink text-dezo-bg font-mono text-xs uppercase tracking-wider font-bold border border-dezo-border hover:bg-dezo-primary hover:text-dezo-ink transition-all shadow-dezo-card inline-flex items-center gap-2 disabled:opacity-50"
                 >
                   {submitting ? 'Submitting...' : 'Submit & Book Strategy Call'} <ArrowRight size={14} />
                 </button>

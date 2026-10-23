@@ -10,7 +10,7 @@ export function OmnichannelComparison() {
   const current = CHANNEL_COMPARISON_MATRIX[selectedChannel];
 
   return (
-    <div className="w-full bg-dezo-bg-warm border-2 border-dezo-ink p-6 sm:p-10 shadow-[4px_4px_0_0_#0B0B0A]">
+    <div className="w-full bg-dezo-bg-warm border border-dezo-border p-6 sm:p-10 shadow-dezo-card">
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b-2 border-dezo-ink">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-dezo-primary/20 border border-dezo-ink text-xs font-mono uppercase tracking-wider text-dezo-ink mb-3 font-bold">
@@ -39,7 +39,7 @@ export function OmnichannelComparison() {
               onClick={() => setSelectedChannel(idx)}
               className={`p-4 text-left border-2 transition-all cursor-pointer ${
                 isSelected
-                  ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[3px_3px_0_0_#B08D57]'
+                  ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-dezo-card'
                   : 'bg-dezo-bg text-dezo-ink border-dezo-ink/40 hover:border-dezo-ink hover:bg-white'
               }`}
             >
@@ -59,7 +59,7 @@ export function OmnichannelComparison() {
       </div>
 
       {/* Active Channel Breakdown */}
-      <div className="bg-dezo-bg border-2 border-dezo-ink p-6 sm:p-8 shadow-[3px_3px_0_0_#0B0B0A]">
+      <div className="bg-dezo-bg border border-dezo-border p-6 sm:p-8 shadow-dezo-card">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-dezo-ink/15">
           <div>
             <span className="font-mono text-xs uppercase tracking-wider text-dezo-primary font-bold">
@@ -136,7 +136,7 @@ export function OmnichannelComparison() {
         </div>
 
         {/* What DEZO Delivers */}
-        <div className="mt-6 p-4 bg-dezo-ink text-dezo-bg border-2 border-dezo-ink flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="mt-6 p-4 bg-dezo-ink text-dezo-bg border border-dezo-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <span className="font-mono text-[11px] uppercase tracking-wider text-dezo-primary block font-bold mb-0.5">
               How DEZO Executes This Channel

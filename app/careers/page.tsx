@@ -89,7 +89,7 @@ export default function CareersPage() {
               {CAREERS_CONFIG.chips.map((chip, idx) => (
                 <span
                   key={idx}
-                  className="px-3 py-1.5 bg-dezo-bg border-2 border-dezo-ink font-mono text-xs font-bold text-dezo-ink shadow-[2px_2px_0_0_#0B0B0A]"
+                  className="px-3 py-1.5 bg-dezo-bg border border-dezo-border font-mono text-xs font-bold text-dezo-ink shadow-xs"
                 >
                   ✓ {chip}
                 </span>
@@ -102,13 +102,13 @@ export default function CareersPage() {
                 href={defaultWhatsAppDataUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 bg-emerald-600 text-white font-mono text-xs uppercase tracking-wider font-bold border-2 border-dezo-ink hover:bg-emerald-700 transition-all shadow-[4px_4px_0_0_#0B0B0A] inline-flex items-center gap-2"
+                className="px-8 py-4 bg-emerald-600 text-white font-mono text-xs uppercase tracking-wider font-bold border border-dezo-border hover:bg-emerald-700 transition-all shadow-dezo-card inline-flex items-center gap-2"
               >
                 <MessageSquare size={16} /> Apply on WhatsApp <ExternalLink size={14} />
               </a>
               <a
                 href="#internship"
-                className="px-8 py-4 bg-dezo-bg text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold border-2 border-dezo-ink hover:bg-dezo-bg-warm transition-all shadow-[4px_4px_0_0_#0B0B0A] inline-flex items-center gap-2"
+                className="px-8 py-4 bg-dezo-bg text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold border border-dezo-border hover:bg-dezo-bg-warm transition-all shadow-dezo-card inline-flex items-center gap-2"
               >
                 Explore the Internship <ArrowRight size={14} />
               </a>
@@ -122,7 +122,7 @@ export default function CareersPage() {
         <DezoContainer size="wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Left 6 cols: Basic Eligibility */}
-            <div className="lg:col-span-6 bg-dezo-bg-warm border-2 border-dezo-ink p-7 sm:p-9 shadow-[4px_4px_0_0_#0B0B0A] flex flex-col justify-between">
+            <div className="lg:col-span-6 bg-dezo-bg-warm border border-dezo-border p-7 sm:p-9 shadow-dezo-card flex flex-col justify-between">
               <div>
                 <span className="font-mono text-xs uppercase tracking-wider text-dezo-primary font-bold block mb-2">
                   Criteria
@@ -181,7 +181,7 @@ export default function CareersPage() {
             </div>
 
             {/* Right 6 cols: Work Model Transparency */}
-            <div className="lg:col-span-6 bg-dezo-bg-warm border-2 border-dezo-ink p-7 sm:p-9 shadow-[4px_4px_0_0_#0B0B0A] flex flex-col justify-between">
+            <div className="lg:col-span-6 bg-dezo-bg-warm border border-dezo-border p-7 sm:p-9 shadow-dezo-card flex flex-col justify-between">
               <div>
                 <span className="font-mono text-xs uppercase tracking-wider text-dezo-primary font-bold block mb-2">
                   Operating Model
@@ -191,7 +191,7 @@ export default function CareersPage() {
                 </h2>
 
                 <div className="space-y-5 text-xs font-mono">
-                  <div className="p-4 bg-dezo-bg border-2 border-dezo-ink">
+                  <div className="p-4 bg-dezo-bg border border-dezo-border">
                     <span className="font-bold text-dezo-primary uppercase block mb-1">
                       1. Remote-First / Work From Home
                     </span>
@@ -200,7 +200,7 @@ export default function CareersPage() {
                     </p>
                   </div>
 
-                  <div className="p-4 bg-dezo-bg border-2 border-dezo-ink">
+                  <div className="p-4 bg-dezo-bg border border-dezo-border">
                     <span className="font-bold text-dezo-ink uppercase block mb-1">
                       2. Occasional In-Person Collaboration
                     </span>
@@ -244,7 +244,7 @@ export default function CareersPage() {
             {INTERNSHIP_TIMELINE.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-dezo-bg border-2 border-dezo-ink p-6 shadow-[4px_4px_0_0_#0B0B0A] flex flex-col justify-between"
+                className="bg-dezo-bg border border-dezo-border p-6 shadow-dezo-card flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between pb-2 mb-3 border-b border-dezo-border">
@@ -270,7 +270,7 @@ export default function CareersPage() {
           </div>
 
           {/* Prominent Disclosure Banner */}
-          <div className="mt-10 p-5 bg-dezo-bg border-2 border-dezo-ink shadow-[3px_3px_0_0_#0B0B0A] flex items-start gap-3">
+          <div className="mt-10 p-5 bg-dezo-bg border border-dezo-border shadow-dezo-card flex items-start gap-3">
             <AlertCircle size={18} className="text-dezo-primary shrink-0 mt-0.5" />
             <div className="text-xs font-mono text-dezo-text-secondary leading-relaxed">
               <strong className="text-dezo-ink uppercase block mb-1">Clear Terms &amp; Expectations Disclosure:</strong>
@@ -295,7 +295,7 @@ export default function CareersPage() {
             {SERVICE_TRAINING_AREAS.map((area, idx) => (
               <div
                 key={idx}
-                className="bg-dezo-bg-warm border-2 border-dezo-ink p-6 shadow-[3px_3px_0_0_#0B0B0A]"
+                className="bg-dezo-bg-warm border border-dezo-border p-6 shadow-dezo-card"
               >
                 <span className="font-mono text-[10px] uppercase font-bold text-dezo-primary block mb-2">
                   [Track 0{idx + 1}]
@@ -340,7 +340,7 @@ export default function CareersPage() {
       {/* Transparent Compensation Section */}
       <DezoSection spacing="normal" className="bg-dezo-bg">
         <DezoContainer size="wide">
-          <div className="bg-dezo-ink text-dezo-bg border-2 border-dezo-ink p-8 sm:p-12 shadow-[6px_6px_0_0_#B08D57]">
+          <div className="bg-dezo-ink text-dezo-bg border border-dezo-border p-8 sm:p-12 shadow-dezo-soft">
             <div className="max-w-3xl">
               <span className="font-mono text-xs uppercase tracking-wider text-dezo-primary block mb-2 font-bold">
                 Standards &amp; Accountability
@@ -376,7 +376,7 @@ export default function CareersPage() {
             {HIRING_PROCESS_STEPS.map((step) => (
               <div
                 key={step.step}
-                className="bg-dezo-bg border-2 border-dezo-ink p-5 shadow-[3px_3px_0_0_#0B0B0A] flex flex-col justify-between"
+                className="bg-dezo-bg border border-dezo-border p-5 shadow-dezo-card flex flex-col justify-between"
               >
                 <div>
                   <span className="font-mono text-xs font-bold text-dezo-primary block mb-2">
@@ -417,7 +417,7 @@ export default function CareersPage() {
             {CAREERS_FAQS.map((faq, idx) => (
               <div
                 key={idx}
-                className="bg-dezo-bg border-2 border-dezo-ink p-6 shadow-[3px_3px_0_0_#0B0B0A]"
+                className="bg-dezo-bg border border-dezo-border p-6 shadow-dezo-card"
               >
                 <h3 className="font-display text-lg font-bold text-dezo-ink flex items-start gap-2.5">
                   <span className="font-mono text-dezo-primary font-bold">Q:</span>
@@ -452,7 +452,7 @@ export default function CareersPage() {
               href={defaultWhatsAppDataUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 bg-white text-emerald-800 font-mono text-xs uppercase tracking-wider font-bold border-2 border-dezo-ink hover:bg-emerald-50 transition-all shadow-[4px_4px_0_0_#0B0B0A] inline-flex items-center gap-2 shrink-0"
+              className="px-8 py-4 bg-white text-emerald-800 font-mono text-xs uppercase tracking-wider font-bold border border-dezo-border hover:bg-emerald-50 transition-all shadow-dezo-card inline-flex items-center gap-2 shrink-0"
             >
               <MessageSquare size={16} /> Apply on WhatsApp Now <ExternalLink size={14} />
             </a>

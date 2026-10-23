@@ -170,7 +170,7 @@ export function DezoAIGrowthAdvisor() {
   };
 
   return (
-    <div className="w-full bg-white border-2 border-dezo-ink shadow-[6px_6px_0_0_#0B0B0A]">
+    <div className="w-full bg-white border border-dezo-border shadow-dezo-soft">
       {/* Header Bar */}
       <div className="flex flex-wrap items-center justify-between border-b-2 border-dezo-ink bg-dezo-ink px-5 py-3 text-dezo-paper">
         <div className="flex items-center gap-2">
@@ -241,7 +241,7 @@ export function DezoAIGrowthAdvisor() {
                 type="text"
                 value={businessType}
                 onChange={(e) => setBusinessType(e.target.value)}
-                className="w-full bg-white border-2 border-dezo-ink p-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-[2px_2px_0_0_#0B0B0A]"
+                className="w-full bg-white border border-dezo-border p-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-xs"
                 placeholder="e.g. Retail Jewellery, Clinic, D2C Apparel"
               />
             </div>
@@ -254,7 +254,7 @@ export function DezoAIGrowthAdvisor() {
                 type="text"
                 value={primaryGoal}
                 onChange={(e) => setPrimaryGoal(e.target.value)}
-                className="w-full bg-white border-2 border-dezo-ink p-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-[2px_2px_0_0_#0B0B0A]"
+                className="w-full bg-white border border-dezo-border p-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-xs"
                 placeholder="e.g. Launch Amazon store, scale local inquiries"
               />
             </div>
@@ -267,7 +267,7 @@ export function DezoAIGrowthAdvisor() {
                 type="text"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="w-full bg-white border-2 border-dezo-ink p-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-[2px_2px_0_0_#0B0B0A]"
+                className="w-full bg-white border border-dezo-border p-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-xs"
                 placeholder="e.g. Bhubaneswar, Cuttack, Mumbai"
               />
             </div>
@@ -279,7 +279,7 @@ export function DezoAIGrowthAdvisor() {
               <select
                 value={budget}
                 onChange={(e) => setBudget(e.target.value)}
-                className="w-full bg-white border-2 border-dezo-ink p-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-[2px_2px_0_0_#0B0B0A] cursor-pointer"
+                className="w-full bg-white border border-dezo-border p-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-xs cursor-pointer"
               >
                 <option value="Under ₹25,000">Under ₹25,000 (Fast Launch)</option>
                 <option value="₹25,000 - ₹50,000">₹25,000 - ₹50,000 (Business Core)</option>
@@ -303,7 +303,7 @@ export function DezoAIGrowthAdvisor() {
 
           {/* Diagnostic Result Container */}
           {advisoryResult && (
-            <div className="p-6 bg-dezo-bg border-2 border-dezo-ink animate-fade-in shadow-[4px_4px_0_0_#0B0B0A]">
+            <div className="p-6 bg-dezo-bg border border-dezo-border animate-fade-in shadow-dezo-card">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 mb-4 border-b border-dezo-border">
                 <div>
                   <span className="font-mono text-xs uppercase tracking-wider text-dezo-gold font-bold">
@@ -351,7 +351,7 @@ export function DezoAIGrowthAdvisor() {
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-dezo-ink text-dezo-paper font-mono text-xs font-bold uppercase tracking-wider hover:bg-dezo-gold hover:text-dezo-ink transition-colors shadow-[2px_2px_0_0_#B08D57]"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-dezo-ink text-dezo-paper font-mono text-xs font-bold uppercase tracking-wider hover:bg-dezo-gold hover:text-dezo-ink transition-colors shadow-xs"
                   >
                     <MessageSquare size={14} /> Discuss Scope on WhatsApp
                   </a>
@@ -373,15 +373,15 @@ export function DezoAIGrowthAdvisor() {
                 className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {msg.role === 'assistant' && (
-                  <div className="w-8 h-8 rounded-none bg-dezo-ink text-dezo-gold flex items-center justify-center shrink-0 border border-dezo-ink">
+                  <div className="w-8 h-8 rounded-dezo-md bg-dezo-ink text-dezo-gold flex items-center justify-center shrink-0 border border-dezo-ink">
                     <Bot size={16} />
                   </div>
                 )}
                 <div
                   className={`max-w-[82%] p-3.5 border-2 ${
                     msg.role === 'user'
-                      ? 'bg-dezo-ink text-dezo-paper border-dezo-ink shadow-[2px_2px_0_0_#B08D57]'
-                      : 'bg-dezo-bg text-dezo-text-primary border-dezo-border shadow-[2px_2px_0_0_#0B0B0A]'
+                      ? 'bg-dezo-ink text-dezo-paper border-dezo-ink shadow-xs'
+                      : 'bg-dezo-bg text-dezo-text-primary border-dezo-border shadow-xs'
                   } whitespace-pre-wrap leading-relaxed`}
                 >
                   {msg.content}
@@ -402,7 +402,7 @@ export function DezoAIGrowthAdvisor() {
               value={chatInput}
               onChange={(e) => setChatInput(e.target.value)}
               placeholder="Ask about website packages, Amazon seller onboarding, local SEO in Odisha..."
-              className="flex-1 bg-white border-2 border-dezo-ink px-4 py-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-[2px_2px_0_0_#0B0B0A]"
+              className="flex-1 bg-white border border-dezo-border px-4 py-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-xs"
             />
             <DezoButton type="submit" disabled={loadingChat || !chatInput.trim()} icon={<Send size={15} />}>
               Send

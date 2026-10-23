@@ -154,7 +154,7 @@ export function DezoAuditReportView({
           <button
             type="button"
             onClick={handleShareReport}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-dezo-ink hover:bg-dezo-bg-warm text-dezo-ink uppercase tracking-wider font-bold transition-all cursor-pointer shadow-[2px_2px_0_0_#0B0B0A]"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-dezo-ink hover:bg-dezo-bg-warm text-dezo-ink uppercase tracking-wider font-bold transition-all cursor-pointer shadow-xs"
           >
             {copiedShare ? <Check size={12} className="text-emerald-600" /> : <Share2 size={12} />}
             <span>{copiedShare ? 'Link Copied!' : 'Share Audit'}</span>
@@ -162,7 +162,7 @@ export function DezoAuditReportView({
           <button
             type="button"
             onClick={handlePrint}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-dezo-ink hover:bg-dezo-bg-warm text-dezo-ink uppercase tracking-wider font-bold transition-all cursor-pointer shadow-[2px_2px_0_0_#0B0B0A]"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-dezo-ink hover:bg-dezo-bg-warm text-dezo-ink uppercase tracking-wider font-bold transition-all cursor-pointer shadow-xs"
           >
             <Download size={12} />
             <span>Save PDF / Print</span>
@@ -171,7 +171,7 @@ export function DezoAuditReportView({
       </div>
 
       {/* ── MASTER AUDIT SCORE BANNER (Brutalist Card) ── */}
-      <div className="p-6 sm:p-9 bg-white border-2 border-dezo-ink shadow-[6px_6px_0_0_#0B0B0A] relative">
+      <div className="p-6 sm:p-9 bg-white border border-dezo-border shadow-dezo-soft relative">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 pb-8 border-b-2 border-dezo-ink">
           <div className="flex flex-col gap-2 max-w-2xl">
             <div className="flex items-center gap-2">
@@ -191,7 +191,7 @@ export function DezoAuditReportView({
           </div>
 
           {/* Brutalist SVG Score Dial */}
-          <div className="flex items-center gap-6 shrink-0 bg-dezo-bg-warm p-4 border-2 border-dezo-ink shadow-[3px_3px_0_0_#0B0B0A]">
+          <div className="flex items-center gap-6 shrink-0 bg-dezo-bg-warm p-4 border border-dezo-border shadow-dezo-card">
             <div className="relative w-28 h-28 flex items-center justify-center">
               <svg className="w-full h-full transform -rotate-90" viewBox="0 0 120 120">
                 <circle
@@ -243,7 +243,7 @@ export function DezoAuditReportView({
           {report.categoryScores.map((cat: ScoreCategory) => (
             <div
               key={cat.name}
-              className="p-3.5 bg-dezo-bg-warm border-2 border-dezo-ink flex flex-col gap-2 shadow-[2px_2px_0_0_#0B0B0A]"
+              className="p-3.5 bg-dezo-bg-warm border border-dezo-border flex flex-col gap-2 shadow-xs"
             >
               <div className="flex items-center justify-between text-xs font-mono">
                 <span className="font-bold text-dezo-ink truncate uppercase">{cat.name}</span>
@@ -264,7 +264,7 @@ export function DezoAuditReportView({
 
       {/* ── AI STRATEGIC OVERVIEW ── */}
       {report.aiStrategicOverview && (
-        <div className="p-6 sm:p-7 bg-dezo-ink text-dezo-bg border-2 border-dezo-ink shadow-[4px_4px_0_0_#B08D57]">
+        <div className="p-6 sm:p-7 bg-dezo-ink text-dezo-bg border border-dezo-border shadow-dezo-card">
           <div className="flex items-center gap-2 mb-4">
             <Sparkles size={16} className="text-dezo-primary" />
             <h3 className="font-mono text-xs sm:text-sm font-bold text-dezo-primary uppercase tracking-widest">
@@ -313,7 +313,7 @@ export function DezoAuditReportView({
               onClick={() => setFilterSeverity('all')}
               className={`px-3 py-1 font-bold border-2 transition-all cursor-pointer uppercase ${
                 filterSeverity === 'all'
-                  ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[2px_2px_0_0_#B08D57]'
+                  ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-xs'
                   : 'bg-white text-dezo-ink border-dezo-ink hover:bg-dezo-bg-warm'
               }`}
             >
@@ -324,7 +324,7 @@ export function DezoAuditReportView({
               onClick={() => setFilterSeverity('critical')}
               className={`px-3 py-1 font-bold border-2 transition-all cursor-pointer uppercase ${
                 filterSeverity === 'critical'
-                  ? 'bg-rose-700 text-white border-rose-900 shadow-[2px_2px_0_0_#0B0B0A]'
+                  ? 'bg-rose-700 text-white border-rose-900 shadow-xs'
                   : 'bg-white text-rose-800 border-rose-700 hover:bg-rose-50'
               }`}
             >
@@ -335,7 +335,7 @@ export function DezoAuditReportView({
               onClick={() => setFilterSeverity('warning')}
               className={`px-3 py-1 font-bold border-2 transition-all cursor-pointer uppercase ${
                 filterSeverity === 'warning'
-                  ? 'bg-amber-600 text-white border-amber-800 shadow-[2px_2px_0_0_#0B0B0A]'
+                  ? 'bg-amber-600 text-white border-amber-800 shadow-xs'
                   : 'bg-white text-amber-800 border-amber-700 hover:bg-amber-50'
               }`}
             >
@@ -346,7 +346,7 @@ export function DezoAuditReportView({
               onClick={() => setFilterSeverity('good')}
               className={`px-3 py-1 font-bold border-2 transition-all cursor-pointer uppercase ${
                 filterSeverity === 'good'
-                  ? 'bg-emerald-700 text-white border-emerald-900 shadow-[2px_2px_0_0_#0B0B0A]'
+                  ? 'bg-emerald-700 text-white border-emerald-900 shadow-xs'
                   : 'bg-white text-emerald-800 border-emerald-700 hover:bg-emerald-50'
               }`}
             >
@@ -362,7 +362,7 @@ export function DezoAuditReportView({
             return (
               <div
                 key={finding.id}
-                className="bg-white border-2 border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A] transition-all"
+                className="bg-white border border-dezo-border shadow-xs transition-all"
               >
                 <button
                   type="button"
@@ -428,7 +428,7 @@ export function DezoAuditReportView({
       </div>
 
       {/* ── HIGH-CONVERTING CALL-TO-ACTION ── */}
-      <div className="p-7 sm:p-10 bg-dezo-bg-warm border-2 border-dezo-ink shadow-[6px_6px_0_0_#0B0B0A] text-center flex flex-col items-center gap-4">
+      <div className="p-7 sm:p-10 bg-dezo-bg-warm border border-dezo-border shadow-dezo-soft text-center flex flex-col items-center gap-4">
         <span className="text-xs font-mono uppercase tracking-widest text-dezo-primary font-bold px-3 py-1 bg-dezo-primary/20 border border-dezo-ink">
           Technical Remediation Sprint
         </span>
@@ -442,7 +442,7 @@ export function DezoAuditReportView({
         <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
           <Link
             href={`/start-a-project?ref=tools_audit&domain=${encodeURIComponent(report.targetInput)}`}
-            className="px-6 py-3 bg-dezo-ink text-dezo-bg font-mono uppercase tracking-wider font-bold text-xs hover:bg-dezo-primary hover:text-dezo-ink transition-all flex items-center gap-2 border border-dezo-ink shadow-[3px_3px_0_0_#0B0B0A]"
+            className="px-6 py-3 bg-dezo-ink text-dezo-bg font-mono uppercase tracking-wider font-bold text-xs hover:bg-dezo-primary hover:text-dezo-ink transition-all flex items-center gap-2 border border-dezo-ink shadow-dezo-card"
           >
             <span>Request Growth Sprint for this Website</span>
             <ArrowUpRight size={14} />
@@ -454,7 +454,7 @@ export function DezoAuditReportView({
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-3 bg-[#25D366] text-black font-mono uppercase tracking-wider font-bold text-xs hover:bg-white transition-all flex items-center gap-2 border border-black shadow-[2px_2px_0_0_#0B0B0A]"
+            className="px-5 py-3 bg-[#25D366] text-black font-mono uppercase tracking-wider font-bold text-xs hover:bg-white transition-all flex items-center gap-2 border border-black shadow-xs"
           >
             <MessageCircle size={14} />
             <span>Discuss on WhatsApp (+91 9114411026)</span>

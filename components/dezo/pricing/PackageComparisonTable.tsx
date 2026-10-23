@@ -161,7 +161,7 @@ export function PackageComparisonTable() {
   const [viewMode, setViewMode] = useState<'cards' | 'matrix'>('cards');
 
   return (
-    <div className="w-full bg-dezo-bg border-2 border-dezo-ink p-5 sm:p-8 lg:p-10 shadow-[6px_6px_0_0_#0B0B0A]" id="packages">
+    <div className="w-full bg-dezo-bg border border-dezo-border p-5 sm:p-8 lg:p-10 shadow-dezo-soft" id="packages">
       {/* Header with View Switcher */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b-2 border-dezo-ink">
         <div>
@@ -184,7 +184,7 @@ export function PackageComparisonTable() {
             onClick={() => setViewMode('cards')}
             className={`px-3 py-2 text-xs font-mono uppercase tracking-wider font-bold border-2 transition-all flex items-center gap-1.5 cursor-pointer ${
               viewMode === 'cards'
-                ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[2px_2px_0_0_#B08D57]'
+                ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-xs'
                 : 'bg-white text-dezo-ink border-dezo-ink hover:bg-dezo-bg-warm'
             }`}
           >
@@ -195,7 +195,7 @@ export function PackageComparisonTable() {
             onClick={() => setViewMode('matrix')}
             className={`px-3 py-2 text-xs font-mono uppercase tracking-wider font-bold border-2 transition-all flex items-center gap-1.5 cursor-pointer ${
               viewMode === 'matrix'
-                ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[2px_2px_0_0_#B08D57]'
+                ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-xs'
                 : 'bg-white text-dezo-ink border-dezo-ink hover:bg-dezo-bg-warm'
             }`}
           >
@@ -212,8 +212,8 @@ export function PackageComparisonTable() {
               key={pkg.id}
               className={`p-5 sm:p-6 border-2 flex flex-col justify-between transition-all ${
                 pkg.popular
-                  ? 'bg-dezo-bg-warm border-dezo-ink shadow-[4px_4px_0_0_#B08D57] ring-1 ring-dezo-primary/40'
-                  : 'bg-white border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A]'
+                  ? 'bg-dezo-bg-warm border-dezo-ink shadow-dezo-card ring-1 ring-dezo-primary/40'
+                  : 'bg-white border-dezo-ink shadow-xs'
               }`}
             >
               <div>
@@ -274,7 +274,7 @@ export function PackageComparisonTable() {
               <div className="mt-6 pt-4 border-t border-dezo-ink/15 space-y-2">
                 <Link
                   href={`/start-a-project?package=${pkg.name}&startingPrice=${pkg.startingPriceNumeric}`}
-                  className="w-full py-2.5 px-3 bg-dezo-ink text-dezo-bg text-center text-xs font-mono uppercase tracking-wider font-bold hover:bg-dezo-primary hover:text-dezo-ink transition-colors flex items-center justify-center gap-1 border border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A]"
+                  className="w-full py-2.5 px-3 bg-dezo-ink text-dezo-bg text-center text-xs font-mono uppercase tracking-wider font-bold hover:bg-dezo-primary hover:text-dezo-ink transition-colors flex items-center justify-center gap-1 border border-dezo-ink shadow-xs"
                 >
                   Choose {pkg.name} <ArrowRight size={12} />
                 </Link>
@@ -296,7 +296,7 @@ export function PackageComparisonTable() {
 
       {/* VIEW 2: Detailed Matrix Table */}
       {viewMode === 'matrix' && (
-        <div className="my-8 overflow-x-auto border-2 border-dezo-ink bg-white shadow-[3px_3px_0_0_#0B0B0A]">
+        <div className="my-8 overflow-x-auto border border-dezo-border bg-white shadow-dezo-card">
           <table className="w-full text-left border-collapse min-w-[800px]">
             <thead>
               <tr className="bg-dezo-ink text-dezo-bg font-mono text-xs uppercase tracking-wider border-b-2 border-dezo-ink">
@@ -377,14 +377,14 @@ export function PackageComparisonTable() {
 
       {/* Explicit Exclusions Notice & Student Discount Banner */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-        <div className="p-4 bg-dezo-bg-warm border-2 border-dezo-ink flex items-start gap-3 text-xs font-mono text-dezo-text-secondary">
+        <div className="p-4 bg-dezo-bg-warm border border-dezo-border flex items-start gap-3 text-xs font-mono text-dezo-text-secondary">
           <XCircle size={16} className="text-red-500 shrink-0 mt-0.5" />
           <p className="leading-relaxed">
             <strong className="text-dezo-ink">What is Not Included in Base Packages:</strong> Domain registration fees (₹600–₹1,200/yr), specialized third-party cloud database fees, premium commercial plugin licenses, or direct paid ad budgets (paid directly to Google/Meta).
           </p>
         </div>
 
-        <div className="p-4 bg-emerald-50 border-2 border-emerald-600 flex items-start gap-3 text-xs font-mono text-emerald-900">
+        <div className="p-4 bg-emerald-50 border border-emerald-600 flex items-start gap-3 text-xs font-mono text-emerald-900">
           <ShieldCheck size={16} className="text-emerald-700 shrink-0 mt-0.5" />
           <p className="leading-relaxed">
             <strong className="text-emerald-950">Student & Local Dukaan Subsidy:</strong> College students in Bhubaneswar/Odisha and across India can get a complete personal portfolio for just ₹1,999 with valid college ID. Neighborhood shops get a complete digital storefront for ₹2,999.

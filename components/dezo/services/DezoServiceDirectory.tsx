@@ -93,7 +93,7 @@ export function DezoServiceDirectory() {
   return (
     <div className="w-full">
       {/* Search & Filter Header Bar */}
-      <div className="bg-dezo-bg-warm border-2 border-dezo-ink p-5 sm:p-7 shadow-[4px_4px_0_0_#0B0B0A] mb-10">
+      <div className="bg-dezo-bg-warm border border-dezo-border p-5 sm:p-7 shadow-dezo-card mb-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
           {/* Search input */}
           <div className="lg:col-span-6 relative">
@@ -107,7 +107,7 @@ export function DezoServiceDirectory() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search services (e.g., SEO, Shopify, Google Ads, WhatsApp, Bhubaneswar)..."
-              className="w-full pl-11 pr-4 py-3 bg-dezo-bg border-2 border-dezo-ink text-sm font-mono text-dezo-ink placeholder:text-dezo-text-muted focus:outline-none focus:ring-0 focus:border-dezo-primary transition-colors"
+              className="w-full pl-11 pr-4 py-3 bg-dezo-bg border border-dezo-border text-sm font-mono text-dezo-ink placeholder:text-dezo-text-muted focus:outline-none focus:ring-0 focus:border-dezo-primary transition-colors"
             />
             {searchQuery && (
               <button
@@ -126,7 +126,7 @@ export function DezoServiceDirectory() {
               value={selectedIndustry}
               onChange={(e) => setSelectedIndustry(e.target.value)}
               aria-label="Filter by target industry"
-              className="w-full px-4 py-3 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:outline-none focus:border-dezo-primary cursor-pointer"
+              className="w-full px-4 py-3 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:outline-none focus:border-dezo-primary cursor-pointer"
             >
               <option value="ALL">ALL INDUSTRIES ({allIndustries.length})</option>
               {allIndustries.map((ind) => (
@@ -143,7 +143,7 @@ export function DezoServiceDirectory() {
               value={selectedTier}
               onChange={(e) => setSelectedTier(e.target.value)}
               aria-label="Filter by engagement model tier"
-              className="w-full px-4 py-3 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:outline-none focus:border-dezo-primary cursor-pointer"
+              className="w-full px-4 py-3 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:outline-none focus:border-dezo-primary cursor-pointer"
             >
               <option value="ALL">ALL TIERS (START, GROW, SCALE)</option>
               <option value="START">START (Foundation & Launch)</option>
@@ -170,7 +170,7 @@ export function DezoServiceDirectory() {
               onClick={() => setSelectedDept('ALL')}
               className={`px-3 py-1.5 text-xs font-mono uppercase transition-all border ${
                 selectedDept === 'ALL'
-                  ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[2px_2px_0_0_#B08D57]'
+                  ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-xs'
                   : 'bg-dezo-bg text-dezo-text-secondary border-dezo-border hover:border-dezo-ink'
               }`}
             >
@@ -185,7 +185,7 @@ export function DezoServiceDirectory() {
                   onClick={() => setSelectedDept(dept.code)}
                   className={`px-3 py-1.5 text-xs font-mono transition-all border flex items-center gap-1.5 ${
                     active
-                      ? 'bg-dezo-primary text-dezo-ink border-dezo-ink font-bold shadow-[2px_2px_0_0_#0B0B0A]'
+                      ? 'bg-dezo-primary text-dezo-ink border-dezo-ink font-bold shadow-xs'
                       : 'bg-dezo-bg text-dezo-text-secondary border-dezo-border hover:border-dezo-ink'
                   }`}
                 >
@@ -207,7 +207,7 @@ export function DezoServiceDirectory() {
             return (
               <div
                 key={service.id}
-                className="group relative flex flex-col justify-between bg-dezo-bg border-2 border-dezo-ink p-6 sm:p-7 shadow-[4px_4px_0_0_#0B0B0A] hover:shadow-[6px_6px_0_0_#B08D57] transition-all"
+                className="group relative flex flex-col justify-between bg-dezo-bg border border-dezo-border p-6 sm:p-7 shadow-dezo-card hover:shadow-dezo-soft transition-all"
               >
                 <div>
                   {/* Top Bar: Dept Code & Tier */}
@@ -269,7 +269,7 @@ export function DezoServiceDirectory() {
         </div>
       ) : (
         /* Empty State */
-        <div className="bg-dezo-bg-warm border-2 border-dezo-ink p-12 text-center shadow-[4px_4px_0_0_#0B0B0A]">
+        <div className="bg-dezo-bg-warm border border-dezo-border p-12 text-center shadow-dezo-card">
           <p className="font-display text-2xl text-dezo-ink font-bold">No services match your filters</p>
           <p className="mt-2 text-sm text-dezo-text-secondary font-mono">
             Try adjusting your search keywords, department filter, or industry selection.
@@ -282,7 +282,7 @@ export function DezoServiceDirectory() {
               setSelectedIndustry('ALL');
               setSelectedTier('ALL');
             }}
-            className="mt-6 px-6 py-2.5 bg-dezo-ink text-dezo-bg text-xs font-mono uppercase tracking-wider border-2 border-dezo-ink hover:bg-dezo-primary hover:text-dezo-ink transition-colors shadow-[2px_2px_0_0_#B08D57]"
+            className="mt-6 px-6 py-2.5 bg-dezo-ink text-dezo-bg text-xs font-mono uppercase tracking-wider border border-dezo-border hover:bg-dezo-primary hover:text-dezo-ink transition-colors shadow-xs"
           >
             Reset All Filters
           </button>

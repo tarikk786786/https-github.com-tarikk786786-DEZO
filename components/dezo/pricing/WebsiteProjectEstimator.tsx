@@ -299,7 +299,7 @@ export function WebsiteProjectEstimator() {
   ]);
 
   return (
-    <div className="w-full bg-dezo-bg-warm border-2 border-dezo-ink p-6 sm:p-10 shadow-[6px_6px_0_0_#0B0B0A]" id="calculator">
+    <div className="w-full bg-dezo-bg-warm border border-dezo-border p-6 sm:p-10 shadow-dezo-soft" id="calculator">
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b-2 border-dezo-ink">
         <div>
@@ -375,7 +375,7 @@ export function WebsiteProjectEstimator() {
                   onClick={() => setWebsiteType(opt.id)}
                   className={`p-4 text-left border-2 transition-all cursor-pointer flex flex-col justify-between ${
                     websiteType === opt.id
-                      ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[3px_3px_0_0_#B08D57]'
+                      ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-dezo-card'
                       : 'bg-white text-dezo-ink border-dezo-ink/30 hover:border-dezo-ink hover:bg-dezo-bg'
                   }`}
                 >
@@ -428,7 +428,7 @@ export function WebsiteProjectEstimator() {
                   onClick={() => setPageCount(p.id as any)}
                   className={`p-3 text-center border-2 transition-all cursor-pointer text-xs font-mono font-bold ${
                     pageCount === p.id
-                      ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[2px_2px_0_0_#B08D57]'
+                      ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-xs'
                       : 'bg-white text-dezo-ink border-dezo-border hover:border-dezo-ink'
                   }`}
                 >
@@ -454,7 +454,7 @@ export function WebsiteProjectEstimator() {
                     onClick={() => setDesignTier(d.id as any)}
                     className={`w-full p-3.5 text-left border-2 transition-all cursor-pointer ${
                       designTier === d.id
-                        ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[2px_2px_0_0_#B08D57]'
+                        ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-xs'
                         : 'bg-white text-dezo-ink border-dezo-border hover:border-dezo-ink'
                     }`}
                   >
@@ -482,7 +482,7 @@ export function WebsiteProjectEstimator() {
                     onClick={() => setContentCreation(c.id as any)}
                     className={`w-full p-3.5 text-left border-2 transition-all cursor-pointer ${
                       contentCreation === c.id
-                        ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[2px_2px_0_0_#B08D57]'
+                        ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-xs'
                         : 'bg-white text-dezo-ink border-dezo-border hover:border-dezo-ink'
                     }`}
                   >
@@ -539,7 +539,7 @@ export function WebsiteProjectEstimator() {
                     onClick={() => toggleFeature(feat.id)}
                     className={`p-3.5 text-left border-2 transition-all cursor-pointer ${
                       isSelected
-                        ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[2px_2px_0_0_#B08D57]'
+                        ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-xs'
                         : 'bg-white text-dezo-ink border-dezo-border hover:border-dezo-ink'
                     }`}
                   >
@@ -572,7 +572,7 @@ export function WebsiteProjectEstimator() {
                     onClick={() => setDesiredTimeline(t.id as any)}
                     className={`p-3 text-left border-2 transition-all cursor-pointer ${
                       desiredTimeline === t.id
-                        ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[2px_2px_0_0_#B08D57]'
+                        ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-xs'
                         : 'bg-white text-dezo-ink border-dezo-border hover:border-dezo-ink'
                     }`}
                   >
@@ -600,7 +600,7 @@ export function WebsiteProjectEstimator() {
                     onClick={() => setMaintenance(m.id as any)}
                     className={`p-3 text-left border-2 transition-all cursor-pointer ${
                       maintenance === m.id
-                        ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[2px_2px_0_0_#B08D57]'
+                        ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-xs'
                         : 'bg-white text-dezo-ink border-dezo-border hover:border-dezo-ink'
                     }`}
                   >
@@ -625,7 +625,7 @@ export function WebsiteProjectEstimator() {
             <button
               type="button"
               onClick={() => setStep(4)}
-              className="px-6 py-3 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold hover:bg-white transition-all flex items-center gap-2 border-2 border-dezo-ink cursor-pointer shadow-[3px_3px_0_0_#0B0B0A]"
+              className="px-6 py-3 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold hover:bg-white transition-all flex items-center gap-2 border border-dezo-border cursor-pointer shadow-dezo-card"
             >
               View Scoped Quotation <Sparkles size={14} />
             </button>
@@ -636,7 +636,7 @@ export function WebsiteProjectEstimator() {
       {/* STEP 4: Scoped Estimate Output */}
       {step === 4 && (
         <div className="space-y-8 py-4">
-          <div className="bg-white border-2 border-dezo-ink p-6 sm:p-8 shadow-[4px_4px_0_0_#0B0B0A]">
+          <div className="bg-white border border-dezo-border p-6 sm:p-8 shadow-dezo-card">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b-2 border-dezo-ink">
               <div>
                 <span className="px-2.5 py-0.5 bg-dezo-primary/20 border border-dezo-ink text-[11px] font-mono uppercase tracking-wider text-dezo-ink font-bold">
@@ -684,7 +684,7 @@ export function WebsiteProjectEstimator() {
               </div>
 
               <div className="lg:col-span-5 space-y-4">
-                <div className="bg-dezo-ink text-dezo-bg p-5 border-2 border-dezo-ink">
+                <div className="bg-dezo-ink text-dezo-bg p-5 border border-dezo-border">
                   <div className="flex items-center gap-1.5 text-dezo-primary mb-2">
                     <ShieldCheck size={16} />
                     <span className="font-mono text-xs uppercase tracking-wider font-bold">
@@ -719,7 +719,7 @@ export function WebsiteProjectEstimator() {
           </div>
 
           {/* Action Box: Prefilled WhatsApp or Intake */}
-          <div className="bg-dezo-ink text-dezo-bg border-2 border-dezo-ink p-6 sm:p-8 shadow-[4px_4px_0_0_#B08D57]">
+          <div className="bg-dezo-ink text-dezo-bg border border-dezo-border p-6 sm:p-8 shadow-dezo-card">
             <div className="max-w-2xl">
               <span className="font-mono text-xs uppercase tracking-wider text-dezo-primary block mb-2 font-bold">
                 Lock in Your Scope & Timeline
@@ -766,7 +766,7 @@ export function WebsiteProjectEstimator() {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 bg-[#25D366] text-black text-xs font-mono uppercase tracking-wider font-bold hover:bg-white transition-all flex items-center justify-center gap-2 border border-black shadow-[2px_2px_0_0_#FFFFFF]"
+                  className="px-6 py-3 bg-[#25D366] text-black text-xs font-mono uppercase tracking-wider font-bold hover:bg-white transition-all flex items-center justify-center gap-2 border border-black shadow-xs"
                 >
                   <MessageSquare size={14} /> Send Estimate via WhatsApp (+91 9114411026) →
                 </a>

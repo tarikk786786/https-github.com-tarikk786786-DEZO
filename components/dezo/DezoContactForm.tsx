@@ -68,14 +68,14 @@ export function DezoContactForm() {
   };
 
   const inputBase =
-    'w-full bg-white border-2 border-dezo-ink rounded-none px-4 py-3 font-mono text-xs sm:text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none focus:border-dezo-primary focus:ring-2 focus:ring-dezo-primary/20 shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all';
+    'w-full bg-white border border-dezo-border rounded-dezo-md px-4 py-3 text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none focus:border-dezo-primary focus:ring-2 focus:ring-dezo-primary/20 shadow-xs focus:shadow-dezo-card transition-all';
 
   return (
     <div className="w-full">
       {status === 'success' && (
         <div
           role="status"
-          className="mb-6 p-5 rounded-none bg-emerald-50 border-2 border-emerald-600 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-dezo-text-primary animate-fade-in shadow-[4px_4px_0_0_#059669]"
+          className="mb-6 p-5 rounded-dezo-md bg-emerald-50 border border-emerald-600 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-dezo-text-primary animate-fade-in shadow-dezo-card"
         >
           <div className="flex items-start gap-3">
             <CheckCircle2 size={22} className="shrink-0 mt-0.5 text-emerald-600" />
@@ -93,7 +93,7 @@ export function DezoContactForm() {
               href={fallbackUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-dezo-ink text-white font-mono text-xs font-bold uppercase tracking-wider hover:bg-dezo-primary hover:text-dezo-ink transition-colors whitespace-nowrap shrink-0 border border-dezo-ink shadow-[2px_2px_0_0_#B08D57]"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-dezo-ink text-white font-mono text-xs font-bold uppercase tracking-wider hover:bg-dezo-primary hover:text-dezo-ink transition-colors whitespace-nowrap shrink-0 border border-dezo-ink shadow-xs"
             >
               <MessageSquare size={14} /> Open WhatsApp
             </a>
@@ -104,7 +104,7 @@ export function DezoContactForm() {
       {status === 'error' && (
         <div
           role="alert"
-          className="mb-6 p-4 rounded-none bg-red-50 border-2 border-red-600 flex items-center gap-3 text-red-900 shadow-[4px_4px_0_0_#DC2626]"
+          className="mb-6 p-4 rounded-dezo-md bg-red-50 border border-red-600 flex items-center gap-3 text-red-900 shadow-xs"
         >
           <AlertCircle size={20} className="shrink-0 text-red-600" />
           <p className="font-mono text-xs font-bold">{errorMessage || 'Something went wrong. Please try again or message directly via WhatsApp.'}</p>

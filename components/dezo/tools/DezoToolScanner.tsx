@@ -213,7 +213,7 @@ export function DezoToolScanner({
                 onChange={(e) => setInputVal(e.target.value)}
                 placeholder={currentMeta.placeholder}
                 disabled={status === 'scanning'}
-                className="w-full pl-10 pr-4 py-3.5 font-mono text-xs sm:text-sm rounded-none bg-white border-2 border-dezo-ink text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none focus:border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A] focus:shadow-[4px_4px_0_0_#B08D57] transition-all disabled:opacity-60"
+                className="w-full pl-10 pr-4 py-3.5 font-mono text-xs sm:text-sm rounded-dezo-md bg-white border border-dezo-border text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none focus:border-dezo-ink shadow-xs focus:shadow-dezo-card transition-all disabled:opacity-60"
               />
             </div>
 
@@ -221,7 +221,7 @@ export function DezoToolScanner({
               type="submit"
               disabled={status === 'scanning' || !inputVal.trim()}
               whileTap={reduced ? undefined : { scale: 0.98 }}
-              className="px-6 py-3.5 rounded-none bg-dezo-ink hover:bg-dezo-primary text-white hover:text-dezo-ink border-2 border-dezo-ink font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-[3px_3px_0_0_#B08D57] hover:shadow-[4px_4px_0_0_#0B0B0A] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
+              className="px-6 py-3.5 rounded-dezo-md bg-dezo-ink hover:bg-dezo-primary text-white hover:text-dezo-ink border border-dezo-border font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-dezo-card hover:shadow-dezo-card flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
             >
               {status === 'scanning' ? (
                 <>

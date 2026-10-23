@@ -125,7 +125,7 @@ export default async function LocationDetailPage({
             </p>
 
             {/* Studio Identity Callout */}
-            <div className="mt-8 p-5 bg-dezo-bg border-2 border-dezo-ink shadow-[4px_4px_0_0_#0B0B0A] max-w-3xl">
+            <div className="mt-8 p-5 bg-dezo-bg border border-dezo-border shadow-dezo-card max-w-3xl">
               <div className="flex items-center gap-2 text-dezo-primary font-mono text-xs uppercase tracking-wider font-bold mb-1.5">
                 <ShieldCheck size={15} /> Authentic Studio Transparency
               </div>
@@ -140,13 +140,13 @@ export default async function LocationDetailPage({
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href={`/start-a-project?location=${encodeURIComponent(loc.cityName)}`}
-                className="px-7 py-3.5 bg-dezo-ink text-dezo-bg text-xs font-mono uppercase tracking-wider font-bold border-2 border-dezo-ink hover:bg-dezo-primary hover:text-dezo-ink transition-all shadow-[4px_4px_0_0_#B08D57] inline-flex items-center gap-2"
+                className="px-7 py-3.5 bg-dezo-ink text-dezo-bg text-xs font-mono uppercase tracking-wider font-bold border border-dezo-border hover:bg-dezo-primary hover:text-dezo-ink transition-all shadow-dezo-card inline-flex items-center gap-2"
               >
                 Grow Your {loc.cityName} Business <ArrowRight size={14} />
               </Link>
               <Link
                 href="/book-strategy-call"
-                className="px-7 py-3.5 bg-dezo-bg text-dezo-ink text-xs font-mono uppercase tracking-wider font-bold border-2 border-dezo-ink hover:bg-dezo-bg-warm transition-all shadow-[4px_4px_0_0_#0B0B0A]"
+                className="px-7 py-3.5 bg-dezo-bg text-dezo-ink text-xs font-mono uppercase tracking-wider font-bold border border-dezo-border hover:bg-dezo-bg-warm transition-all shadow-dezo-card"
               >
                 Book Virtual Strategy Call
               </Link>
@@ -161,7 +161,7 @@ export default async function LocationDetailPage({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             {/* Left 6 cols: Local Challenges */}
             <div className="lg:col-span-6">
-              <div className="bg-dezo-bg-warm border-2 border-dezo-ink p-7 sm:p-9 shadow-[4px_4px_0_0_#0B0B0A] h-full flex flex-col justify-between">
+              <div className="bg-dezo-bg-warm border border-dezo-border p-7 sm:p-9 shadow-dezo-card h-full flex flex-col justify-between">
                 <div>
                   <span className="font-mono text-xs uppercase tracking-wider text-red-600 font-bold flex items-center gap-1.5 mb-2">
                     <AlertTriangle size={14} /> Regional Market Friction
@@ -198,7 +198,7 @@ export default async function LocationDetailPage({
 
             {/* Right 6 cols: Recommended Services */}
             <div className="lg:col-span-6">
-              <div className="bg-dezo-bg-warm border-2 border-dezo-ink p-7 sm:p-9 shadow-[4px_4px_0_0_#0B0B0A] h-full flex flex-col justify-between">
+              <div className="bg-dezo-bg-warm border border-dezo-border p-7 sm:p-9 shadow-dezo-card h-full flex flex-col justify-between">
                 <div>
                   <span className="font-mono text-xs uppercase tracking-wider text-dezo-primary font-bold flex items-center gap-1.5 mb-2">
                     <Building size={14} /> Recommended Capabilities
@@ -210,7 +210,7 @@ export default async function LocationDetailPage({
                     {recommendedServices.map((srv) => {
                       if (!srv) return null;
                       return (
-                        <div key={srv.id} className="bg-dezo-bg p-5 border-2 border-dezo-ink shadow-[2px_2px_0_0_#0B0B0A]">
+                        <div key={srv.id} className="bg-dezo-bg p-5 border border-dezo-border shadow-xs">
                           <div className="flex items-center justify-between mb-2">
                             <h3 className="font-display text-lg font-bold text-dezo-ink">
                               {srv.name}
@@ -261,7 +261,7 @@ export default async function LocationDetailPage({
               {loc.faqs.map((faq, idx) => (
                 <div
                   key={idx}
-                  className="bg-dezo-bg border-2 border-dezo-ink p-6 shadow-[3px_3px_0_0_#0B0B0A]"
+                  className="bg-dezo-bg border border-dezo-border p-6 shadow-dezo-card"
                 >
                   <h3 className="font-display text-lg font-bold text-dezo-ink flex items-start gap-2.5">
                     <span className="font-mono text-dezo-primary font-bold">Q:</span>
@@ -295,7 +295,7 @@ export default async function LocationDetailPage({
             </div>
             <Link
               href={`/start-a-project?location=${encodeURIComponent(loc.cityName)}`}
-              className="px-8 py-4 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold border-2 border-white hover:bg-white transition-all shadow-[4px_4px_0_0_#FFFFFF] inline-flex items-center gap-2"
+              className="px-8 py-4 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold border border-white/80 hover:bg-white transition-all shadow-dezo-soft inline-flex items-center gap-2"
             >
               Start Your Project <ArrowRight size={16} />
             </Link>

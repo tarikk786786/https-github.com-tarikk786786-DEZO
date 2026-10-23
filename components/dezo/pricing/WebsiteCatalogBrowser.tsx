@@ -52,7 +52,7 @@ export function WebsiteCatalogBrowser() {
   }, [searchQuery, selectedCategory]);
 
   return (
-    <div className="w-full bg-dezo-bg border-2 border-dezo-ink p-6 sm:p-10 shadow-[6px_6px_0_0_#0B0B0A]" id="website-catalog">
+    <div className="w-full bg-dezo-bg border border-dezo-border p-6 sm:p-10 shadow-dezo-soft" id="website-catalog">
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b-2 border-dezo-ink">
         <div>
@@ -87,7 +87,7 @@ export function WebsiteCatalogBrowser() {
             placeholder="Search by website type, industry, or tech (e.g., 'school', 'shopify', 'restaurant', 'real estate', 'doctor')..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 bg-dezo-bg-warm border-2 border-dezo-ink font-mono text-xs text-dezo-ink placeholder-dezo-text-muted focus:outline-none focus:bg-white shadow-[2px_2px_0_0_#0B0B0A]"
+            className="w-full pl-10 pr-4 py-3 bg-dezo-bg-warm border border-dezo-border font-mono text-xs text-dezo-ink placeholder-dezo-text-muted focus:outline-none focus:bg-white shadow-xs"
           />
         </div>
 
@@ -111,7 +111,7 @@ export function WebsiteCatalogBrowser() {
               onClick={() => setSelectedCategory(cat.id)}
               className={`px-3.5 py-1.5 text-xs font-mono uppercase tracking-wider border-2 transition-all cursor-pointer ${
                 isSelected
-                  ? 'bg-dezo-ink text-dezo-bg border-dezo-ink font-bold shadow-[2px_2px_0_0_#B08D57]'
+                  ? 'bg-dezo-ink text-dezo-bg border-dezo-ink font-bold shadow-xs'
                   : 'bg-dezo-bg-warm text-dezo-text-secondary border-dezo-border hover:border-dezo-ink hover:text-dezo-ink'
               }`}
             >
@@ -140,7 +140,7 @@ export function WebsiteCatalogBrowser() {
           {filteredItems.map((item) => (
             <div
               key={item.id}
-              className="bg-dezo-bg border-2 border-dezo-ink p-6 shadow-[3px_3px_0_0_#0B0B0A] flex flex-col justify-between hover:shadow-[5px_5px_0_0_#B08D57] transition-all"
+              className="bg-dezo-bg border border-dezo-border p-6 shadow-dezo-card flex flex-col justify-between hover:shadow-dezo-card transition-all"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
@@ -161,7 +161,7 @@ export function WebsiteCatalogBrowser() {
                 </p>
 
                 {/* Price Display */}
-                <div className="p-3 bg-dezo-bg-warm border-2 border-dezo-ink mb-4 flex items-baseline justify-between">
+                <div className="p-3 bg-dezo-bg-warm border border-dezo-border mb-4 flex items-baseline justify-between">
                   <span className="text-[11px] font-mono uppercase text-dezo-text-muted font-bold">
                     Starting from:
                   </span>
@@ -223,7 +223,7 @@ export function WebsiteCatalogBrowser() {
       )}
 
       {/* Pricing Clarification Notice */}
-      <div className="mt-8 p-4 bg-dezo-bg-warm border-2 border-dezo-ink flex items-start gap-3 text-xs font-mono text-dezo-text-secondary">
+      <div className="mt-8 p-4 bg-dezo-bg-warm border border-dezo-border flex items-start gap-3 text-xs font-mono text-dezo-text-secondary">
         <Info size={16} className="text-dezo-primary shrink-0 mt-0.5" />
         <p className="leading-relaxed">
           <strong className="text-dezo-ink">Pricing Transparency Notice:</strong> All listed rates represent introductory starting prices for tightly scoped baseline implementations. The final quotation depends on your exact page count, content readiness, third-party API integrations, and technical complexity. Every project begins with a documented Scope Lock agreement before payment.

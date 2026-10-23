@@ -150,13 +150,13 @@ export default async function ServiceDetailPage({
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href={`/start-a-project?service=${service.slug}`}
-                className="px-7 py-3.5 bg-dezo-ink text-dezo-bg text-xs font-mono uppercase tracking-wider font-bold border-2 border-dezo-ink hover:bg-dezo-primary hover:text-dezo-ink transition-all shadow-[4px_4px_0_0_#B08D57] inline-flex items-center gap-2"
+                className="px-7 py-3.5 bg-dezo-ink text-dezo-bg text-xs font-mono uppercase tracking-wider font-bold border border-dezo-border hover:bg-dezo-primary hover:text-dezo-ink transition-all shadow-dezo-card inline-flex items-center gap-2"
               >
                 Request Scoped Quote <ArrowRight size={14} />
               </Link>
               <Link
                 href="/book-strategy-call"
-                className="px-7 py-3.5 bg-dezo-bg text-dezo-ink text-xs font-mono uppercase tracking-wider font-bold border-2 border-dezo-ink hover:bg-dezo-bg-warm transition-all shadow-[4px_4px_0_0_#0B0B0A]"
+                className="px-7 py-3.5 bg-dezo-bg text-dezo-ink text-xs font-mono uppercase tracking-wider font-bold border border-dezo-border hover:bg-dezo-bg-warm transition-all shadow-dezo-card"
               >
                 Book 20-Min Strategy Call
               </Link>
@@ -171,7 +171,7 @@ export default async function ServiceDetailPage({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             {/* Left 7 cols: What is Included */}
             <div className="lg:col-span-7">
-              <div className="bg-dezo-bg-warm border-2 border-dezo-ink p-7 sm:p-9 shadow-[4px_4px_0_0_#0B0B0A]">
+              <div className="bg-dezo-bg-warm border border-dezo-border p-7 sm:p-9 shadow-dezo-card">
                 <span className="font-mono text-xs uppercase tracking-wider text-dezo-primary block mb-2 font-bold">
                   Documented Scope
                 </span>
@@ -206,7 +206,7 @@ export default async function ServiceDetailPage({
             {/* Right 5 cols: Target Industries & Tech Stack */}
             <div className="lg:col-span-5 space-y-8">
               {/* Target Industries */}
-              <div className="bg-dezo-bg-warm border-2 border-dezo-ink p-6 sm:p-7 shadow-[4px_4px_0_0_#0B0B0A]">
+              <div className="bg-dezo-bg-warm border border-dezo-border p-6 sm:p-7 shadow-dezo-card">
                 <span className="font-mono text-xs uppercase tracking-wider text-dezo-primary block mb-1 font-bold">
                   Recommended For
                 </span>
@@ -226,7 +226,7 @@ export default async function ServiceDetailPage({
               </div>
 
               {/* Tools & Platforms */}
-              <div className="bg-dezo-bg border-2 border-dezo-ink p-6 sm:p-7 shadow-[4px_4px_0_0_#0B0B0A]">
+              <div className="bg-dezo-bg border border-dezo-border p-6 sm:p-7 shadow-dezo-card">
                 <div className="flex items-center gap-2 mb-4">
                   <Wrench size={16} className="text-dezo-primary" />
                   <h3 className="font-display text-xl font-bold uppercase text-dezo-ink">
@@ -246,7 +246,7 @@ export default async function ServiceDetailPage({
               </div>
 
               {/* Accountability Box */}
-              <div className="bg-dezo-ink text-dezo-bg border-2 border-dezo-ink p-6 sm:p-7 shadow-[4px_4px_0_0_#B08D57]">
+              <div className="bg-dezo-ink text-dezo-bg border border-dezo-border p-6 sm:p-7 shadow-dezo-card">
                 <div className="flex items-center gap-2 text-dezo-primary mb-2">
                   <ShieldCheck size={18} />
                   <span className="font-mono text-xs uppercase tracking-wider font-bold">
@@ -278,7 +278,7 @@ export default async function ServiceDetailPage({
             {service.process.map((step, idx) => (
               <div
                 key={idx}
-                className="bg-dezo-bg border-2 border-dezo-ink p-6 shadow-[3px_3px_0_0_#0B0B0A] flex flex-col justify-between"
+                className="bg-dezo-bg border border-dezo-border p-6 shadow-dezo-card flex flex-col justify-between"
               >
                 <div>
                   <span className="font-mono text-xs font-bold text-dezo-primary block mb-2">
@@ -395,7 +395,7 @@ export default async function ServiceDetailPage({
               {service.faqs.map((faq, idx) => (
                 <div
                   key={idx}
-                  className="bg-dezo-bg-warm border-2 border-dezo-ink p-6 shadow-[3px_3px_0_0_#0B0B0A]"
+                  className="bg-dezo-bg-warm border border-dezo-border p-6 shadow-dezo-card"
                 >
                   <h3 className="font-display text-lg font-bold text-dezo-ink flex items-start gap-2.5">
                     <span className="font-mono text-dezo-primary font-bold">Q:</span>
@@ -437,7 +437,7 @@ export default async function ServiceDetailPage({
                 <Link
                   key={rSrv.id}
                   href={`/services/${rSrv.slug}`}
-                  className="group bg-dezo-bg border-2 border-dezo-ink p-6 shadow-[3px_3px_0_0_#0B0B0A] hover:shadow-[5px_5px_0_0_#B08D57] transition-all flex flex-col justify-between"
+                  className="group bg-dezo-bg border border-dezo-border p-6 shadow-dezo-card hover:shadow-dezo-card transition-all flex flex-col justify-between"
                 >
                   <div>
                     <span className="font-mono text-[11px] font-bold text-dezo-primary block mb-2">
@@ -478,7 +478,7 @@ export default async function ServiceDetailPage({
             </div>
             <Link
               href={`/start-a-project?service=${service.slug}`}
-              className="px-8 py-4 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold border-2 border-white hover:bg-white transition-all shadow-[4px_4px_0_0_#FFFFFF] inline-flex items-center gap-2"
+              className="px-8 py-4 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold border border-white/80 hover:bg-white transition-all shadow-dezo-soft inline-flex items-center gap-2"
             >
               Start This Project <ArrowRight size={16} />
             </Link>

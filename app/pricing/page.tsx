@@ -184,7 +184,7 @@ export default function PricingPage() {
             {PRICING_FAQS.map((faq, idx) => (
               <div
                 key={idx}
-                className="bg-dezo-bg border-2 border-dezo-ink p-6 shadow-[3px_3px_0_0_#0B0B0A]"
+                className="bg-dezo-bg border border-dezo-border p-6 shadow-dezo-card"
               >
                 <h3 className="font-display text-lg font-bold text-dezo-ink flex items-start gap-2.5">
                   <span className="font-mono text-dezo-primary font-bold">Q:</span>

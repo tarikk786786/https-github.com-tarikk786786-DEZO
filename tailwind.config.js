@@ -21,6 +21,9 @@ export default {
           'primary-hover': '#9A7A48',
           accent: '#B08D57',
           'accent-soft': 'rgba(176, 141, 87, 0.12)',
+          /** Aliases — black + gold luxury system */
+          gold: '#B08D57',
+          paper: '#F5F3EE',
           secondary: '#161616',
           ink: '#0B0B0A',
           success: '#3D6B4F',

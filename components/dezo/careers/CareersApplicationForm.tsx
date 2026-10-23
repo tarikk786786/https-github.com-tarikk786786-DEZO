@@ -80,7 +80,7 @@ export function CareersApplicationForm() {
   };
 
   return (
-    <div id="apply" className="w-full bg-dezo-bg border-2 border-dezo-ink p-7 sm:p-10 shadow-[6px_6px_0_0_#0B0B0A]">
+    <div id="apply" className="w-full bg-dezo-bg border border-dezo-border p-7 sm:p-10 shadow-dezo-soft">
       <div className="max-w-3xl mb-8">
         <span className="font-mono text-xs uppercase tracking-wider text-dezo-primary font-bold block mb-2">
           Application Portal
@@ -102,7 +102,7 @@ export function CareersApplicationForm() {
           onClick={() => setActiveTab('whatsapp')}
           className={`px-6 py-3 font-mono text-xs uppercase tracking-wider font-bold border-t-2 border-x-2 -mb-[2px] transition-all flex items-center gap-2 ${
             activeTab === 'whatsapp'
-              ? 'bg-emerald-600 text-white border-dezo-ink shadow-[2px_-2px_0_0_#0B0B0A]'
+              ? 'bg-emerald-600 text-white border-dezo-ink shadow-xs'
               : 'bg-dezo-bg-warm text-dezo-text-secondary border-transparent hover:text-dezo-ink'
           }`}
         >
@@ -113,7 +113,7 @@ export function CareersApplicationForm() {
           onClick={() => setActiveTab('form')}
           className={`px-6 py-3 font-mono text-xs uppercase tracking-wider font-bold border-t-2 border-x-2 -mb-[2px] transition-all flex items-center gap-2 ${
             activeTab === 'form'
-              ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-[2px_-2px_0_0_#0B0B0A]'
+              ? 'bg-dezo-ink text-dezo-bg border-dezo-ink shadow-xs'
               : 'bg-dezo-bg-warm text-dezo-text-secondary border-transparent hover:text-dezo-ink'
           }`}
         >
@@ -124,7 +124,7 @@ export function CareersApplicationForm() {
       {/* OPTION A: WhatsApp Application Flow */}
       {activeTab === 'whatsapp' && (
         <div className="space-y-6">
-          <div className="bg-dezo-bg-warm border-2 border-dezo-ink p-6 sm:p-8">
+          <div className="bg-dezo-bg-warm border border-dezo-border p-6 sm:p-8">
             <div className="max-w-2xl mb-6">
               <label className="block text-xs font-mono uppercase tracking-wider text-dezo-ink font-bold mb-2">
                 Select Your Preferred Learning Track:
@@ -132,7 +132,7 @@ export function CareersApplicationForm() {
               <select
                 value={selectedTrack}
                 onChange={(e) => setSelectedTrack(e.target.value)}
-                className="w-full px-4 py-3 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary cursor-pointer"
+                className="w-full px-4 py-3 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary cursor-pointer"
               >
                 {CAREER_TRACKS.map((t) => (
                   <option key={t.id} value={t.name}>
@@ -164,7 +164,7 @@ export function CareersApplicationForm() {
               href={whatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 bg-emerald-600 text-white font-mono text-xs uppercase tracking-wider font-bold border-2 border-dezo-ink hover:bg-emerald-700 transition-all shadow-[4px_4px_0_0_#0B0B0A] inline-flex items-center gap-2"
+              className="px-8 py-4 bg-emerald-600 text-white font-mono text-xs uppercase tracking-wider font-bold border border-dezo-border hover:bg-emerald-700 transition-all shadow-dezo-card inline-flex items-center gap-2"
             >
               <MessageSquare size={16} /> Apply on WhatsApp (+91 9114411026) <ExternalLink size={14} />
             </a>
@@ -181,8 +181,8 @@ export function CareersApplicationForm() {
       {activeTab === 'form' && (
         <div>
           {submitted ? (
-            <div className="bg-dezo-bg-warm border-2 border-dezo-ink p-8 text-center">
-              <div className="w-12 h-12 bg-emerald-600 text-white border-2 border-dezo-ink rounded-none flex items-center justify-center mx-auto mb-4">
+            <div className="bg-dezo-bg-warm border border-dezo-border p-8 text-center">
+              <div className="w-12 h-12 bg-emerald-600 text-white border border-dezo-border rounded-dezo-md flex items-center justify-center mx-auto mb-4">
                 <CheckCircle2 size={24} />
               </div>
               <h4 className="font-display text-2xl font-bold uppercase text-dezo-ink">
@@ -197,7 +197,7 @@ export function CareersApplicationForm() {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleFormSubmit} className="space-y-5 bg-dezo-bg-warm border-2 border-dezo-ink p-6 sm:p-8">
+            <form onSubmit={handleFormSubmit} className="space-y-5 bg-dezo-bg-warm border border-dezo-border p-6 sm:p-8">
               {errorMessage && (
                 <div className="p-3 bg-red-100 border-2 border-red-600 text-red-900 text-xs font-mono flex items-center gap-2">
                   <AlertCircle size={14} /> {errorMessage}
@@ -215,7 +215,7 @@ export function CareersApplicationForm() {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="e.g., Ananya Mohanty"
-                    className="w-full px-4 py-2.5 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                    className="w-full px-4 py-2.5 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
                   />
                 </div>
 
@@ -231,7 +231,7 @@ export function CareersApplicationForm() {
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
                     placeholder="e.g., 24"
-                    className="w-full px-4 py-2.5 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                    className="w-full px-4 py-2.5 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
                   />
                 </div>
 
@@ -242,7 +242,7 @@ export function CareersApplicationForm() {
                   <select
                     value={qualification}
                     onChange={(e) => setQualification(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                    className="w-full px-4 py-2.5 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
                   >
                     <option value="Class 12 Pass">Class 12 Pass</option>
                     <option value="Undergraduate Student">Currently in College / Degree</option>
@@ -262,7 +262,7 @@ export function CareersApplicationForm() {
                     value={cityState}
                     onChange={(e) => setCityState(e.target.value)}
                     placeholder="e.g., Bhubaneswar, Odisha"
-                    className="w-full px-4 py-2.5 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                    className="w-full px-4 py-2.5 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
                   />
                 </div>
 
@@ -276,7 +276,7 @@ export function CareersApplicationForm() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+91 91144 11026"
-                    className="w-full px-4 py-2.5 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                    className="w-full px-4 py-2.5 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
                   />
                 </div>
 
@@ -289,7 +289,7 @@ export function CareersApplicationForm() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className="w-full px-4 py-2.5 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                    className="w-full px-4 py-2.5 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
                   />
                 </div>
 
@@ -300,7 +300,7 @@ export function CareersApplicationForm() {
                   <select
                     value={selectedTrack}
                     onChange={(e) => setSelectedTrack(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                    className="w-full px-4 py-2.5 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
                   >
                     {CAREER_TRACKS.map((t) => (
                       <option key={t.id} value={t.name}>
@@ -321,7 +321,7 @@ export function CareersApplicationForm() {
                     type="checkbox"
                     checked={hasLaptop}
                     onChange={(e) => setHasLaptop(e.target.checked)}
-                    className="w-4 h-4 rounded-none border-2 border-dezo-ink text-dezo-primary focus:ring-0"
+                    className="w-4 h-4 rounded-dezo-md border border-dezo-border text-dezo-primary focus:ring-0"
                   />
                   <span>I have a personal laptop or computer for completing assignments *</span>
                 </label>
@@ -330,7 +330,7 @@ export function CareersApplicationForm() {
                     type="checkbox"
                     checked={hasInternet}
                     onChange={(e) => setHasInternet(e.target.checked)}
-                    className="w-4 h-4 rounded-none border-2 border-dezo-ink text-dezo-primary focus:ring-0"
+                    className="w-4 h-4 rounded-dezo-md border border-dezo-border text-dezo-primary focus:ring-0"
                   />
                   <span>I have a stable broadband or 4G internet connection *</span>
                 </label>
@@ -345,7 +345,7 @@ export function CareersApplicationForm() {
                   value={portfolioUrl}
                   onChange={(e) => setPortfolioUrl(e.target.value)}
                   placeholder="https://linkedin.com/in/... or Google Drive link"
-                  className="w-full px-4 py-2.5 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                  className="w-full px-4 py-2.5 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
                 />
               </div>
 
@@ -359,7 +359,7 @@ export function CareersApplicationForm() {
                   value={intro}
                   onChange={(e) => setIntro(e.target.value)}
                   placeholder="Tell us about yourself, why you want to learn digital marketing, and your daily availability..."
-                  className="w-full px-4 py-2.5 bg-dezo-bg border-2 border-dezo-ink text-xs font-mono text-dezo-ink focus:border-dezo-primary"
+                  className="w-full px-4 py-2.5 bg-dezo-bg border border-dezo-border text-xs font-mono text-dezo-ink focus:border-dezo-primary"
                 />
               </div>
 
@@ -370,7 +370,7 @@ export function CareersApplicationForm() {
                     required
                     checked={consent}
                     onChange={(e) => setConsent(e.target.checked)}
-                    className="w-4 h-4 mt-0.5 rounded-none border-2 border-dezo-ink text-dezo-primary focus:ring-0"
+                    className="w-4 h-4 mt-0.5 rounded-dezo-md border border-dezo-border text-dezo-primary focus:ring-0"
                   />
                   <span>
                     I consent to DEZO processing my details for recruitment, evaluation, and communication in accordance
@@ -386,7 +386,7 @@ export function CareersApplicationForm() {
               <button
                 type="submit"
                 disabled={submitting || !hasLaptop || !hasInternet}
-                className="px-8 py-3.5 bg-dezo-ink text-dezo-bg font-mono text-xs uppercase tracking-wider font-bold border-2 border-dezo-ink hover:bg-dezo-primary hover:text-dezo-ink transition-all shadow-[4px_4px_0_0_#B08D57] inline-flex items-center gap-2 disabled:opacity-50"
+                className="px-8 py-3.5 bg-dezo-ink text-dezo-bg font-mono text-xs uppercase tracking-wider font-bold border border-dezo-border hover:bg-dezo-primary hover:text-dezo-ink transition-all shadow-dezo-card inline-flex items-center gap-2 disabled:opacity-50"
               >
                 {submitting ? 'Submitting Application...' : 'Submit Application Form'} <Send size={14} />
               </button>

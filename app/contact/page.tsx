@@ -80,7 +80,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-7 border-2 border-dezo-ink bg-white p-6 sm:p-8 shadow-[6px_6px_0_0_#0B0B0A]">
+            <div className="lg:col-span-7 border border-dezo-border bg-white p-6 sm:p-8 shadow-dezo-soft">
               <DezoContactForm />
             </div>
           </div>

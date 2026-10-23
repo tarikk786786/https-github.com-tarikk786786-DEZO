@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 export function WebsiteConfidencePromise() {
   return (
-    <div className="w-full bg-dezo-bg-warm border-2 border-dezo-ink p-6 sm:p-10 shadow-[6px_6px_0_0_#0B0B0A]" id="website-promise">
+    <div className="w-full bg-dezo-bg-warm border border-dezo-border p-6 sm:p-10 shadow-dezo-soft" id="website-promise">
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b-2 border-dezo-ink">
         <div>
@@ -40,7 +40,7 @@ export function WebsiteConfidencePromise() {
         {WEBSITE_CONFIDENCE_PROMISES.map((item) => (
           <div
             key={item.number}
-            className="bg-dezo-bg border-2 border-dezo-ink p-6 shadow-[3px_3px_0_0_#0B0B0A] flex flex-col justify-between"
+            className="bg-dezo-bg border border-dezo-border p-6 shadow-dezo-card flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between gap-2 mb-2">
@@ -76,7 +76,7 @@ export function WebsiteConfidencePromise() {
       </div>
 
       {/* 30-Day Defect-Fix Warranty Banner */}
-      <div className="p-6 sm:p-8 bg-dezo-ink text-dezo-bg border-2 border-dezo-ink flex flex-col lg:flex-row lg:items-center justify-between gap-6 shadow-[4px_4px_0_0_#B08D57]">
+      <div className="p-6 sm:p-8 bg-dezo-ink text-dezo-bg border border-dezo-border flex flex-col lg:flex-row lg:items-center justify-between gap-6 shadow-dezo-card">
         <div className="max-w-2xl">
           <div className="flex items-center gap-2 text-dezo-primary mb-2 font-mono text-xs uppercase tracking-wider font-bold">
             <Lock size={14} />
@@ -93,7 +93,7 @@ export function WebsiteConfidencePromise() {
         <div className="flex flex-col sm:flex-row gap-3 shrink-0">
           <Link
             href="/start-a-project"
-            className="px-6 py-3 bg-dezo-primary text-dezo-ink text-xs font-mono uppercase tracking-wider font-bold hover:bg-white transition-colors flex items-center justify-center gap-2 border-2 border-white"
+            className="px-6 py-3 bg-dezo-primary text-dezo-ink text-xs font-mono uppercase tracking-wider font-bold hover:bg-white transition-colors flex items-center justify-center gap-2 border border-white/80"
           >
             Start Protected Project <ArrowRight size={14} />
           </Link>

@@ -106,7 +106,7 @@ export function PromiseHomeTeaser() {
           <div className="lg:col-span-5 flex lg:justify-end">
             <Link
               href="/promise"
-              className="px-6 py-3 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold hover:bg-white transition-all shadow-[4px_4px_0_0_#FFFFFF] border border-dezo-primary inline-block text-center"
+              className="px-6 py-3 bg-dezo-primary text-dezo-ink font-mono text-xs uppercase tracking-wider font-bold hover:bg-white transition-all shadow-dezo-soft border border-dezo-primary inline-block text-center"
             >
               Read Full Guarantee &amp; Warranties &rarr;
             </Link>

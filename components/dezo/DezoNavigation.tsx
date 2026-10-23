@@ -58,6 +58,17 @@ export function DezoNavigation() {
   }, [pathname]);
 
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setServicesOpen(false);
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
   }, [mobileMenuOpen]);
 

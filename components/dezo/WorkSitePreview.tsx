@@ -6,8 +6,7 @@ import { useReducedMotion } from '@/lib/motion/useReducedMotion';
 import { LiveSitePreview } from '@/components/dezo/LiveSitePreview';
 
 /**
- * Work website preview — clean Brutalist browser frame with interactive elevation.
- * Removed continuous dizzying pan; replaced with refined hover depth.
+ * Work website preview — refined browser frame with soft luxury chrome.
  */
 export function WorkSitePreview({
   url,
@@ -27,36 +26,30 @@ export function WorkSitePreview({
 
   return (
     <motion.div
-      className={`relative h-full w-full overflow-hidden bg-white ${className}`}
-      initial={
-        reduced ? false : { opacity: 0.8 }
-      }
-      whileInView={
-        reduced ? undefined : { opacity: 1 }
-      }
+      className={`relative h-full w-full overflow-hidden bg-white rounded-dezo-lg border border-dezo-border shadow-dezo-card ${className}`}
+      initial={reduced ? false : { opacity: 0.8 }}
+      whileInView={reduced ? undefined : { opacity: 1 }}
       viewport={{ once: true, margin: '-40px', amount: 0.25 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
-      {/* Brutalist Browser Top Chrome */}
       <div
-        className="absolute inset-x-0 top-0 z-20 flex h-7 items-center justify-between border-b-2 border-dezo-ink bg-[#FAF8F5] px-2.5 sm:h-8 sm:px-3 select-none"
+        className="absolute inset-x-0 top-0 z-20 flex h-7 items-center justify-between border-b border-dezo-border bg-dezo-bg-warm/90 px-2.5 sm:h-8 sm:px-3 select-none"
         aria-hidden
       >
         <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-none bg-dezo-ink border border-dezo-ink" />
-          <span className="h-2 w-2 rounded-none bg-dezo-primary border border-dezo-ink" />
-          <span className="h-2 w-2 rounded-none bg-white border border-dezo-ink" />
+          <span className="h-2 w-2 rounded-full bg-dezo-primary/50"></span>
+          <span className="h-2 w-2 rounded-full bg-dezo-primary/80"></span>
+          <span className="h-2 w-2 rounded-full bg-dezo-ink/20"></span>
         </div>
-        <span className="flex h-4 items-center truncate px-2 font-mono text-[9px] font-bold text-dezo-ink sm:text-[10px] tracking-wide">
+        <span className="flex h-4 max-w-[14rem] items-center truncate rounded-dezo-sm bg-white/80 px-2 font-mono text-[9px] text-dezo-text-muted sm:text-[10px] tracking-wide">
           {url.replace(/^https?:\/\//, '').replace(/\/$/, '')}
         </span>
-        <span className="font-mono text-[8px] font-bold uppercase tracking-widest text-dezo-primary bg-dezo-ink text-white px-1.5 py-0.2">
-          LIVE
+        <span className="font-mono text-[8px] font-semibold uppercase tracking-widest text-dezo-primary">
+          Live
         </span>
       </div>
 
-      {/* Site surface container */}
-      <div className="absolute inset-0 pt-7 sm:pt-8 overflow-hidden bg-[#FAF8F5]">
+      <div className="absolute inset-0 pt-7 sm:pt-8 overflow-hidden bg-dezo-bg-warm">
         <LiveSitePreview
           url={url}
           title={title}

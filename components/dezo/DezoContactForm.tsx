@@ -216,6 +216,7 @@ export function DezoContactForm() {
               <option value="Amazon & Flipkart Growth">Amazon & Flipkart Marketplace Management</option>
               <option value="SEO & Organic Growth">SEO & Local Google Maps Visibility</option>
               <option value="Meta & Google Ads">Meta & Google Performance Ads</option>
+              <option value="Influencer Marketing">Influencer Marketing & Creator Campaigns</option>
               <option value="AI & Automation">AI & Workflow Automation (WhatsApp Bot)</option>
               <option value="Bespoke Engineering">Bespoke Engineering</option>
             </select>

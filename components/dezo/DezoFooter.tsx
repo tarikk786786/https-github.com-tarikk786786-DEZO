@@ -78,9 +78,24 @@ export function DezoFooter() {
                   Full Growth Systems
                 </Link>
               </li>
+              <li>
+                <Link href="/influencer-marketing" className="hover:text-dezo-primary transition-colors">
+                  Influencer Marketing
+                </Link>
+              </li>
+              <li>
+                <Link href="/for-brands" className="hover:text-dezo-primary transition-colors">
+                  For Brands
+                </Link>
+              </li>
+              <li>
+                <Link href="/for-creators" className="hover:text-dezo-primary transition-colors">
+                  For Creators
+                </Link>
+              </li>
               <li className="pt-2">
                 <Link href="/services" className="text-dezo-primary hover:text-white inline-flex items-center gap-1">
-                  All 12 Departments →
+                  All departments →
                 </Link>
               </li>
             </ul>

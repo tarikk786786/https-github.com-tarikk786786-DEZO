@@ -33,6 +33,7 @@ import {
   chapterBanners,
   marketplaceBanner,
 } from '@/content/banners';
+import { dualPaths, influencerServices } from '@/content/influencer';
 import { motion } from 'motion/react';
 import { useReducedMotion } from '@/lib/motion/useReducedMotion';
 import {
@@ -178,6 +179,46 @@ export default function HomePage() {
           </DezoContainer>
         </div>
       </section>
+
+      {/* Dual path — brands & creators */}
+      <DezoSection spacing="normal" className="bg-dezo-bg border-b border-dezo-border">
+        <DezoContainer size="wide">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            {dualPaths.map((path) => (
+              <Link
+                key={path.id}
+                href={path.href}
+                className="group block border border-dezo-border p-8 hover:border-dezo-primary transition-colors bg-dezo-surface"
+              >
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dezo-primary mb-3">
+                  {path.eyebrow}
+                </p>
+                <h2 className="font-display text-2xl sm:text-3xl text-dezo-text-primary mb-3 group-hover:text-dezo-primary transition-colors">
+                  {path.title}
+                </h2>
+                <p className="text-sm text-dezo-text-secondary leading-relaxed mb-6">{path.body}</p>
+                <span className="text-sm font-semibold text-dezo-primary">{path.cta} →</span>
+              </Link>
+            ))}
+          </div>
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
+            <DezoHeading badge="Influencer division" as="h2" subtitle="Creator partnerships inside BUILD. MARKET. GROW.">
+              Campaigns across India’s creator economy
+            </DezoHeading>
+            <DezoButton href="/influencer-marketing" variant="outline" size="sm">
+              Explore influencer marketing
+            </DezoButton>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-dezo-border border border-dezo-border">
+            {influencerServices.slice(0, 4).map((svc) => (
+              <article key={svc.slug} className="bg-dezo-bg p-5">
+                <h3 className="font-display text-base text-dezo-text-primary mb-1">{svc.name}</h3>
+                <p className="text-xs text-dezo-text-secondary leading-relaxed">{svc.summary}</p>
+              </article>
+            ))}
+          </div>
+        </DezoContainer>
+      </DezoSection>
 
       {/* 03 Trust — animated host strip (proof after trailer) */}
       <DezoSection spacing="compact" className="border-y border-dezo-border bg-dezo-surface overflow-hidden">

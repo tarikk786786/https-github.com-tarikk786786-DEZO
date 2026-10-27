@@ -35,6 +35,7 @@ const SERVICE_GROUPS = [
     items: [
       { name: 'Meta & Google Ads', href: '/services/paid-ads' },
       { name: 'Social Media', href: '/services/social' },
+      { name: 'Influencer Marketing', href: '/influencer-marketing' },
     ],
   },
 ] as const;
@@ -136,14 +137,14 @@ export function DezoNavigation() {
               </div>
             </div>
 
+            <Link href="/influencer-marketing" className={linkClass('/influencer-marketing')}>
+              Influencers
+            </Link>
             <Link href="/work" className={linkClass('/work')}>
               Work
             </Link>
             <Link href="/growth-lab" className={linkClass('/growth-lab')}>
               Lab
-            </Link>
-            <Link href="/pricing" className={linkClass('/pricing')}>
-              Pricing
             </Link>
             <Link href="/about" className={linkClass('/about')}>
               About
@@ -152,13 +153,13 @@ export function DezoNavigation() {
 
           <div className="hidden lg:flex items-center gap-4">
             <Link
-              href="/promise"
+              href="/for-creators"
               className="text-[12px] font-medium text-dezo-text-secondary hover:text-dezo-text-primary transition-colors"
             >
-              Standard
+              For creators
             </Link>
-            <DezoButton href="/start-a-project" size="sm">
-              Get started
+            <DezoButton href="/campaigns/launch" size="sm">
+              Launch a Campaign
             </DezoButton>
           </div>
 
@@ -182,12 +183,12 @@ export function DezoNavigation() {
         <div className="flex flex-col gap-5">
           {[
             ['Services', '/services'],
+            ['Influencer Marketing', '/influencer-marketing'],
+            ['For Brands', '/for-brands'],
+            ['For Creators', '/for-creators'],
             ['Work', '/work'],
             ['Lab', '/growth-lab'],
-            ['Pricing', '/pricing'],
             ['About', '/about'],
-            ['DEZO Standard', '/promise'],
-            ['Careers', '/careers'],
             ['Contact', '/contact'],
           ].map(([label, href]) => (
             <Link key={href} href={href} className="font-display text-2xl text-dezo-text-primary">
@@ -195,9 +196,12 @@ export function DezoNavigation() {
             </Link>
           ))}
         </div>
-        <div className="mt-auto pt-8">
-          <DezoButton href="/start-a-project" size="lg" className="w-full">
-            Get started
+        <div className="mt-auto pt-8 flex flex-col gap-3">
+          <DezoButton href="/campaigns/launch" size="lg" className="w-full">
+            Launch a Campaign
+          </DezoButton>
+          <DezoButton href="/creators/register" variant="outline" size="lg" className="w-full">
+            Join as a Creator
           </DezoButton>
         </div>
       </div>

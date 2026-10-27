@@ -15,7 +15,6 @@ import {
   DezoStagger,
   DezoStaggerItem,
   DezoScrollProgress,
-  DezoMagnetic,
 } from '@/lib/motion/MotionAdapter';
 import { PromiseHomeTeaser } from '@/components/promise/PromiseGuaranteeSystem';
 import {
@@ -24,18 +23,14 @@ import {
   ChapterBanner,
   ProjectMosaic,
 } from '@/components/dezo/visual';
-import { DezoHeroMedia } from '@/components/dezo/DezoHeroMedia';
-import { DezoHeroText } from '@/components/dezo/DezoHeroText';
+import { DezoHomeHero } from '@/components/dezo/DezoHomeHero';
 import {
   finalCtaBanner,
-  heroBanner,
   statementBanners,
   chapterBanners,
   marketplaceBanner,
 } from '@/content/banners';
 import { dualPaths, influencerServices } from '@/content/influencer';
-import { motion } from 'motion/react';
-import { useReducedMotion } from '@/lib/motion/useReducedMotion';
 import {
   brand,
   serviceRows,
@@ -54,7 +49,6 @@ export default function HomePage() {
   const featured = featuredCaseStudies.slice(0, 3);
   const [hoveredService, setHoveredService] = useState<string | null>(null);
   const [activeGoal, setActiveGoal] = useState(0);
-  const reducedMotion = useReducedMotion();
 
   const trustHosts = [
     'yasanabeautyrituals.in',
@@ -114,71 +108,7 @@ export default function HomePage() {
     <>
       <DezoScrollProgress />
 
-      {/*
-        Hero — full-bleed cinema impact.
-        Media shoots in; brand slams; BUILD / MARKET / GROW streak.
-        No root DezoHeroMotion / chapter ticker. See docs/hero-marketing-motion.md
-      */}
-      <section className="relative min-h-[100svh] overflow-hidden bg-dezo-ink">
-        <DezoHeroMedia />
-        <div
-          className="pointer-events-none absolute inset-0 dezo-hero-film"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 dezo-hero-grain opacity-[0.07] mix-blend-overlay"
-          aria-hidden
-        />
-
-        <div className="relative z-10 flex min-h-[100svh] flex-col justify-end pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-28 sm:justify-center sm:pb-20 sm:pt-32">
-          <DezoContainer size="wide" className="w-full">
-            <DezoHeroText
-              brandName={brand.name}
-              eyebrow={heroBanner.eyebrow ?? brand.companyLabel}
-              body={heroBanner.body ?? brand.supporting}
-            />
-
-            <motion.div
-              className="mt-7 sm:mt-9 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3"
-              initial={reducedMotion ? false : { opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <DezoMagnetic>
-                <DezoButton
-                  href={heroBanner.primaryCta?.href ?? '/start-a-project'}
-                  size="lg"
-                  magnetic
-                  className="w-full sm:w-auto justify-center !bg-dezo-primary !border-dezo-primary !text-dezo-ink hover:!bg-dezo-primary-hover"
-                  icon={<ArrowUpRight size={16} className="dezo-cta-arrow" />}
-                >
-                  {heroBanner.primaryCta?.label ?? 'Start a Project'}
-                </DezoButton>
-              </DezoMagnetic>
-              <DezoMagnetic strength={0.14}>
-                <DezoButton
-                  href={heroBanner.secondaryCta?.href ?? '/work'}
-                  variant="outline"
-                  size="lg"
-                  magnetic
-                  className="w-full sm:w-auto justify-center !border-white/45 !text-dezo-text-inverse hover:!bg-white/10 hover:!border-white/70"
-                >
-                  {heroBanner.secondaryCta?.label ?? 'View Our Work'}
-                </DezoButton>
-              </DezoMagnetic>
-            </motion.div>
-
-            <motion.p
-              className="mt-8 sm:mt-10 max-w-md text-[11px] sm:text-xs tracking-wide text-white/55"
-              initial={reducedMotion ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.05 }}
-            >
-              {heroBanner.meta ?? brand.studioLine}
-            </motion.p>
-          </DezoContainer>
-        </div>
-      </section>
+      <DezoHomeHero />
 
       {/* Dual path — brands & creators */}
       <DezoSection spacing="normal" className="bg-dezo-bg border-b border-dezo-border">

@@ -30,6 +30,14 @@ export interface BannerBase {
   numeral?: string;
 }
 
+export interface HeroBriefItem {
+  id: string;
+  label: string;
+  title: string;
+  detail: string;
+  href: string;
+}
+
 export interface ChapterBannerData extends BannerBase {
   chapter: 'build' | 'grow' | 'sell' | 'advertise' | 'brand';
   href: string;
@@ -37,20 +45,44 @@ export interface ChapterBannerData extends BannerBase {
 
 export const heroBanner: BannerBase = {
   id: 'hero-home',
-  eyebrow: 'INTRODUCING DEZO',
+  eyebrow: 'Founding studio · Bhubaneswar',
   title: 'BUILD. MARKET. GROW.',
-  body: 'Your brand. The right creators. Campaigns built to grow — plus web, marketplaces, ads, SEO and brand systems as one commercial stack.',
-  tone: 'warm',
+  body: 'Websites, ecommerce, marketplaces, advertising, SEO, social and brand — connected into one commercial system.',
+  tone: 'paper',
   media: {
     kind: 'video',
     src: '/hero/dezo-hero-loop.mp4',
     poster: '/hero/dezo-hero-poster.jpg',
-    alt: 'DEZO site trailer — Build, Market, Grow chapters with live project proof',
+    alt: 'DEZO studio reel of brand, commerce, and campaign work',
   },
-  primaryCta: { label: 'Launch a Campaign', href: '/campaigns/launch', variant: 'primary' },
-  secondaryCta: { label: 'Join as a Creator', href: '/creators/register', variant: 'outline' },
-  meta: 'Founding studio · Bhubaneswar, Odisha · Brands + creators across India',
+  primaryCta: { label: 'Start a Project', href: '/start-a-project', variant: 'primary' },
+  secondaryCta: { label: 'View Our Work', href: '/work', variant: 'outline' },
+  meta: '181 live websites in the public archive',
 };
+
+export const heroBrief: HeroBriefItem[] = [
+  {
+    id: 'build',
+    label: 'BUILD',
+    title: 'Websites, stores, and brand systems',
+    detail: 'A site or storefront you can launch, with the brand basics required to sell.',
+    href: '/services/web-development',
+  },
+  {
+    id: 'market',
+    label: 'MARKET',
+    title: 'Search, ads, and creator campaigns',
+    detail: 'SEO, paid media, and influencer work planned as one program, not three vendors.',
+    href: '/influencer-marketing',
+  },
+  {
+    id: 'grow',
+    label: 'GROW',
+    title: 'Marketplaces and a monthly cadence',
+    detail: 'Amazon and Flipkart operations, plus reporting after the launch.',
+    href: '/marketplace',
+  },
+];
 
 export const servicesIndexBanner: BannerBase = {
   id: 'banner-services-index',

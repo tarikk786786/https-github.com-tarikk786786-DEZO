@@ -16,22 +16,23 @@ In one viewport, a prospect should understand:
 
 | Surface | Layout | Media |
 | --- | --- | --- |
-| All | Full-bleed cinema plane + film grade + type | Landscape WebM/MP4; portrait MP4 on narrow |
+| Desktop | Paper brief on the left, framed reel on the right | Landscape WebM/MP4 inside the frame |
+| Narrow | Brief first, framed reel below | Same reel; poster if motion is reduced |
 
-No split panels. No chapter ticker in the first viewport. No floating badges/chips on media.
+The first viewport explains BUILD, MARKET, and GROW with a real link for each. No full-bleed film grade. No brand slam.
 
 ## Animation information (shipping)
 
 | Beat | Mechanism | Timing / notes |
 | --- | --- | --- |
-| 1. Media shoot | Motion scale 1.22→1 + opacity | ~1.35s power settle |
-| 2. Brand slam | Clip-rise y 120%→0 + slight scale | ~0.95s |
-| 3. Accent line | scaleX 0→1 gold bar | delay ~0.35s |
-| 4. Word shoot | BUILD / MARKET / GROW x + blur streak | stagger 0.1s |
-| 5. Body + CTAs | opacity / y rise | after words |
-| 6. Ken burns | CSS fallback when video blocked | poster only |
+| 1. Name | Clip-rise | ~0.7s |
+| 2. Gold rule | scaleX 0→1 | delay ~0.25s |
+| 3. Brief rows | Fade up, stagger | ~0.08s apart |
+| 4. Active row | Linear progress, then advance | 4.2s; pauses on hover or focus |
+| 5. Frame caption | Crossfade with the active row | ~0.28s |
+| 6. Reel | Plays inside the frame; ken burns on the poster if video is blocked | no white flash |
 
-**Reduced motion:** poster only, no reel, no ken burns, static type.
+**Reduced motion:** poster only, no cycle, no progress bar, static type.
 
 ## Content source
 
@@ -39,7 +40,7 @@ Homepage hero copy/CTAs read from `content/banners.ts` → `heroBanner`.
 
 ## Do not
 
-- Reintroduce editorial split / cream paper panel over reel
-- Put chapter ticker, stats, or promo chips in the first viewport
-- Neon / HUD / fake metrics
-- Root `DezoHeroMotion` GSAP on the homepage hero (entrance lives in hero components)
+- Restore the full-bleed cinema slam (flash, blur word streak, type over the reel)
+- Put a chapter ticker or invented metrics in the first viewport
+- Neon / HUD treatments
+- Root `DezoHeroMotion` GSAP on the homepage hero (entrance lives in `DezoHomeHero`)

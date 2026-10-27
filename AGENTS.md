@@ -19,3 +19,11 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## Cursor Cloud specific instructions
+
+- Install with `npm ci`. Node 22 satisfies `engines.node` (`>=18`).
+- Dev server: `npm run dev -- --hostname 0.0.0.0 --port 3000`. The `dev` script already passes `--webpack`. `allowedDevOrigins` includes `127.0.0.1` so dev assets load when the page is opened at that host.
+- `npm run lint` is `tsc --noEmit`. `npm test` is Node’s test runner via `tsx`. Route tests call `http://127.0.0.1:3000` and warn-skip when that server is down.
+- Keys in `.env.example` are optional for local development. The marketing site, contact intake, and tests run without them. The advisor falls back locally when LLM provider keys are unset.
+- Do not run `npm run build` while `next dev` is using `.next` if you still need that dev server; the production build rewrites the same output directory.

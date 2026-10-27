@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Next.js 16 blocks dev assets from any host other than localhost.
+  // Agents and browsers often open the dev server at 127.0.0.1.
+  allowedDevOrigins: ['127.0.0.1'],
   outputFileTracingRoot: process.cwd(),
   images: {
     formats: ['image/avif', 'image/webp'],

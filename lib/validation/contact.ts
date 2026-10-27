@@ -12,6 +12,7 @@ export const contactFormSchema = z.object({
     'Amazon & Flipkart Growth',
     'SEO & Organic Growth',
     'Meta & Google Ads',
+    'Influencer Marketing',
     'AI & Automation',
     'Bespoke Engineering',
   ], {

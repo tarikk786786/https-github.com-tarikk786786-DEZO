@@ -29,12 +29,17 @@ Production: https://dezo.in
 - No matching, assignments, contracts, invoices, or role-based admin
 - No persistent lead store beyond server logs + WhatsApp handoff
 
-## Phase sequence (this PR = Phase 2)
+## Phase sequence
 
-1. **Phase 2 (shipping now):** positioning, nav, influencer pages, brand campaign inquiry, creator registration intake
-2. **Phase 3:** auth + creator portal + durable storage
+1. **Phase 2 (shipped on branch `cursor/influencer-growth-platform-15f3`):** positioning, nav, pages, dual intake
+   - Routes: `/influencer-marketing`, `/for-brands`, `/for-creators`, `/campaigns/launch`, `/creators/register`
+   - APIs: `/api/campaigns/inquiry`, `/api/creators/register`
+   - Sitemap + contact service enum + `campaign_inquiry` / `creator_apply` analytics events
+2. **Phase 3:** auth + creator portal + durable storage (SQL migrations exist but unused by Next APIs)
 3. **Phase 4–5:** matching engine, notifications, assignments
-4. **Phase 6–8:** contracts, payments reconciliation, SEO polish, staging → prod controls
+4. **Phase 6–8:** contracts, payments reconciliation, staging → prod controls
+
+Note: Repo audit recommended `/influencer/*` nesting; shipped flat brand routes for clearer CTAs without breaking existing IA.
 
 ## Honest claims policy
 

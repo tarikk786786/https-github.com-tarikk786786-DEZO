@@ -10,6 +10,7 @@ import {
   buildCampaignWhatsAppUrl,
 } from '@/lib/validation/campaign';
 import { DezoButton } from '@/components/dezo/DezoButton';
+import { trackEvent } from '@/lib/analytics/adapter';
 
 const inputBase =
   'w-full bg-white border border-dezo-border rounded-dezo-md px-4 py-3 text-sm text-dezo-text-primary placeholder:text-dezo-text-muted focus:outline-none focus:border-dezo-primary focus:ring-2 focus:ring-dezo-primary/20';
@@ -62,13 +63,16 @@ export function CampaignInquiryForm() {
       const result = await res.json().catch(() => null);
       if (res.ok && result?.success) {
         setLeadId(result.leadId || null);
+        trackEvent('campaign_inquiry', { status: 'success', model: data.collaborationModel });
         window.open(result.whatsappHandoffUrl || direct, '_blank', 'noopener,noreferrer');
       } else {
+        trackEvent('campaign_inquiry', { status: 'fallback' });
         window.open(direct, '_blank', 'noopener,noreferrer');
       }
       setStatus('success');
       reset();
     } catch {
+      trackEvent('campaign_inquiry', { status: 'fallback' });
       window.open(direct, '_blank', 'noopener,noreferrer');
       setStatus('success');
       reset();

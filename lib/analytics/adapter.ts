@@ -12,7 +12,9 @@ export type DezoAnalyticsEvent =
   | 'pricing_open'
   | 'phone_click'
   | 'whatsapp_click'
-  | 'marketplace_demo_interacted';
+  | 'marketplace_demo_interacted'
+  | 'campaign_inquiry'
+  | 'creator_apply';
 
 export interface AnalyticsPayload {
   event: DezoAnalyticsEvent;

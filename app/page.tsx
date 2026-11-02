@@ -18,6 +18,7 @@ import {
   DezoMagnetic,
 } from '@/lib/motion/MotionAdapter';
 import { PromiseHomeTeaser } from '@/components/promise/PromiseGuaranteeSystem';
+import { generateFAQSchema } from '@/lib/seo/jsonld';
 import {
   CTASection,
   StatementBanner,
@@ -109,8 +110,14 @@ export default function HomePage() {
 
   const trustLoop = [...trustHosts, ...trustHosts];
 
+  const faqSchema = generateFAQSchema(faqItems);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <DezoScrollProgress />
 
       {/*

@@ -1,0 +1,50 @@
+# DEZO — Digital Infrastructure & Performance Marketing
+> Complete commercial system: Websites, Ecommerce, Amazon & Flipkart Marketplaces, Performance Advertising, Technical SEO, Social, and Brand.
+> Headquartered in Bhubaneswar, Odisha, India. Serving clients nationwide and globally.
+
+## Company Identity & Positioning
+- Brand Name: DEZO
+- Apex Domain: https://dezo.in
+- Legal/Operating Model: Sovereign digital infrastructure, software engineering, and performance marketing studio.
+- Founder & CEO: Tarik Islam
+- Studio Location: Phase 2, Patia, Bhubaneswar, Odisha, 751024, India
+- Phone: +91 9114411026
+- Primary Inquiries: contact@dezo.in
+- Client Portal & Support: support@dezo.in
+
+## Core Chapters & Capabilities
+
+### 1. Web Development & Custom Engineering (BUILD)
+- High-performance web development utilizing Next.js App Router, React 19, TypeScript, and Tailwind CSS.
+- E-commerce architecture specializing in Shopify, Shopify Plus, headless commerce, WooCommerce, and custom checkout flows.
+- Conversion Rate Optimization (CRO), web speed engineering, 95+ PageSpeed & Core Web Vitals guarantees.
+- Full Git source-code ownership, zero proprietary lock-in, and 30-day post-launch warranty.
+- URL: https://dezo.in/services/web-development
+
+### 2. Technical SEO & Organic Discovery (GROW)
+- Enterprise-grade technical SEO audits, crawl budget optimization, indexation monitoring, and Schema.org structured data.
+- Generative Engine Optimization (GEO) ensuring high citation readiness across Google AI Overviews, Perplexity, ChatGPT Search, and Gemini.
+- Local SEO and Google Business Profile (GBP) dominance across Bhubaneswar, Cuttack, Puri, Rourkela, and pan-India regions.
+- URL: https://dezo.in/services/seo
+
+### 3. Marketplace Operations (SELL)
+- Amazon India Seller Services: Brand Registry, A+ Content, Storefront design, Sponsored Products/Brands PPC, inventory health, and Buy Box telemetry.
+- Flipkart Advertising & Operations: Product listing optimization, PLA/PCA advertising, catalog compliance, and promotions management.
+- Multi-channel inventory and order integration.
+- URL: https://dezo.in/services/amazon and https://dezo.in/services/flipkart
+
+### 4. Performance Marketing & Media (ADVERTISE)
+- Direct-response advertising across Meta (Facebook & Instagram) and Google Ads (Search, Performance Max, YouTube, Display).
+- Server-side tracking via Meta Conversions API (CAPI) and Google Tag Manager server containers to combat signal loss.
+- High-craft creative testing loops: static hooks, UGC scripts, motion typography, and landing page congruency.
+- URL: https://dezo.in/services/paid-ads
+
+### 5. Brand Strategy & Visual Identity (BRAND)
+- Visual positioning, packaging design, logo architecture, typography hierarchies, and complete design systems.
+- URL: https://dezo.in/services/branding
+
+## Public Proof & Verified Deployments
+- Live Verified Work Portfolio: https://dezo.in/work (181+ production deployments across 14 commercial industries).
+- DEZO Growth Lab: https://dezo.in/growth-lab (Public diagnostic tools for technical site auditing, SEO health, and speed tests).
+- Client Results & Case Studies: https://dezo.in/results
+- Commercial Commitments: https://dezo.in/promise (10 written standards including Defined Scope Lock, Git Handover, and 30-day covered-defect warranty).

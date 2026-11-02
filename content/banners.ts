@@ -260,7 +260,7 @@ export const statementBanners: BannerBase[] = [
   {
     id: 'statement-standard',
     eyebrow: 'The DEZO Standard',
-    title: 'We guarantee what we control.',
+    title: 'Accountability in writing.',
     body: 'Defined scope, QA, transparent reporting and accountability—not rankings, ROAS or virality.',
     tone: 'ink',
     primaryCta: { label: 'Read the promise system', href: '/promise', variant: 'outline' },

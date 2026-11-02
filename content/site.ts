@@ -10,7 +10,7 @@ export const brand = {
   tagline: 'Digital infrastructure for ambitious businesses.',
   heroLine: 'Digital infrastructure for ambitious businesses.',
   supporting:
-    'Websites, ecommerce, marketplaces, advertising, SEO, social and brand—connected into one commercial system.',
+    'Websites, ecommerce, marketplaces, performance advertising, SEO, social and brand—connected into one commercial operating system across Odisha and India.',
   tag: 'BUILD. MARKET. GROW.',
   companyLabel: 'Introducing DEZO',
   geo: 'Founded in India. Built for businesses everywhere.',

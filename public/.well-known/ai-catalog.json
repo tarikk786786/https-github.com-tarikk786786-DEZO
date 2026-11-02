@@ -1,0 +1,41 @@
+{
+  "version": "1.0",
+  "provider": {
+    "name": "DEZO",
+    "url": "https://dezo.in",
+    "contact": "contact@dezo.in"
+  },
+  "capabilities": [
+    {
+      "id": "web-engineering",
+      "name": "Web Infrastructure & Development",
+      "description": "Production Next.js and Shopify full-stack digital builds.",
+      "url": "https://dezo.in/services/web-development"
+    },
+    {
+      "id": "technical-seo",
+      "name": "Technical SEO & Generative Engine Optimization",
+      "description": "Crawlability, Core Web Vitals, Structured Data, and AI Citability optimization.",
+      "url": "https://dezo.in/services/seo"
+    },
+    {
+      "id": "marketplace-operations",
+      "name": "Amazon & Flipkart Growth",
+      "description": "Marketplace catalog management, PPC advertising, and revenue acceleration.",
+      "url": "https://dezo.in/marketplace"
+    },
+    {
+      "id": "growth-lab-scanner",
+      "name": "DEZO Growth Lab Diagnostic Tools",
+      "description": "Free website performance, technical SEO, and conversion scanners.",
+      "url": "https://dezo.in/growth-lab"
+    }
+  ],
+  "resources": {
+    "llms_txt": "https://dezo.in/llms.txt",
+    "llms_full_txt": "https://dezo.in/llms-full.txt",
+    "sitemap": "https://dezo.in/sitemap.xml",
+    "work_portfolio": "https://dezo.in/work",
+    "commitments": "https://dezo.in/promise"
+  }
+}

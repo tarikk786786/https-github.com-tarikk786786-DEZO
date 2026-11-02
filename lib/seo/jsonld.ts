@@ -35,6 +35,49 @@ export function generateOrganizationSchema() {
       'https://www.linkedin.com/company/dezo-digital',
       'https://www.instagram.com/dezo.in',
     ],
+    areaServed: [
+      { '@type': 'Country', name: 'India' },
+      { '@type': 'AdministrativeArea', name: 'Odisha' },
+      { '@type': 'City', name: 'Bhubaneswar' },
+    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'DEZO Core Commercial Capabilities',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Web Infrastructure & Custom Software Engineering',
+            description: 'High-performance Next.js and full-stack software development.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Technical SEO & Organic Discovery',
+            description: 'Enterprise technical SEO, Core Web Vitals optimization, and AI search readiness.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Performance Marketing & Paid Media',
+            description: 'Meta and Google Ads campaigns optimized for ROAS and conversion tracking.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Amazon & Flipkart Marketplace Operations',
+            description: 'End-to-end catalog, PPC advertising, A+ brand content, and multi-channel telemetry.',
+          },
+        },
+      ],
+    },
   };
 }
 
@@ -178,5 +221,23 @@ export function generateWorkPortfolioSchema(items: { title: string; url: string;
         },
       })),
     },
+  };
+}
+
+
+export function generateFAQSchema(
+  faqs: ReadonlyArray<{ q: string; a: string }> | Array<{ q: string; a: string }>
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.a,
+      },
+    })),
   };
 }

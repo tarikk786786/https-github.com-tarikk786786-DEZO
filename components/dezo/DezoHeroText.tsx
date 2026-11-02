@@ -54,11 +54,7 @@ export function DezoHeroText({
       />
 
       <h1 className="mt-6 sm:mt-8">
-        <span className="sr-only">BUILD. MARKET. GROW.</span>
-        <span
-          className="flex flex-wrap items-baseline gap-x-3 gap-y-2 sm:gap-x-5"
-          aria-hidden
-        >
+        <span className="flex flex-wrap items-baseline gap-x-3 gap-y-2 sm:gap-x-5">
           {WORDS.map((word, i) => (
             <span key={word} className="overflow-hidden inline-block">
               <motion.span

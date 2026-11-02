@@ -76,7 +76,7 @@ export function DezoHeroMedia() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={poster}
-        alt=""
+        alt="DEZO Digital Infrastructure & Performance Marketing Reel Poster"
         width={isNarrow ? 1080 : 1920}
         height={isNarrow ? 1920 : 1080}
         decoding="async"

@@ -60,6 +60,8 @@ export function ProjectMosaic({
                 <img
                   src={item.src}
                   alt={item.host}
+                  width={i === 0 ? 1200 : 600}
+                  height={i === 0 ? 800 : 400}
                   className="absolute inset-0 h-full w-full object-cover object-top dezo-img-zoom"
                   loading="lazy"
                   decoding="async"

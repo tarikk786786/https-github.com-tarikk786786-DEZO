@@ -209,6 +209,8 @@ export function DezoToolScanner({
               />
               <input
                 type="text"
+                id="growth-lab-scanner-url"
+                aria-label={`${currentMeta.name} URL input`}
                 value={inputVal}
                 onChange={(e) => setInputVal(e.target.value)}
                 placeholder={currentMeta.placeholder}

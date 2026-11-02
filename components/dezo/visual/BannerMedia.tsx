@@ -31,6 +31,8 @@ export function BannerMedia({
         <img
           src={local}
           alt={`Live site preview — ${media.host}`}
+          width={1200}
+          height={800}
           className={`absolute inset-0 h-full w-full object-cover ${className}`}
           style={{ objectPosition: media.objectPosition || 'top' }}
           loading={priority ? 'eager' : 'lazy'}
@@ -54,6 +56,8 @@ export function BannerMedia({
       <img
         src={media.src}
         alt={media.alt}
+        width={1200}
+        height={800}
         className={`absolute inset-0 h-full w-full object-cover ${className}`}
         style={{ objectPosition: media.objectPosition || 'center' }}
         loading={priority ? 'eager' : 'lazy'}

@@ -9,9 +9,9 @@ import { generateBreadcrumbSchema } from '@/lib/seo/jsonld';
 import { ArrowRight, CheckCircle2, Building2, MapPin } from 'lucide-react';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Industry Solutions — Digital Growth for Odisha & India | DEZO',
+  title: 'Industry Solutions & Growth Architecture',
   description:
-    'Tailored digital growth architectures for 16 key sectors across Odisha and India: Handloom, Real Estate, Healthcare, Education, Tourism, Manufacturing, D2C eCommerce, and Local Retail.',
+    'Digital growth architectures tailored for Handloom, Real Estate, Healthcare, Education, Tourism, Manufacturing, D2C Commerce, and Retail.',
   canonicalUrl: 'https://dezo.in/industries',
 });
 

@@ -69,6 +69,11 @@ export function DezoFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/marketplace" className="hover:text-dezo-primary transition-colors">
+                  Marketplace Telemetry
+                </Link>
+              </li>
+              <li>
                 <Link href="/services/whatsapp-crm-automation" className="hover:text-dezo-primary transition-colors">
                   WhatsApp Business API
                 </Link>

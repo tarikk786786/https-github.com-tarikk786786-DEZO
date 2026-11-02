@@ -26,6 +26,7 @@ const SERVICE_GROUPS = [
   {
     label: 'Sell',
     items: [
+      { name: 'Marketplace Hub', href: '/marketplace' },
       { name: 'Amazon', href: '/services/amazon' },
       { name: 'Flipkart', href: '/services/flipkart' },
     ],

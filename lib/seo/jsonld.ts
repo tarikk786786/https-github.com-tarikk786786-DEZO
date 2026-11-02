@@ -139,3 +139,44 @@ export function generateFaqSchema(faqs: { question: string; answer: string }[]) 
     })),
   };
 }
+
+
+export function generateWorkPortfolioSchema(items: { title: string; url: string; category?: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'DEZO Verified Client Work & Case Studies',
+    description: 'Portfolio of live verified client websites and eCommerce deployments engineered by DEZO.',
+    url: `${siteConfig.url}/work`,
+    publisher: {
+      '@type': 'Organization',
+      name: 'DEZO',
+      url: siteConfig.url,
+    },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: items.slice(0, 10).map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'Article',
+          headline: `${item.title} — Live Commerce Deployment`,
+          name: item.title,
+          url: item.url,
+          inLanguage: 'en-IN',
+          author: {
+            '@type': 'Organization',
+            name: 'DEZO',
+            url: siteConfig.url,
+          },
+          publisher: {
+            '@type': 'Organization',
+            name: 'DEZO',
+            url: siteConfig.url,
+          },
+          about: item.category || 'Digital Commerce',
+        },
+      })),
+    },
+  };
+}

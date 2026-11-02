@@ -234,49 +234,57 @@ export function DezoAIGrowthAdvisor() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
             <div className="flex flex-col gap-1.5">
-              <label className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink flex items-center gap-1.5">
+              <label htmlFor="advisor-business-type" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink flex items-center gap-1.5">
                 <Building size={14} /> Business Type / Industry
               </label>
               <input
                 type="text"
                 value={businessType}
                 onChange={(e) => setBusinessType(e.target.value)}
-                className="w-full bg-white border border-dezo-border p-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-xs"
+className="w-full bg-white border border-dezo-border p-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-xs"
+                id="advisor-business-type"
+                aria-label="Business Type or Industry"
                 placeholder="e.g. Retail Jewellery, Clinic, D2C Apparel"
               />
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink flex items-center gap-1.5">
+              <label htmlFor="advisor-business-type" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink flex items-center gap-1.5">
                 <Target size={14} /> Primary Growth Objective
               </label>
               <input
                 type="text"
                 value={primaryGoal}
                 onChange={(e) => setPrimaryGoal(e.target.value)}
-                className="w-full bg-white border border-dezo-border p-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-xs"
+className="w-full bg-white border border-dezo-border p-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-xs"
+                id="advisor-primary-goal"
+                aria-label="Primary Growth Objective"
                 placeholder="e.g. Launch Amazon store, scale local inquiries"
               />
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink flex items-center gap-1.5">
+              <label htmlFor="advisor-business-type" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink flex items-center gap-1.5">
                 <MapPin size={14} /> Geographic Location / Base
               </label>
               <input
                 type="text"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="w-full bg-white border border-dezo-border p-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-xs"
+className="w-full bg-white border border-dezo-border p-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-xs"
+                id="advisor-location"
+                aria-label="Geographic Location or Base City"
                 placeholder="e.g. Bhubaneswar, Cuttack, Mumbai"
               />
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink flex items-center gap-1.5">
+              <label htmlFor="advisor-business-type" className="font-mono text-xs font-bold uppercase tracking-wider text-dezo-ink flex items-center gap-1.5">
                 <Banknote size={14} /> Target Budget Range
               </label>
               <select
+                id="advisor-budget"
+                aria-label="Target Budget Range"
                 value={budget}
                 onChange={(e) => setBudget(e.target.value)}
                 className="w-full bg-white border border-dezo-border p-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-xs cursor-pointer"
@@ -401,6 +409,7 @@ export function DezoAIGrowthAdvisor() {
               type="text"
               value={chatInput}
               onChange={(e) => setChatInput(e.target.value)}
+              aria-label="Ask DEZO AI growth intelligence question"
               placeholder="Ask about website packages, Amazon seller onboarding, local SEO in Odisha..."
               className="flex-1 bg-white border border-dezo-border px-4 py-3 font-mono text-xs sm:text-sm focus:outline-none focus:border-dezo-gold shadow-xs"
             />

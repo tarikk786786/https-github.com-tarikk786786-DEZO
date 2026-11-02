@@ -10,6 +10,7 @@ import { DezoReveal } from '@/lib/motion/MotionAdapter';
 import { finalCtaBanner, workIndexBanner } from '@/content/banners';
 import { constructMetadata } from '@/lib/seo/metadata';
 import { portfolioData } from '@/content/projects';
+import { generateWorkPortfolioSchema } from '@/lib/seo/jsonld';
 
 export const metadata: Metadata = constructMetadata({
   title: 'Work — 181+ Live Verified Client Websites | DEZO',
@@ -35,8 +36,14 @@ export default function WorkPage() {
       return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
     });
 
+  const workSchema = generateWorkPortfolioSchema(featured);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(workSchema) }}
+      />
       <ServiceBanner data={workIndexBanner} compact />
 
       <DezoSection spacing="normal">

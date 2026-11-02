@@ -19,7 +19,7 @@ import { DezoMarketplaceDashboard } from '@/components/dezo/DezoMarketplaceDashb
 import { constructMetadata } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Marketplace Intelligence & Seller Telemetry (Amazon + Flipkart)',
+  title: 'Amazon & Flipkart Marketplace Growth Services',
   description:
     'Consolidated marketplace analytics and AI seller intelligence. Master Amazon, Flipkart, Meta, Google, and direct web commerce through unified data.',
   canonicalUrl: 'https://dezo.in/marketplace',
@@ -41,6 +41,9 @@ export default function MarketplacePage() {
           </div>
 
           <div className="mb-20">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-dezo-text-primary mb-3">
+              Unified Commerce & Marketplace Telemetry
+            </h2>
             <p className="text-xs font-semibold uppercase tracking-wider text-dezo-text-muted mb-3">
               Illustrative product demo — sample data only
             </p>
@@ -108,7 +111,7 @@ export default function MarketplacePage() {
                 Ready to Scale Your Marketplace Revenues?
               </h3>
               <p className="text-sm text-dezo-text-secondary">
-                Request a comprehensive audit of your Amazon and Flipkart seller accounts today.
+                Request a comprehensive audit of your Amazon and Flipkart seller accounts today. Explore our <a href="/services" className="text-dezo-primary underline">Services Catalog</a>, review live case studies on <a href="/work" className="text-dezo-primary underline">Client Work</a>, or run automated diagnostics in <a href="/growth-lab" className="text-dezo-primary underline">DEZO Growth Lab</a>.
               </p>
             </div>
             <DezoButton href="/contact" size="lg" magnetic>

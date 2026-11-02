@@ -6,7 +6,7 @@ export const siteConfig = {
   shortName: brand.name,
   description: brand.supporting,
   url: 'https://dezo.in',
-  ogImage: 'https://dezo.in/dezo-logo-transparent.png',
+  ogImage: 'https://dezo.in/og-image.png',
   phone: contact.phone,
   phoneFormatted: contact.phoneFormatted,
   email: contact.email,
@@ -34,7 +34,7 @@ export function constructMetadata({
     .trim();
   const metaTitle = cleaned
     ? `${cleaned} | DEZO`
-    : 'DEZO | BUILD. MARKET. GROW. — Digital infrastructure for ambitious businesses';
+    : 'DEZO | Digital Infrastructure & Performance Marketing';
 
   return {
     title: metaTitle,

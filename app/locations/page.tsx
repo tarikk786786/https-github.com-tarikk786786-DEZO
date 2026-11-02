@@ -9,9 +9,9 @@ import { generateBreadcrumbSchema } from '@/lib/seo/jsonld';
 import { MapPin, ArrowRight, Building, ShieldCheck } from 'lucide-react';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Digital Marketing & Growth Services Across Odisha | DEZO Locations',
+  title: 'Digital Marketing & Web Services in Odisha',
   description:
-    'DEZO provides digital growth, website development, SEO, and performance marketing across 25 key commercial hubs in Odisha — from our Bhubaneswar studio to Cuttack, Puri, Rourkela, Sambalpur, and beyond.',
+    'Digital marketing, web development, and SEO services across Bhubaneswar, Cuttack, Puri, Rourkela, Sambalpur, and commercial hubs in Odisha.',
   canonicalUrl: 'https://dezo.in/locations',
 });
 

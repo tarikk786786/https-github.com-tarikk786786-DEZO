@@ -9,9 +9,9 @@ import { constructMetadata } from '@/lib/seo/metadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/jsonld';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Services Directory — Digital Growth, SEO, Web & Marketplaces | DEZO',
+  title: 'Digital Growth, Web Development & SEO Services',
   description:
-    'Searchable directory of DEZO digital growth services across 12 primary departments: Web Development, SEO, Paid Ads, Social, Branding, Amazon, Lead Generation, WhatsApp CRM, and Analytics.',
+    'Comprehensive digital growth services across Web Development, Technical SEO, Performance Marketing, Amazon & Flipkart Growth, and Analytics.',
   canonicalUrl: 'https://dezo.in/services',
 });
 
@@ -32,6 +32,7 @@ export default function ServicesPage() {
 
       <DezoSection spacing="normal" className="bg-dezo-bg">
         <DezoContainer size="wide">
+          <h2 className="font-display text-2xl sm:text-3xl font-black text-dezo-ink tracking-tight uppercase mb-8">Specialized Commercial Services Directory</h2>
           <DezoServiceDirectory />
         </DezoContainer>
       </DezoSection>

@@ -39,12 +39,15 @@ export function LiveSitePreview({
   url,
   title,
   className = '',
+  width = 600,
+  height = 400,
   eager = false,
 }: {
   url: string;
   title: string;
   className?: string;
   width?: number;
+  height?: number;
   eager?: boolean;
 }) {
   const local = previewPathForUrl(url);
@@ -86,6 +89,8 @@ export function LiveSitePreview({
               <img
                 src={faviconUrl}
                 alt=""
+width={20}
+                height={20}
                 className="w-5 h-5 object-contain rounded-dezo-md border border-dezo-ink/20"
                 onError={() => setFaviconFailed(true)}
               />
@@ -113,6 +118,8 @@ export function LiveSitePreview({
               <img
                 src={faviconUrl}
                 alt=""
+                width={20}
+                height={20}
                 className="w-8 h-8 object-contain"
                 onError={() => setFaviconFailed(true)}
               />
@@ -143,6 +150,9 @@ export function LiveSitePreview({
     <img
       src={currentSrc}
       alt={`${title} live website preview`}
+      width={width}
+      height={height}
+      decoding="async"
       loading={eager ? 'eager' : 'lazy'}
       onError={handleError}
       className={className}

@@ -1,28 +1,24 @@
-# Dezo
+# DEZO
 
-Dezo is a web development and digital marketing agency in India.
+> Digital infrastructure, web development, technical SEO, and performance marketing agency in India.
 
-## Services
+## Core Capabilities
 
-- Website development
-- Ecommerce website development
-- Landing page design
-- SEO services
-- Meta Ads campaigns
-- Google Ads campaigns
-- Digital marketing strategy
-- Business growth systems
-- UI/UX design
-- Website performance optimization
+- [Commercial Services](https://dezo.in/services): Searchable catalog across Web Build, Technical SEO, Performance Marketing, Amazon & Flipkart Operations, and Business Automation.
+- [Marketplace Hub](https://dezo.in/marketplace): Amazon and Flipkart seller growth, listing optimization, A+ content, and multi-channel telemetry.
+- [Growth Lab](https://dezo.in/growth-lab): Free website and technical SEO scanner suite with instant diagnostic insights.
+- [Industry Solutions](https://dezo.in/industries): Specialized digital growth frameworks for 16 key sectors across Odisha and India.
+- [Regional Coverage](https://dezo.in/locations): Commercial hubs across Odisha including Bhubaneswar, Cuttack, Puri, Rourkela, and Sambalpur.
 
-## Website
+## Proof & Delivery
 
-Official website: https://dezo.in/
+- [Verified Work Portfolio](https://dezo.in/work): 181+ live verified client websites and commerce projects with production URLs.
+- [Commercial Promise](https://dezo.in/promise): 30-Day Covered-Defect Warranty, 100% source-code ownership, and zero surprise fees.
+- [Client Results & Case Studies](https://dezo.in/results): Documented revenue growth, organic rank improvements, and return on ad spend.
 
-## About
+## Company & Contact
 
-Dezo helps businesses create fast, mobile-friendly and conversion-focused websites. The agency combines web development, SEO, paid advertising and digital strategy to help brands generate more leads and sales online.
-
-## Contact
-
-Use the contact form or WhatsApp button on https://dezo.in/ to contact Dezo.
+- [Official Portal](https://dezo.in/): Primary web portal and commercial operating system.
+- [About DEZO](https://dezo.in/about): Operating philosophy, leadership, and engineering standards.
+- [Book Strategy Call](https://dezo.in/book-strategy-call): 30-minute growth diagnostic session.
+- [Direct Studio Contact](https://dezo.in/contact): Bhubaneswar studio line (+91 9114411026) and official email (contact@dezo.in).
